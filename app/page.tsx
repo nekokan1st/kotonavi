@@ -16,6 +16,19 @@ type Service = {
   href: string;
   accent: string;
 };
+
+const mobileAppNames = new Set([
+  "Peatix", "Google フォト", "入退去メモ", "RAKURA", "UCHITAS", "Cabinote",
+  "Misoca", "Toggl Track", "GOOSE", "つなぐノート", "全国版救急受診ガイド Q助",
+  "マネーフォワード ME", "保険簿", "母子モ", "TimeTree", "Google One バックアップ",
+  "Yahoo!乗換案内", "GO", "akippa", "ecbo cloak", "クラシル", "くふう トクバイ",
+  "TABETE", "Yieto 2", "ぺとログ", "PetBacker",
+]);
+
+const iosOnlyApps = new Set(["入退去メモ", "Cabinote"]);
+const androidOnlyApps = new Set(["ぺとログ"]);
+const appStoreUrl = (name: string) => `https://apps.apple.com/jp/search?term=${encodeURIComponent(name)}`;
+const googlePlayUrl = (name: string) => `https://play.google.com/store/search?q=${encodeURIComponent(name)}&c=apps&hl=ja`;
 type Problem = {
   id: string;
   theme: ThemeId;
@@ -864,24 +877,30 @@ const problems: Problem[] = [
   },
 ];
 
+const appProblems = problems
+  .map((problem) => ({ ...problem, services: problem.services.filter((service) => mobileAppNames.has(service.name)) }))
+  .filter((problem) => problem.services.length > 0);
+
 export default function Home() {
-  const [themeId, setThemeId] = useState<ThemeId>("daily");
-  const [phaseId, setPhaseId] = useState("now");
-  const [selectedId, setSelectedId] = useState("daily-lost");
+  const firstAppProblem = appProblems[0];
+  const [themeId, setThemeId] = useState<ThemeId>(firstAppProblem.theme);
+  const [phaseId, setPhaseId] = useState(firstAppProblem.phase);
+  const [selectedId, setSelectedId] = useState(firstAppProblem.id);
   const [completed, setCompleted] = useState<string[]>([]);
   const [query, setQuery] = useState("");
 
   const theme = themes.find((item) => item.id === themeId) ?? themes[0];
-  const selected = problems.find((problem) => problem.id === selectedId) ?? problems[0];
+  const selected = appProblems.find((problem) => problem.id === selectedId) ?? firstAppProblem;
+  const activePhases = theme.phases.filter((item) => appProblems.some((problem) => problem.theme === themeId && problem.phase === item.id));
   const currentPhase = theme.phases.find((phase) => phase.id === phaseId);
   const visibleProblems = useMemo(
-    () => problems.filter((problem) => problem.theme === themeId && problem.phase === phaseId),
+    () => appProblems.filter((problem) => problem.theme === themeId && problem.phase === phaseId),
     [themeId, phaseId],
   );
   const searchResults = useMemo(() => {
     const normalized = query.trim().toLowerCase();
     if (!normalized) return [];
-    return problems.filter((problem) =>
+    return appProblems.filter((problem) =>
       [problem.title, problem.description, ...problem.services.map((service) => service.name)]
         .join(" ").toLowerCase().includes(normalized),
     ).slice(0, 6);
@@ -890,12 +909,11 @@ export default function Home() {
   const progress = Math.round((completedForSelected / selected.tasks.length) * 100);
 
   const selectTheme = (nextTheme: Theme) => {
-    if (!nextTheme.available) return;
-    const firstPhase = nextTheme.phases[0];
-    const firstProblem = problems.find((problem) => problem.theme === nextTheme.id && problem.phase === firstPhase.id);
+    const firstProblem = appProblems.find((problem) => problem.theme === nextTheme.id);
+    if (!firstProblem) return;
     setThemeId(nextTheme.id);
-    setPhaseId(firstPhase.id);
-    if (firstProblem) setSelectedId(firstProblem.id);
+    setPhaseId(firstProblem.phase);
+    setSelectedId(firstProblem.id);
   };
   const selectProblem = (problem: Problem) => {
     setThemeId(problem.theme);
@@ -914,11 +932,11 @@ export default function Home() {
       </header>
 
       <section className="hero" id="top">
-        <div className="hero-kicker"><span>EXPANDED</span> 13テーマ・53の困りごとを掲載</div>
+        <div className="hero-kicker"><span>APP ONLY</span> スマホアプリだけを厳選</div>
         <h1>困ったとき、<br />次にやることがわかる。</h1>
-        <p>暮らしから移動、食事、ペット、健康、お金、子育て、相談まで。状況別のやることと、合うサービスをひとつながりに。</p>
+        <p>困りごとを解決までの順番に整理し、状況に合うスマホアプリと公式・ストア情報をひとつながりに。</p>
         <div className="hero-themes" aria-label="公開中のテーマ">
-          {themes.filter((item) => item.available).map((item) => <button key={item.id} type="button" onClick={() => { selectTheme(item); document.getElementById("guide")?.scrollIntoView({ behavior: "smooth" }); }}><b>{item.mark}</b>{item.label}</button>)}
+          {themes.filter((item) => appProblems.some((problem) => problem.theme === item.id)).map((item) => <button key={item.id} type="button" onClick={() => { selectTheme(item); document.getElementById("guide")?.scrollIntoView({ behavior: "smooth" }); }}><b>{item.mark}</b>{item.label}</button>)}
         </div>
         <div className="search-wrap">
           <span className="search-icon" aria-hidden="true" />
@@ -930,7 +948,7 @@ export default function Home() {
             return <button key={problem.id} type="button" onClick={() => selectProblem(problem)}><span>{resultTheme?.label}<small>{resultPhase?.label}</small></span><strong>{problem.title}</strong><i>→</i></button>;
           }) : <p>別の言葉でも探してみてください。</p>}</div>}
         </div>
-        <div className="trust-row"><span>広告順位ではなく、目的との相性で紹介</span><span>公式情報を確認</span><span>最終確認日を表示</span></div>
+        <div className="trust-row"><span>スマホアプリ限定</span><span>公式・ストア情報へ直結</span><span>目的との相性で紹介</span></div>
       </section>
 
       <section className="navigator" id="guide">
@@ -939,8 +957,8 @@ export default function Home() {
           <aside className="category-rail" id="categories">
             <div className="rail-label">テーマ</div>
             {themes.map((item) => {
-              const count = problems.filter((problem) => problem.theme === item.id).length;
-              return <button className={themeId === item.id ? "category active" : "category"} key={item.id} disabled={!item.available} type="button" onClick={() => selectTheme(item)}>
+              const count = appProblems.filter((problem) => problem.theme === item.id).length;
+              return <button className={themeId === item.id ? "category active" : "category"} key={item.id} disabled={count === 0} type="button" onClick={() => selectTheme(item)}>
                 <span className="category-mark">{item.mark}</span><span><strong>{item.label}</strong><small>{count}の困りごと</small></span><i>{themeId === item.id ? "→" : ""}</i>
               </button>;
             })}
@@ -949,10 +967,10 @@ export default function Home() {
 
           <div className={`explorer theme-${themeId}`}>
             <div className="theme-context"><span className="category-mark">{theme.mark}</span><div><b>{theme.label}</b><small>{theme.description}</small></div></div>
-            <div className="phase-tabs" style={{ gridTemplateColumns: `repeat(${theme.phases.length}, 1fr)` }} role="tablist" aria-label={`${theme.label}の段階`}>
-              {theme.phases.map((item, index) => <button key={item.id} className={phaseId === item.id ? "phase-tab active" : "phase-tab"} onClick={() => {
+            <div className="phase-tabs" style={{ gridTemplateColumns: `repeat(${activePhases.length}, 1fr)` }} role="tablist" aria-label={`${theme.label}の段階`}>
+              {activePhases.map((item, index) => <button key={item.id} className={phaseId === item.id ? "phase-tab active" : "phase-tab"} onClick={() => {
                 setPhaseId(item.id);
-                const first = problems.find((problem) => problem.theme === themeId && problem.phase === item.id);
+                const first = appProblems.find((problem) => problem.theme === themeId && problem.phase === item.id);
                 if (first) setSelectedId(first.id);
               }} type="button" role="tab" aria-selected={phaseId === item.id}><b>0{index + 1}</b><span>{item.label}<small>{item.short}</small></span></button>)}
             </div>
@@ -968,7 +986,8 @@ export default function Home() {
               <article className="detail-panel">
                 <div className="breadcrumb">{theme.label} <i>›</i> {currentPhase?.label}</div>
                 <span className="detail-kicker">{selected.eyebrow}</span><h3>{selected.title}</h3><p className="detail-description">{selected.description}</p>
-                <div className="progress-line"><span><b>{selected.tasks.length}</b>つのやること</span><div><i style={{ width: `${progress}%` }} /></div><strong>{progress}%</strong></div>
+                <div className="steps-intro"><span className="overline">ROADMAP</span><h4>解決までの{selected.tasks.length}ステップ</h4><p>アプリを選ぶ前に、上から順に確認することで、条件違いや手戻りを減らせます。</p></div>
+                <div className="progress-line"><span>準備の進み具合</span><div><i style={{ width: `${progress}%` }} /></div><strong>{progress}%</strong></div>
                 <div className="task-list">{selected.tasks.map((task, index) => {
                   const checked = completed.includes(task.id);
                   return <button type="button" className={checked ? "task checked" : "task"} key={task.id} onClick={() => setCompleted((current) => checked ? current.filter((id) => id !== task.id) : [...current, task.id])}>
@@ -976,11 +995,11 @@ export default function Home() {
                   </button>;
                 })}</div>
 
-                <div className="solutions-heading"><div><span className="overline">USEFUL SERVICES</span><h4>この困りごとに使えるサービス</h4></div><span>{selected.services.length}件を掲載</span></div>
+                <div className="solutions-heading"><div><span className="overline">MOBILE APPS</span><h4>この困りごとに使えるアプリ</h4></div><span>{selected.services.length}件を掲載</span></div>
                 <div className="service-list">{selected.services.map((service, index) => <div className="service-card" key={service.name}>
                   <div className="service-rank">0{index + 1}</div><div className="service-logo" style={{ background: service.accent }}>{service.name.slice(0, 1)}</div>
                   <div className="service-main"><small>{service.category}</small><h5>{service.name}</h5><p>{service.description}</p><div className="service-match"><small>このパターンなら</small><strong>{service.fit}</strong></div><div className="tag-row">{service.tags.map((tag) => <span key={tag}>{tag}</span>)}</div></div>
-                  <div className="service-meta"><dl><dt>選ぶ決め手</dt><dd>{service.why ?? service.tags.join("・")}</dd><dt>注意点</dt><dd>{service.watch ?? "料金・対象地域・利用条件は公式サイトで最新情報を確認"}</dd><dt>料金</dt><dd>{service.price}</dd><dt>始め方</dt><dd>{service.access}</dd></dl><a href={service.href} target="_blank" rel="noreferrer">公式情報を見る <span>↗</span></a></div>
+                  <div className="service-meta"><dl><dt>選ぶ決め手</dt><dd>{service.why ?? service.tags.join("・")}</dd><dt>注意点</dt><dd>{service.watch ?? "料金・対象地域・利用条件は公式サイトで最新情報を確認"}</dd><dt>料金</dt><dd>{service.price}</dd><dt>始め方</dt><dd>{service.access}</dd></dl><div className="app-links"><a href={service.href} target="_blank" rel="noreferrer">公式サイト <span>↗</span></a>{!androidOnlyApps.has(service.name) && <a className="store-link" href={appStoreUrl(service.name)} target="_blank" rel="noreferrer">App Store <span>↗</span></a>}{!iosOnlyApps.has(service.name) && <a className="store-link" href={googlePlayUrl(service.name)} target="_blank" rel="noreferrer">Google Play <span>↗</span></a>}</div></div>
                 </div>)}</div>
                 <div className="verified-note"><span>✓</span> 掲載内容は公式情報をもとに編集しています <b>最終確認 2026.08.08</b></div>
               </article>

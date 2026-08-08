@@ -9,20 +9,20 @@ export async function generateMetadata(): Promise<Metadata> {
   const origin = `${protocol}://${host}`;
 
   return {
-    title: "コトナビ｜困りごとから、次にやることがわかる",
-    description: "生活の53の困りごとから、次にやることと状況に合うサービスがわかる。",
+    title: "コトナビ｜困りごとから、使えるアプリまで",
+    description: "生活の困りごとを解決までの順番に整理し、状況に合うスマホアプリと公式・ストア情報がわかる。",
     icons: { icon: "/favicon.svg", shortcut: "/favicon.svg" },
     openGraph: {
-      title: "コトナビ｜困ったとき、次にやることがわかる。",
-      description: "生活の53の困りごとから、この場合に合うサービスまで具体的にわかる。",
+      title: "コトナビ｜困りごとから、使えるアプリまで。",
+      description: "解決までのステップと、この場合に合うスマホアプリが具体的にわかる。",
       type: "website",
-      images: [{ url: `${origin}/og-v4.png`, width: 1662, height: 946, alt: "コトナビ この場合は、これ。" }],
+      images: [{ url: `${origin}/og-v5.png`, width: 1662, height: 946, alt: "コトナビ 困りごとから、使えるアプリまで。" }],
     },
     twitter: {
       card: "summary_large_image",
-      title: "コトナビ｜困ったとき、次にやることがわかる。",
-      description: "生活の53の困りごとから、この場合に合うサービスまで具体的にわかる。",
-      images: [`${origin}/og-v4.png`],
+      title: "コトナビ｜困りごとから、使えるアプリまで。",
+      description: "解決までのステップと、この場合に合うスマホアプリが具体的にわかる。",
+      images: [`${origin}/og-v5.png`],
     },
   };
 }
