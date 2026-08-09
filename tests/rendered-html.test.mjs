@@ -59,7 +59,8 @@ test("uses verified destinations, broad search fields, and a bottom sponsor slot
   assert.match(page, /problem\.services\.flatMap/);
   assert.match(page, /tokens\.every/);
   assert.match(page, /className="sponsor-slot"/);
-  assert.match(page, /アプリを選ぶ前に、整理したい\{selected\.tasks\.length\}つのこと/);
+  assert.match(page, /アプリを見る前に、整理したい\{selected\.tasks\.length\}つのこと/);
+  assert.match(page, /アプリが困りごとのどの部分を助けるのか確認/);
   assert.match(page, /ここで操作や登録をする必要はありません/);
   assert.doesNotMatch(page, /行動の進み具合|setCompleted|completed\.length/);
   assert.match(css, /\.sponsor-slot/);
