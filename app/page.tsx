@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 type ThemeId = "daily" | "home" | "leisure" | "work" | "family" | "health" | "money" | "parenting" | "digital" | "mobility" | "food" | "pets" | "support";
 type Service = {
@@ -15,6 +15,8 @@ type Service = {
   access: string;
   href: string;
   accent: string;
+  sponsored?: boolean;
+  affiliate?: boolean;
 };
 
 const mobileAppNames = new Set([
@@ -908,17 +910,43 @@ export default function Home() {
   const completedForSelected = completed.filter((id) => selected.tasks.some((task) => task.id === id)).length;
   const progress = Math.round((completedForSelected / selected.tasks.length) * 100);
 
+  const updateProblemUrl = (problemId: string) => {
+    const url = new URL(window.location.href);
+    url.searchParams.set("problem", problemId);
+    window.history.replaceState({}, "", url);
+  };
+  const chooseProblem = (problem: Problem) => {
+    setSelectedId(problem.id);
+    updateProblemUrl(problem.id);
+  };
+  const trackOutbound = (service: Service, destination: "official" | "app-store" | "google-play") => {
+    const payload = { event: "outbound_app_click", service: service.name, destination, problem: selected.id, sponsored: Boolean(service.sponsored), affiliate: Boolean(service.affiliate) };
+    window.dispatchEvent(new CustomEvent("kotonavi:outbound", { detail: payload }));
+    const analyticsWindow = window as Window & { dataLayer?: Array<Record<string, unknown>> };
+    analyticsWindow.dataLayer?.push(payload);
+  };
+
+  useEffect(() => {
+    const requestedId = new URLSearchParams(window.location.search).get("problem");
+    const requestedProblem = appProblems.find((problem) => problem.id === requestedId);
+    if (requestedProblem) {
+      setThemeId(requestedProblem.theme);
+      setPhaseId(requestedProblem.phase);
+      setSelectedId(requestedProblem.id);
+    }
+  }, []);
+
   const selectTheme = (nextTheme: Theme) => {
     const firstProblem = appProblems.find((problem) => problem.theme === nextTheme.id);
     if (!firstProblem) return;
     setThemeId(nextTheme.id);
     setPhaseId(firstProblem.phase);
-    setSelectedId(firstProblem.id);
+    chooseProblem(firstProblem);
   };
   const selectProblem = (problem: Problem) => {
     setThemeId(problem.theme);
     setPhaseId(problem.phase);
-    setSelectedId(problem.id);
+    chooseProblem(problem);
     setQuery("");
     document.getElementById("guide")?.scrollIntoView({ behavior: "smooth" });
   };
@@ -927,7 +955,7 @@ export default function Home() {
     <main>
       <header className="topbar">
         <a className="brand" href="#top" aria-label="コトナビ ホーム"><span className="brand-mark"><i /><i /><i /></span><span>コトナビ</span></a>
-        <nav className="topnav" aria-label="メインナビゲーション"><a href="#guide">困りごとから探す</a><a href="#categories">テーマ一覧</a><a href="#about">コトナビについて</a></nav>
+        <nav className="topnav" aria-label="メインナビゲーション"><a href="#guide">困りごとから探す</a><a href="#categories">テーマ一覧</a><a href="/info">運営・掲載方針</a></nav>
         <button className="saved-button" type="button" aria-label="保存した項目"><span>保存した項目</span><b>{completed.length}</b></button>
       </header>
 
@@ -962,7 +990,7 @@ export default function Home() {
                 <span className="category-mark">{item.mark}</span><span><strong>{item.label}</strong><small>{count}の困りごと</small></span><i>{themeId === item.id ? "→" : ""}</i>
               </button>;
             })}
-            <div className="request-card"><span>探しているテーマがない？</span><strong>困りごとを教えてください</strong><button type="button">テーマをリクエスト ↗</button></div>
+            <div className="request-card"><span>探しているテーマがない？</span><strong>困りごとを教えてください</strong><a href="/info#contact">テーマをリクエスト ↗</a></div>
           </aside>
 
           <div className={`explorer theme-${themeId}`}>
@@ -971,14 +999,14 @@ export default function Home() {
               {activePhases.map((item, index) => <button key={item.id} className={phaseId === item.id ? "phase-tab active" : "phase-tab"} onClick={() => {
                 setPhaseId(item.id);
                 const first = appProblems.find((problem) => problem.theme === themeId && problem.phase === item.id);
-                if (first) setSelectedId(first.id);
+                if (first) chooseProblem(first);
               }} type="button" role="tab" aria-selected={phaseId === item.id}><b>0{index + 1}</b><span>{item.label}<small>{item.short}</small></span></button>)}
             </div>
 
             <div className="problem-layout">
               <div className="problem-list">
                 <div className="list-top"><span>{currentPhase?.label}</span><b>{visibleProblems.length}件</b></div>
-                {visibleProblems.map((problem) => <button type="button" key={problem.id} className={selected.id === problem.id ? "problem-item active" : "problem-item"} onClick={() => setSelectedId(problem.id)}>
+                {visibleProblems.map((problem) => <button type="button" key={problem.id} className={selected.id === problem.id ? "problem-item active" : "problem-item"} onClick={() => chooseProblem(problem)}>
                   <span className="problem-dot" /><span><small>{problem.eyebrow}</small><strong>{problem.title}</strong><em>{problem.tasks.length}ステップ ・ {problem.duration}</em></span><i>›</i>
                 </button>)}
               </div>
@@ -996,10 +1024,11 @@ export default function Home() {
                 })}</div>
 
                 <div className="solutions-heading"><div><span className="overline">MOBILE APPS</span><h4>この困りごとに使えるアプリ</h4></div><span>{selected.services.length}件を掲載</span></div>
+                <div className="commercial-note"><b>広告・提携について</b><span>現在の掲載順は広告料で決めていません。将来、広告・PR・成果報酬リンクを含む場合は、該当カードに明記します。</span><a href="/info#advertising">掲載方針を見る</a></div>
                 <div className="service-list">{selected.services.map((service, index) => <div className="service-card" key={service.name}>
                   <div className="service-rank">0{index + 1}</div><div className="service-logo" style={{ background: service.accent }}>{service.name.slice(0, 1)}</div>
-                  <div className="service-main"><small>{service.category}</small><h5>{service.name}</h5><p>{service.description}</p><div className="service-match"><small>このパターンなら</small><strong>{service.fit}</strong></div><div className="tag-row">{service.tags.map((tag) => <span key={tag}>{tag}</span>)}</div></div>
-                  <div className="service-meta"><dl><dt>選ぶ決め手</dt><dd>{service.why ?? service.tags.join("・")}</dd><dt>注意点</dt><dd>{service.watch ?? "料金・対象地域・利用条件は公式サイトで最新情報を確認"}</dd><dt>料金</dt><dd>{service.price}</dd><dt>始め方</dt><dd>{service.access}</dd></dl><div className="app-links"><a href={service.href} target="_blank" rel="noreferrer">公式サイト <span>↗</span></a>{!androidOnlyApps.has(service.name) && <a className="store-link" href={appStoreUrl(service.name)} target="_blank" rel="noreferrer">App Store <span>↗</span></a>}{!iosOnlyApps.has(service.name) && <a className="store-link" href={googlePlayUrl(service.name)} target="_blank" rel="noreferrer">Google Play <span>↗</span></a>}</div></div>
+                  <div className="service-main"><small>{service.category}</small><h5>{service.name}{service.sponsored && <em className="ad-label">PR</em>}{service.affiliate && <em className="ad-label affiliate">成果報酬</em>}</h5><p>{service.description}</p><div className="service-match"><small>このパターンなら</small><strong>{service.fit}</strong></div><div className="tag-row">{service.tags.map((tag) => <span key={tag}>{tag}</span>)}</div></div>
+                  <div className="service-meta"><dl><dt>選ぶ決め手</dt><dd>{service.why ?? service.tags.join("・")}</dd><dt>注意点</dt><dd>{service.watch ?? "料金・対象地域・利用条件は公式サイトで最新情報を確認"}</dd><dt>料金</dt><dd>{service.price}</dd><dt>始め方</dt><dd>{service.access}</dd></dl><div className="app-links"><a href={service.href} target="_blank" rel={service.sponsored || service.affiliate ? "noreferrer sponsored" : "noreferrer"} onClick={() => trackOutbound(service, "official")}>公式サイト <span>↗</span></a>{!androidOnlyApps.has(service.name) && <a className="store-link" href={appStoreUrl(service.name)} target="_blank" rel={service.sponsored || service.affiliate ? "noreferrer sponsored" : "noreferrer"} onClick={() => trackOutbound(service, "app-store")}>App Store <span>↗</span></a>}{!iosOnlyApps.has(service.name) && <a className="store-link" href={googlePlayUrl(service.name)} target="_blank" rel={service.sponsored || service.affiliate ? "noreferrer sponsored" : "noreferrer"} onClick={() => trackOutbound(service, "google-play")}>Google Play <span>↗</span></a>}</div></div>
                 </div>)}</div>
                 <div className="verified-note"><span>✓</span> 掲載内容は公式情報をもとに編集しています <b>最終確認 2026.08.08</b></div>
               </article>
@@ -1013,7 +1042,7 @@ export default function Home() {
         <div><b>02</b><span>できる・できないを明確に</span><p>個人で使えるか、契約や導入が必要かまで、始め方を整理します。</p></div>
         <div><b>03</b><span>情報の鮮度を見える化</span><p>公式情報への導線と最終確認日を表示し、古い情報の報告を受け付けます。</p></div>
       </div></section>
-      <footer><a className="brand footer-brand" href="#top"><span className="brand-mark"><i /><i /><i /></span><span>コトナビ</span></a><p>困りごとから、次の一歩へ。</p><div><a href="#guide">困りごとから探す</a><a href="#about">掲載方針</a><a href="#top">情報修正の連絡</a></div><small>© 2026 Kotonavi. Preview edition.</small></footer>
+      <footer><a className="brand footer-brand" href="#top"><span className="brand-mark"><i /><i /><i /></span><span>コトナビ</span></a><p>困りごとから、次の一歩へ。</p><div><a href="#guide">困りごとから探す</a><a href="/info#editorial">編集方針</a><a href="/info#advertising">広告掲載方針</a><a href="/info#privacy">プライバシー</a><a href="/info#contact">お問い合わせ</a></div><small>© 2026 Kotonavi.</small></footer>
     </main>
   );
 }

@@ -9,9 +9,16 @@ export async function generateMetadata(): Promise<Metadata> {
   const origin = `${protocol}://${host}`;
 
   return {
-    title: "コトナビ｜困りごとから、使えるアプリまで",
+    metadataBase: new URL(origin),
+    title: {
+      default: "コトナビ｜困りごとから、使えるアプリまで",
+      template: "%s",
+    },
     description: "生活の困りごとを解決までの順番に整理し、状況に合うスマホアプリと公式・ストア情報がわかる。",
     icons: { icon: "/favicon.svg", shortcut: "/favicon.svg" },
+    manifest: "/manifest.webmanifest",
+    alternates: { canonical: "/" },
+    robots: { index: true, follow: true },
     openGraph: {
       title: "コトナビ｜困りごとから、使えるアプリまで。",
       description: "解決までのステップと、この場合に合うスマホアプリが具体的にわかる。",
@@ -28,9 +35,20 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "コトナビ",
+    url: "https://kotonavi-moving-guide.maronnu.chatgpt.site",
+    description: "生活の困りごとを解決までの順番に整理し、状況に合うスマホアプリと公式・ストア情報を案内するサイト。",
+    inLanguage: "ja",
+  };
   return (
     <html lang="ja">
-      <body>{children}</body>
+      <body>
+        {children}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }} />
+      </body>
     </html>
   );
 }
