@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 type ThemeId = "daily" | "home" | "leisure" | "work" | "family" | "health" | "money" | "parenting" | "digital" | "mobility" | "food" | "pets" | "support";
 type Service = {
@@ -27,10 +27,17 @@ const mobileAppNames = new Set([
   "TABETE", "Yieto 2", "ぺとログ", "PetBacker",
 ]);
 
-const iosOnlyApps = new Set(["入退去メモ", "Cabinote"]);
-const androidOnlyApps = new Set(["ぺとログ"]);
-const appStoreUrl = (name: string) => `https://apps.apple.com/jp/search?term=${encodeURIComponent(name)}`;
-const googlePlayUrl = (name: string) => `https://play.google.com/store/search?q=${encodeURIComponent(name)}&c=apps&hl=ja`;
+type AppDestinations = { official?: string; ios?: string; android?: string };
+const directStoreLinks: Record<string, AppDestinations> = {
+  "入退去メモ": { ios: "https://apps.apple.com/jp/app/%E5%85%A5%E9%80%80%E5%8E%BB%E3%83%A1%E3%83%A2/id6767765025" },
+  "Cabinote": { ios: "https://apps.apple.com/jp/app/%E6%8C%81%E3%81%A1%E7%89%A9-%E5%AE%B6%E8%B2%A1%E7%AE%A1%E7%90%86%E6%95%B4%E7%90%93%E4%BF%9D%E8%A8%BC%E6%9B%B8-cabinote/id6755080718" },
+  "ぺとログ": { android: "https://play.google.com/store/apps/details?id=jp.nooon.petlog" },
+};
+const isStoreUrl = (url: string) => url.includes("apps.apple.com/") || url.includes("play.google.com/store/apps/");
+const destinationsFor = (service: Service): AppDestinations => {
+  const stores = directStoreLinks[service.name] ?? {};
+  return { official: isStoreUrl(service.href) ? undefined : service.href, ...stores };
+};
 type Problem = {
   id: string;
   theme: ThemeId;
@@ -478,6 +485,34 @@ const problems: Problem[] = [
     ],
   },
   {
+    id: "family-medical-share", theme: "family", phase: "normal", eyebrow: "救急時に迷わないために",
+    title: "家族の服薬・通院情報をすぐ確認できるようにしたい",
+    description: "薬の名前を暗記するのではなく、お薬手帳、かかりつけ医、アレルギーの確認場所を家族でそろえます。",
+    duration: "初回 15分",
+    tasks: [
+      { id: "family-med-photo", title: "お薬手帳の最新ページを確認する", note: "変更があった薬には日付を添えます。", timing: "今日" },
+      { id: "family-med-doctor", title: "かかりつけ医の連絡先を登録する", note: "診療科と休診日も一緒に残します。", timing: "今日" },
+      { id: "family-med-allergy", title: "アレルギーと緊急時の注意を共有する", note: "本人が説明できない場合を想定します。", timing: "今週" },
+    ],
+    services: [
+      { name: "GOOSE", category: "家族共有・ライフログ", description: "病歴、保険、かかりつけ医など、もしもの時に必要な情報を家族で共有。", tags: ["医療情報", "家族共有", "見守り"], fit: "家族が同じ情報を確認できるようにしたい", price: "無料版あり", access: "アプリで利用", href: "https://goose-net.com/", accent: "#147f73" },
+    ],
+  },
+  {
+    id: "family-access-plan", theme: "family", phase: "normal", eyebrow: "見せる範囲も先に決める",
+    title: "重要情報を、必要なときだけ家族へ伝えたい",
+    description: "資産、契約、IDなどを一度に共有せず、何を・誰に・いつ見せるかを分けて整理します。",
+    duration: "初回 20分",
+    tasks: [
+      { id: "family-access-list", title: "伝える情報を種類ごとに分ける", note: "医療、契約、資産、デジタル情報に分けます。", timing: "最初に" },
+      { id: "family-access-person", title: "情報ごとに受取人を決める", note: "一人へ集中させず役割で考えます。", timing: "今週" },
+      { id: "family-access-time", title: "共有するタイミングを決める", note: "今すぐ、入院時、判断が難しい時など。", timing: "登録前" },
+    ],
+    services: [
+      { name: "つなぐノート", category: "ライフノート", description: "資産、健康、IDなどを整理し、情報ごとに公開時期を指定。", tags: ["公開時期", "受取人", "暗号化"], fit: "情報ごとに共有する相手と時期を選びたい", price: "無料", access: "アプリで利用", href: "https://tsunagu-note.jp/", accent: "#e18b58" },
+    ],
+  },
+  {
     id: "family-absence", theme: "family", phase: "absence", eyebrow: "72時間を乗り切る",
     title: "急な入院でも家のことを引き継げるようにしたい",
     description: "ペット、子ども、仕事、定期配送など、本人が動けない間に止められない生活を優先します。",
@@ -890,6 +925,7 @@ export default function Home() {
   const [selectedId, setSelectedId] = useState(firstAppProblem.id);
   const [completed, setCompleted] = useState<string[]>([]);
   const [query, setQuery] = useState("");
+  const searchInputRef = useRef<HTMLInputElement>(null);
 
   const theme = themes.find((item) => item.id === themeId) ?? themes[0];
   const selected = appProblems.find((problem) => problem.id === selectedId) ?? firstAppProblem;
@@ -902,10 +938,23 @@ export default function Home() {
   const searchResults = useMemo(() => {
     const normalized = query.trim().toLowerCase();
     if (!normalized) return [];
-    return appProblems.filter((problem) =>
-      [problem.title, problem.description, ...problem.services.map((service) => service.name)]
-        .join(" ").toLowerCase().includes(normalized),
-    ).slice(0, 6);
+    const tokens = normalized.split(/[\s　、。・\/のをがにはへでと]+/).filter(Boolean);
+    return appProblems.filter((problem) => {
+      const problemTheme = themes.find((item) => item.id === problem.theme);
+      const problemPhase = problemTheme?.phases.find((item) => item.id === problem.phase);
+      const searchable = [
+        problem.title,
+        problem.description,
+        problem.eyebrow,
+        problemTheme?.label ?? "",
+        problemTheme?.description ?? "",
+        problemPhase?.label ?? "",
+        problemPhase?.short ?? "",
+        ...problem.tasks.flatMap((task) => [task.title, task.note]),
+        ...problem.services.flatMap((service) => [service.name, service.category, service.description, service.fit, ...service.tags]),
+      ].join(" ").toLowerCase();
+      return tokens.every((token) => searchable.includes(token));
+    }).slice(0, 8);
   }, [query]);
   const completedForSelected = completed.filter((id) => selected.tasks.some((task) => task.id === id)).length;
   const progress = Math.round((completedForSelected / selected.tasks.length) * 100);
@@ -934,6 +983,16 @@ export default function Home() {
       setPhaseId(requestedProblem.phase);
       setSelectedId(requestedProblem.id);
     }
+  }, []);
+  useEffect(() => {
+    const focusSearch = (event: KeyboardEvent) => {
+      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
+        event.preventDefault();
+        searchInputRef.current?.focus();
+      }
+    };
+    window.addEventListener("keydown", focusSearch);
+    return () => window.removeEventListener("keydown", focusSearch);
   }, []);
 
   const selectTheme = (nextTheme: Theme) => {
@@ -968,9 +1027,9 @@ export default function Home() {
         </div>
         <div className="search-wrap">
           <span className="search-icon" aria-hidden="true" />
-          <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="困っていることを入力　例：病院を探したい、契約で困った" aria-label="困りごとを検索" />
+          <input ref={searchInputRef} value={query} onChange={(event) => setQuery(event.target.value)} placeholder="困っていることを入力　例：家族の薬、タクシー、写真整理" aria-label="困りごとを検索" />
           <kbd>⌘ K</kbd>
-          {query && <div className="search-results"><div className="search-results-label">{searchResults.length}件の候補</div>{searchResults.length ? searchResults.map((problem) => {
+          {query && <div className="search-results" role="listbox"><div className="search-results-label">{searchResults.length}件の候補</div>{searchResults.length ? searchResults.map((problem) => {
             const resultTheme = themes.find((item) => item.id === problem.theme);
             const resultPhase = resultTheme?.phases.find((item) => item.id === problem.phase);
             return <button key={problem.id} type="button" onClick={() => selectProblem(problem)}><span>{resultTheme?.label}<small>{resultPhase?.label}</small></span><strong>{problem.title}</strong><i>→</i></button>;
@@ -995,21 +1054,21 @@ export default function Home() {
 
           <div className={`explorer theme-${themeId}`}>
             <div className="theme-context"><span className="category-mark">{theme.mark}</span><div><b>{theme.label}</b><small>{theme.description}</small></div></div>
-            <div className="phase-tabs" style={{ gridTemplateColumns: `repeat(${activePhases.length}, 1fr)` }} role="tablist" aria-label={`${theme.label}の段階`}>
+            {activePhases.length > 1 ? <div className="phase-tabs" style={{ gridTemplateColumns: `repeat(${activePhases.length}, 1fr)` }} role="tablist" aria-label={`${theme.label}の段階`}>
               {activePhases.map((item, index) => <button key={item.id} className={phaseId === item.id ? "phase-tab active" : "phase-tab"} onClick={() => {
                 setPhaseId(item.id);
                 const first = appProblems.find((problem) => problem.theme === themeId && problem.phase === item.id);
                 if (first) chooseProblem(first);
               }} type="button" role="tab" aria-selected={phaseId === item.id}><b>0{index + 1}</b><span>{item.label}<small>{item.short}</small></span></button>)}
-            </div>
+            </div> : <div className="single-phase-context"><span>現在の場面</span><b>{activePhases[0]?.label}</b><small>{activePhases[0]?.short}</small></div>}
 
-            <div className="problem-layout">
-              <div className="problem-list">
+            <div className={`problem-layout ${visibleProblems.length === 1 ? "single-problem" : ""}`}>
+              {visibleProblems.length > 1 && <div className="problem-list">
                 <div className="list-top"><span>{currentPhase?.label}</span><b>{visibleProblems.length}件</b></div>
                 {visibleProblems.map((problem) => <button type="button" key={problem.id} className={selected.id === problem.id ? "problem-item active" : "problem-item"} onClick={() => chooseProblem(problem)}>
                   <span className="problem-dot" /><span><small>{problem.eyebrow}</small><strong>{problem.title}</strong><em>{problem.tasks.length}ステップ ・ {problem.duration}</em></span><i>›</i>
                 </button>)}
-              </div>
+              </div>}
 
               <article className="detail-panel">
                 <div className="breadcrumb">{theme.label} <i>›</i> {currentPhase?.label}</div>
@@ -1024,12 +1083,14 @@ export default function Home() {
                 })}</div>
 
                 <div className="solutions-heading"><div><span className="overline">MOBILE APPS</span><h4>この困りごとに使えるアプリ</h4></div><span>{selected.services.length}件を掲載</span></div>
-                <div className="commercial-note"><b>広告・提携について</b><span>現在の掲載順は広告料で決めていません。将来、広告・PR・成果報酬リンクを含む場合は、該当カードに明記します。</span><a href="/info#advertising">掲載方針を見る</a></div>
-                <div className="service-list">{selected.services.map((service, index) => <div className="service-card" key={service.name}>
+                <div className="service-list">{selected.services.map((service, index) => {
+                  const destinations = destinationsFor(service);
+                  return <div className="service-card" key={service.name}>
                   <div className="service-rank">0{index + 1}</div><div className="service-logo" style={{ background: service.accent }}>{service.name.slice(0, 1)}</div>
                   <div className="service-main"><small>{service.category}</small><h5>{service.name}{service.sponsored && <em className="ad-label">PR</em>}{service.affiliate && <em className="ad-label affiliate">成果報酬</em>}</h5><p>{service.description}</p><div className="service-match"><small>このパターンなら</small><strong>{service.fit}</strong></div><div className="tag-row">{service.tags.map((tag) => <span key={tag}>{tag}</span>)}</div></div>
-                  <div className="service-meta"><dl><dt>選ぶ決め手</dt><dd>{service.why ?? service.tags.join("・")}</dd><dt>注意点</dt><dd>{service.watch ?? "料金・対象地域・利用条件は公式サイトで最新情報を確認"}</dd><dt>料金</dt><dd>{service.price}</dd><dt>始め方</dt><dd>{service.access}</dd></dl><div className="app-links"><a href={service.href} target="_blank" rel={service.sponsored || service.affiliate ? "noreferrer sponsored" : "noreferrer"} onClick={() => trackOutbound(service, "official")}>公式サイト <span>↗</span></a>{!androidOnlyApps.has(service.name) && <a className="store-link" href={appStoreUrl(service.name)} target="_blank" rel={service.sponsored || service.affiliate ? "noreferrer sponsored" : "noreferrer"} onClick={() => trackOutbound(service, "app-store")}>App Store <span>↗</span></a>}{!iosOnlyApps.has(service.name) && <a className="store-link" href={googlePlayUrl(service.name)} target="_blank" rel={service.sponsored || service.affiliate ? "noreferrer sponsored" : "noreferrer"} onClick={() => trackOutbound(service, "google-play")}>Google Play <span>↗</span></a>}</div></div>
-                </div>)}</div>
+                  <div className="service-meta"><dl><dt>選ぶ決め手</dt><dd>{service.why ?? service.tags.join("・")}</dd><dt>注意点</dt><dd>{service.watch ?? "料金・対象地域・利用条件は公式サイトで最新情報を確認"}</dd><dt>料金</dt><dd>{service.price}</dd><dt>始め方</dt><dd>{service.access}</dd></dl><div className="app-links">{destinations.official && <a href={destinations.official} target="_blank" rel={service.sponsored || service.affiliate ? "noreferrer sponsored" : "noreferrer"} onClick={() => trackOutbound(service, "official")}>公式サイト <span>↗</span></a>}{destinations.ios && <a className="store-link" href={destinations.ios} target="_blank" rel={service.sponsored || service.affiliate ? "noreferrer sponsored" : "noreferrer"} onClick={() => trackOutbound(service, "app-store")}>App Store <span>↗</span></a>}{destinations.android && <a className="store-link" href={destinations.android} target="_blank" rel={service.sponsored || service.affiliate ? "noreferrer sponsored" : "noreferrer"} onClick={() => trackOutbound(service, "google-play")}>Google Play <span>↗</span></a>}</div></div>
+                </div>;
+                })}</div>
                 <div className="verified-note"><span>✓</span> 掲載内容は公式情報をもとに編集しています <b>最終確認 2026.08.08</b></div>
               </article>
             </div>
@@ -1042,6 +1103,7 @@ export default function Home() {
         <div><b>02</b><span>できる・できないを明確に</span><p>個人で使えるか、契約や導入が必要かまで、始め方を整理します。</p></div>
         <div><b>03</b><span>情報の鮮度を見える化</span><p>公式情報への導線と最終確認日を表示し、古い情報の報告を受け付けます。</p></div>
       </div></section>
+      <aside className="sponsor-slot" aria-label="広告掲載枠"><span>SPONSOR</span><div><b>広告掲載枠</b><p>コンテンツを読み終えた後にだけ表示する、控えめな広告枠です。おすすめアプリの順位には影響しません。</p></div><a href="/info#advertising">掲載について</a></aside>
       <footer><a className="brand footer-brand" href="#top"><span className="brand-mark"><i /><i /><i /></span><span>コトナビ</span></a><p>困りごとから、次の一歩へ。</p><div><a href="#guide">困りごとから探す</a><a href="/info#editorial">編集方針</a><a href="/info#advertising">広告掲載方針</a><a href="/info#privacy">プライバシー</a><a href="/info#contact">お問い合わせ</a></div><small>© 2026 Kotonavi.</small></footer>
     </main>
   );
