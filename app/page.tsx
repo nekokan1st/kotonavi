@@ -944,7 +944,6 @@ export default function Home() {
   const [themeId, setThemeId] = useState<ThemeId>(firstAppProblem.theme);
   const [phaseId, setPhaseId] = useState(firstAppProblem.phase);
   const [selectedId, setSelectedId] = useState(firstAppProblem.id);
-  const [completed, setCompleted] = useState<string[]>([]);
   const [query, setQuery] = useState("");
   const searchInputRef = useRef<HTMLInputElement>(null);
 
@@ -977,9 +976,6 @@ export default function Home() {
       return tokens.every((token) => searchable.includes(token));
     }).slice(0, 8);
   }, [query]);
-  const completedForSelected = completed.filter((id) => selected.tasks.some((task) => task.id === id)).length;
-  const progress = Math.round((completedForSelected / selected.tasks.length) * 100);
-
   const updateProblemUrl = (problemId: string) => {
     const url = new URL(window.location.href);
     url.searchParams.set("problem", problemId);
@@ -1036,7 +1032,6 @@ export default function Home() {
       <header className="topbar">
         <a className="brand" href="#top" aria-label="コトナビ ホーム"><span className="brand-mark"><i /><i /><i /></span><span>コトナビ</span></a>
         <nav className="topnav" aria-label="メインナビゲーション"><a href="#guide">困りごとから探す</a><a href="#categories">テーマ一覧</a><a href="/info">運営・掲載方針</a></nav>
-        <button className="saved-button" type="button" aria-label="保存した項目"><span>保存した項目</span><b>{completed.length}</b></button>
       </header>
 
       <section className="hero" id="top">
@@ -1087,21 +1082,17 @@ export default function Home() {
               {visibleProblems.length > 1 && <div className="problem-list">
                 <div className="list-top"><span>{currentPhase?.label}</span><b>{visibleProblems.length}件</b></div>
                 {visibleProblems.map((problem) => <button type="button" key={problem.id} className={selected.id === problem.id ? "problem-item active" : "problem-item"} onClick={() => chooseProblem(problem)}>
-                  <span className="problem-dot" /><span><small>{problem.eyebrow}</small><strong>{problem.title}</strong><em>{problem.tasks.length}ステップ ・ {problem.duration}</em></span><i>›</i>
+                  <span className="problem-dot" /><span><small>{problem.eyebrow}</small><strong>{problem.title}</strong><em>整理ポイント {problem.tasks.length}つ ・ {problem.duration}</em></span><i>›</i>
                 </button>)}
               </div>}
 
               <article className="detail-panel">
                 <div className="breadcrumb">{theme.label} <i>›</i> {currentPhase?.label}</div>
                 <span className="detail-kicker">{selected.eyebrow}</span><h3>{selected.title}</h3><p className="detail-description">{selected.description}</p>
-                <div className="steps-intro"><span className="overline">FIRST ACTIONS</span><h4>まず、この{selected.tasks.length}つを進める</h4><p>ここはアプリの機能紹介ではなく、この困りごとを解決するための行動順です。おすすめアプリは、この行動を進めやすくする道具として下に紹介します。</p></div>
-                <div className="progress-line"><span>行動の進み具合</span><div><i style={{ width: `${progress}%` }} /></div><strong>{progress}%</strong></div>
-                <div className="task-list">{selected.tasks.map((task, index) => {
-                  const checked = completed.includes(task.id);
-                  return <button type="button" className={checked ? "task checked" : "task"} key={task.id} onClick={() => setCompleted((current) => checked ? current.filter((id) => id !== task.id) : [...current, task.id])}>
-                    <span className="check">{checked ? "✓" : index + 1}</span><span><strong>{task.title}</strong><small>{task.note}</small></span><em>{task.timing}</em>
-                  </button>;
-                })}</div>
+                <div className="steps-intro"><span className="overline">BEFORE YOU CHOOSE</span><h4>アプリを選ぶ前に、整理したい{selected.tasks.length}つのこと</h4><p>自分の状況や希望を先に整理すると、必要なアプリを選びやすくなります。ここで操作や登録をする必要はありません。</p></div>
+                <div className="task-list">{selected.tasks.map((task, index) => <div className="task" key={task.id}>
+                  <span className="check">{index + 1}</span><span><strong>{task.title}</strong><small>{task.note}</small></span><em>{task.timing}</em>
+                </div>)}</div>
 
                 <div className="solutions-heading"><div><span className="overline">MOBILE APPS</span><h4>この困りごとに使えるアプリ</h4></div><span>{selected.services.length}件を掲載</span></div>
                 <div className="service-list">{selected.services.map((service, index) => {
