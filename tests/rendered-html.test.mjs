@@ -49,6 +49,8 @@ test("uses verified destinations, broad search fields, and a bottom sponsor slot
   ]);
 
   assert.match(page, /const directStoreLinks/);
+  assert.match(page, /"Peatix": \{ ios:/);
+  assert.match(page, /"GOOSE": \{ ios:.*android:/);
   assert.match(page, /destinationsFor\(service\)/);
   assert.doesNotMatch(page, /apps\.apple\.com\/jp\/search|play\.google\.com\/store\/search/);
   assert.match(page, /family-medical-share/);
@@ -57,6 +59,8 @@ test("uses verified destinations, broad search fields, and a bottom sponsor slot
   assert.match(page, /problem\.services\.flatMap/);
   assert.match(page, /tokens\.every/);
   assert.match(page, /className="sponsor-slot"/);
+  assert.match(page, /まず、この\{selected\.tasks\.length\}つを進める/);
+  assert.match(page, /この困りごとを解決するための行動順/);
   assert.match(css, /\.sponsor-slot/);
   assert.match(css, /\.single-phase-context/);
 });
