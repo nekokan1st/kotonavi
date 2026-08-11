@@ -30,7 +30,10 @@ test("server-renders the Kotonavi home page", async () => {
 
   const html = await response.text();
   assert.match(html, /<title>コトナビ/);
-  assert.match(html, /困りごとから/);
+  assert.match(html, /困りごとから、/);
+  assert.match(html, /次の一歩へ/);
+  assert.match(html, /アプリ・Webサービス・公的窓口/);
+  assert.doesNotMatch(html, /APP ONLY|スマホアプリだけを厳選|スマホアプリ限定/);
   assert.doesNotMatch(html, /Your site is taking shape|Building your site/);
 });
 
@@ -115,8 +118,8 @@ test("uses verified destinations, broad search fields, and a bottom sponsor slot
   assert.match(css, /(?:^|})footer > div a \{ padding: 0 14px; border-left:/);
   assert.match(page, /disasterKitProblemIds\.has\(selected\.id\)/);
   assert.match(page, /この困りごとに関連する広告/);
-  assert.match(page, /アプリを見る前に、整理したい\{selected\.tasks\.length\}つのこと/);
-  assert.match(page, /アプリが困りごとのどの部分を助けるのか確認/);
+  assert.match(page, /サービスを見る前に、整理したい\{selected\.tasks\.length\}つのこと/);
+  assert.match(page, /サービスや窓口が困りごとのどの部分を助けるのか確認/);
   assert.match(page, /ここで操作や登録をする必要はありません/);
   assert.doesNotMatch(page, /行動の進み具合|setCompleted|completed\.length/);
   assert.match(css, /\.sponsor-slot/);

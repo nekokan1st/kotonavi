@@ -11,24 +11,24 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     metadataBase: new URL(origin),
     title: {
-      default: "コトナビ｜困りごとから、使えるアプリまで",
+      default: "コトナビ｜困りごとから、次の一歩へ",
       template: "%s",
     },
-    description: "生活の困りごとを解決までの順番に整理し、状況に合うスマホアプリと公式・ストア情報がわかる。",
+    description: "生活の困りごとを解決までの順番に整理し、役立つアプリ・Webサービス・公的窓口を案内します。",
     icons: { icon: "/favicon.svg", shortcut: "/favicon.svg" },
     manifest: "/manifest.webmanifest",
     alternates: { canonical: "/" },
     robots: { index: true, follow: true },
     openGraph: {
-      title: "コトナビ｜困りごとから、使えるアプリまで。",
-      description: "解決までのステップと、この場合に合うスマホアプリが具体的にわかる。",
+      title: "コトナビ｜困りごとから、次の一歩へ。",
+      description: "解決までのステップと、状況に合うアプリ・Webサービス・公的窓口がわかる。",
       type: "website",
-      images: [{ url: `${origin}/og-v5.png`, width: 1662, height: 946, alt: "コトナビ 困りごとから、使えるアプリまで。" }],
+      images: [{ url: `${origin}/og-v5.png`, width: 1662, height: 946, alt: "コトナビ 困りごとから、次の一歩へ。" }],
     },
     twitter: {
       card: "summary_large_image",
-      title: "コトナビ｜困りごとから、使えるアプリまで。",
-      description: "解決までのステップと、この場合に合うスマホアプリが具体的にわかる。",
+      title: "コトナビ｜困りごとから、次の一歩へ。",
+      description: "解決までのステップと、状況に合うアプリ・Webサービス・公的窓口がわかる。",
       images: [`${origin}/og-v5.png`],
     },
   };
@@ -40,7 +40,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     "@type": "WebSite",
     name: "コトナビ",
     url: "https://kotonaviapp.com",
-    description: "生活の困りごとを解決までの順番に整理し、状況に合うスマホアプリと公式・ストア情報を案内するサイト。",
+    description: "生活の困りごとを解決までの順番に整理し、役立つアプリ・Webサービス・公的窓口を案内するサイト。",
     inLanguage: "ja",
   };
   return (

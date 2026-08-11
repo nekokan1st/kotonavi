@@ -32,8 +32,8 @@ export default function InfoPage() {
       <div className="policy-content">
         <section id="about">
           <span className="policy-number">01</span><div><h2>コトナビについて</h2>
-          <p>コトナビは、生活上の困りごとを「解決までのステップ」に整理し、その場面で使えるスマホアプリへの入口を提供する情報サイトです。アプリの契約・提供・サポートは各運営事業者が行います。</p>
-          <dl><dt>運営主体</dt><dd>コトナビ編集部</dd><dt>屋号</dt><dd>コトナビ</dd><dt>運営開始</dt><dd>2026年</dd><dt>サイトの目的</dt><dd>困りごとから適切な行動とアプリを見つけやすくすること</dd></dl></div>
+          <p>コトナビは、生活上の困りごとを「解決までのステップ」に整理し、その場面で役立つアプリ・Webサービス・公的窓口への入口を提供する情報サイトです。各サービスの契約・提供・サポートは、それぞれの運営事業者や機関が行います。</p>
+          <dl><dt>運営主体</dt><dd>コトナビ編集部</dd><dt>屋号</dt><dd>コトナビ</dd><dt>運営開始</dt><dd>2026年</dd><dt>サイトの目的</dt><dd>困りごとから適切な行動とサービス・窓口を見つけやすくすること</dd></dl></div>
         </section>
 
         <section id="editorial">
