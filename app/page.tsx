@@ -29,30 +29,30 @@ const mobileAppNames = new Set([
 
 type AppDestinations = { official?: string; ios?: string; android?: string };
 const directStoreLinks: Record<string, AppDestinations> = {
-  "Peatix": { ios: "https://apps.apple.com/jp/app/id561632513" },
-  "Google フォト": { ios: "https://apps.apple.com/jp/app/id962194608" },
+  "Peatix": { ios: "https://apps.apple.com/jp/app/id561632513", android: "https://play.google.com/store/apps/details?id=com.peatix.android.Azuki" },
+  "Google フォト": { ios: "https://apps.apple.com/jp/app/id962194608", android: "https://play.google.com/store/apps/details?id=com.google.android.apps.photos" },
   "入退去メモ": { ios: "https://apps.apple.com/jp/app/%E5%85%A5%E9%80%80%E5%8E%BB%E3%83%A1%E3%83%A2/id6767765025" },
   "UCHITAS": { ios: "https://apps.apple.com/jp/app/id1453357489" },
   "Cabinote": { ios: "https://apps.apple.com/jp/app/%E6%8C%81%E3%81%A1%E7%89%A9-%E5%AE%B6%E8%B2%A1%E7%AE%A1%E7%90%86%E6%95%B4%E7%90%93%E4%BF%9D%E8%A8%BC%E6%9B%B8-cabinote/id6755080718" },
-  "Misoca": { ios: "https://apps.apple.com/jp/app/id1026534800" },
+  "Misoca": { ios: "https://apps.apple.com/jp/app/id1026534800", android: "https://play.google.com/store/apps/details?id=jp.misoca.misoca" },
   "Toggl Track": { ios: "https://apps.apple.com/jp/app/id1291898086" },
   "GOOSE": { ios: "https://apps.apple.com/jp/app/id1565305966", android: "https://play.google.com/store/apps/details?id=jp.co.tsunamamo.kalert" },
   "つなぐノート": { ios: "https://apps.apple.com/jp/app/id6451205576" },
-  "マネーフォワード ME": { ios: "https://apps.apple.com/jp/app/id594145971" },
-  "保険簿": { ios: "https://apps.apple.com/jp/app/id1447375500" },
-  "母子モ": { ios: "https://apps.apple.com/jp/app/id1106750564" },
-  "TimeTree": { ios: "https://apps.apple.com/jp/app/id952578473" },
-  "Google One バックアップ": { ios: "https://apps.apple.com/jp/app/id1451784328" },
-  "Yahoo!乗換案内": { ios: "https://apps.apple.com/jp/app/id291676451" },
-  "GO": { ios: "https://apps.apple.com/jp/app/id1254341709" },
+  "マネーフォワード ME": { ios: "https://apps.apple.com/jp/app/id594145971", android: "https://play.google.com/store/apps/details?id=com.moneyforward.android.app" },
+  "保険簿": { ios: "https://apps.apple.com/jp/app/id1447375500", android: "https://play.google.com/store/apps/details?id=com.ib.hokenbo" },
+  "母子モ": { ios: "https://apps.apple.com/jp/app/id1106750564", android: "https://play.google.com/store/apps/details?id=jp.co.mti.BoshiAuthorize" },
+  "TimeTree": { ios: "https://apps.apple.com/jp/app/id952578473", android: "https://play.google.com/store/apps/details?id=works.jubilee.timetree" },
+  "Google One バックアップ": { ios: "https://apps.apple.com/jp/app/id1451784328", android: "https://play.google.com/store/apps/details?id=com.google.android.apps.subscriptions.red" },
+  "Yahoo!乗換案内": { ios: "https://apps.apple.com/jp/app/id291676451", android: "https://play.google.com/store/apps/details?id=jp.co.yahoo.android.apps.transit" },
+  "GO": { ios: "https://apps.apple.com/jp/app/id1254341709", android: "https://play.google.com/store/apps/details?id=com.dena.automotive.taxibell" },
   "akippa": { ios: "https://apps.apple.com/jp/app/id894446397" },
-  "ecbo cloak": { ios: "https://apps.apple.com/jp/app/id1443707795" },
-  "クラシル": { ios: "https://apps.apple.com/jp/app/id1059134258" },
-  "くふう トクバイ": { ios: "https://apps.apple.com/jp/app/id1124772645" },
-  "TABETE": { ios: "https://apps.apple.com/jp/app/id1392919676" },
+  "ecbo cloak": { ios: "https://apps.apple.com/jp/app/id1443707795", android: "https://play.google.com/store/apps/details?id=io.ecbo.cloak" },
+  "クラシル": { ios: "https://apps.apple.com/jp/app/id1059134258", android: "https://play.google.com/store/apps/details?id=com.kurashiru" },
+  "くふう トクバイ": { ios: "https://apps.apple.com/jp/app/id1124772645", android: "https://play.google.com/store/apps/details?id=jp.co.tokubai.android.bargain" },
+  "TABETE": { ios: "https://apps.apple.com/jp/app/id1392919676", android: "https://play.google.com/store/apps/details?id=me.tabete.tabete" },
   "Yieto 2": { ios: "https://apps.apple.com/jp/app/id6745941580" },
   "ぺとログ": { ios: "https://apps.apple.com/jp/app/id6756508276", android: "https://play.google.com/store/apps/details?id=jp.nooon.petlog" },
-  "PetBacker": { ios: "https://apps.apple.com/jp/app/id1168037472" },
+  "PetBacker": { ios: "https://apps.apple.com/jp/app/id1168037472", android: "https://play.google.com/store/apps/details?id=com.petbacker.android" },
 };
 const isStoreUrl = (url: string) => url.includes("apps.apple.com/") || url.includes("play.google.com/store/apps/");
 const destinationsFor = (service: Service): AppDestinations => {
@@ -1057,7 +1057,7 @@ export default function Home() {
       <section className="navigator" id="guide">
         <div className="section-heading"><div><span className="overline">SCENE NAVIGATOR</span><h2>今の場面から探す</h2></div><p>テーマを選び、いまの状況へ進んでください。</p></div>
         <div className="navigator-grid">
-          <aside className="category-rail" id="categories">
+          <div className="category-nav"><aside className="category-rail" id="categories">
             <div className="rail-label">テーマ</div>
             {themes.map((item) => {
               const count = appProblems.filter((problem) => problem.theme === item.id).length;
@@ -1066,7 +1066,7 @@ export default function Home() {
               </button>;
             })}
             <div className="request-card"><span>探しているテーマがない？</span><strong>困りごとを教えてください</strong><a href="/info#contact">テーマをリクエスト ↗</a></div>
-          </aside>
+          </aside><p className="category-scroll-hint" aria-hidden="true"><span>←</span> 横にスワイプして他のテーマを見る <span>→</span></p></div>
 
           <div className={`explorer theme-${themeId}`}>
             <div className="theme-context"><span className="category-mark">{theme.mark}</span><div><b>{theme.label}</b><small>{theme.description}</small></div></div>

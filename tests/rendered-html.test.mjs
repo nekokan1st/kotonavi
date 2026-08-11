@@ -91,6 +91,9 @@ test("uses verified destinations, broad search fields, and a bottom sponsor slot
   assert.match(page, /const directStoreLinks/);
   assert.match(page, /"Peatix": \{ ios:/);
   assert.match(page, /"GOOSE": \{ ios:.*android:/);
+  assert.match(page, /"母子モ": \{ ios:.*android:/);
+  assert.match(page, /"Google One バックアップ": \{ ios:.*android:/);
+  assert.match(page, /"PetBacker": \{ ios:.*android:/);
   assert.match(page, /destinationsFor\(service\)/);
   assert.match(page, /className="official-link"/);
   assert.doesNotMatch(css, /\.app-links a:first-child/);
@@ -107,4 +110,6 @@ test("uses verified destinations, broad search fields, and a bottom sponsor slot
   assert.doesNotMatch(page, /行動の進み具合|setCompleted|completed\.length/);
   assert.match(css, /\.sponsor-slot/);
   assert.match(css, /\.single-phase-context/);
+  assert.match(page, /横にスワイプして他のテーマを見る/);
+  assert.match(css, /\.category-scroll-hint/);
 });

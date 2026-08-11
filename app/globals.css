@@ -128,6 +128,7 @@ a { color: inherit; text-decoration: none; }
 .navigator-grid { max-width: 1360px; margin: auto; display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 14px; align-items: start; }
 .category-rail, .explorer { background: var(--cream); border: 1px solid rgba(24,32,29,.1); border-radius: 11px; overflow: hidden; }
 .category-rail { padding: 17px 12px 12px; }
+.category-scroll-hint { display: none; }
 .rail-label { font-size: 9px; color: var(--muted); font-weight: 800; letter-spacing: .1em; padding: 0 8px 10px; }
 .category { width: 100%; min-height: 66px; display: grid; grid-template-columns: 38px 1fr 15px; gap: 10px; align-items: center; border: 0; border-radius: 8px; padding: 8px; background: transparent; text-align: left; color: var(--ink); }
 .category:disabled { opacity: .47; }
@@ -186,7 +187,7 @@ footer { background: #15241e; color: white; padding: 48px clamp(24px, 7vw, 110px
   .topbar { height: 64px; }.topnav { display: none; }.saved-button span { display: none; }.saved-button { padding: 7px; }
   .hero { min-height: 520px; padding-top: 60px; }.hero h1 { font-size: 47px; }.search-wrap > input { font-size: 12px; padding-right: 45px; }.search-wrap kbd { display: none; }.trust-row { gap: 9px; flex-wrap: wrap; justify-content: center; }
   .section-heading { display: block; }.section-heading > p { margin-top: 12px; }
-  .navigator { padding: 68px 12px; }.navigator-grid { display: block; }.category-rail { display: flex; overflow-x: auto; padding: 8px; margin-bottom: 10px; gap: 4px; }.rail-label, .request-card { display: none; }.category { min-width: 180px; }.category:disabled { display: none; }
+  .navigator { padding: 68px 12px; }.navigator-grid { display: block; }.category-nav { margin-bottom: 12px; }.category-rail { display: flex; overflow-x: auto; padding: 8px; gap: 4px; scrollbar-width: none; }.category-rail::-webkit-scrollbar { display: none; }.category-scroll-hint { display: flex; align-items: center; justify-content: center; gap: 7px; margin: 6px 0 0; color: var(--muted); font-size: 9px; font-weight: 700; }.category-scroll-hint span { color: var(--green); font-size: 12px; }.rail-label, .request-card { display: none; }.category { min-width: 180px; }.category:disabled { display: none; }
   .theme-context { min-height: 58px; }
   .phase-tabs { overflow-x: auto; grid-template-columns: repeat(4, minmax(140px, 1fr)); }.phase-tab { min-height: 70px; }
   .single-phase-context { min-height: 58px; flex-wrap: wrap; }.single-phase-context small { width: 100%; }
