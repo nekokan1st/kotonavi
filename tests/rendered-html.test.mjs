@@ -69,6 +69,19 @@ test("server-renders the guide index and search landing pages", async () => {
   assert.match(html, /application\/ld\+json/);
 });
 
+test("every guide CTA targets an existing problem", async () => {
+  const [page, guideData] = await Promise.all([
+    readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/guides/data.ts", import.meta.url), "utf8"),
+  ]);
+  const problemIds = new Set([...page.matchAll(/\bid:\s*"([^"]+)"\s*,\s*theme:/g)].map((match) => match[1]));
+  const guideProblemIds = [...guideData.matchAll(/\bproblemId:\s*"([^"]+)"/g)].map((match) => match[1]);
+  assert.ok(guideProblemIds.length > 0);
+  for (const problemId of guideProblemIds) {
+    assert.ok(problemIds.has(problemId), `guide CTA target does not exist: ${problemId}`);
+  }
+});
+
 test("uses verified destinations, broad search fields, and a bottom sponsor slot", async () => {
   const [page, css] = await Promise.all([
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
@@ -79,6 +92,8 @@ test("uses verified destinations, broad search fields, and a bottom sponsor slot
   assert.match(page, /"Peatix": \{ ios:/);
   assert.match(page, /"GOOSE": \{ ios:.*android:/);
   assert.match(page, /destinationsFor\(service\)/);
+  assert.match(page, /className="official-link"/);
+  assert.doesNotMatch(css, /\.app-links a:first-child/);
   assert.doesNotMatch(page, /apps\.apple\.com\/jp\/search|play\.google\.com\/store\/search/);
   assert.match(page, /family-medical-share/);
   assert.match(page, /family-access-plan/);

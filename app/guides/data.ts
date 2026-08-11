@@ -15,7 +15,7 @@ export const guides: Guide[] = [
     title: "入居時の傷や汚れを記録する方法｜退去時に困らないための準備",
     description: "賃貸住宅への入居時に、傷・汚れ・設備の状態をスマホで記録する手順と、記録用アプリを選ぶポイントを解説します。",
     eyebrow: "引越し・住まい",
-    problemId: "home-movein",
+    problemId: "record-condition",
     updated: "2026年8月11日",
     sections: [
       { heading: "入居直後の記録が必要な理由", body: "入居前からあった傷や汚れを後から説明するのは難しいため、荷物を運び込む前後に部屋の状態を残しておくことが大切です。写真だけでなく、撮影場所・日付・状況を一緒に整理すると、管理会社への連絡や退去時の確認に使いやすくなります。" },
@@ -71,7 +71,7 @@ export const guides: Guide[] = [
     title: "献立と買い物に役立つアプリの選び方｜食材を無駄にしない手順",
     description: "献立、チラシ、買い物リスト、食品ロス対策のアプリを目的別に選ぶための整理方法を紹介します。",
     eyebrow: "食事・家事",
-    problemId: "food-cook",
+    problemId: "food-recipe",
     updated: "2026年8月11日",
     sections: [
       { heading: "困っている場面を分ける", body: "献立が決まらない、予算内で買いたい、家にある食材を使い切りたいなど、同じ買い物でも必要な機能は異なります。最も時間がかかっている場面を一つ選びます。" },
@@ -85,7 +85,7 @@ export const guides: Guide[] = [
     title: "ペットの健康記録を続ける方法｜体重・投薬・通院をまとめる",
     description: "犬や猫の体重、食事、投薬、通院を記録し、家族や動物病院へ伝えやすくするための項目とアプリ選びを解説します。",
     eyebrow: "ペット",
-    problemId: "pets-health",
+    problemId: "pets-record",
     updated: "2026年8月11日",
     sections: [
       { heading: "毎日記録する項目を絞る", body: "食事量、排泄、投薬など、健康状態の変化に気づくために必要な項目を選びます。すべてを詳しく書こうとせず、異変があった日だけ写真やメモを追加すると続けやすくなります。" },
