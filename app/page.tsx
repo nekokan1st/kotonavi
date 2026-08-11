@@ -1041,7 +1041,7 @@ export default function Home() {
 
       <section className="hero" id="top">
         <div className="hero-kicker"><span>GUIDE</span> 困りごと別ナビ</div>
-        <h1>困りごとから、<br />次の一歩へ。</h1>
+        <h1>困りごとから、次の一歩へ。</h1>
         <p>状況を整理し、役立つアプリ・Webサービス・公的窓口を案内します。</p>
         <div className="hero-themes" aria-label="公開中のテーマ">
           {themes.filter((item) => appProblems.some((problem) => problem.theme === item.id)).map((item) => <button key={item.id} type="button" onClick={() => { selectTheme(item); document.getElementById("guide")?.scrollIntoView({ behavior: "smooth" }); }}><b>{item.mark}</b>{item.label}</button>)}

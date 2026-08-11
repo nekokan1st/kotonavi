@@ -65,7 +65,7 @@ export default function InfoPage() {
           <span className="policy-number">06</span><div><h2>お問い合わせ</h2>
           <p>掲載情報の修正、提供終了の報告、掲載・提携の相談は、以下のメールアドレスで受け付けています。</p>
           <p><a className="contact-email" href="mailto:kotonavi.info@proton.me">kotonavi.info@proton.me</a></p>
-          <div className="contact-types"><span>情報修正</span><span>アプリ掲載</span><span>PR・提携相談</span><span>その他</span></div>
+          <div className="contact-types"><span>情報修正</span><span>サービス掲載</span><span>PR・提携相談</span><span>その他</span></div>
           <p className="policy-needed">通常3営業日以内を目安に確認します。内容によっては返信できない場合があります。</p></div>
         </section>
       </div>

@@ -23,13 +23,13 @@ export async function generateMetadata(): Promise<Metadata> {
       title: "コトナビ｜困りごとから、次の一歩へ。",
       description: "解決までのステップと、状況に合うアプリ・Webサービス・公的窓口がわかる。",
       type: "website",
-      images: [{ url: `${origin}/og-v5.png`, width: 1662, height: 946, alt: "コトナビ 困りごとから、次の一歩へ。" }],
+      images: [{ url: `${origin}/og.png`, width: 1731, height: 909, alt: "コトナビ 困りごとから、次の一歩へ。" }],
     },
     twitter: {
       card: "summary_large_image",
       title: "コトナビ｜困りごとから、次の一歩へ。",
       description: "解決までのステップと、状況に合うアプリ・Webサービス・公的窓口がわかる。",
-      images: [`${origin}/og-v5.png`],
+      images: [`${origin}/og.png`],
     },
   };
 }

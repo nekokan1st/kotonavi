@@ -32,6 +32,8 @@ test("server-renders the Kotonavi home page", async () => {
   assert.match(html, /<title>コトナビ/);
   assert.match(html, /困りごとから、/);
   assert.match(html, /次の一歩へ/);
+  assert.match(html, /<h1>困りごとから、次の一歩へ。<\/h1>/);
+  assert.doesNotMatch(html, /<h1>困りごとから、<br\s*\/>/);
   assert.match(html, /アプリ・Webサービス・公的窓口/);
   assert.doesNotMatch(html, /APP ONLY|スマホアプリだけを厳選|スマホアプリ限定/);
   assert.doesNotMatch(html, /Your site is taking shape|Building your site/);
