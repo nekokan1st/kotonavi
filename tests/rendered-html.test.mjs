@@ -104,6 +104,11 @@ test("uses verified destinations, broad search fields, and a bottom sponsor slot
   assert.match(page, /problem\.services\.flatMap/);
   assert.match(page, /tokens\.every/);
   assert.match(page, /className="sponsor-slot"/);
+  assert.match(page, /広告・アフィリエイト掲載枠/);
+  assert.match(page, /家族のもしもに備える、防災セット/);
+  assert.match(page, /rel="noreferrer nofollow sponsored"/);
+  assert.match(page, /rpx\.a8\.net\/svt\/ejp/);
+  assert.match(page, /affiliate-impression/);
   assert.match(page, /アプリを見る前に、整理したい\{selected\.tasks\.length\}つのこと/);
   assert.match(page, /アプリが困りごとのどの部分を助けるのか確認/);
   assert.match(page, /ここで操作や登録をする必要はありません/);
