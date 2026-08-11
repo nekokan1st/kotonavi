@@ -1116,7 +1116,7 @@ export default function Home() {
         <div><b>03</b><span>情報の鮮度を見える化</span><p>公式情報への導線と最終確認日を表示し、古い情報の報告を受け付けます。</p></div>
       </div></section>
       <aside className="sponsor-slot" aria-label="広告掲載枠"><span>SPONSOR</span><div><b>広告掲載枠</b><p>コンテンツを読み終えた後にだけ表示する、控えめな広告枠です。おすすめアプリの順位には影響しません。</p></div><a href="/info#advertising">掲載について</a></aside>
-      <footer><a className="brand footer-brand" href="#top"><span className="brand-mark"><i /><i /><i /></span><span>コトナビ</span></a><p>困りごとから、次の一歩へ。</p><div><a href="#guide">困りごとから探す</a><a href="/info#editorial">編集方針</a><a href="/info#advertising">広告掲載方針</a><a href="/info#privacy">プライバシー</a><a href="/info#contact">お問い合わせ</a></div><small>© 2026 Kotonavi.</small></footer>
+      <footer><a className="brand footer-brand" href="#top"><span className="brand-mark"><i /><i /><i /></span><span>コトナビ</span></a><p>困りごとから、次の一歩へ。</p><div><a href="#guide">困りごとから探す</a><a href="/guides">解決ガイド</a><a href="/info#editorial">編集方針</a><a href="/info#advertising">広告掲載方針</a><a href="/info#privacy">プライバシー</a><a href="/info#contact">お問い合わせ</a></div><small>© 2026 Kotonavi.</small></footer>
     </main>
   );
 }

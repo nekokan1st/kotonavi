@@ -56,6 +56,19 @@ test("uses the production domain in crawl metadata", async () => {
   }
 });
 
+test("server-renders the guide index and search landing pages", async () => {
+  const indexResponse = await render("/guides");
+  assert.equal(indexResponse.status, 200);
+  assert.match(await indexResponse.text(), /暮らしの困りごと解決ガイド/);
+
+  const guideResponse = await render("/guides/move-in-photo-record");
+  assert.equal(guideResponse.status, 200);
+  const html = await guideResponse.text();
+  assert.match(html, /入居時の傷や汚れを記録する方法/);
+  assert.match(html, /コトナビ編集部/);
+  assert.match(html, /application\/ld\+json/);
+});
+
 test("uses verified destinations, broad search fields, and a bottom sponsor slot", async () => {
   const [page, css] = await Promise.all([
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),

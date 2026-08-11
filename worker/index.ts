@@ -28,10 +28,20 @@ interface ExecutionContext {
 const worker = {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     const url = new URL(request.url);
+    const isStaging = url.hostname === "staging.kotonaviapp.com";
 
     if (url.hostname === "www.kotonaviapp.com") {
       url.hostname = "kotonaviapp.com";
       return Response.redirect(url.toString(), 308);
+    }
+
+    if (isStaging && url.pathname === "/robots.txt") {
+      return new Response("User-agent: *\nDisallow: /\n", {
+        headers: {
+          "content-type": "text/plain; charset=utf-8",
+          "x-robots-tag": "noindex, nofollow, noarchive",
+        },
+      });
     }
 
     if (url.pathname === "/_vinext/image") {
@@ -45,7 +55,16 @@ const worker = {
       }, allowedWidths);
     }
 
-    return handler.fetch(request, env, ctx);
+    const response = await handler.fetch(request, env, ctx);
+    if (!isStaging) return response;
+
+    const headers = new Headers(response.headers);
+    headers.set("x-robots-tag", "noindex, nofollow, noarchive");
+    return new Response(response.body, {
+      status: response.status,
+      statusText: response.statusText,
+      headers,
+    });
   },
 };
 
