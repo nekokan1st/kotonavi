@@ -1109,9 +1109,9 @@ export default function Home() {
                 </div>;
                 })}</div>
                 {disasterKitProblemIds.has(selected.id) && <aside className="contextual-affiliate" aria-label="この困りごとに関連する広告">
-                  <span>関連広告・アフィリエイト</span>
-                  <div><b>家族のもしもに備える、防災セット</b><p>この困りごとに関連する選択肢として、アイリスオーヤマ公式の2人用防災セットを紹介しています。広告はアプリの掲載順位に影響しません。</p></div>
-                  <a href={disasterKitAffiliateUrl} target="_blank" rel="noreferrer nofollow sponsored">楽天市場で見る ↗</a>
+                  <span>広告・アフィリエイト</span>
+                  <div><b>ふたり分の備えを、ひとつのリュックに。</b><p>水・保存食から、ラジオライト、エアベッド、携帯トイレまで。家族で一つずつ集める手間を減らせる、2人用の防災セットです。</p><small>商品の内容・価格・在庫は販売ページでご確認ください。広告はアプリの掲載順位に影響しません。</small></div>
+                  <a href={disasterKitAffiliateUrl} target="_blank" rel="noreferrer nofollow sponsored">セット内容を確認する ↗</a>
                   <img className="affiliate-impression" width="1" height="1" src="https://www15.a8.net/0.gif?a8mat=4BA39A+BFEJSI+2HOM+BW8O1" alt="" aria-hidden="true" />
                 </aside>}
                 <div className="verified-note"><span>✓</span> 掲載内容は公式情報をもとに編集しています <b>最終確認 2026.08.08</b></div>
@@ -1128,8 +1128,8 @@ export default function Home() {
       </div></section>
       <aside className="sponsor-slot has-affiliate" aria-label="広告・アフィリエイト掲載枠">
         <span>広告・アフィリエイト</span>
-        <div><b>家族のもしもに備える、防災セット</b><p>アイリスオーヤマ公式の2人用防災セット。商品内容・価格・在庫は販売ページでご確認ください。おすすめアプリの順位には影響しません。</p></div>
-        <a href={disasterKitAffiliateUrl} target="_blank" rel="noreferrer nofollow sponsored">楽天市場で見る ↗</a>
+        <div><b>防災用品を、一つずつ集める手間を減らす。</b><p>水・保存食やラジオライトなど、ふたり分の備えをまとめた防災セットです。商品内容・価格・在庫は販売ページでご確認ください。おすすめアプリの順位には影響しません。</p></div>
+        <a href={disasterKitAffiliateUrl} target="_blank" rel="noreferrer nofollow sponsored">セット内容を確認する ↗</a>
         <img className="affiliate-impression" width="1" height="1" src="https://www15.a8.net/0.gif?a8mat=4BA39A+BFEJSI+2HOM+BW8O1" alt="" aria-hidden="true" />
       </aside>
       <footer><a className="brand footer-brand" href="#top"><span className="brand-mark"><i /><i /><i /></span><span>コトナビ</span></a><p>困りごとから、次の一歩へ。</p><div><a href="#guide">困りごとから探す</a><a href="/guides">解決ガイド</a><a href="/info#editorial">編集方針</a><a href="/info#advertising">広告掲載方針</a><a href="/info#privacy">プライバシー</a><a href="/info#contact">お問い合わせ</a></div><small>© 2026 Kotonavi.</small></footer>
