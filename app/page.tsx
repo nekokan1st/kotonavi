@@ -1109,7 +1109,7 @@ export default function Home() {
                 </div>;
                 })}</div>
                 {disasterKitProblemIds.has(selected.id) && <aside className="contextual-affiliate" aria-label="この困りごとに関連する広告">
-                  <span>広告・アフィリエイト</span>
+                  <span>広告</span>
                   <div><b>ふたり分の備えを、ひとつのリュックに。</b><p>水・保存食から、ラジオライト、エアベッド、携帯トイレまで。家族で一つずつ集める手間を減らせる、2人用の防災セットです。</p><small>商品の内容・価格・在庫は販売ページでご確認ください。広告はサービス・窓口の掲載順位に影響しません。</small></div>
                   <a href={disasterKitAffiliateUrl} target="_blank" rel="noreferrer nofollow sponsored">セット内容を確認する ↗</a>
                   <img className="affiliate-impression" width="1" height="1" src="https://www15.a8.net/0.gif?a8mat=4BA39A+BFEJSI+2HOM+BW8O1" alt="" aria-hidden="true" />
@@ -1126,8 +1126,8 @@ export default function Home() {
         <div><b>02</b><span>できる・できないを明確に</span><p>個人で使えるか、契約や導入が必要かまで、始め方を整理します。</p></div>
         <div><b>03</b><span>情報の鮮度を見える化</span><p>公式情報への導線と最終確認日を表示し、古い情報の報告を受け付けます。</p></div>
       </div></section>
-      <aside className="sponsor-slot has-affiliate" aria-label="広告・アフィリエイト掲載枠">
-        <span>広告・アフィリエイト</span>
+      <aside className="sponsor-slot has-affiliate" aria-label="広告掲載枠">
+        <span>広告</span>
         <div><b>防災用品を、一つずつ集める手間を減らす。</b><p>水・保存食やラジオライトなど、ふたり分の備えをまとめた防災セットです。商品内容・価格・在庫は販売ページでご確認ください。サービス・窓口の掲載順位には影響しません。</p></div>
         <a href={disasterKitAffiliateUrl} target="_blank" rel="noreferrer nofollow sponsored">セット内容を確認する ↗</a>
         <img className="affiliate-impression" width="1" height="1" src="https://www15.a8.net/0.gif?a8mat=4BA39A+BFEJSI+2HOM+BW8O1" alt="" aria-hidden="true" />
