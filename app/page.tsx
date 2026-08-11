@@ -59,6 +59,11 @@ const destinationsFor = (service: Service): AppDestinations => {
   const stores = directStoreLinks[service.name] ?? {};
   return { official: isStoreUrl(service.href) ? undefined : service.href, ...stores };
 };
+
+const disasterKitAffiliateUrl = "https://rpx.a8.net/svt/ejp?a8mat=4BA39A+BFEJSI+2HOM+BW8O1&rakuten=y&a8ejpredirect=http%3A%2F%2Fhb.afl.rakuten.co.jp%2Fhgc%2F0ea62065.34400275.0ea62066.204f04c0%2Fa26081143426_4BA39A_BFEJSI_2HOM_BW8O1%3Fpc%3Dhttps%253A%252F%252Fitem.rakuten.co.jp%252Firisplaza-r%252F288353%252F%26m%3Dhttps%253A%252F%252Fitem.rakuten.co.jp%252Firisplaza-r%252F288353%252F";
+const disasterKitProblemIds = new Set([
+  "daily-emergency", "family-basics", "family-medical-share", "family-absence", "family-emergency",
+]);
 type Problem = {
   id: string;
   theme: ThemeId;
@@ -1103,6 +1108,12 @@ export default function Home() {
                   <div className="service-meta"><dl><dt>選ぶ決め手</dt><dd>{service.why ?? service.tags.join("・")}</dd><dt>注意点</dt><dd>{service.watch ?? "料金・対象地域・利用条件は公式サイトで最新情報を確認"}</dd><dt>料金</dt><dd>{service.price}</dd><dt>始め方</dt><dd>{service.access}</dd></dl><div className="app-links">{destinations.official && <a className="official-link" href={destinations.official} target="_blank" rel={service.sponsored || service.affiliate ? "noreferrer sponsored" : "noreferrer"} onClick={() => trackOutbound(service, "official")}>公式サイト <span>↗</span></a>}{destinations.ios && <a className="store-link" href={destinations.ios} target="_blank" rel={service.sponsored || service.affiliate ? "noreferrer sponsored" : "noreferrer"} onClick={() => trackOutbound(service, "app-store")}>App Store <span>↗</span></a>}{destinations.android && <a className="store-link" href={destinations.android} target="_blank" rel={service.sponsored || service.affiliate ? "noreferrer sponsored" : "noreferrer"} onClick={() => trackOutbound(service, "google-play")}>Google Play <span>↗</span></a>}</div></div>
                 </div>;
                 })}</div>
+                {disasterKitProblemIds.has(selected.id) && <aside className="contextual-affiliate" aria-label="この困りごとに関連する広告">
+                  <span>関連広告・アフィリエイト</span>
+                  <div><b>家族のもしもに備える、防災セット</b><p>この困りごとに関連する選択肢として、アイリスオーヤマ公式の2人用防災セットを紹介しています。広告はアプリの掲載順位に影響しません。</p></div>
+                  <a href={disasterKitAffiliateUrl} target="_blank" rel="noreferrer nofollow sponsored">楽天市場で見る ↗</a>
+                  <img className="affiliate-impression" width="1" height="1" src="https://www15.a8.net/0.gif?a8mat=4BA39A+BFEJSI+2HOM+BW8O1" alt="" aria-hidden="true" />
+                </aside>}
                 <div className="verified-note"><span>✓</span> 掲載内容は公式情報をもとに編集しています <b>最終確認 2026.08.08</b></div>
               </article>
             </div>
@@ -1118,7 +1129,7 @@ export default function Home() {
       <aside className="sponsor-slot has-affiliate" aria-label="広告・アフィリエイト掲載枠">
         <span>広告・アフィリエイト</span>
         <div><b>家族のもしもに備える、防災セット</b><p>アイリスオーヤマ公式の2人用防災セット。商品内容・価格・在庫は販売ページでご確認ください。おすすめアプリの順位には影響しません。</p></div>
-        <a href="https://rpx.a8.net/svt/ejp?a8mat=4BA39A+BFEJSI+2HOM+BW8O1&rakuten=y&a8ejpredirect=http%3A%2F%2Fhb.afl.rakuten.co.jp%2Fhgc%2F0ea62065.34400275.0ea62066.204f04c0%2Fa26081143426_4BA39A_BFEJSI_2HOM_BW8O1%3Fpc%3Dhttps%253A%252F%252Fitem.rakuten.co.jp%252Firisplaza-r%252F288353%252F%26m%3Dhttps%253A%252F%252Fitem.rakuten.co.jp%252Firisplaza-r%252F288353%252F" target="_blank" rel="noreferrer nofollow sponsored">楽天市場で見る ↗</a>
+        <a href={disasterKitAffiliateUrl} target="_blank" rel="noreferrer nofollow sponsored">楽天市場で見る ↗</a>
         <img className="affiliate-impression" width="1" height="1" src="https://www15.a8.net/0.gif?a8mat=4BA39A+BFEJSI+2HOM+BW8O1" alt="" aria-hidden="true" />
       </aside>
       <footer><a className="brand footer-brand" href="#top"><span className="brand-mark"><i /><i /><i /></span><span>コトナビ</span></a><p>困りごとから、次の一歩へ。</p><div><a href="#guide">困りごとから探す</a><a href="/guides">解決ガイド</a><a href="/info#editorial">編集方針</a><a href="/info#advertising">広告掲載方針</a><a href="/info#privacy">プライバシー</a><a href="/info#contact">お問い合わせ</a></div><small>© 2026 Kotonavi.</small></footer>
