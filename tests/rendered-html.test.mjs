@@ -111,8 +111,8 @@ test("uses verified destinations, broad search fields, and a bottom sponsor slot
   assert.match(page, /rpx\.a8\.net\/svt\/ejp/);
   assert.match(page, /affiliate-impression/);
   assert.match(page, /className="contextual-affiliate"/);
-  assert.match(css, /footer > div \{ display: flex; flex-wrap: wrap;/);
-  assert.match(css, /footer > div a \{ padding: 0 14px; border-left:/);
+  assert.match(css, /(?:^|})footer > div \{ display: flex; flex-wrap: wrap;/);
+  assert.match(css, /(?:^|})footer > div a \{ padding: 0 14px; border-left:/);
   assert.match(page, /disasterKitProblemIds\.has\(selected\.id\)/);
   assert.match(page, /この困りごとに関連する広告/);
   assert.match(page, /アプリを見る前に、整理したい\{selected\.tasks\.length\}つのこと/);
