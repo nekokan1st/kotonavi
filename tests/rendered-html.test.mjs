@@ -40,6 +40,20 @@ test("server-renders the policy page", async () => {
   const html = await response.text();
   assert.match(html, /広告・PR・アフィリエイト掲載方針/);
   assert.match(html, /プライバシー/);
+  assert.match(html, /コトナビ編集部/);
+  assert.match(html, /kotonavi\.info@proton\.me/);
+});
+
+test("uses the production domain in crawl metadata", async () => {
+  const [layout, sitemap, robots] = await Promise.all([
+    readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/sitemap.ts", import.meta.url), "utf8"),
+    readFile(new URL("../app/robots.ts", import.meta.url), "utf8"),
+  ]);
+  for (const source of [layout, sitemap, robots]) {
+    assert.match(source, /https:\/\/kotonaviapp\.com/);
+    assert.doesNotMatch(source, /kotonavi-moving-guide\.maronnu\.chatgpt\.site/);
+  }
 });
 
 test("uses verified destinations, broad search fields, and a bottom sponsor slot", async () => {

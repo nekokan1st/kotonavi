@@ -33,7 +33,7 @@ export default function InfoPage() {
         <section id="about">
           <span className="policy-number">01</span><div><h2>コトナビについて</h2>
           <p>コトナビは、生活上の困りごとを「解決までのステップ」に整理し、その場面で使えるスマホアプリへの入口を提供する情報サイトです。アプリの契約・提供・サポートは各運営事業者が行います。</p>
-          <dl><dt>運営主体</dt><dd>正式名称の公開準備中</dd><dt>運営開始</dt><dd>2026年</dd><dt>サイトの目的</dt><dd>困りごとから適切な行動とアプリを見つけやすくすること</dd></dl></div>
+          <dl><dt>運営主体</dt><dd>コトナビ編集部</dd><dt>屋号</dt><dd>コトナビ</dd><dt>運営開始</dt><dd>2026年</dd><dt>サイトの目的</dt><dd>困りごとから適切な行動とアプリを見つけやすくすること</dd></dl></div>
         </section>
 
         <section id="editorial">
@@ -63,13 +63,14 @@ export default function InfoPage() {
 
         <section id="contact">
           <span className="policy-number">06</span><div><h2>お問い合わせ</h2>
-          <p>掲載情報の修正、提供終了の報告、掲載・提携の相談を受け付ける窓口を準備しています。連絡先が確定後、この場所に公開します。</p>
+          <p>掲載情報の修正、提供終了の報告、掲載・提携の相談は、以下のメールアドレスで受け付けています。</p>
+          <p><a className="contact-email" href="mailto:kotonavi.info@proton.me">kotonavi.info@proton.me</a></p>
           <div className="contact-types"><span>情報修正</span><span>アプリ掲載</span><span>PR・提携相談</span><span>その他</span></div>
-          <p className="policy-needed">公開前に必要：運営者名または屋号、公開用メールアドレス</p></div>
+          <p className="policy-needed">通常3営業日以内を目安に確認します。内容によっては返信できない場合があります。</p></div>
         </section>
       </div>
 
-      <footer className="policy-footer"><a href="/">← コトナビへ戻る</a><small>最終更新：2026年8月9日</small></footer>
+      <footer className="policy-footer"><a href="/">← コトナビへ戻る</a><small>最終更新：2026年8月11日</small></footer>
     </main>
   );
 }

@@ -3,6 +3,6 @@ import type { MetadataRoute } from "next";
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: { userAgent: "*", allow: "/" },
-    sitemap: "https://kotonavi-moving-guide.maronnu.chatgpt.site/sitemap.xml",
+    sitemap: "https://kotonaviapp.com/sitemap.xml",
   };
 }

@@ -39,7 +39,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: "コトナビ",
-    url: "https://kotonavi-moving-guide.maronnu.chatgpt.site",
+    url: "https://kotonaviapp.com",
     description: "生活の困りごとを解決までの順番に整理し、状況に合うスマホアプリと公式・ストア情報を案内するサイト。",
     inLanguage: "ja",
   };
