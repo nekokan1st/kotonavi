@@ -1115,16 +1115,11 @@ export default function Home() {
         <div><b>02</b><span>できる・できないを明確に</span><p>個人で使えるか、契約や導入が必要かまで、始め方を整理します。</p></div>
         <div><b>03</b><span>情報の鮮度を見える化</span><p>公式情報への導線と最終確認日を表示し、古い情報の報告を受け付けます。</p></div>
       </div></section>
-      <aside className="sponsor-slot" aria-label="広告・アフィリエイト掲載枠">
-        <span>ADVERTISEMENT</span>
-        {themeId === "family" || themeId === "digital" ? <>
-          <div><b>家族のもしもに備える、防災セット</b><p>アイリスオーヤマ公式の2人用防災セット。商品内容・価格・在庫は販売ページでご確認ください。おすすめアプリの順位には影響しません。</p></div>
-          <a href="https://rpx.a8.net/svt/ejp?a8mat=4BA39A+BFEJSI+2HOM+BW8O1&rakuten=y&a8ejpredirect=http%3A%2F%2Fhb.afl.rakuten.co.jp%2Fhgc%2F0ea62065.34400275.0ea62066.204f04c0%2Fa26081143426_4BA39A_BFEJSI_2HOM_BW8O1%3Fpc%3Dhttps%253A%252F%252Fitem.rakuten.co.jp%252Firisplaza-r%252F288353%252F%26m%3Dhttps%253A%252F%252Fitem.rakuten.co.jp%252Firisplaza-r%252F288353%252F" target="_blank" rel="noreferrer nofollow sponsored">楽天市場で見る ↗</a>
-          <img className="affiliate-impression" width="1" height="1" src="https://www15.a8.net/0.gif?a8mat=4BA39A+BFEJSI+2HOM+BW8O1" alt="" aria-hidden="true" />
-        </> : <>
-          <div><b>広告掲載枠</b><p>コンテンツを読み終えた後にだけ表示する、控えめな広告枠です。おすすめアプリの順位には影響しません。</p></div>
-          <a href="/info#advertising">掲載について</a>
-        </>}
+      <aside className="sponsor-slot has-affiliate" aria-label="広告・アフィリエイト掲載枠">
+        <span>広告・アフィリエイト</span>
+        <div><b>家族のもしもに備える、防災セット</b><p>アイリスオーヤマ公式の2人用防災セット。商品内容・価格・在庫は販売ページでご確認ください。おすすめアプリの順位には影響しません。</p></div>
+        <a href="https://rpx.a8.net/svt/ejp?a8mat=4BA39A+BFEJSI+2HOM+BW8O1&rakuten=y&a8ejpredirect=http%3A%2F%2Fhb.afl.rakuten.co.jp%2Fhgc%2F0ea62065.34400275.0ea62066.204f04c0%2Fa26081143426_4BA39A_BFEJSI_2HOM_BW8O1%3Fpc%3Dhttps%253A%252F%252Fitem.rakuten.co.jp%252Firisplaza-r%252F288353%252F%26m%3Dhttps%253A%252F%252Fitem.rakuten.co.jp%252Firisplaza-r%252F288353%252F" target="_blank" rel="noreferrer nofollow sponsored">楽天市場で見る ↗</a>
+        <img className="affiliate-impression" width="1" height="1" src="https://www15.a8.net/0.gif?a8mat=4BA39A+BFEJSI+2HOM+BW8O1" alt="" aria-hidden="true" />
       </aside>
       <footer><a className="brand footer-brand" href="#top"><span className="brand-mark"><i /><i /><i /></span><span>コトナビ</span></a><p>困りごとから、次の一歩へ。</p><div><a href="#guide">困りごとから探す</a><a href="/guides">解決ガイド</a><a href="/info#editorial">編集方針</a><a href="/info#advertising">広告掲載方針</a><a href="/info#privacy">プライバシー</a><a href="/info#contact">お問い合わせ</a></div><small>© 2026 Kotonavi.</small></footer>
     </main>
