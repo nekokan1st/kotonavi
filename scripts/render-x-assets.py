@@ -24,8 +24,10 @@ def mark(draw: ImageDraw.ImageDraw, x: int, y: int, size: int) -> None:
     draw.rectangle((x + half - radius, y + half - radius, x + half, y + half), fill=BLUE_LIGHT)
     draw.rounded_rectangle((x + half + gap, y, x + size, y + half), radius=radius, fill=BLUE)
     draw.rounded_rectangle((x, y + half + gap, x + half, y + size), radius=radius, fill=BLUE)
-    draw.rounded_rectangle((x + half, y + half, x + size, y + size), radius=radius, fill=BLUE_PALE)
-    draw.rectangle((x + half, y + half, x + half + radius, y + half + radius), fill=BLUE_PALE)
+    lower_right = x + half + size * 3 // 100
+    lower_top = y + half + size * 3 // 100
+    draw.rounded_rectangle((lower_right, lower_top, x + size, y + size), radius=radius, fill=BLUE_PALE)
+    draw.rectangle((lower_right, lower_top, lower_right + radius, lower_top + radius), fill=BLUE_PALE)
 
 
 profile = Image.new("RGB", (400, 400), PAPER)
