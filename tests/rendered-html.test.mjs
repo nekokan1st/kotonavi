@@ -129,3 +129,26 @@ test("uses verified destinations, broad search fields, and a bottom sponsor slot
   assert.match(page, /横にスワイプして他のテーマを見る/);
   assert.match(css, /\.category-scroll-hint/);
 });
+
+test("server-renders indexable problem landing pages", async () => {
+  const indexResponse = await render("/problems");
+  assert.equal(indexResponse.status, 200);
+  assert.match(await indexResponse.text(), /困りごとから、確認する順番を探す/);
+
+  const problemResponse = await render("/problems/ambulance-or-hospital");
+  assert.equal(problemResponse.status, 200);
+  const html = await problemResponse.text();
+  assert.match(html, /救急車を呼ぶべきか迷ったとき/);
+  assert.match(html, /全国版救急受診ガイド Q助/);
+  assert.match(html, /application\/ld\+json/);
+});
+
+test("sitemap includes all problem landing pages", async () => {
+  const [sitemap, data] = await Promise.all([
+    readFile(new URL("../app/sitemap.ts", import.meta.url), "utf8"),
+    readFile(new URL("../app/problems/data.ts", import.meta.url), "utf8"),
+  ]);
+  assert.match(sitemap, /problemPages\.map/);
+  assert.match(data, /slug: "scam-call-check"/);
+  assert.match(data, /slug: "ambulance-or-hospital"/);
+});

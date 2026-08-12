@@ -940,9 +940,13 @@ const problems: Problem[] = [
   },
 ];
 
-const appProblems = problems
-  .map((problem) => ({ ...problem, services: problem.services.filter((service) => mobileAppNames.has(service.name)) }))
-  .filter((problem) => problem.services.length > 0);
+const appProblems = problems.filter((problem) => problem.services.length > 0);
+const problemDetailSlugs: Record<string, string> = {
+  "digital-scam": "scam-call-check", "health-urgent": "ambulance-or-hospital", "health-clinic": "find-open-clinic",
+  "digital-phone": "find-lost-phone", "daily-emergency": "check-disaster-risk", "home-utilities": "moving-procedures",
+  "family-medical-share": "share-family-medication", "daily-subscriptions": "cancel-subscriptions",
+  "daily-dispose": "dispose-large-appliances", "pets-record": "pet-health-log",
+};
 
 export default function Home() {
   const firstAppProblem = appProblems[0];
@@ -1094,6 +1098,7 @@ export default function Home() {
               <article className="detail-panel">
                 <div className="breadcrumb">{theme.label} <i>›</i> {currentPhase?.label}</div>
                 <span className="detail-kicker">{selected.eyebrow}</span><h3>{selected.title}</h3><p className="detail-description">{selected.description}</p>
+                {problemDetailSlugs[selected.id] && <a className="problem-detail-link" href={`/problems/${problemDetailSlugs[selected.id]}`}>この困りごとの詳しい確認手順を見る →</a>}
                 <div className="steps-intro"><span className="overline">BEFORE YOU CHOOSE</span><h4>サービスを見る前に、整理したい{selected.tasks.length}つのこと</h4><p>自分の状況や希望を先に整理し、下のサービスや窓口が困りごとのどの部分を助けるのか確認してみてください。ここで操作や登録をする必要はありません。</p></div>
                 <div className="task-list">{selected.tasks.map((task, index) => <div className="task" key={task.id}>
                   <span className="check">{index + 1}</span><span><strong>{task.title}</strong><small>{task.note}</small></span><em>{task.timing}</em>
@@ -1132,7 +1137,7 @@ export default function Home() {
         <a href={disasterKitAffiliateUrl} target="_blank" rel="noreferrer nofollow sponsored">セット内容を確認する ↗</a>
         <img className="affiliate-impression" width="1" height="1" src="https://www15.a8.net/0.gif?a8mat=4BA39A+BFEJSI+2HOM+BW8O1" alt="" aria-hidden="true" />
       </aside>
-      <footer><a className="brand footer-brand" href="#top"><span className="brand-mark"><i /><i /><i /></span><span>コトナビ</span></a><p>困りごとから、次の一歩へ。</p><div><a href="#guide">困りごとから探す</a><a href="/guides">解決ガイド</a><a href="/info#editorial">編集方針</a><a href="/info#advertising">広告掲載方針</a><a href="/info#privacy">プライバシー</a><a href="/info#contact">お問い合わせ</a></div><small>© 2026 Kotonavi.</small></footer>
+      <footer><a className="brand footer-brand" href="#top"><span className="brand-mark"><i /><i /><i /></span><span>コトナビ</span></a><p>困りごとから、次の一歩へ。</p><div><a href="#guide">困りごとから探す</a><a href="/problems">困りごと一覧</a><a href="/guides">解決ガイド</a><a href="/info#editorial">編集方針</a><a href="/info#advertising">広告掲載方針</a><a href="/info#privacy">プライバシー</a><a href="/info#contact">お問い合わせ</a></div><small>© 2026 Kotonavi.</small></footer>
     </main>
   );
 }

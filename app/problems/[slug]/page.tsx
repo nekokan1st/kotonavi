@@ -1,0 +1,45 @@
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { problemPageById, problemPageBySlug, problemPages } from "../data";
+
+export function generateStaticParams() { return problemPages.map(({ slug }) => ({ slug })); }
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const item = problemPageBySlug(slug);
+  if (!item) return {};
+  return {
+    title: `${item.title}｜コトナビ`, description: item.description,
+    alternates: { canonical: `/problems/${item.slug}` },
+    openGraph: { title: item.title, description: item.description, type: "article", url: `/problems/${item.slug}` },
+  };
+}
+
+export default async function ProblemDetail({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const item = problemPageBySlug(slug);
+  if (!item) notFound();
+  const related = item.related.map(problemPageById).filter((value) => value !== undefined);
+  const structuredData = {
+    "@context": "https://schema.org", "@type": "Article", headline: item.title, description: item.description,
+    dateModified: item.reviewedAt, author: { "@type": "Organization", name: "コトナビ編集部" },
+    publisher: { "@type": "Organization", name: "コトナビ編集部" }, mainEntityOfPage: `https://kotonaviapp.com/problems/${item.slug}`,
+  };
+  return <main className="guide-page problem-detail-page">
+    <header className="topbar"><a className="brand" href="/"><span className="brand-mark"><i /><i /><i /></span><span>コトナビ</span></a><nav className="topnav"><a href="/problems">困りごと一覧</a><a href="/guides">解決ガイド</a><a href="/info">運営・掲載方針</a></nav></header>
+    <article>
+      <header className="article-header"><nav className="breadcrumb"><a href="/">トップ</a> <i>›</i> <a href="/problems">困りごと一覧</a> <i>›</i> {item.category}</nav><small>{item.category} ・ 最終確認 {item.reviewedAt.replaceAll("-", ".")}</small><h1>{item.title}</h1><p>{item.description}</p></header>
+      <div className="article-body">
+        <section><h2>最初に知っておきたいこと</h2><p>{item.intro}</p></section>
+        <section className="article-checklist"><h2>確認する順番</h2><ol>{item.steps.map((step) => <li key={step.title}><strong>{step.title}</strong><p>{step.body}</p></li>)}</ol></section>
+        <section><h2>使えるサービス・窓口</h2><div className="problem-options">{item.options.map((option) => <article key={option.name}><small>{option.kind}</small><h3>{option.name}</h3><p>{option.body}</p><dl><dt>向いている状況</dt><dd>{option.fit}</dd><dt>注意点</dt><dd>{option.caution}</dd></dl><a href={option.url} target="_blank" rel="noreferrer">公式情報を確認する ↗</a></article>)}</div></section>
+        <section className="problem-notes"><h2>利用前の注意</h2><ul>{item.notes.map((note) => <li key={note}>{note}</li>)}</ul></section>
+        <aside className="article-cta"><span>コトナビで比較</span><h2>同じ困りごとに使える選択肢を見る</h2><p>対応環境や始め方を確認し、自分の状況に合うものを選んでください。</p><a href={`/?problem=${item.problemId}#guide`}>コトナビの案内を見る →</a></aside>
+        {related.length > 0 && <section><h2>関連する困りごと</h2><div className="related-problems">{related.map((entry) => <a key={entry.slug} href={`/problems/${entry.slug}`}><small>{entry.category}</small><strong>{entry.title}</strong><span>→</span></a>)}</div></section>}
+        <p className="article-note">掲載内容は各サービス・公的機関の公式情報をもとにコトナビ編集部が整理しています。利用条件や受付状況は変わるため、リンク先で最新情報をご確認ください。</p>
+      </div>
+    </article>
+    <footer><a className="brand footer-brand" href="/"><span className="brand-mark"><i /><i /><i /></span><span>コトナビ</span></a><p>困りごとから、次の一歩へ。</p><div><a href="/">トップ</a><a href="/problems">困りごと一覧</a><a href="/guides">解決ガイド</a><a href="/info">運営・掲載方針</a></div><small>© 2026 Kotonavi.</small></footer>
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }} />
+  </main>;
+}
