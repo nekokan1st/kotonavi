@@ -7,6 +7,7 @@ export const metadata: Metadata = {
 
 const sections = [
   { href: "#about", label: "コトナビについて" },
+  { href: "#team", label: "編集部・確認方法" },
   { href: "#editorial", label: "編集方針" },
   { href: "#advertising", label: "広告掲載方針" },
   { href: "#privacy", label: "プライバシー" },
@@ -36,6 +37,13 @@ export default function InfoPage() {
           <dl><dt>運営主体</dt><dd>コトナビ編集部</dd><dt>屋号</dt><dd>コトナビ</dd><dt>運営開始</dt><dd>2026年</dd><dt>サイトの目的</dt><dd>困りごとから適切な行動とサービス・窓口を見つけやすくすること</dd></dl></div>
         </section>
 
+        <section id="team">
+          <span className="policy-number">02</span><div><h2>コトナビ編集部と情報の確認方法</h2>
+          <p>コトナビ編集部は、生活上の困りごとを、利用者が次の行動へ移りやすい順番に整理します。紹介文はサービス提供者の広告文を転載せず、公式情報から確認できる範囲を利用場面に合わせて編集します。</p>
+          <ol><li>困りごとと、最初に確認すべき事項を定義します。</li><li>行政機関、公式サイト、公式ストアなど一次情報を確認します。</li><li>対象者、料金、対応環境、利用条件、注意点を照合します。</li><li>医療・安全・法律では緊急窓口と専門家の判断を優先する旨を明記します。</li><li>公開後もリンク切れや提供状況を定期確認し、変更時に修正します。</li></ol>
+          <dl><dt>執筆・確認</dt><dd>コトナビ編集部</dd><dt>公開用メール</dt><dd><a href="mailto:kotonavi.info@proton.me">kotonavi.info@proton.me</a></dd><dt>主な情報源</dt><dd>行政機関、サービス公式サイト、App Store、Google Play</dd></dl></div>
+        </section>
+
         <section id="editorial">
           <span className="policy-number">02</span><div><h2>編集方針</h2>
           <p>掲載候補は、利用場面との適合性、個人がスマートフォンで利用できること、公式情報を確認できることを基準に選定します。</p>
@@ -52,7 +60,7 @@ export default function InfoPage() {
         <section id="privacy">
           <span className="policy-number">04</span><div><h2>プライバシーについて</h2>
           <p>サイト改善のため、ホスティングサービスがアクセス数やページ閲覧などの利用状況を記録する場合があります。外部リンクを開いた後は、リンク先事業者のプライバシーポリシーが適用されます。</p>
-          <ul><li>チェックリストの操作は、現時点ではアカウント情報と結び付けて保存しません。</li><li>問い合わせ機能を追加する際は、取得項目、利用目的、保存期間を明示します。</li><li>広告計測サービスを導入する際は、このページに事業者名と送信項目を追記します。</li><li>機密情報や健康情報などを、このサイトへ入力しないでください。</li></ul></div>
+          <ul><li>閲覧ページ、サイト内検索語、検索結果件数、外部リンク種別、参照元をサイト改善のため記録する場合があります。</li><li>これらの計測情報を、氏名やメールアドレスと結び付けて収集しません。</li><li>問い合わせ機能を追加する際は、取得項目、利用目的、保存期間を明示します。</li><li>機密情報や健康情報などを、このサイトへ入力しないでください。</li></ul></div>
         </section>
 
         <section id="disclaimer">

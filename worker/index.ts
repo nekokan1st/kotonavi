@@ -44,6 +44,16 @@ const worker = {
       });
     }
 
+    if (url.pathname === "/api/events" && request.method === "POST") {
+      try {
+        const raw = await request.json() as Record<string, unknown>;
+        const allowed = ["event", "path", "referrer", "service", "destination", "problem", "query", "resultCount", "href"];
+        const event = Object.fromEntries(allowed.filter((key) => ["string", "number", "boolean"].includes(typeof raw[key])).map((key) => [key, String(raw[key]).slice(0, 300)]));
+        console.log(JSON.stringify({ source: "kotonavi_event", ...event }));
+      } catch { /* 計測失敗は閲覧を妨げない */ }
+      return new Response(null, { status: 204, headers: { "cache-control": "no-store" } });
+    }
+
     if (url.pathname === "/_vinext/image") {
       const allowedWidths = [...DEFAULT_DEVICE_SIZES, ...DEFAULT_IMAGE_SIZES];
       return handleImageOptimization(request, {

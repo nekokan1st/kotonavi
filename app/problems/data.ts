@@ -177,5 +177,100 @@ export const problemPages: ProblemPage[] = [
   },
 ];
 
+const moreProblemPages: ProblemPage[] = [
+  {
+    slug: "suspicious-sms-email", problemId: "digital-scam", category: "デジタル・安全",
+    title: "怪しいSMS・メールが届いたときの確認方法｜リンクを開く前にすること",
+    description: "配送、不正利用、未払いなどを装うSMSやメールを受け取ったときに、安全に真偽を確認して報告する手順です。",
+    intro: "本文のリンク、添付ファイル、記載された電話番号は使わず、公式アプリや自分のブックマークから契約状況を確認します。",
+    steps: [{ title: "リンク・添付・返信を使わない", body: "画面を保存し、送信元と要求内容を確認します。" }, { title: "公式アプリから事実を確認する", body: "請求、配送、アカウント通知を公式画面で直接確認します。" }, { title: "入力済みならすぐ保護する", body: "パスワード変更、カード会社への連絡、フィッシング情報の報告を行います。" }],
+    options: [{ name: "フィッシング対策協議会", kind: "注意情報・報告窓口", body: "最新事例、対策、フィッシングサイトの報告方法を掲載しています。", fit: "届いたメッセージと既知の詐欺事例を照合したい", caution: "事例にない文面でも安全とは限りません。", url: "https://www.antiphishing.jp/" }],
+    notes: ["認証コードや暗証番号を第三者へ伝えないでください。", "被害が発生している場合は警察や金融機関へ相談してください。"], related: ["digital-scam", "digital-account"], reviewedAt: "2026-08-12",
+  },
+  {
+    slug: "prevent-account-takeover", problemId: "digital-account", category: "デジタル・安全",
+    title: "アカウント乗っ取りを防ぐ設定｜パスワード・多要素認証・復旧方法",
+    description: "メール、金融、SNSなど重要なアカウントを、使い回しや不正ログインから守る基本設定を整理します。",
+    intro: "まず、他サービスの復旧にも使われるメールアカウントから保護します。異なる強いパスワードと多要素認証を設定します。",
+    steps: [{ title: "重要なアカウントを選ぶ", body: "メール、金融、SNS、通信会社から始めます。" }, { title: "使い回しをやめて多要素認証を設定する", body: "バックアップコードも安全な別の場所へ保存します。" }, { title: "ログイン履歴と復旧先を見直す", body: "見覚えのない端末や不要な外部連携を解除します。" }],
+    options: [{ name: "IPA 情報セキュリティ10大脅威", kind: "情報処理推進機構", body: "個人に関係する最新の被害事例と基本対策を確認できます。", fit: "何から対策を始めればよいか知りたい", caution: "各サービス固有の設定手順は公式ヘルプを確認してください。", url: "https://www.ipa.go.jp/security/10threats/index.html" }],
+    notes: ["バックアップコードを同じ端末だけに保存しないでください。", "不正利用が疑われる場合は、先に公式窓口へ連絡してください。"], related: ["digital-scam", "digital-phone"], reviewedAt: "2026-08-12",
+  },
+  {
+    slug: "child-fever-night", problemId: "parenting-sick", category: "子育て・学び",
+    title: "夜間・休日に子どもが発熱したときの相談先｜#8000を使う前の確認",
+    description: "子どもの急な発熱や症状で受診を迷ったときに、状態を整理して電話相談へつなぐ手順です。",
+    intro: "意識や呼吸に異常があるなど明らかな緊急時は119へ。迷う場合は、年齢、体温、症状、始まった時刻を整理して相談します。",
+    steps: [{ title: "意識・呼吸・水分摂取を確認する", body: "普段と明らかに違う状態があれば緊急対応を優先します。" }, { title: "症状と経過をメモする", body: "服薬、持病、アレルギーも確認します。" }, { title: "#8000または地域の窓口へ相談する", body: "案内された受診先には出発前に受付可否を確認します。" }],
+    options: [{ name: "子ども医療電話相談 #8000", kind: "厚生労働省", body: "休日・夜間の子どもの症状を小児科医師・看護師へ相談できる全国共通短縮番号です。", fit: "家庭での対処や受診の必要性を相談したい", caution: "実施時間は地域で異なります。緊急時は119へ。", url: "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/newpage_55223.html" }],
+    notes: ["このページは診断を行うものではありません。", "処方薬は医師の指示なく変更しないでください。"], related: ["health-urgent", "health-clinic"], reviewedAt: "2026-08-12",
+  },
+  {
+    slug: "insurance-policy-organize", problemId: "money-insurance", category: "お金・契約",
+    title: "加入している保険と請求先を整理する方法｜請求漏れを防ぐ",
+    description: "生命保険、損害保険、カード付帯保険などをまとめ、補償、更新、問い合わせ先を家族と確認します。",
+    intro: "保険会社名だけでなく、何が起きたときに使える契約か、証券番号の保管場所、請求期限を整理します。",
+    steps: [{ title: "紙・PDF・Web証券を集める", body: "生命、医療、火災、自動車、カード付帯を確認します。" }, { title: "補償される場面で分類する", body: "入院、けが、物損、旅行などに分けます。" }, { title: "家族と問い合わせ方法を共有する", body: "更新日と見直し日も登録します。" }],
+    options: [{ name: "保険簿", kind: "保険管理アプリ", body: "複数社の保険証券、補償、更新時期などをまとめて管理できます。", fit: "家族分を含む契約を一か所で確認したい", caution: "実際の補償可否は保険会社へ確認してください。", url: "https://hokenbo.com/" }],
+    notes: ["保険証券の画像には個人情報が含まれます。共有範囲を確認してください。", "請求期限は契約ごとに確認してください。"], related: ["family-basics", "money-trouble"], reviewedAt: "2026-08-12",
+  },
+  {
+    slug: "consumer-contract-trouble", problemId: "money-trouble", category: "お金・契約",
+    title: "契約・請求トラブルを相談したいとき｜証拠の残し方と188",
+    description: "解約できない、説明と違う、身に覚えのない請求などの消費者トラブルで、相談前に整理する内容を案内します。",
+    intro: "契約画面、注文履歴、請求明細、事業者とのやり取りを消さずに保存し、希望する解決内容を一文で整理します。",
+    steps: [{ title: "契約条件と請求を保存する", body: "URL、日時、広告表示、確認画面も残します。" }, { title: "事業者へ記録が残る方法で申し出る", body: "返金・解約など希望内容と回答期限を伝えます。" }, { title: "解決しなければ188へ相談する", body: "最寄りの消費生活センター等につながります。" }],
+    options: [{ name: "消費者ホットライン 188", kind: "消費者庁", body: "消費者トラブルを最寄りの消費生活相談窓口へつなぐ全国共通番号です。", fit: "事業者との交渉や解約で困っている", caution: "相談無料でも通話料がかかります。", url: "https://www.caa.go.jp/policies/policy/local_cooperation/local_consumer_administration/hotline/" }],
+    notes: ["支払い期限や取消期限がある場合は早めに相談してください。", "カード不正利用はカード会社にも連絡してください。"], related: ["daily-subscriptions", "support-legal"], reviewedAt: "2026-08-12",
+  },
+  {
+    slug: "train-delay-detour", problemId: "mobility-delay", category: "移動・外出",
+    title: "電車が遅延・運休したときの迂回ルートの調べ方",
+    description: "運行区間と再開見込みを確認し、別路線、バス、徒歩を含めて到着時刻を比較する手順です。",
+    intro: "全線運休か一部区間かを鉄道会社の公式情報で確認し、振替輸送の対象と利用条件を優先します。",
+    steps: [{ title: "公式の運行区間を確認する", body: "再開見込みと振替輸送の案内を確認します。" }, { title: "遅延を反映して再検索する", body: "乗換回数だけでなく到着の確実性を比べます。" }, { title: "到着見込みを共有する", body: "状況が変わるため再確認する時刻も決めます。" }],
+    options: [{ name: "Yahoo!乗換案内", kind: "乗換・運行情報", body: "乗換検索と登録路線の運行情報をまとめて確認できます。", fit: "遅延を見ながら別経路を探したい", caution: "振替輸送と入場規制は鉄道会社の公式案内を優先してください。", url: "https://transit.yahoo.co.jp/" }],
+    notes: ["無理な乗換や混雑したホームでの移動を避けてください。", "運休証明等が必要な場合は鉄道会社の案内を確認してください。"], related: ["mobility-taxi", "mobility-luggage"], reviewedAt: "2026-08-12",
+  },
+  {
+    slug: "find-missing-pet", problemId: "pets-missing", category: "ペット",
+    title: "犬や猫が逃げたときにすぐすること｜連絡先と探し方",
+    description: "脱走場所、特徴、写真を整理し、警察、保健所、動物愛護窓口へ連絡しながら捜索する手順です。",
+    intro: "最初の数時間から連絡範囲を広げます。マイクロチップはGPSではありませんが、保護された際の所有者確認につながります。",
+    steps: [{ title: "直近写真と特徴をまとめる", body: "脱走時刻、場所、首輪、性格、マイクロチップ番号を整理します。" }, { title: "警察・保健所・近隣病院へ連絡する", body: "自治体の境界を越える可能性も考えます。" }, { title: "登録情報を最新にする", body: "連絡先と住所を確認し、捜索記録を残します。" }],
+    options: [{ name: "犬と猫のマイクロチップ情報登録", kind: "環境省", body: "マイクロチップと飼い主情報の登録・変更を行う公的制度です。", fit: "装着済みのチップに最新の連絡先を登録したい", caution: "GPS追跡機能ではありません。窓口への連絡と捜索も必要です。", url: "https://reg.mc.env.go.jp/" }],
+    notes: ["見つけた人へ自宅住所など不要な個人情報を公開しないでください。", "交通量の多い場所では安全を優先してください。"], related: ["pets-hospital", "pets-record"], reviewedAt: "2026-08-12",
+  },
+  {
+    slug: "where-to-get-legal-help", problemId: "support-legal", category: "相談・支援",
+    title: "どこへ法律相談すればよいか分からないとき｜法テラスへの相談準備",
+    description: "問題名が分からない段階でも、出来事、相手、期限、資料を整理して適切な制度と相談先を確認します。",
+    intro: "法律相談の前に、評価や推測ではなく出来事を日付順に短くまとめると、窓口が状況を把握しやすくなります。",
+    steps: [{ title: "出来事を時系列でまとめる", body: "いつ、誰が、何をしたかを3〜5行で整理します。" }, { title: "契約書・通知・やり取りを集める", body: "原本は手元に残し、期限を確認します。" }, { title: "制度と相談窓口の案内を受ける", body: "費用や利用条件も確認します。" }],
+    options: [{ name: "法テラス・サポートダイヤル", kind: "法制度・相談窓口案内", body: "内容に応じた法制度や相談機関を無料で案内します。", fit: "弁護士を探す前に問題の種類と窓口を知りたい", caution: "無料法律相談や費用立替には要件があります。", url: "https://www.houterasu.or.jp/site/soudanmadoguchi-houseido/index.html" }],
+    notes: ["裁判・申立て等の期限がある場合は早めに相談してください。", "このページは個別の法律判断を提供するものではありません。"], related: ["money-trouble", "support-home"], reviewedAt: "2026-08-12",
+  },
+  {
+    slug: "mental-health-public-help", problemId: "support-mind", category: "相談・支援",
+    title: "気持ちがつらいときに公的な相談先へつながる方法",
+    description: "ひとりで抱え込まず、今の安全を確認して、地域のこころの相談窓口へつながるための案内です。",
+    intro: "今すぐ自分や他人を傷つける危険がある場合は119または110へ。うまく説明できなくても、困っていることを一言から伝えて構いません。",
+    steps: [{ title: "今の安全を確認する", body: "一人で危険を避けられない場合は緊急窓口や近くの人へ連絡します。" }, { title: "困っていることを一言で書く", body: "話せる範囲だけで大丈夫です。" }, { title: "地域の公的窓口へ電話する", body: "つながらなければ別の相談方法も試します。" }],
+    options: [{ name: "こころの健康相談統一ダイヤル", kind: "厚生労働省・自治体", body: "電話した地域の公的な相談機関につながる全国共通番号です。", fit: "地域の精神保健相談窓口へつながりたい", caution: "受付時間は地域で異なります。緊急時は119・110へ。", url: "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/seikatsuhogo/jisatsu/kokoro_dial.html" }],
+    notes: ["相談内容を完璧に整理する必要はありません。", "一つの窓口につながらない場合も、別の方法を試してください。"], related: ["support-alone", "health-clinic"], reviewedAt: "2026-08-12",
+  },
+  {
+    slug: "dv-stalking-safe-consultation", problemId: "support-home", category: "相談・支援",
+    title: "パートナーからの暴力・監視を安全に相談する方法",
+    description: "DVや端末監視が疑われるときに、現在の安全を優先し、電話・チャット・メールで専門窓口へ相談する手順です。",
+    intro: "証拠集めより安全確保を優先します。端末を見られている可能性がある場合は、安全な別端末や場所から相談してください。",
+    steps: [{ title: "今すぐ危険なら110へ連絡する", body: "移動できる場合は安全な場所へ移ります。" }, { title: "安全な端末と時間を選ぶ", body: "履歴や通知を見られる可能性を考えます。" }, { title: "専門窓口へ相談する", body: "電話が難しければチャットやメールを選びます。" }],
+    options: [{ name: "DV相談プラス", kind: "内閣府 DV相談", body: "電話、チャット、メール、外国語相談に対応する専門窓口です。", fit: "安全な方法を選んでDVについて相談したい", caution: "監視が疑われる場合は閲覧履歴や通知に注意してください。", url: "https://soudanplus.jp/" }],
+    notes: ["緊急の危険がある場合は110を優先してください。", "安全な避難先や支援は相談員と一緒に検討できます。"], related: ["support-legal", "support-mind"], reviewedAt: "2026-08-12",
+  },
+];
+
+problemPages.push(...moreProblemPages);
+
 export const problemPageBySlug = (slug: string) => problemPages.find((item) => item.slug === slug);
 export const problemPageById = (problemId: string) => problemPages.find((item) => item.problemId === problemId);

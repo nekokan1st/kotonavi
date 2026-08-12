@@ -946,6 +946,10 @@ const problemDetailSlugs: Record<string, string> = {
   "digital-phone": "find-lost-phone", "daily-emergency": "check-disaster-risk", "home-utilities": "moving-procedures",
   "family-medical-share": "share-family-medication", "daily-subscriptions": "cancel-subscriptions",
   "daily-dispose": "dispose-large-appliances", "pets-record": "pet-health-log",
+  "digital-account": "prevent-account-takeover", "parenting-sick": "child-fever-night",
+  "money-insurance": "insurance-policy-organize", "money-trouble": "consumer-contract-trouble",
+  "mobility-delay": "train-delay-detour", "pets-missing": "find-missing-pet", "support-legal": "where-to-get-legal-help",
+  "support-mind": "mental-health-public-help", "support-home": "dv-stalking-safe-consultation",
 };
 
 export default function Home() {
@@ -1010,6 +1014,12 @@ export default function Home() {
       setSelectedId(requestedProblem.id);
     }
   }, []);
+  useEffect(() => {
+    const normalized = query.trim();
+    if (!normalized) return;
+    const timer = window.setTimeout(() => window.dispatchEvent(new CustomEvent("kotonavi:outbound", { detail: { event: searchResults.length ? "site_search" : "site_search_zero", query: normalized.slice(0, 80), resultCount: searchResults.length } })), 700);
+    return () => window.clearTimeout(timer);
+  }, [query, searchResults.length]);
   useEffect(() => {
     const focusSearch = (event: KeyboardEvent) => {
       if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
