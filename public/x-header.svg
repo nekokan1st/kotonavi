@@ -3,10 +3,10 @@
   <path d="M0 0H330C292 92 203 145 0 164V0Z" fill="#EAF4FC"/>
   <path d="M1500 500H1170C1208 408 1297 355 1500 336V500Z" fill="#EAF4FC"/>
   <g transform="translate(470 116)">
-    <rect x="0" y="0" width="72" height="72" rx="22" fill="#2878B9"/>
-    <rect x="83" y="0" width="73" height="72" rx="22" fill="#1760A6"/>
-    <rect x="0" y="83" width="72" height="73" rx="22" fill="#0B5DA5"/>
-    <rect x="64" y="64" width="92" height="92" rx="22" fill="#559BC3"/>
+    <path d="M72 72H22C9.9 72 0 62.1 0 50V22C0 9.9 9.9 0 22 0H50C62.1 0 72 9.9 72 22V72Z" fill="#2E9EFF"/>
+    <rect x="83" y="0" width="73" height="72" rx="22" fill="#0C79D8"/>
+    <rect x="0" y="83" width="72" height="73" rx="22" fill="#0C79D8"/>
+    <path d="M156 134C156 146.1 146.1 156 134 156H94C81.9 156 72 146.1 72 134V72H134C146.1 72 156 81.9 156 94V134Z" fill="#68C4FF"/>
   </g>
   <text x="665" y="213" fill="#18221E" font-family="-apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="92" font-weight="700" letter-spacing="5">コトナビ</text>
   <text x="470" y="306" fill="#18221E" font-family="-apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="43" font-weight="600">困りごとから、次の一歩へ。</text>

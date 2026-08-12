@@ -8,10 +8,9 @@ PUBLIC = ROOT / "public"
 FONT_BOLD = "/System/Library/Fonts/ヒラギノ角ゴシック W8.ttc"
 FONT_REGULAR = "/System/Library/Fonts/ヒラギノ角ゴシック W8.ttc"
 PAPER = "#F8F7F1"
-BLUE = "#1760A6"
-BLUE_LIGHT = "#2878B9"
-BLUE_DEEP = "#0B5DA5"
-BLUE_PALE = "#559BC3"
+BLUE = "#0C79D8"
+BLUE_LIGHT = "#2E9EFF"
+BLUE_PALE = "#68C4FF"
 INK = "#18221E"
 MUTED = "#65716B"
 PALE = "#EAF4FC"
@@ -22,9 +21,11 @@ def mark(draw: ImageDraw.ImageDraw, x: int, y: int, size: int) -> None:
     half = size * 46 // 100
     radius = size * 14 // 100
     draw.rounded_rectangle((x, y, x + half, y + half), radius=radius, fill=BLUE_LIGHT)
+    draw.rectangle((x + half - radius, y + half - radius, x + half, y + half), fill=BLUE_LIGHT)
     draw.rounded_rectangle((x + half + gap, y, x + size, y + half), radius=radius, fill=BLUE)
-    draw.rounded_rectangle((x, y + half + gap, x + half, y + size), radius=radius, fill=BLUE_DEEP)
-    draw.rounded_rectangle((x + size * 41 // 100, y + size * 41 // 100, x + size, y + size), radius=radius, fill=BLUE_PALE)
+    draw.rounded_rectangle((x, y + half + gap, x + half, y + size), radius=radius, fill=BLUE)
+    draw.rounded_rectangle((x + half, y + half, x + size, y + size), radius=radius, fill=BLUE_PALE)
+    draw.rectangle((x + half, y + half, x + half + radius, y + half + radius), fill=BLUE_PALE)
 
 
 profile = Image.new("RGB", (400, 400), PAPER)
