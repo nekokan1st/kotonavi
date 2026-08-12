@@ -15,21 +15,21 @@ export async function generateMetadata(): Promise<Metadata> {
       default: "コトナビ｜困りごとから、次の一歩へ",
       template: "%s",
     },
-    description: "生活の困りごとを解決までの順番に整理し、役立つアプリ・Webサービス・公的窓口を案内します。",
+    description: "生活の困りごとを解決までの順番に整理し、状況に合うスマホアプリを案内します。",
     icons: { icon: "/favicon.svg", shortcut: "/favicon.svg" },
     manifest: "/manifest.webmanifest",
     alternates: { canonical: "/" },
     robots: { index: true, follow: true },
     openGraph: {
       title: "コトナビ｜困りごとから、次の一歩へ。",
-      description: "解決までのステップと、状況に合うアプリ・Webサービス・公的窓口がわかる。",
+      description: "解決までのステップと、状況に合うスマホアプリがわかる。",
       type: "website",
       images: [{ url: `${origin}/og-kotonavi-next-step-v2.png`, width: 1731, height: 909, alt: "コトナビ 困りごとから、次の一歩へ。" }],
     },
     twitter: {
       card: "summary_large_image",
       title: "コトナビ｜困りごとから、次の一歩へ。",
-      description: "解決までのステップと、状況に合うアプリ・Webサービス・公的窓口がわかる。",
+      description: "解決までのステップと、状況に合うスマホアプリがわかる。",
       images: [`${origin}/og-kotonavi-next-step-v2.png`],
     },
   };
@@ -41,7 +41,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     "@type": "WebSite",
     name: "コトナビ",
     url: "https://kotonaviapp.com",
-    description: "生活の困りごとを解決までの順番に整理し、役立つアプリ・Webサービス・公的窓口を案内するサイト。",
+    description: "生活の困りごとを解決までの順番に整理し、状況に合うスマホアプリを案内するサイト。",
     inLanguage: "ja",
   };
   return (

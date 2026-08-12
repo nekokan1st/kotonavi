@@ -4,7 +4,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "コトナビ",
     short_name: "コトナビ",
-    description: "困りごとから、解決までのステップと役立つサービス・窓口がわかる。",
+    description: "困りごとから、解決までのステップと役立つスマホアプリがわかる。",
     start_url: "/",
     display: "standalone",
     background_color: "#f9f8f4",

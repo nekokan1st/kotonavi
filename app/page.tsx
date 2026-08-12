@@ -940,7 +940,9 @@ const problems: Problem[] = [
   },
 ];
 
-const appProblems = problems.filter((problem) => problem.services.length > 0);
+const appProblems = problems
+  .map((problem) => ({ ...problem, services: problem.services.filter((service) => mobileAppNames.has(service.name)) }))
+  .filter((problem) => problem.services.length > 0);
 const problemDetailSlugs: Record<string, string> = {
   "digital-scam": "scam-call-check", "health-urgent": "ambulance-or-hospital", "health-clinic": "find-open-clinic",
   "digital-phone": "find-lost-phone", "daily-emergency": "check-disaster-risk", "home-utilities": "moving-procedures",
@@ -1056,7 +1058,7 @@ export default function Home() {
       <section className="hero" id="top">
         <div className="hero-kicker"><span>GUIDE</span> 困りごと別ナビ</div>
         <h1>困りごとから、次の一歩へ。</h1>
-        <p>状況を整理し、役立つアプリ・Webサービス・公的窓口を案内します。</p>
+        <p>状況を整理し、困りごとに合うスマホアプリを案内します。</p>
         <div className="hero-themes" aria-label="公開中のテーマ">
           {themes.filter((item) => appProblems.some((problem) => problem.theme === item.id)).map((item) => <button key={item.id} type="button" onClick={() => { selectTheme(item); document.getElementById("guide")?.scrollIntoView({ behavior: "smooth" }); }}><b>{item.mark}</b>{item.label}</button>)}
         </div>
@@ -1070,7 +1072,7 @@ export default function Home() {
             return <button key={problem.id} type="button" onClick={() => selectProblem(problem)}><span>{resultTheme?.label}<small>{resultPhase?.label}</small></span><strong>{problem.title}</strong><i>→</i></button>;
           }) : <p>別の言葉でも探してみてください。</p>}</div>}
         </div>
-        <div className="trust-row"><span>アプリ・Web・相談先を案内</span><span>公式情報へ直結</span><span>目的との相性で紹介</span></div>
+        <div className="trust-row"><span>スマホアプリに限定</span><span>公式ストアへ直結</span><span>目的との相性で紹介</span></div>
       </section>
 
       <section className="navigator" id="guide">
@@ -1114,7 +1116,7 @@ export default function Home() {
                   <span className="check">{index + 1}</span><span><strong>{task.title}</strong><small>{task.note}</small></span><em>{task.timing}</em>
                 </div>)}</div>
 
-                <div className="solutions-heading"><div><span className="overline">NEXT OPTIONS</span><h4>この困りごとに使えるサービス・窓口</h4></div><span>{selected.services.length}件を掲載</span></div>
+                <div className="solutions-heading"><div><span className="overline">NEXT APPS</span><h4>この困りごとに使えるスマホアプリ</h4></div><span>{selected.services.length}件を掲載</span></div>
                 <div className="service-list">{selected.services.map((service, index) => {
                   const destinations = destinationsFor(service);
                   return <div className="service-card" key={service.name}>
@@ -1125,11 +1127,11 @@ export default function Home() {
                 })}</div>
                 {disasterKitProblemIds.has(selected.id) && <aside className="contextual-affiliate" aria-label="この困りごとに関連する広告">
                   <span>広告</span>
-                  <div><b>ふたり分の備えを、ひとつのリュックに。</b><p>水・保存食から、ラジオライト、エアベッド、携帯トイレまで。家族で一つずつ集める手間を減らせる、2人用の防災セットです。</p><small>商品の内容・価格・在庫は販売ページでご確認ください。広告はサービス・窓口の掲載順位に影響しません。</small></div>
+                  <div><b>ふたり分の備えを、ひとつのリュックに。</b><p>水・保存食から、ラジオライト、エアベッド、携帯トイレまで。家族で一つずつ集める手間を減らせる、2人用の防災セットです。</p><small>商品の内容・価格・在庫は販売ページでご確認ください。広告はアプリの掲載順位に影響しません。</small></div>
                   <a href={disasterKitAffiliateUrl} target="_blank" rel="noreferrer nofollow sponsored">セット内容を確認する ↗</a>
                   <img className="affiliate-impression" width="1" height="1" src="https://www15.a8.net/0.gif?a8mat=4BA39A+BFEJSI+2HOM+BW8O1" alt="" aria-hidden="true" />
                 </aside>}
-                <div className="verified-note"><span>✓</span> 掲載内容は公式情報をもとに編集しています <b>最終確認 2026.08.08</b></div>
+                <div className="verified-note"><span>✓</span> 掲載内容は公式サイト・公式ストアをもとに編集しています <b>最終確認 2026.08.12</b></div>
               </article>
             </div>
           </div>
@@ -1143,7 +1145,7 @@ export default function Home() {
       </div></section>
       <aside className="sponsor-slot has-affiliate" aria-label="広告掲載枠">
         <span>広告</span>
-        <div><b>防災用品を、一つずつ集める手間を減らす。</b><p>水・保存食やラジオライトなど、ふたり分の備えをまとめた防災セットです。商品内容・価格・在庫は販売ページでご確認ください。サービス・窓口の掲載順位には影響しません。</p></div>
+        <div><b>防災用品を、一つずつ集める手間を減らす。</b><p>水・保存食やラジオライトなど、ふたり分の備えをまとめた防災セットです。商品内容・価格・在庫は販売ページでご確認ください。アプリの掲載順位には影響しません。</p></div>
         <a href={disasterKitAffiliateUrl} target="_blank" rel="noreferrer nofollow sponsored">セット内容を確認する ↗</a>
         <img className="affiliate-impression" width="1" height="1" src="https://www15.a8.net/0.gif?a8mat=4BA39A+BFEJSI+2HOM+BW8O1" alt="" aria-hidden="true" />
       </aside>

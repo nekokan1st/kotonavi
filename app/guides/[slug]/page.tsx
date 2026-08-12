@@ -43,7 +43,7 @@ export default async function GuidePage({ params }: Props) {
         <div className="article-body">
           <section className="article-checklist"><h2>最初に確認する3つのこと</h2><ol>{guide.checklist.map((item) => <li key={item}>{item}</li>)}</ol></section>
           {guide.sections.map((section) => <section key={section.heading}><h2>{section.heading}</h2><p>{section.body}</p></section>)}
-          <aside className="article-cta"><small>コトナビで探す</small><h2>この困りごとに合うサービス・窓口を見る</h2><p>公式サイトと、対応している場合はApp Store・Google Playへの導線をまとめています。</p><a href={`/?problem=${guide.problemId}`}>候補を確認する →</a></aside>
+          <aside className="article-cta"><small>コトナビで探す</small><h2>この困りごとに合うスマホアプリを見る</h2><p>アプリの公式サイトとApp Store・Google Playへの導線をまとめています。</p><a href={`/?problem=${guide.problemId}`}>候補を確認する →</a></aside>
           <p className="article-note">掲載情報は確認時点の内容です。サービスの料金・機能・対応OSは変更される場合があるため、利用前に公式情報をご確認ください。</p>
         </div>
       </article>

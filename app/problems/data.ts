@@ -175,7 +175,7 @@ export const problemPages: ProblemPage[] = [
     notes: ["薬の量や回数は獣医師の指示を優先してください。", "誤食や呼吸困難など緊急性がある場合は記録より受診を優先します。"],
     related: ["pets-hospital", "pets-sitter"], reviewedAt: "2026-08-12",
   },
-];
+].filter((item) => new Set(["digital-scam", "digital-phone", "family-medical-share", "pets-record"]).has(item.problemId));
 
 const moreProblemPages: ProblemPage[] = [
   {
@@ -270,7 +270,9 @@ const moreProblemPages: ProblemPage[] = [
   },
 ];
 
-problemPages.push(...moreProblemPages);
+problemPages.push(...moreProblemPages.filter((item) => new Set(["money-insurance", "mobility-delay"]).has(item.problemId)));
+const publishedAppNames = new Set(["詐欺バスターLITE", "Apple『探す』", "Google デバイスを探す", "GOOSE", "ぺとログ", "保険簿", "Yahoo!乗換案内"]);
+for (const page of problemPages) page.options = page.options.filter((option) => publishedAppNames.has(option.name));
 
 export const problemPageBySlug = (slug: string) => problemPages.find((item) => item.slug === slug);
 export const problemPageById = (problemId: string) => problemPages.find((item) => item.problemId === problemId);

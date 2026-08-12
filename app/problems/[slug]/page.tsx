@@ -32,11 +32,11 @@ export default async function ProblemDetail({ params }: { params: Promise<{ slug
       <div className="article-body">
         <section><h2>最初に知っておきたいこと</h2><p>{item.intro}</p></section>
         <section className="article-checklist"><h2>確認する順番</h2><ol>{item.steps.map((step) => <li key={step.title}><strong>{step.title}</strong><p>{step.body}</p></li>)}</ol></section>
-        <section><h2>使えるサービス・窓口</h2><div className="problem-options">{item.options.map((option) => <article key={option.name}><small>{option.kind}</small><h3>{option.name}</h3><p>{option.body}</p><dl><dt>向いている状況</dt><dd>{option.fit}</dd><dt>注意点</dt><dd>{option.caution}</dd></dl><a href={option.url} target="_blank" rel="noreferrer">公式情報を確認する ↗</a></article>)}</div></section>
+        <section><h2>使えるスマホアプリ</h2><div className="problem-options">{item.options.map((option) => <article key={option.name}><small>{option.kind}</small><h3>{option.name}</h3><p>{option.body}</p><dl><dt>向いている状況</dt><dd>{option.fit}</dd><dt>注意点</dt><dd>{option.caution}</dd></dl><a href={option.url} target="_blank" rel="noreferrer">公式情報を確認する ↗</a></article>)}</div></section>
         <section className="problem-notes"><h2>利用前の注意</h2><ul>{item.notes.map((note) => <li key={note}>{note}</li>)}</ul></section>
         <aside className="article-cta"><span>コトナビで比較</span><h2>同じ困りごとに使える選択肢を見る</h2><p>対応環境や始め方を確認し、自分の状況に合うものを選んでください。</p><a href={`/?problem=${item.problemId}#guide`}>コトナビの案内を見る →</a></aside>
         {related.length > 0 && <section><h2>関連する困りごと</h2><div className="related-problems">{related.map((entry) => <a data-track="related" key={entry.slug} href={`/problems/${entry.slug}`}><small>{entry.category}</small><strong>{entry.title}</strong><span>→</span></a>)}</div></section>}
-        <section className="source-method"><h2>このページの作成・確認方法</h2><dl><dt>執筆・確認</dt><dd><a href="/info#team">コトナビ編集部</a></dd><dt>情報源</dt><dd>上記サービス・公的機関の公式ページ</dd><dt>確認項目</dt><dd>提供主体、対象者、利用方法、注意事項、緊急時の優先窓口</dd><dt>最終確認日</dt><dd>{item.reviewedAt.replaceAll("-", ".")}</dd></dl><p>医療・法律・安全に関する記載は、専門家による個別判断を代替するものではありません。誤りや変更は<a href="mailto:kotonavi.info@proton.me">編集部へお知らせください</a>。</p></section>
+        <section className="source-method"><h2>このページの作成・確認方法</h2><dl><dt>執筆・確認</dt><dd><a href="/info#team">コトナビ編集部</a></dd><dt>情報源</dt><dd>アプリの公式サイト・公式ストア</dd><dt>確認項目</dt><dd>提供主体、対象者、対応OS、利用方法、料金、注意事項</dd><dt>最終確認日</dt><dd>{item.reviewedAt.replaceAll("-", ".")}</dd></dl><p>アプリは専門家による個別判断や緊急対応を代替するものではありません。誤りや変更は<a href="mailto:kotonavi.info@proton.me">編集部へお知らせください</a>。</p></section>
         <p className="article-note">広告・提携の有無は通常掲載の順位に影響しません。利用条件や受付状況は変わるため、リンク先で最新情報をご確認ください。</p>
       </div>
     </article>
