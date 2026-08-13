@@ -186,3 +186,10 @@ test("server-renders expanded app guide pages", async () => {
     assert.match(await response.text(), expected);
   }
 });
+
+test("adds listed app names to every problem guide's search metadata", async () => {
+  const response = await render("/problems/manage-medication-app");
+  const html = await response.text();
+  assert.match(html, /<title>薬と服用履歴をスマホで管理する方法｜お薬手帳プラス・EPARKお薬手帳・頭痛ーる｜コトナビ<\/title>/);
+  assert.match(html, /お薬手帳プラス・EPARKお薬手帳・頭痛ーるの向いている状況と注意点/);
+});

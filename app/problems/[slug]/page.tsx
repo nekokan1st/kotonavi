@@ -8,10 +8,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const item = problemPageBySlug(slug);
   if (!item) return {};
+  const appNames = item.options.map((option) => option.name).join("・");
+  const title = item.title.includes(appNames) || !appNames ? item.title : `${item.title}｜${appNames}`;
+  const description = appNames ? `${item.description} ${appNames}の向いている状況と注意点を、公式情報をもとに整理します。` : item.description;
   return {
-    title: `${item.title}｜コトナビ`, description: item.description,
+    title: `${title}｜コトナビ`, description,
     alternates: { canonical: `/problems/${item.slug}` },
-    openGraph: { title: item.title, description: item.description, type: "article", url: `/problems/${item.slug}` },
+    openGraph: { title, description, type: "article", url: `/problems/${item.slug}` },
   };
 }
 
@@ -24,7 +27,7 @@ export default async function ProblemDetail({ params }: { params: Promise<{ slug
     "@context": "https://schema.org", "@type": "Article", headline: item.title, description: item.description,
     dateModified: item.reviewedAt, author: { "@type": "Organization", name: "コトナビ編集部" },
     publisher: { "@type": "Organization", name: "コトナビ編集部" }, mainEntityOfPage: `https://kotonaviapp.com/problems/${item.slug}`,
-    about: item.options.map((option) => ({ "@type": "SoftwareApplication", name: option.name, applicationCategory: option.kind, operatingSystem: "iOS, Android" })),
+    about: item.options.map((option) => ({ "@type": "SoftwareApplication", name: option.name, applicationCategory: option.kind, operatingSystem: "スマートフォン" })),
   };
   return <main className="guide-page problem-detail-page">
     <header className="topbar"><a className="brand" href="/"><span className="brand-mark"><i /><i /><i /></span><span>コトナビ</span></a><nav className="topnav"><a href="/problems">困りごと一覧</a><a href="/guides">解決ガイド</a><a href="/info">運営・掲載方針</a></nav></header>
