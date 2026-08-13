@@ -31,22 +31,6 @@ export const problemPages: ProblemPage[] = [
     related: ["digital-account", "money-trouble"], reviewedAt: "2026-08-12",
   },
   {
-    slug: "ambulance-or-hospital", problemId: "health-urgent", category: "健康・介護",
-    title: "救急車を呼ぶべきか迷ったときの確認方法｜Q助と相談窓口",
-    description: "急な病気やけがで、救急車・早めの受診・経過観察のどれが必要か迷ったときの判断材料を案内します。",
-    intro: "意識がない、呼吸が苦しい、突然の激しい痛みなど明らかな緊急症状がある場合は、案内サービスを操作する前に119へ連絡してください。迷う状況では、公的な判定支援や電話相談を利用できます。",
-    steps: [
-      { title: "意識・呼吸・強い痛みを確認する", body: "反応がない、普段どおり呼吸していない、突然の激痛などがあれば119へ。" },
-      { title: "症状と年齢から緊急度を確認する", body: "発症時刻、持病、服薬、アレルギーも一緒に整理します。" },
-      { title: "案内された受診手段を確認する", body: "自力受診の場合も、医療機関へ出発前に受付可否を電話で確認します。" },
-    ],
-    options: [
-      { name: "全国版救急受診ガイド Q助", kind: "総務省消防庁", body: "画面上で症状を選択すると、緊急度に応じた必要な対応と受診手段を案内します。", fit: "救急車か受診かを判断する材料がほしい", caution: "診断を行うものではありません。明らかな緊急時は119へ連絡してください。", url: "https://www.fdma.go.jp/mission/enrichment/appropriate/appropriate003.html" },
-    ],
-    notes: ["地域によっては救急安心センター #7119も利用できます。", "子どもの急な症状は小児救急電話相談 #8000も確認できます。"],
-    related: ["health-clinic", "family-medical-share"], reviewedAt: "2026-08-12",
-  },
-  {
     slug: "find-open-clinic", problemId: "health-clinic", category: "健康・介護",
     title: "今診てもらえる病院や薬局を探す方法｜診療時間と診療科で検索",
     description: "現在地、診療科、診療時間、対応可能な治療などから医療機関・薬局を探し、受診前に確認する項目を案内します。",

@@ -21,8 +21,8 @@ type Service = {
 };
 
 const mobileAppNames = new Set([
-  "Peatix", "Google フォト", "入退去メモ", "RAKURA", "UCHITAS", "Cabinote",
-  "Misoca", "Toggl Track", "GOOSE", "つなぐノート", "全国版救急受診ガイド Q助",
+  "Peatix", "Google フォト", "入退去メモ", "UCHITAS", "Cabinote",
+  "Misoca", "Toggl Track", "GOOSE", "つなぐノート",
   "マネーフォワード ME", "保険簿", "母子モ", "TimeTree", "Google One バックアップ",
   "Yahoo!乗換案内", "GO", "akippa", "ecbo cloak", "クラシル", "くふう トクバイ",
   "TABETE", "Yieto 2", "ぺとログ", "PetBacker",
@@ -419,7 +419,6 @@ const problems: Problem[] = [
     ],
     services: [
       { name: "入退去メモ", category: "個人向けアプリ", description: "部屋別チェック、写真の改変確認、入退去比較、PDF出力まで一つで管理。", tags: ["個人で開始可", "iPhone", "オフライン"], fit: "自分で証拠を整理したい", price: "無料", access: "すぐ使える", href: "https://apps.apple.com/jp/app/%E5%85%A5%E9%80%80%E5%8E%BB%E3%83%A1%E3%83%A2/id6767765025", accent: "#5d6bff" },
-      { name: "RAKURA", category: "入居者・管理会社向け", description: "撮影のヒントを見ながら入居時の不備を記録。対応物件で利用するサービス。", tags: ["撮影ガイド", "管理会社連携", "対応物件"], fit: "管理会社から案内がある", price: "物件による", access: "管理会社の案内が必要", href: "https://is-next.net/rakura/app-manual/nyukyojsatsuei/", accent: "#ef6b53" },
       { name: "更新退去くん", category: "不動産管理サービス", description: "入居者の現況確認と写真提出をオンライン化。管理会社導入型のサービス。", tags: ["現況確認", "オンライン提出", "法人導入"], fit: "指定フォームで提出したい", price: "管理会社契約", access: "対応物件のみ", href: "https://prtimes.jp/main/html/rd/p/000000203.000014691.html", accent: "#1e9f7a" },
     ],
   },
@@ -597,7 +596,6 @@ const problems: Problem[] = [
       { id: "family-em-home", title: "自宅で待つ人・動物を確認する", note: "当日中に必要な対応を優先します。", timing: "当日" },
       { id: "family-em-work", title: "勤務先や予定の連絡を代行する", note: "本人の希望する連絡範囲を尊重します。", timing: "当日" },
     ], services: [
-      { name: "全国版救急受診ガイド Q助", category: "総務省消防庁", description: "症状を選ぶと緊急度に応じた対応を表示し、医療機関や受診手段の検索へ案内する公式サービス。", tags: ["緊急度", "医療機関検索", "Web・アプリ"], fit: "救急車か受診か判断に迷っている", price: "無料", access: "Web・アプリ", href: "https://www.fdma.go.jp/mission/enrichment/appropriate/appropriate003.html", accent: "#d94d4d" },
     ],
   },
   {
@@ -624,7 +622,6 @@ const problems: Problem[] = [
       { id: "health-guide", title: "症状から緊急度を確認する", note: "本人の年齢と症状を正確に選びます。", timing: "すぐ" },
       { id: "health-contact", title: "受診先か相談窓口へ連絡する", note: "服薬と持病を伝えられるようにします。", timing: "判断後" },
     ], services: [
-      { name: "全国版救急受診ガイド Q助", category: "総務省消防庁", description: "症状を選択すると緊急度に応じた対応を示し、医療機関や受診手段の検索へ案内。", tags: ["緊急度", "Web・アプリ", "公的サービス"], fit: "救急車か受診か迷っている", price: "無料", access: "登録不要で利用", href: "https://www.fdma.go.jp/mission/enrichment/appropriate/appropriate003.html", accent: "#d94d4d" },
     ],
   },
   {

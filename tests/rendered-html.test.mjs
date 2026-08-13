@@ -36,6 +36,7 @@ test("server-renders the Kotonavi home page", async () => {
   assert.doesNotMatch(html, /<h1>困りごとから、<br\s*\/>/);
   assert.match(html, /困りごとに合うスマホアプリ/);
   assert.match(html, /スマホアプリに限定/);
+  assert.doesNotMatch(html, /RAKURA|全国版救急受診ガイド Q助/);
   assert.match(html, /favicon-48\.png/);
   assert.match(html, /apple-touch-icon\.png/);
   assert.match(html, /manifest\.webmanifest/);
@@ -165,7 +166,7 @@ test("sitemap includes all problem landing pages", async () => {
   ]);
   assert.match(sitemap, /problemPages\.map/);
   assert.match(data, /slug: "scam-call-check"/);
-  assert.match(data, /slug: "ambulance-or-hospital"/);
+  assert.doesNotMatch(data, /全国版救急受診ガイド Q助|slug: "ambulance-or-hospital"/);
   assert.match(data, /slug: "disaster-alert-apps"/);
   assert.match(data, /slug: "choose-household-budget-app"/);
   assert.match(data, /slug: "set-up-two-factor-authentication"/);
