@@ -197,6 +197,9 @@ test("server-renders expanded app guide pages", async () => {
   const budgetHtml = await budgetResponse.text();
   assert.match(budgetHtml, /App Store/);
   assert.match(budgetHtml, /Google Play/);
+
+  const lostPhoneResponse = await render("/problems/find-lost-phone");
+  assert.match(await lostPhoneResponse.text(), /apps\.apple\.com\/jp\/app\/.*id1514844621/);
 });
 
 test("keeps problem guide search metadata stable when app choices change", async () => {
