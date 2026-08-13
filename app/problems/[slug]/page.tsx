@@ -36,7 +36,8 @@ export default async function ProblemDetail({ params }: { params: Promise<{ slug
       <div className="article-body">
         <section><h2>最初に知っておきたいこと</h2><p>{item.intro}</p></section>
         <section className="article-checklist"><h2>確認する順番</h2><ol>{item.steps.map((step) => <li key={step.title}><strong>{step.title}</strong><p>{step.body}</p></li>)}</ol></section>
-        <section><h2>使えるスマホアプリ</h2><div className="problem-options">{item.options.map((option) => <article key={option.name}><small>{option.kind}</small><h3>{option.name}</h3><p>{option.body}</p><dl><dt>向いている状況</dt><dd>{option.fit}</dd><dt>注意点</dt><dd>{option.caution}</dd></dl><a href={option.url} target="_blank" rel="noreferrer">公式情報を確認する ↗</a></article>)}</div></section>
+        <section className="app-chooser"><span>CHOOSE BY YOUR SITUATION</span><h2>あなたの場合は、どのアプリから見る？</h2><p>一番多くの機能があるものではなく、今の困りごとに合うものから選ぶと始めやすくなります。</p><ol>{item.options.map((option) => <li key={option.name}><strong>{option.fit}なら、<em>{option.name}</em></strong><small>{option.body}</small></li>)}</ol></section>
+        <section><h2>アプリごとの特徴と向いているケース</h2><div className="problem-options">{item.options.map((option) => <article key={option.name}><small>{option.kind}</small><h3>{option.name}</h3><p>{option.body}</p><dl><dt>こんな場合におすすめ</dt><dd>{option.fit}</dd><dt>注意点</dt><dd>{option.caution}</dd></dl><a href={option.url} target="_blank" rel="noreferrer">公式情報を確認する ↗</a></article>)}</div></section>
         {item.seoContent?.map((content) => <section key={content.heading}><h2>{content.heading}</h2><p>{content.body}</p></section>)}
         <section className="problem-notes"><h2>利用前の注意</h2><ul>{item.notes.map((note) => <li key={note}>{note}</li>)}</ul></section>
         <aside className="article-cta"><span>コトナビで比較</span><h2>同じ困りごとに使える選択肢を見る</h2><p>対応環境や始め方を確認し、自分の状況に合うものを選んでください。</p><a href={`/?problem=${item.problemId}#guide`}>コトナビの案内を見る →</a></aside>

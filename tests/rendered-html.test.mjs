@@ -156,6 +156,8 @@ test("server-renders indexable problem landing pages", async () => {
   const html = await problemResponse.text();
   assert.match(html, /詐欺電話か確認したいとき/);
   assert.match(html, /詐欺バスターLITE/);
+  assert.match(html, /あなたの場合は、どのアプリから見る？/);
+  assert.match(html, /こんな場合におすすめ/);
   assert.match(html, /application\/ld\+json/);
 });
 
