@@ -9,9 +9,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const item = problemPageBySlug(slug);
   if (!item) return {};
-  const appNames = item.options.map((option) => option.name).join("・");
-  const title = item.title.includes(appNames) || !appNames ? item.title : `${item.title}｜${appNames}`;
-  const description = appNames ? `${item.description} ${appNames}の向いている状況と注意点を、公式情報をもとに整理します。` : item.description;
+  const title = item.title;
+  const description = `${item.description} 確認する順番と、状況に応じたアプリの選び方を公式情報をもとに整理します。`;
   return {
     title: `${title}｜コトナビ`, description,
     alternates: { canonical: `/problems/${item.slug}` },

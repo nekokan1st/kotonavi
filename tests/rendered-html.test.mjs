@@ -190,11 +190,15 @@ test("server-renders expanded app guide pages", async () => {
     assert.equal(response.status, 200);
     assert.match(await response.text(), expected);
   }
+  const budgetResponse = await render("/problems/choose-household-budget-app");
+  const budgetHtml = await budgetResponse.text();
+  assert.match(budgetHtml, /App Store/);
+  assert.match(budgetHtml, /Google Play/);
 });
 
-test("adds listed app names to every problem guide's search metadata", async () => {
+test("keeps problem guide search metadata stable when app choices change", async () => {
   const response = await render("/problems/manage-medication-app");
   const html = await response.text();
-  assert.match(html, /<title>薬と服用履歴をスマホで管理する方法｜お薬手帳プラス・EPARKお薬手帳・頭痛ーる｜コトナビ<\/title>/);
-  assert.match(html, /お薬手帳プラス・EPARKお薬手帳・頭痛ーるの向いている状況と注意点/);
+  assert.match(html, /<title>薬と服用履歴をスマホで管理する方法｜コトナビ<\/title>/);
+  assert.match(html, /状況に応じたアプリの選び方を公式情報をもとに整理します。/);
 });
