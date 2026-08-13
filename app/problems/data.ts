@@ -129,18 +129,19 @@ export const problemPages: ProblemPage[] = [
   },
   {
     slug: "dispose-large-appliances", problemId: "daily-dispose", category: "日常生活",
-    title: "粗大ごみ・家電を正しく処分する方法｜捨て方を調べる順番",
-    description: "家具や家電の品目、サイズ、家電リサイクル対象、自治体のルールを確認し、安全に処分する手順です。",
-    intro: "テレビ、エアコン、冷蔵庫・冷凍庫、洗濯機・衣類乾燥機は、通常の粗大ごみと異なる家電リサイクルの手続きが必要です。無許可の回収業者による高額請求や不適正処理にも注意します。",
+    title: "ごみの分別と収集日をスマホで確認する方法",
+    description: "住んでいる自治体のルールに合わせて、ごみの分別方法と収集日を確認し、出し忘れを減らす手順です。",
+    intro: "ごみの出し方や収集日は自治体・地域によって異なります。アプリを使う前に、住んでいる自治体が対応しているかを確認してください。テレビ、エアコン、冷蔵庫・冷凍庫、洗濯機・衣類乾燥機は通常の粗大ごみと異なる手続きが必要です。",
     steps: [
-      { title: "品目・大きさ・製造年を確認する", body: "家電はメーカーと型番も控え、まだ使用可能か確認します。" },
-      { title: "自治体とリサイクル対象のルールを確認する", body: "粗大ごみ、小型家電、家電4品目など、正しい区分を調べます。" },
-      { title: "費用・搬出方法・日程を確認して申し込む", body: "自力搬出が難しい場合は、正規の許可や提携がある事業者を選びます。" },
+      { title: "自治体がアプリに対応しているか確認する", body: "住んでいる市区町村と地域を選択できるか確認します。" },
+      { title: "品目と収集日を確認する", body: "ごみの名称で検索し、分別区分と出す日を確認します。" },
+      { title: "通知と例外ルールを確認する", body: "通知時刻を設定し、粗大ごみ・家電4品目など別手続きの品目も確認します。" },
     ],
     options: [
       { name: "環境省 家電リサイクル案内", kind: "公的案内", body: "家電4品目、小型家電、粗大ごみの区分と、無許可回収業者への注意点を確認できます。", fit: "処分方法の区分から確認したい", caution: "実際の収集方法や料金は自治体・販売店の案内を確認してください。", url: "https://www.env.go.jp/recycle/kaden/tvrecycle.html" },
+      { name: "さんあ〜る", kind: "ごみ分別・収集日通知アプリ", body: "対応自治体のごみ収集日、分別方法、品目検索、自治体からのお知らせを確認できます。", fit: "自治体のごみ出し日と分別をスマホで確認したい", caution: "対応自治体と地域設定を確認してください。家電4品目などは別の手続きが必要です。", url: "https://threer.delight-system.co.jp/" },
     ],
-    notes: ["冷蔵庫や洗濯機は中身と水抜きを事前に確認します。", "個人情報が残る機器は初期化とデータ消去を行います。"],
+    notes: ["通知は地域設定が正しいことを確認してから有効にします。", "個人情報が残る機器は初期化とデータ消去を行います。"],
     related: ["home-moving", "daily-subscriptions"], reviewedAt: "2026-08-12",
   },
   {
@@ -159,7 +160,7 @@ export const problemPages: ProblemPage[] = [
     notes: ["薬の量や回数は獣医師の指示を優先してください。", "誤食や呼吸困難など緊急性がある場合は記録より受診を優先します。"],
     related: ["pets-hospital", "pets-sitter"], reviewedAt: "2026-08-12",
   },
-].filter((item) => new Set(["digital-scam", "digital-phone", "family-medical-share", "pets-record"]).has(item.problemId));
+].filter((item) => new Set(["digital-scam", "digital-phone", "family-medical-share", "pets-record", "daily-dispose"]).has(item.problemId));
 
 const moreProblemPages: ProblemPage[] = [
   {
@@ -292,7 +293,7 @@ const appExpansionProblemPages: ProblemPage[] = [
     description: "処方薬、市販薬、服用時刻、体調変化を電子お薬手帳や体調記録アプリへまとめます。",
     intro: "アプリの記録は診断や処方変更の代わりにはなりません。薬の変更・中止は医師や薬剤師へ相談します。",
     steps: [{ title: "現在の薬を確認する", body: "薬名、用量、回数、処方医療機関を最新の状態にします。" }, { title: "服用と体調を記録する", body: "飲み忘れ、頭痛などの症状、服用後の変化を残します。" }, { title: "受診時に履歴を見せる", body: "市販薬やサプリも含めて医療者へ伝えます。" }],
-    options: [{ name: "お薬手帳プラス", kind: "電子お薬手帳アプリ", body: "薬の記録、服用管理、処方箋送信、家族の薬の管理に対応します。", fit: "薬の履歴と飲み忘れをまとめて管理したい", caution: "処方箋送信の対応薬局と会員機能を確認してください。", url: "https://portal.okusuriplus.com/" }, { name: "頭痛ーる", kind: "気圧・体調記録アプリ", body: "気圧予報と頭痛・服薬の記録を重ねて傾向を確認できます。", fit: "天気と頭痛の関係を記録したい", caution: "予測や分析は診断ではありません。急な強い症状は受診してください。", url: "https://zutool.jp/" }],
+    options: [{ name: "お薬手帳プラス", kind: "電子お薬手帳アプリ", body: "薬の記録、服用管理、処方箋送信、家族の薬の管理に対応します。", fit: "薬の履歴と飲み忘れをまとめて管理したい", caution: "処方箋送信の対応薬局と会員機能を確認してください。", url: "https://portal.okusuriplus.com/" }, { name: "EPARKお薬手帳", kind: "電子お薬手帳アプリ", body: "薬の情報、家族分の記録、通院記録をまとめて確認でき、対応薬局では調剤予約も利用できます。", fit: "家族分を含む薬の情報と通院予定をまとめたい", caution: "対応薬局と機能の利用条件を確認してください。薬の変更は医師・薬剤師へ相談します。", url: "https://okusuritecho.epark.jp/" }, { name: "頭痛ーる", kind: "気圧・体調記録アプリ", body: "気圧予報と頭痛・服薬の記録を重ねて傾向を確認できます。", fit: "天気と頭痛の関係を記録したい", caution: "予測や分析は診断ではありません。急な強い症状は受診してください。", url: "https://zutool.jp/" }],
     notes: ["薬の記録は定期的に更新してください。", "家族と共有する場合は健康情報の公開範囲を確認します。"], related: ["family-medical-share", "health-clinic"], reviewedAt: "2026-08-13",
   },
   {
@@ -352,7 +353,7 @@ const appExpansionProblemPages: ProblemPage[] = [
 ];
 
 problemPages.push(...moreProblemPages.filter((item) => new Set(["money-insurance", "mobility-delay"]).has(item.problemId)), ...appExpansionProblemPages);
-const publishedAppNames = new Set(["詐欺バスターLITE", "Apple『探す』", "Google デバイスを探す", "GOOSE", "ぺとログ", "保険簿", "Yahoo!乗換案内", "Yahoo!防災速報", "特務機関NERV防災", "tenki.jp", "トリセツ", "CLINICS", "お薬手帳プラス", "頭痛ーる", "Zaim", "Moneytree", "OsidOri", "ぴよログ", "家族アルバム みてね", "Google Authenticator", "Whoscall", "ジョルダン乗換案内", "乗換NAVITIME", "クックパッド", "DELISH KITCHEN", "Shufoo!"]);
+const publishedAppNames = new Set(["詐欺バスターLITE", "Apple『探す』", "Google デバイスを探す", "GOOSE", "ぺとログ", "保険簿", "Yahoo!乗換案内", "Yahoo!防災速報", "特務機関NERV防災", "tenki.jp", "トリセツ", "CLINICS", "お薬手帳プラス", "EPARKお薬手帳", "頭痛ーる", "Zaim", "Moneytree", "OsidOri", "ぴよログ", "家族アルバム みてね", "Google Authenticator", "Whoscall", "ジョルダン乗換案内", "乗換NAVITIME", "クックパッド", "DELISH KITCHEN", "Shufoo!", "さんあ〜る"]);
 for (const page of problemPages) page.options = page.options.filter((option) => publishedAppNames.has(option.name));
 
 export const problemPageBySlug = (slug: string) => problemPages.find((item) => item.slug === slug);

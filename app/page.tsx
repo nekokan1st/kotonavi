@@ -30,6 +30,7 @@ const mobileAppNames = new Set([
   "お薬手帳プラス", "頭痛ーる", "CLINICS", "Zaim", "Moneytree", "OsidOri",
   "ぴよログ", "家族アルバム みてね", "Google Authenticator", "Whoscall",
   "ジョルダン乗換案内", "乗換NAVITIME", "クックパッド", "DELISH KITCHEN", "Shufoo!",
+  "さんあ〜る", "EPARKお薬手帳", "Google Keep",
 ]);
 
 type AppDestinations = { official?: string; ios?: string; android?: string };
@@ -78,6 +79,9 @@ const directStoreLinks: Record<string, AppDestinations> = {
   "クックパッド": { ios: "https://apps.apple.com/jp/app/id340368403", android: "https://play.google.com/store/apps/details?id=com.cookpad.android.activities" },
   "DELISH KITCHEN": { android: "https://play.google.com/store/apps/details?id=tv.every.delishkitchen" },
   "Shufoo!": { ios: "https://apps.apple.com/jp/app/id373909230", android: "https://play.google.com/store/apps/details?id=com.toppan.shufoo.android" },
+  "さんあ〜る": { ios: "https://apps.apple.com/jp/app/id977071564", android: "https://play.google.com/store/apps/details?id=jp.co.delight_system.threeR.android" },
+  "EPARKお薬手帳": { ios: "https://apps.apple.com/jp/app/id952969231", android: "https://play.google.com/store/apps/details?id=jp.epark.medicinenote" },
+  "Google Keep": { ios: "https://apps.apple.com/jp/app/id1029207872", android: "https://play.google.com/store/apps/details?id=com.google.android.keep" },
 };
 const isStoreUrl = (url: string) => url.includes("apps.apple.com/") || url.includes("play.google.com/store/apps/");
 const destinationsFor = (service: Service): AppDestinations => {
@@ -308,6 +312,7 @@ const problems: Problem[] = [
       { id: "daily-book", title: "費用と搬出方法を比べて予約する", note: "自力搬出が難しい場合は運び出し条件も確認。", timing: "希望日の前" },
     ], services: [
       { name: "環境省 家電リサイクル案内", category: "公的案内", description: "家電4品目、小型家電、粗大ごみを正しく処分するための区分と、無許可回収業者への注意点を確認。", tags: ["家電4品目", "自治体ルール", "不用品処分"], fit: "処分方法の区分から確認したい", price: "閲覧無料", access: "Webで確認", href: "https://www.env.go.jp/recycle/kaden/tvrecycle.html", accent: "#368665" },
+      { name: "さんあ〜る", category: "ごみ分別・収集日通知アプリ", description: "対応自治体のごみ収集日、分別方法、品目検索、自治体からのお知らせを確認できるアプリ。", tags: ["ごみ収集日", "分別検索", "対応自治体"], fit: "住んでいる自治体のごみ出し日と分別をスマホで確認したい", why: "地域設定に合わせて収集日と分別ルールを確認できる", watch: "利用できる自治体か、初回設定時に必ず確認", price: "無料", access: "アプリで利用", href: "https://threer.delight-system.co.jp/", accent: "#4c9a72" },
     ],
   },
   {
@@ -645,6 +650,7 @@ const problems: Problem[] = [
       { id: "health-share", title: "必要な情報を受診時に伝える", note: "自己判断で薬を変更しないようにします。", timing: "受診時" },
     ], services: [
       { name: "マイナポータル 健康医療", category: "デジタル庁", description: "薬、医療費、健診、予防接種、アレルギーなど、連携された本人の健康医療情報を確認。", tags: ["薬", "医療費", "健診"], fit: "自分の医療履歴をまとめて確認したい", price: "無料", access: "マイナンバーカードで利用", href: "https://myna.go.jp/health-medical", accent: "#2e7f6d" },
+      { name: "EPARKお薬手帳", category: "電子お薬手帳アプリ", description: "薬の情報、家族分の記録、通院記録、次回通院日のアラームをまとめて確認できるアプリ。", tags: ["家族の薬", "通院記録", "薬局予約"], fit: "家族分を含む薬の情報と通院予定を一か所で管理したい", why: "本人・家族のお薬情報をまとめ、対応薬局では調剤予約も利用できる", watch: "対応薬局、機能の利用条件、共有する健康情報の範囲を確認", price: "無料", access: "アプリで利用", href: "https://okusuritecho.epark.jp/", accent: "#5e9c54" },
       { name: "お薬手帳プラス", category: "電子お薬手帳", description: "薬の記録、服用管理、処方箋の事前送信、家族の薬の管理に対応。", tags: ["薬の記録", "飲み忘れ", "処方箋送信"], fit: "薬の履歴と服用をスマホで管理したい", watch: "処方箋送信の対応薬局と会員機能を確認。薬の変更は医師・薬剤師へ相談", price: "無料", access: "アプリで利用", href: "https://portal.okusuriplus.com/", accent: "#ee7757" },
       { name: "頭痛ーる", category: "気圧・体調記録", description: "気圧予報と頭痛・服薬の記録を重ね、体調変化を振り返れるアプリ。", tags: ["気圧予報", "頭痛記録", "服薬記録"], fit: "天気と頭痛の傾向を記録して備えたい", watch: "予測や分析は診断ではない。強い・急な症状は医療機関へ相談", price: "無料版あり", access: "アプリで利用", href: "https://zutool.jp/", accent: "#6b8cd7" },
     ],
@@ -891,6 +897,7 @@ const problems: Problem[] = [
       { id: "chore-change", title: "一つ減らし、一つ分担を変える", note: "一週間試して再調整します。", timing: "話合い時" },
     ], services: [
       { name: "Yieto 2", category: "家事分担の可視化", description: "用意された家事育児リストから現状・不満・理想を各自入力し、パートナーと共有して再分担を支援。", tags: ["不満の可視化", "ペア利用", "分担見直し"], fit: "タスク管理より、まず分担への認識差を話し合いたい", why: "『誰が悪いか』ではなく現状・不満・理想の差を見える化する設計", watch: "日々のToDo管理が主目的なら別の共有タスクアプリが向く", price: "無料", access: "アプリ・Web", href: "https://yieto.jp/", accent: "#e36e80" },
+      { name: "Google Keep", category: "共有メモ・リストアプリ", description: "メモ、チェックリスト、写真、音声メモを保存し、家族やパートナーと共同編集できます。", tags: ["共同編集", "買い物リスト", "リマインダー"], fit: "家事や買い物の担当を、気軽な共有リストから始めたい", why: "メモやチェックリストを共有して、完了状況を同じ画面で確認できる", watch: "共有するメモと招待相手を確認し、個人情報は必要以上に保存しない", price: "無料", access: "アプリで利用", href: "https://keep.google.com/", accent: "#e3b13d" },
     ],
   },
   {
