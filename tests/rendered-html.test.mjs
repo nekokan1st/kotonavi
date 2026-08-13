@@ -201,4 +201,9 @@ test("keeps problem guide search metadata stable when app choices change", async
   const html = await response.text();
   assert.match(html, /<title>薬と服用履歴をスマホで管理する方法｜コトナビ<\/title>/);
   assert.match(html, /状況に応じたアプリの選び方を公式情報をもとに整理します。/);
+
+  const budgetResponse = await render("/problems/choose-household-budget-app");
+  const budgetHtml = await budgetResponse.text();
+  assert.match(budgetHtml, /<title>毎月のお金を把握したい人の家計簿アプリ比較｜コトナビ<\/title>/);
+  assert.doesNotMatch(budgetHtml, /<title>[^<]*マネーフォワード ME/);
 });
