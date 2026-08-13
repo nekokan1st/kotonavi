@@ -35,6 +35,9 @@ const mobileAppNames = new Set([
 
 export type AppDestinations = { official?: string; ios?: string; android?: string };
 export const directStoreLinks: Record<string, AppDestinations> = {
+  "詐欺バスターLITE": { ios: "https://apps.apple.com/jp/app/id6743839168" },
+  "Apple『探す』": { ios: "https://apps.apple.com/jp/app/%E6%8E%A2%E3%81%99/id1514844621?platform=ipad" },
+  "Google デバイスを探す": { android: "https://play.google.com/store/apps/details?id=com.google.android.apps.adm" },
   "Peatix": { ios: "https://apps.apple.com/jp/app/id561632513", android: "https://play.google.com/store/apps/details?id=com.peatix.android.Azuki" },
   "Google フォト": { ios: "https://apps.apple.com/jp/app/id962194608", android: "https://play.google.com/store/apps/details?id=com.google.android.apps.photos" },
   "入退去メモ": { ios: "https://apps.apple.com/jp/app/%E5%85%A5%E9%80%80%E5%8E%BB%E3%83%A1%E3%83%A2/id6767765025" },

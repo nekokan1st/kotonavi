@@ -98,6 +98,9 @@ test("uses verified destinations, broad search fields, and a bottom sponsor slot
   ]);
 
   assert.match(page, /const directStoreLinks/);
+  assert.match(page, /"詐欺バスターLITE": \{ ios:/);
+  assert.match(page, /"Apple『探す』": \{ ios:/);
+  assert.match(page, /"Google デバイスを探す": \{ android:/);
   assert.match(page, /"Peatix": \{ ios:/);
   assert.match(page, /"GOOSE": \{ ios:.*android:/);
   assert.match(page, /"母子モ": \{ ios:.*android:/);
