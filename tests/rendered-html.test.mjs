@@ -139,6 +139,9 @@ test("uses verified destinations, broad search fields, and a bottom sponsor slot
   assert.match(page, /サービスを見る前に、整理したい\{selected\.tasks\.length\}つのこと/);
   assert.match(page, /サービスや窓口が困りごとのどの部分を助けるのか確認/);
   assert.match(page, /ここで操作や登録をする必要はありません/);
+  assert.match(page, /problemPageById\(selected\.id\)/);
+  assert.match(page, /詳しい確認手順と利用前の注意/);
+  assert.match(page, /className="inline-problem-detail"/);
   assert.doesNotMatch(page, /行動の進み具合|setCompleted|completed\.length/);
   assert.match(css, /\.sponsor-slot/);
   assert.match(css, /\.single-phase-context/);

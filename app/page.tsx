@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { problemPageById } from "./problems/data";
 
 type ThemeId = "daily" | "home" | "leisure" | "work" | "family" | "health" | "money" | "parenting" | "digital" | "mobility" | "food" | "pets" | "support";
 type Service = {
@@ -994,20 +995,6 @@ const problems: Problem[] = [
 const appProblems = problems
   .map((problem) => ({ ...problem, services: problem.services.filter((service) => mobileAppNames.has(service.name)) }))
   .filter((problem) => problem.services.length > 0);
-const problemDetailSlugs: Record<string, string> = {
-  "digital-scam": "identify-unknown-phone-number", "health-urgent": "ambulance-or-hospital", "health-clinic": "online-medical-appointment",
-  "digital-phone": "find-lost-phone", "daily-emergency": "check-disaster-risk", "home-utilities": "moving-procedures",
-  "family-medical-share": "share-family-medication", "daily-subscriptions": "cancel-subscriptions",
-  "daily-dispose": "dispose-large-appliances", "pets-record": "pet-health-log",
-  "digital-account": "set-up-two-factor-authentication", "parenting-sick": "child-fever-night",
-  "money-insurance": "insurance-policy-organize", "money-trouble": "consumer-contract-trouble",
-  "mobility-delay": "train-delay-detour", "pets-missing": "find-missing-pet", "support-legal": "where-to-get-legal-help",
-  "support-mind": "mental-health-public-help", "support-home": "dv-stalking-safe-consultation",
-  "daily-emergency": "disaster-alert-apps", "home-manuals": "organize-appliance-manuals",
-  "health-record": "manage-medication-app", "money-budget": "choose-household-budget-app",
-  "parenting-grow": "baby-care-sharing-app", "food-recipe": "choose-recipe-and-flyer-apps",
-};
-
 export default function Home() {
   const firstAppProblem = appProblems[0];
   const [themeId, setThemeId] = useState<ThemeId>(firstAppProblem.theme);
@@ -1018,6 +1005,7 @@ export default function Home() {
 
   const theme = themes.find((item) => item.id === themeId) ?? themes[0];
   const selected = appProblems.find((problem) => problem.id === selectedId) ?? firstAppProblem;
+  const selectedDetail = problemPageById(selected.id);
   const activePhases = theme.phases.filter((item) => appProblems.some((problem) => problem.theme === themeId && problem.phase === item.id));
   const currentPhase = theme.phases.find((phase) => phase.id === phaseId);
   const visibleProblems = useMemo(
@@ -1164,7 +1152,6 @@ export default function Home() {
               <article className="detail-panel">
                 <div className="breadcrumb">{theme.label} <i>›</i> {currentPhase?.label}</div>
                 <span className="detail-kicker">{selected.eyebrow}</span><h3>{selected.title}</h3><p className="detail-description">{selected.description}</p>
-                {problemDetailSlugs[selected.id] && <a className="problem-detail-link" href={`/problems/${problemDetailSlugs[selected.id]}`}>この困りごとの詳しい確認手順を見る →</a>}
                 <div className="steps-intro"><span className="overline">BEFORE YOU CHOOSE</span><h4>サービスを見る前に、整理したい{selected.tasks.length}つのこと</h4><p>自分の状況や希望を先に整理し、下のサービスや窓口が困りごとのどの部分を助けるのか確認してみてください。ここで操作や登録をする必要はありません。</p></div>
                 <div className="task-list">{selected.tasks.map((task, index) => <div className="task" key={task.id}>
                   <span className="check">{index + 1}</span><span><strong>{task.title}</strong><small>{task.note}</small></span><em>{task.timing}</em>
@@ -1179,6 +1166,11 @@ export default function Home() {
                   <div className="service-meta"><dl><dt>選ぶ決め手</dt><dd>{service.why ?? service.tags.join("・")}</dd><dt>注意点</dt><dd>{service.watch ?? "料金・対象地域・利用条件は公式サイトで最新情報を確認"}</dd><dt>料金</dt><dd>{service.price}</dd><dt>始め方</dt><dd>{service.access}</dd></dl><div className="app-links">{destinations.official && <a className="official-link" href={destinations.official} target="_blank" rel={service.sponsored || service.affiliate ? "noreferrer nofollow sponsored" : "noreferrer"} onClick={() => trackOutbound(service, "official")}>公式サイト <span>↗</span></a>}{destinations.ios && <a className="store-link" href={destinations.ios} target="_blank" rel={service.sponsored ? "noreferrer sponsored" : "noreferrer"} onClick={() => trackOutbound(service, "app-store")}>App Store <span>↗</span></a>}{destinations.android && <a className="store-link" href={destinations.android} target="_blank" rel={service.sponsored ? "noreferrer sponsored" : "noreferrer"} onClick={() => trackOutbound(service, "google-play")}>Google Play <span>↗</span></a>}</div>{service.affiliateImpression && <img className="affiliate-impression" width="1" height="1" src={service.affiliateImpression} alt="" aria-hidden="true" />}</div>
                 </div>;
                 })}</div>
+                {selectedDetail && <section className="inline-problem-detail" aria-labelledby="inline-problem-detail-title">
+                  <div className="inline-problem-detail-heading"><span className="overline">CHECK IN THIS PAGE</span><h4 id="inline-problem-detail-title">詳しい確認手順と利用前の注意</h4><p>{selectedDetail.intro}</p></div>
+                  <ol className="inline-detail-steps">{selectedDetail.steps.map((step, index) => <li key={step.title}><span>{index + 1}</span><div><strong>{step.title}</strong><p>{step.body}</p></div></li>)}</ol>
+                  {selectedDetail.notes.length > 0 && <div className="inline-detail-notes"><b>利用前に確認したいこと</b><ul>{selectedDetail.notes.map((note) => <li key={note}>{note}</li>)}</ul></div>}
+                </section>}
                 {disasterKitProblemIds.has(selected.id) && <aside className="contextual-affiliate" aria-label="この困りごとに関連する広告">
                   <span>広告</span>
                   <div><b>ふたり分の備えを、ひとつのリュックに。</b><p>水・保存食から、ラジオライト、エアベッド、携帯トイレまで。家族で一つずつ集める手間を減らせる、2人用の防災セットです。</p><small>商品の内容・価格・在庫は販売ページでご確認ください。広告はアプリの掲載順位に影響しません。</small></div>
