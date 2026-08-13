@@ -1,0 +1,21 @@
+{
+  "name": "コトナビ",
+  "short_name": "コトナビ",
+  "description": "困りごとから、状況に合うスマホアプリを案内します。",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0c79d8",
+  "icons": [
+    {
+      "src": "/favicon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

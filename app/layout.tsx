@@ -16,7 +16,14 @@ export async function generateMetadata(): Promise<Metadata> {
       template: "%s",
     },
     description: "生活の困りごとを解決までの順番に整理し、状況に合うスマホアプリを案内します。",
-    icons: { icon: "/favicon.svg", shortcut: "/favicon.svg" },
+    icons: {
+      icon: [
+        { url: "/favicon-48.png", type: "image/png", sizes: "48x48" },
+        { url: "/favicon.svg", type: "image/svg+xml", sizes: "any" },
+      ],
+      shortcut: "/favicon-48.png",
+      apple: [{ url: "/apple-touch-icon.png", type: "image/png", sizes: "180x180" }],
+    },
     manifest: "/manifest.webmanifest",
     alternates: { canonical: "/" },
     robots: { index: true, follow: true },
