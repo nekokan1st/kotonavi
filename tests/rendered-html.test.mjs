@@ -156,9 +156,9 @@ test("server-renders indexable problem landing pages", async () => {
   const html = await problemResponse.text();
   assert.match(html, /詐欺電話か確認したいとき/);
   assert.match(html, /詐欺バスターLITE/);
-  assert.match(html, /あなたの場合は、どのアプリから見る？/);
-  assert.match(html, /気になる項目を選ぶと、すぐ下に特徴・注意点・公式情報への入口が表示されます。/);
-  assert.match(html, /詐欺バスターLITE/);
+  assert.match(html, /条件に合わせて、使うアプリを選ぶ/);
+  assert.match(html, /条件に合わせてアプリを比較する/);
+  assert.doesNotMatch(html, /あなたの場合は、どのアプリから見る？/);
   assert.match(html, /application\/ld\+json/);
 });
 
