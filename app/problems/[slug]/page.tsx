@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { AppChooser } from "./app-chooser";
 import { problemPageById, problemPageBySlug, problemPages } from "../data";
 
 export function generateStaticParams() { return problemPages.map(({ slug }) => ({ slug })); }
@@ -36,7 +37,7 @@ export default async function ProblemDetail({ params }: { params: Promise<{ slug
       <div className="article-body">
         <section><h2>最初に知っておきたいこと</h2><p>{item.intro}</p></section>
         <section className="article-checklist"><h2>確認する順番</h2><ol>{item.steps.map((step) => <li key={step.title}><strong>{step.title}</strong><p>{step.body}</p></li>)}</ol></section>
-        <aside className="article-cta guide-to-comparison"><span>アプリを比較する</span><h2>条件に合わせて、使うアプリを選ぶ</h2><p>アプリの特徴、向いているケース、対応OSを比較して、いまの状況に合うものを選べます。</p><a href={`/?problem=${item.problemId}#guide`}>条件に合わせてアプリを比較する →</a></aside>
+        <AppChooser options={item.options} />
         {item.seoContent?.map((content) => <section key={content.heading}><h2>{content.heading}</h2><p>{content.body}</p></section>)}
         <section className="problem-notes"><h2>利用前の注意</h2><ul>{item.notes.map((note) => <li key={note}>{note}</li>)}</ul></section>
         {related.length > 0 && <section><h2>関連する困りごと</h2><div className="related-problems">{related.map((entry) => <a data-track="related" key={entry.slug} href={`/problems/${entry.slug}`}><small>{entry.category}</small><strong>{entry.title}</strong><span>→</span></a>)}</div></section>}

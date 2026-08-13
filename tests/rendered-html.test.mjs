@@ -139,6 +139,9 @@ test("uses verified destinations, broad search fields, and a bottom sponsor slot
   assert.match(page, /サービスを見る前に、整理したい\{selected\.tasks\.length\}つのこと/);
   assert.match(page, /サービスや窓口が困りごとのどの部分を助けるのか確認/);
   assert.match(page, /ここで操作や登録をする必要はありません/);
+  assert.match(page, /className="problem-detail-cta"/);
+  assert.match(page, /まずは状況を整理する/);
+  assert.match(page, /約3分で読めます/);
   assert.doesNotMatch(page, /行動の進み具合|setCompleted|completed\.length/);
   assert.match(css, /\.sponsor-slot/);
   assert.match(css, /\.single-phase-context/);
@@ -156,9 +159,8 @@ test("server-renders indexable problem landing pages", async () => {
   const html = await problemResponse.text();
   assert.match(html, /詐欺電話か確認したいとき/);
   assert.match(html, /詐欺バスターLITE/);
-  assert.match(html, /条件に合わせて、使うアプリを選ぶ/);
-  assert.match(html, /条件に合わせてアプリを比較する/);
-  assert.doesNotMatch(html, /あなたの場合は、どのアプリから見る？/);
+  assert.match(html, /あなたの場合は、どのアプリから見る？/);
+  assert.match(html, /気になる項目を選ぶと、すぐ下に特徴・注意点・公式情報への入口が表示されます。/);
   assert.match(html, /application\/ld\+json/);
 });
 
