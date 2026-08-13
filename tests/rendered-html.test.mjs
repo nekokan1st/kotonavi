@@ -157,7 +157,8 @@ test("server-renders indexable problem landing pages", async () => {
   assert.match(html, /詐欺電話か確認したいとき/);
   assert.match(html, /詐欺バスターLITE/);
   assert.match(html, /あなたの場合は、どのアプリから見る？/);
-  assert.match(html, /こんな場合におすすめ/);
+  assert.match(html, /気になる項目を選ぶと、すぐ下に特徴・注意点・公式情報への入口が表示されます。/);
+  assert.match(html, /詐欺バスターLITE/);
   assert.match(html, /application\/ld\+json/);
 });
 
