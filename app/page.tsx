@@ -26,6 +26,10 @@ const mobileAppNames = new Set([
   "マネーフォワード ME", "保険簿", "母子モ", "TimeTree", "Google One バックアップ",
   "Yahoo!乗換案内", "GO", "akippa", "ecbo cloak", "クラシル", "くふう トクバイ",
   "TABETE", "Yieto 2", "ぺとログ", "PetBacker",
+  "Yahoo!防災速報", "特務機関NERV防災", "Yahoo!天気", "tenki.jp", "トリセツ",
+  "お薬手帳プラス", "頭痛ーる", "CLINICS", "Zaim", "Moneytree", "OsidOri",
+  "ぴよログ", "家族アルバム みてね", "Google Authenticator", "Whoscall",
+  "ジョルダン乗換案内", "乗換NAVITIME", "クックパッド", "DELISH KITCHEN", "Shufoo!",
 ]);
 
 type AppDestinations = { official?: string; ios?: string; android?: string };
@@ -54,6 +58,26 @@ const directStoreLinks: Record<string, AppDestinations> = {
   "Yieto 2": { ios: "https://apps.apple.com/jp/app/id6745941580" },
   "ぺとログ": { ios: "https://apps.apple.com/jp/app/id6756508276", android: "https://play.google.com/store/apps/details?id=jp.nooon.petlog" },
   "PetBacker": { ios: "https://apps.apple.com/jp/app/id1168037472", android: "https://play.google.com/store/apps/details?id=com.petbacker.android" },
+  "Yahoo!防災速報": { ios: "https://apps.apple.com/jp/app/id481914139", android: "https://play.google.com/store/apps/details?id=jp.co.yahoo.android.emg" },
+  "特務機関NERV防災": { ios: "https://apps.apple.com/jp/app/id1472338480", android: "https://play.google.com/store/apps/details?id=app.nerv" },
+  "Yahoo!天気": { ios: "https://apps.apple.com/jp/app/id521974902" },
+  "tenki.jp": { ios: "https://apps.apple.com/jp/app/id433865746", android: "https://play.google.com/store/apps/details?id=jwa.or.jp.tenkijp3" },
+  "トリセツ": { ios: "https://apps.apple.com/jp/app/id1085923883", android: "https://play.google.com/store/apps/details?id=com.trygle.instructionmanualapp" },
+  "お薬手帳プラス": { ios: "https://apps.apple.com/jp/app/id947740067", android: "https://play.google.com/store/apps/details?id=jp.co.nicho.jpokusuri" },
+  "頭痛ーる": { ios: "https://apps.apple.com/jp/app/id913664940", android: "https://play.google.com/store/apps/details?id=jp.co.pocke.android.zutsu" },
+  "CLINICS": { ios: "https://apps.apple.com/jp/app/id1106261604", android: "https://play.google.com/store/apps/details?id=life.medley.clinics" },
+  "Zaim": { ios: "https://apps.apple.com/jp/app/id445850671", android: "https://play.google.com/store/apps/details?id=net.zaim.android" },
+  "Moneytree": { ios: "https://apps.apple.com/jp/app/id586847189", android: "https://play.google.com/store/apps/details?id=jp.moneytree.moneytree" },
+  "OsidOri": { ios: "https://apps.apple.com/jp/app/id1473751623" },
+  "ぴよログ": { ios: "https://apps.apple.com/jp/app/id1252857347", android: "https://play.google.com/store/apps/details?id=jp.co.sakabou.piyolog" },
+  "家族アルバム みてね": { ios: "https://apps.apple.com/jp/app/id935672069", android: "https://play.google.com/store/apps/details?id=us.mitene" },
+  "Google Authenticator": { ios: "https://apps.apple.com/jp/app/id388497605", android: "https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2" },
+  "Whoscall": { ios: "https://apps.apple.com/jp/app/id929968679", android: "https://play.google.com/store/apps/details?id=gogolook.callgogolook2" },
+  "ジョルダン乗換案内": { ios: "https://apps.apple.com/jp/app/id299490481", android: "https://play.google.com/store/apps/details?id=jp.co.jorudan.nrkj" },
+  "乗換NAVITIME": { ios: "https://apps.apple.com/jp/app/id528532387" },
+  "クックパッド": { ios: "https://apps.apple.com/jp/app/id340368403", android: "https://play.google.com/store/apps/details?id=com.cookpad.android.activities" },
+  "DELISH KITCHEN": { android: "https://play.google.com/store/apps/details?id=tv.every.delishkitchen" },
+  "Shufoo!": { ios: "https://apps.apple.com/jp/app/id373909230", android: "https://play.google.com/store/apps/details?id=com.toppan.shufoo.android" },
 };
 const isStoreUrl = (url: string) => url.includes("apps.apple.com/") || url.includes("play.google.com/store/apps/");
 const destinationsFor = (service: Service): AppDestinations => {
@@ -310,6 +334,10 @@ const problems: Problem[] = [
       { id: "daily-contact", title: "家族の集合場所と連絡方法を決める", note: "電話がつながらない前提で決めます。", timing: "準備時" },
     ], services: [
       { name: "ハザードマップポータル", category: "国土交通省・国土地理院", description: "住所や現在地から洪水、土砂災害、高潮、津波などのリスクと自治体のハザードマップを確認。", tags: ["住所検索", "避難先", "災害リスク"], fit: "自宅や勤務先周辺の危険を知りたい", price: "無料", access: "登録不要で利用", href: "https://disaportal.gsi.go.jp/", accent: "#2876a8" },
+      { name: "Yahoo!防災速報", category: "防災情報通知", description: "現在地と登録地点の地震、豪雨、避難情報、Jアラートなどを通知。", tags: ["災害通知", "登録地点", "防災手帳"], fit: "自宅や家族の地域の災害情報を受け取りたい", watch: "通知には位置情報・通知設定が必要。避難判断は自治体の最新情報を優先", price: "無料", access: "アプリで利用", href: "https://emg.yahoo.co.jp/", accent: "#e15b4b" },
+      { name: "特務機関NERV防災", category: "防災気象情報", description: "地震・津波・噴火・大雨などを、現在地や登録地点に合わせて配信。", tags: ["地震速報", "雨雲", "音声読み上げ"], fit: "災害情報を地図と通知で詳しく確認したい", watch: "重大な通知には位置情報など端末側の設定が必要", price: "無料・任意の有料支援あり", access: "アプリで利用", href: "https://nerv.app/", accent: "#222b34" },
+      { name: "Yahoo!天気", category: "天気・防災", description: "雨雲レーダー、警報、台風、地域ごとの天気を確認。", tags: ["雨雲レーダー", "警報", "台風"], fit: "日常の天気と急な雨を同じアプリで確認したい", watch: "避難情報は自治体・気象庁の最新発表も確認", price: "無料", access: "アプリで利用", href: "https://weather.yahoo.co.jp/weather/promo/app/", accent: "#4c8bd9" },
+      { name: "tenki.jp", category: "日本気象協会公式", description: "天気、雨雲、台風、地震、防災情報を地域ごとに確認。", tags: ["天気予報", "防災情報", "日本気象協会"], fit: "気象情報と防災情報をまとめて見たい", watch: "警報時は自治体の避難情報も確認", price: "無料版あり", access: "アプリで利用", href: "https://tenki.jp/pr/app/", accent: "#287cb9" },
     ],
   },
   {
@@ -421,6 +449,7 @@ const problems: Problem[] = [
     services: [
       { name: "UCHITAS", category: "家電管理サービス", description: "家電の取扱説明書や保証書を整理し、家族で製品情報を共有。", tags: ["説明書", "保証書", "家族共有"], fit: "家電情報を家族でまとめたい", price: "公式サイトで確認", access: "個人利用可", href: "https://uchitas.com/", accent: "#f0a02f" },
       { name: "Cabinote", category: "持ち物・家財管理", description: "家財、保証書、収納場所を写真で管理。引越し時の箱管理にも対応。", tags: ["持ち物管理", "保証通知", "iPhone"], fit: "家財と収納場所も管理したい", price: "無料プランあり", access: "すぐ使える", href: "https://apps.apple.com/jp/app/%E6%8C%81%E3%81%A1%E7%89%A9-%E5%AE%B6%E8%B2%A1%E7%AE%A1%E7%90%86%E6%95%B4%E7%90%93%E4%BF%9D%E8%A8%BC%E6%9B%B8-cabinote/id6755080718", accent: "#5d6bff" },
+      { name: "トリセツ", category: "取扱説明書管理", description: "製品を登録して取扱説明書や関連情報をまとめて確認できるアプリ。", tags: ["説明書", "型番登録", "製品管理"], fit: "紙の説明書を探す手間を減らしたい", watch: "未登録製品やメーカー提供終了の説明書は表示できない場合がある", price: "無料", access: "アプリで利用", href: "https://torisetsu.biz/", accent: "#4b86c5" },
     ],
   },
   {
@@ -607,6 +636,7 @@ const problems: Problem[] = [
       { id: "health-call", title: "受診可能か電話で確認する", note: "急患や初診の受付条件を聞きます。", timing: "出発前" },
     ], services: [
       { name: "医療情報ネット ナビイ", category: "厚生労働省", description: "診療日、診療科目、対応可能な疾患や治療内容などから全国の医療機関・薬局を検索。", tags: ["全国検索", "病院", "薬局"], fit: "条件に合う医療機関を探したい", price: "無料", access: "Webで検索", href: "https://www.iryou.teikyouseido.mhlw.go.jp/", accent: "#1683a8" },
+      { name: "CLINICS", category: "オンライン診療・服薬指導", description: "対応医療機関の予約、オンライン診療、薬の受け取りまでを支援。", tags: ["オンライン診療", "予約", "服薬指導"], fit: "対応する医療機関を予約してオンラインで相談したい", watch: "緊急症状には不向き。診療内容・費用・利用可否は医療機関ごとに確認", price: "診療・医療機関ごと", access: "アプリで利用", href: "https://clinics-app.com/", accent: "#46a5a1" },
     ],
   },
   {
@@ -618,6 +648,8 @@ const problems: Problem[] = [
       { id: "health-share", title: "必要な情報を受診時に伝える", note: "自己判断で薬を変更しないようにします。", timing: "受診時" },
     ], services: [
       { name: "マイナポータル 健康医療", category: "デジタル庁", description: "薬、医療費、健診、予防接種、アレルギーなど、連携された本人の健康医療情報を確認。", tags: ["薬", "医療費", "健診"], fit: "自分の医療履歴をまとめて確認したい", price: "無料", access: "マイナンバーカードで利用", href: "https://myna.go.jp/health-medical", accent: "#2e7f6d" },
+      { name: "お薬手帳プラス", category: "電子お薬手帳", description: "薬の記録、服用管理、処方箋の事前送信、家族の薬の管理に対応。", tags: ["薬の記録", "飲み忘れ", "処方箋送信"], fit: "薬の履歴と服用をスマホで管理したい", watch: "処方箋送信の対応薬局と会員機能を確認。薬の変更は医師・薬剤師へ相談", price: "無料", access: "アプリで利用", href: "https://portal.okusuriplus.com/", accent: "#ee7757" },
+      { name: "頭痛ーる", category: "気圧・体調記録", description: "気圧予報と頭痛・服薬の記録を重ね、体調変化を振り返れるアプリ。", tags: ["気圧予報", "頭痛記録", "服薬記録"], fit: "天気と頭痛の傾向を記録して備えたい", watch: "予測や分析は診断ではない。強い・急な症状は医療機関へ相談", price: "無料版あり", access: "アプリで利用", href: "https://zutool.jp/", accent: "#6b8cd7" },
     ],
   },
   {
@@ -640,6 +672,9 @@ const problems: Problem[] = [
       { id: "money-review", title: "固定費を一つ見直す", note: "通信・保険・定額課金から選びます。", timing: "月末" },
     ], services: [
       { name: "マネーフォワード ME", category: "家計簿・資産管理", description: "銀行、証券、クレジットカードなどをまとめ、家計簿と資産の推移を自動で見える化。", tags: ["口座連携", "自動家計簿", "資産管理"], fit: "複数の明細をまとめて把握したい", price: "無料版あり", access: "Web・アプリ", href: "https://moneyforward.com/me", accent: "#2b77c6" },
+      { name: "Zaim", category: "家計簿・予算管理", description: "レシート読取や金融連携で支出を記録し、予算と家計の推移を確認。", tags: ["レシート", "口座連携", "予算"], fit: "手入力と自動連携を使い分けて家計簿を続けたい", watch: "明細の分類やレシート読取結果は定期的に確認", price: "無料版あり", access: "Web・アプリ", href: "https://zaim.net/", accent: "#36a99a" },
+      { name: "Moneytree", category: "資産管理", description: "銀行、カード、電子マネー、ポイントなどを一か所で確認。", tags: ["資産一覧", "明細", "口座連携"], fit: "複数サービスの残高と明細をまとめて見たい", watch: "対応金融機関と無料・有料機能の範囲を確認", price: "無料版あり", access: "アプリで利用", href: "https://getmoneytree.com/jp/app/about", accent: "#28a267" },
+      { name: "OsidOri", category: "共有家計簿", description: "夫婦・カップルの共有家計と個人のお金を分けて管理。", tags: ["家計共有", "個人ページ", "予算"], fit: "ふたりの支出だけを共有し、個人分は分けたい", watch: "共有範囲と連携できる金融サービスを登録前に確認", price: "無料版あり", access: "アプリで利用", href: "https://www.osidori.co/", accent: "#ef8791" },
     ],
   },
   {
@@ -706,6 +741,8 @@ const problems: Problem[] = [
       { id: "child-share", title: "家族へ成長記録を共有する", note: "紙の母子健康手帳も保管します。", timing: "記録後" },
     ], services: [
       { name: "母子モ", category: "母子手帳・子育て支援アプリ", description: "妊娠から育児までの成長記録、予防接種予定、地域情報、家族共有を支援。自治体版も提供。", tags: ["成長記録", "予防接種", "家族共有"], fit: "健診や予防接種を家族で管理したい", price: "無料", access: "アプリで利用", href: "https://www.mchh.jp/", accent: "#e9687d" },
+      { name: "ぴよログ", category: "育児記録", description: "授乳、ミルク、睡眠、排泄などを記録し、家族とリアルタイムで共有。", tags: ["授乳記録", "睡眠", "家族共有"], fit: "赤ちゃんの生活記録を家族で引き継ぎたい", watch: "体調の判断は記録だけに頼らず、異変時は医療機関へ相談", price: "無料版あり", access: "アプリで利用", href: "https://www.piyolog.com/", accent: "#f2a24a" },
+      { name: "家族アルバム みてね", category: "写真・動画共有", description: "子どもの写真や動画を家族だけのアルバムで共有し、月ごとに整理。", tags: ["家族共有", "写真", "動画"], fit: "離れて暮らす家族にも成長を共有したい", watch: "招待相手と公開範囲を確認し、個人情報が写る写真に注意", price: "無料版あり", access: "アプリで利用", href: "https://mitene.us/", accent: "#f0a451" },
     ],
   },
   {
@@ -728,6 +765,7 @@ const problems: Problem[] = [
       { id: "digital-review", title: "ログイン履歴と不要な連携を確認する", note: "見覚えのない端末を解除します。", timing: "毎月" },
     ], services: [
       { name: "IPA 情報セキュリティ10大脅威", category: "情報処理推進機構", description: "最新の被害事例と、パスワード管理・認証強化など個人が取るべき基本対策を確認。", tags: ["乗っ取り対策", "パスワード", "公的情報"], fit: "何から安全対策を始めるか知りたい", price: "無料", access: "Webで確認", href: "https://www.ipa.go.jp/security/10threats/index.html", accent: "#345993" },
+      { name: "Google Authenticator", category: "認証コード", description: "対応サービスの2段階認証コードをスマホで生成。", tags: ["2段階認証", "認証コード", "オフライン"], fit: "SMS以外の認証方法を設定したい", watch: "機種変更前に移行・同期方法とバックアップコードを確認", price: "無料", access: "アプリで利用", href: "https://support.google.com/accounts/answer/1066447?hl=ja", accent: "#4285f4" },
     ],
   },
   {
@@ -739,6 +777,7 @@ const problems: Problem[] = [
       { id: "scam-report", title: "フィッシング情報を報告する", note: "入力済みならパスワード変更と連絡を。", timing: "確認後" },
     ], services: [
       { name: "フィッシング対策協議会", category: "注意情報・報告窓口", description: "最新のフィッシング事例、身を守る対策、フィッシングサイトURLの報告方法を掲載。", tags: ["事例確認", "詐欺対策", "URL報告"], fit: "届いたメッセージが詐欺か確認したい", price: "無料", access: "Webで確認・報告", href: "https://www.antiphishing.jp/", accent: "#bd4f55" },
+      { name: "Whoscall", category: "迷惑電話・SMS対策", description: "着信番号の識別や迷惑電話・SMS対策を支援するアプリ。", tags: ["発信者識別", "迷惑電話", "SMS"], fit: "知らない番号へ出る前の判断材料がほしい", watch: "判定を過信せず、金銭や個人情報を求められたら公式窓口へ確認", price: "無料版あり", access: "アプリで利用", href: "https://whoscall.com/ja", accent: "#45b65c" },
     ],
   },
   {
@@ -773,6 +812,8 @@ const problems: Problem[] = [
       { id: "move-share", title: "到着見込みを相手へ共有する", note: "再検索する時刻も決めます。", timing: "出発前" },
     ], services: [
       { name: "Yahoo!乗換案内", category: "乗換・運行情報", description: "乗換検索、時刻表、登録路線の運行情報をまとめて確認。遅延時の再検索に向く。", tags: ["運行情報", "迂回検索", "無料"], fit: "普段使う路線の遅延を見ながら、無料で迂回したい", why: "路線登録と運行情報を乗換検索と同じ画面で確認できる", watch: "実際の振替輸送・入場規制は鉄道会社の案内を優先", price: "無料", access: "Web・アプリ", href: "https://transit.yahoo.co.jp/", accent: "#d84a42" },
+      { name: "ジョルダン乗換案内", category: "乗換・運行情報", description: "鉄道・バスの乗換、時刻表、運行情報から別経路を検索。", tags: ["鉄道・バス", "再検索", "運行情報"], fit: "一本前後や別ルートを素早く比較したい", watch: "振替輸送の条件と最新運行情報は交通事業者の公式案内を優先", price: "無料版あり", access: "アプリで利用", href: "https://www.jorudan.co.jp/norikae/", accent: "#ec712c" },
+      { name: "乗換NAVITIME", category: "乗換・時刻表", description: "鉄道・バスの乗換、時刻表、路線図を条件付きで検索。", tags: ["乗換検索", "バス", "路線図"], fit: "経由駅や一本後など条件を変えて検索したい", watch: "有料機能の範囲と交通事業者の最新運行情報を確認", price: "無料版あり", access: "アプリで利用", href: "https://www.navitime.co.jp/transfer/", accent: "#2a65bd" },
     ],
   },
   {
@@ -817,6 +858,8 @@ const problems: Problem[] = [
       { id: "cook-save", title: "作った結果と変更点をメモする", note: "次回の定番候補に残します。", timing: "食後" },
     ], services: [
       { name: "クラシル", category: "レシピ動画", description: "公式レシピを中心に、食材・時短・節約などから検索し、工程を動画で確認できる。", tags: ["動画レシピ", "食材検索", "時短"], fit: "料理に不慣れで、工程を動画で見ながら作りたい", why: "完成だけでなく切り方や火加減などの工程を視覚的に確認しやすい", watch: "アレルギー、加熱時間、保存方法は個別に確認", price: "無料版あり", access: "Web・アプリ", href: "https://www.kurashiru.com/", accent: "#ef5b54" },
+      { name: "クックパッド", category: "レシピ検索", description: "食材名や料理名から多数の投稿レシピを検索し、保存して比較。", tags: ["食材検索", "投稿レシピ", "保存"], fit: "手元の食材から多くの作り方を比較したい", watch: "投稿内容ごとに分量・加熱・衛生面を確認", price: "無料版あり", access: "Web・アプリ", href: "https://cookpad.com/jp", accent: "#e6a024" },
+      { name: "DELISH KITCHEN", category: "レシピ動画", description: "料理の工程を短い動画で確認し、献立や食材からレシピを探せる。", tags: ["動画", "献立", "時短"], fit: "調理手順を動画で追いながら作りたい", watch: "アレルギー、加熱時間、保存条件は個別に確認", price: "無料版あり", access: "Web・アプリ", href: "https://delishkitchen.tv/", accent: "#e95383" },
     ],
   },
   {
@@ -828,6 +871,7 @@ const problems: Problem[] = [
       { id: "shop-route", title: "一店舗か二店舗に決める", note: "価格差より総所要時間も考えます。", timing: "出発前" },
     ], services: [
       { name: "くふう トクバイ", category: "チラシ・買い物情報", description: "近くのスーパーやドラッグストアの商品・チラシを店舗横断で確認できる。", tags: ["近隣店舗", "デジタルチラシ", "商品比較"], fit: "紙のチラシを取っておらず、近所の特売を横断したい", why: "位置情報を基準に複数店舗の商品情報を見比べやすい", watch: "在庫や店頭価格は変わるため、確実性が必要なら店舗へ確認", price: "無料", access: "Web・アプリ", href: "https://tokubai.co.jp/app", accent: "#f06b35" },
+      { name: "Shufoo!", category: "デジタルチラシ", description: "近隣店舗のチラシを位置や店舗から探して比較できるアプリ。", tags: ["チラシ", "近隣店舗", "買い物"], fit: "複数店の紙チラシをスマホでまとめて見たい", watch: "掲載期間、在庫、店頭価格は店舗の最新情報を確認", price: "無料", access: "アプリで利用", href: "https://www.shufoo.net/contents/app/", accent: "#f05c4f" },
     ],
   },
   {
@@ -947,14 +991,17 @@ const appProblems = problems
   .map((problem) => ({ ...problem, services: problem.services.filter((service) => mobileAppNames.has(service.name)) }))
   .filter((problem) => problem.services.length > 0);
 const problemDetailSlugs: Record<string, string> = {
-  "digital-scam": "scam-call-check", "health-urgent": "ambulance-or-hospital", "health-clinic": "find-open-clinic",
+  "digital-scam": "identify-unknown-phone-number", "health-urgent": "ambulance-or-hospital", "health-clinic": "online-medical-appointment",
   "digital-phone": "find-lost-phone", "daily-emergency": "check-disaster-risk", "home-utilities": "moving-procedures",
   "family-medical-share": "share-family-medication", "daily-subscriptions": "cancel-subscriptions",
   "daily-dispose": "dispose-large-appliances", "pets-record": "pet-health-log",
-  "digital-account": "prevent-account-takeover", "parenting-sick": "child-fever-night",
+  "digital-account": "set-up-two-factor-authentication", "parenting-sick": "child-fever-night",
   "money-insurance": "insurance-policy-organize", "money-trouble": "consumer-contract-trouble",
   "mobility-delay": "train-delay-detour", "pets-missing": "find-missing-pet", "support-legal": "where-to-get-legal-help",
   "support-mind": "mental-health-public-help", "support-home": "dv-stalking-safe-consultation",
+  "daily-emergency": "disaster-alert-apps", "home-manuals": "organize-appliance-manuals",
+  "health-record": "manage-medication-app", "money-budget": "choose-household-budget-app",
+  "parenting-grow": "baby-care-sharing-app", "food-recipe": "choose-recipe-and-flyer-apps",
 };
 
 export default function Home() {

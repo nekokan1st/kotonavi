@@ -102,6 +102,14 @@ test("uses verified destinations, broad search fields, and a bottom sponsor slot
   assert.match(page, /"母子モ": \{ ios:.*android:/);
   assert.match(page, /"Google One バックアップ": \{ ios:.*android:/);
   assert.match(page, /"PetBacker": \{ ios:.*android:/);
+  assert.match(page, /"Yahoo!防災速報": \{ ios:.*android:/);
+  assert.match(page, /"お薬手帳プラス": \{ ios:.*android:/);
+  assert.match(page, /"Zaim": \{ ios:.*android:/);
+  assert.match(page, /"ぴよログ": \{ ios:.*android:/);
+  assert.match(page, /"Google Authenticator": \{ ios:.*android:/);
+  assert.match(page, /"乗換NAVITIME": \{ ios:/);
+  assert.match(page, /"DELISH KITCHEN": \{ android:/);
+  assert.match(page, /"Shufoo!": \{ ios:.*android:/);
   assert.match(page, /destinationsFor\(service\)/);
   assert.match(page, /className="official-link"/);
   assert.doesNotMatch(css, /\.app-links a:first-child/);
@@ -158,4 +166,22 @@ test("sitemap includes all problem landing pages", async () => {
   assert.match(sitemap, /problemPages\.map/);
   assert.match(data, /slug: "scam-call-check"/);
   assert.match(data, /slug: "ambulance-or-hospital"/);
+  assert.match(data, /slug: "disaster-alert-apps"/);
+  assert.match(data, /slug: "choose-household-budget-app"/);
+  assert.match(data, /slug: "set-up-two-factor-authentication"/);
+  assert.match(data, /slug: "choose-recipe-and-flyer-apps"/);
+});
+
+test("server-renders expanded app guide pages", async () => {
+  const cases = [
+    ["/problems/disaster-alert-apps", /Yahoo!防災速報/],
+    ["/problems/choose-household-budget-app", /Moneytree/],
+    ["/problems/set-up-two-factor-authentication", /Google Authenticator/],
+    ["/problems/choose-recipe-and-flyer-apps", /DELISH KITCHEN/],
+  ];
+  for (const [path, expected] of cases) {
+    const response = await render(path);
+    assert.equal(response.status, 200);
+    assert.match(await response.text(), expected);
+  }
 });

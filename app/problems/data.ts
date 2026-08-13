@@ -270,8 +270,105 @@ const moreProblemPages: ProblemPage[] = [
   },
 ];
 
-problemPages.push(...moreProblemPages.filter((item) => new Set(["money-insurance", "mobility-delay"]).has(item.problemId)));
-const publishedAppNames = new Set(["詐欺バスターLITE", "Apple『探す』", "Google デバイスを探す", "GOOSE", "ぺとログ", "保険簿", "Yahoo!乗換案内"]);
+const appExpansionProblemPages: ProblemPage[] = [
+  {
+    slug: "disaster-alert-apps", problemId: "daily-emergency", category: "日常生活",
+    title: "地震・豪雨・避難情報をアプリで受け取る方法",
+    description: "現在地と家族の地域に合う防災通知アプリを選び、通知・位置情報・登録地点を設定する手順です。",
+    intro: "防災アプリを入れただけでは、必要な通知が届かない場合があります。通知権限、位置情報、登録地点を確認し、自治体の避難情報と合わせて使います。",
+    steps: [{ title: "知りたい地域を決める", body: "現在地、自宅、勤務先、離れて暮らす家族の地域を整理します。" }, { title: "通知と位置情報を設定する", body: "端末側の通知権限と、アプリ内の通知項目・重大な通知を確認します。" }, { title: "避難先と連絡方法も確認する", body: "通知を受けた後にどこへ行くか、家族とどう連絡するかを決めます。" }],
+    options: [
+      { name: "Yahoo!防災速報", kind: "防災情報通知アプリ", body: "現在地と登録地点の地震、豪雨、避難情報などを通知します。", fit: "複数地点の防災情報をまとめて受け取りたい", caution: "避難判断は自治体・気象機関の最新発表を優先してください。", url: "https://emg.yahoo.co.jp/" },
+      { name: "特務機関NERV防災", kind: "防災気象情報アプリ", body: "地震、津波、大雨などを地図・通知・音声で確認できます。", fit: "災害情報を地図で詳しく確認したい", caution: "位置情報や重大な通知の端末設定を確認してください。", url: "https://nerv.app/" },
+      { name: "tenki.jp", kind: "日本気象協会公式アプリ", body: "天気、雨雲、台風、地震、防災情報を地域ごとに確認できます。", fit: "日常の天気と防災情報を一緒に見たい", caution: "警報時は自治体の避難情報も確認してください。", url: "https://tenki.jp/pr/app/" },
+    ],
+    notes: ["通知が届くか、平常時に設定を見直してください。", "通信障害に備えて避難先や連絡先はオフラインでも確認できるようにします。"], related: ["family-basics", "family-absence"], reviewedAt: "2026-08-13",
+  },
+  {
+    slug: "organize-appliance-manuals", problemId: "home-manuals", category: "引越し・住まい",
+    title: "家電の説明書をスマホでまとめる方法",
+    description: "家電の型番を確認し、取扱説明書、保証期限、消耗品情報をアプリで探せる状態にします。",
+    intro: "家電本体の型番ラベルを先に撮影すると、似た製品の説明書を登録する間違いを防げます。",
+    steps: [{ title: "メーカーと型番を撮影する", body: "本体ラベルと購入日が分かる情報を残します。" }, { title: "説明書アプリへ製品を登録する", body: "型番が一致することを確認して登録します。" }, { title: "保証と消耗品を追記する", body: "保証期限、購入店、交換部品の型番を一緒に管理します。" }],
+    options: [{ name: "トリセツ", kind: "取扱説明書管理アプリ", body: "製品を登録し、取扱説明書や関連情報をまとめて確認できます。", fit: "紙の説明書を探す手間を減らしたい", caution: "未登録製品や提供終了した説明書は表示できない場合があります。", url: "https://torisetsu.biz/" }],
+    notes: ["修理や安全に関する案内はメーカー公式情報を優先してください。", "保証書原本や購入証明が必要な製品は別途保管します。"], related: ["record-condition", "moveout-evidence"], reviewedAt: "2026-08-13",
+  },
+  {
+    slug: "online-medical-appointment", problemId: "health-clinic", category: "健康・介護",
+    title: "オンライン診療を予約したいときの確認事項",
+    description: "オンライン診療に向く症状かを確認し、対応医療機関、費用、薬の受け取り方法を整理します。",
+    intro: "呼吸困難、意識障害、突然の激痛など緊急性がある症状では、オンライン診療を待たず119や救急相談を利用してください。",
+    steps: [{ title: "緊急性がないか確認する", body: "強い症状や急変では対面受診・救急対応を優先します。" }, { title: "対応医療機関と費用を確認する", body: "初診の可否、予約枠、診察料以外の費用を確認します。" }, { title: "通信環境と薬の受け取りを準備する", body: "本人確認書類、保険情報、服薬情報を手元に置きます。" }],
+    options: [{ name: "CLINICS", kind: "オンライン診療アプリ", body: "対応医療機関の予約、オンライン診療、服薬指導や薬の受け取りを支援します。", fit: "対応医療機関を予約してオンラインで相談したい", caution: "診療内容、費用、初診可否は医療機関ごとに異なります。", url: "https://clinics-app.com/" }],
+    notes: ["オンライン診療はすべての症状に適するものではありません。", "薬の配送・受取方法と到着時期を確認してください。"], related: ["health-urgent", "health-record"], reviewedAt: "2026-08-13",
+  },
+  {
+    slug: "manage-medication-app", problemId: "health-record", category: "健康・介護",
+    title: "薬と服用履歴をスマホで管理する方法",
+    description: "処方薬、市販薬、服用時刻、体調変化を電子お薬手帳や体調記録アプリへまとめます。",
+    intro: "アプリの記録は診断や処方変更の代わりにはなりません。薬の変更・中止は医師や薬剤師へ相談します。",
+    steps: [{ title: "現在の薬を確認する", body: "薬名、用量、回数、処方医療機関を最新の状態にします。" }, { title: "服用と体調を記録する", body: "飲み忘れ、頭痛などの症状、服用後の変化を残します。" }, { title: "受診時に履歴を見せる", body: "市販薬やサプリも含めて医療者へ伝えます。" }],
+    options: [{ name: "お薬手帳プラス", kind: "電子お薬手帳アプリ", body: "薬の記録、服用管理、処方箋送信、家族の薬の管理に対応します。", fit: "薬の履歴と飲み忘れをまとめて管理したい", caution: "処方箋送信の対応薬局と会員機能を確認してください。", url: "https://portal.okusuriplus.com/" }, { name: "頭痛ーる", kind: "気圧・体調記録アプリ", body: "気圧予報と頭痛・服薬の記録を重ねて傾向を確認できます。", fit: "天気と頭痛の関係を記録したい", caution: "予測や分析は診断ではありません。急な強い症状は受診してください。", url: "https://zutool.jp/" }],
+    notes: ["薬の記録は定期的に更新してください。", "家族と共有する場合は健康情報の公開範囲を確認します。"], related: ["family-medical-share", "health-clinic"], reviewedAt: "2026-08-13",
+  },
+  {
+    slug: "choose-household-budget-app", problemId: "money-budget", category: "お金・契約",
+    title: "家計簿アプリを目的別に選ぶ方法",
+    description: "自動連携、レシート入力、資産一覧、夫婦共有のどれを重視するか整理して家計簿アプリを選びます。",
+    intro: "最初からすべての口座を登録せず、日常利用する口座やカードから始めると、分類や共有範囲を確認しやすくなります。",
+    steps: [{ title: "家計簿の目的を一つ決める", body: "支出削減、資産一覧、夫婦共有などから優先目的を選びます。" }, { title: "入力方法と連携先を確認する", body: "手入力、レシート、自動連携のうち続けられる方法を選びます。" }, { title: "一か月試して見直す", body: "分類の手間と見たい情報が合っているか確認します。" }],
+    options: [{ name: "Zaim", kind: "家計簿・予算管理アプリ", body: "レシート読取、手入力、金融連携を使い分けて家計を記録できます。", fit: "入力方法を選びながら予算も管理したい", caution: "読取結果や自動分類を定期的に確認してください。", url: "https://zaim.net/" }, { name: "Moneytree", kind: "資産管理アプリ", body: "銀行、カード、電子マネー、ポイントなどを一か所で確認できます。", fit: "残高と明細をまとめて見たい", caution: "対応金融機関と無料・有料機能を確認してください。", url: "https://getmoneytree.com/jp/app/about" }, { name: "OsidOri", kind: "共有家計簿アプリ", body: "共有家計と個人のお金を分けて管理できます。", fit: "ふたりの支出だけを共有したい", caution: "共有範囲を確認してから口座を連携してください。", url: "https://www.osidori.co/" }],
+    notes: ["金融情報を扱うため、端末の画面ロックと復旧方法を設定します。", "広告提携の有無は掲載順位に影響しません。"], related: ["money-insurance", "daily-subscriptions"], reviewedAt: "2026-08-13",
+  },
+  {
+    slug: "baby-care-sharing-app", problemId: "parenting-grow", category: "子育て・学び",
+    title: "赤ちゃんの授乳・睡眠・成長を家族で共有する方法",
+    description: "授乳、ミルク、睡眠、排泄、写真などを、家族で同じ記録を見られる状態にします。",
+    intro: "すべてを細かく記録するより、家族の引き継ぎや受診時に必要な項目から始めると続けやすくなります。",
+    steps: [{ title: "共有する記録を決める", body: "授乳、睡眠、排泄、体温など必要な項目を選びます。" }, { title: "家族を正しく招待する", body: "共有相手と権限を確認します。" }, { title: "異変時は記録を受診に活用する", body: "記録だけで判断せず、必要に応じて医療機関へ相談します。" }],
+    options: [{ name: "ぴよログ", kind: "育児記録アプリ", body: "授乳、ミルク、睡眠、排泄などを記録し家族で共有できます。", fit: "日々の育児を交代しやすくしたい", caution: "体調判断は記録だけに頼らず医療者へ相談してください。", url: "https://www.piyolog.com/" }, { name: "家族アルバム みてね", kind: "家族写真共有アプリ", body: "子どもの写真や動画を招待した家族へ共有できます。", fit: "離れて暮らす家族にも成長を共有したい", caution: "招待相手と写真の公開範囲を確認してください。", url: "https://mitene.us/" }],
+    notes: ["紙の母子健康手帳も保管してください。", "子どもの個人情報が写る写真の共有範囲に注意します。"], related: ["parenting-sick", "parenting-schedule"], reviewedAt: "2026-08-13",
+  },
+  {
+    slug: "set-up-two-factor-authentication", problemId: "digital-account", category: "デジタル・安全",
+    title: "2段階認証アプリを設定する方法",
+    description: "重要なアカウントへ認証アプリを設定し、機種変更や端末紛失に備えて復旧方法も保存します。",
+    intro: "メールや金融など、他サービスの復旧に使われる重要なアカウントから設定します。バックアップコードは同じ端末だけに保存しません。",
+    steps: [{ title: "重要なアカウントを選ぶ", body: "メール、金融、SNSなどから始めます。" }, { title: "認証アプリを登録する", body: "公式設定画面のQRコードまたはキーを使います。" }, { title: "復旧方法を別の場所へ保存する", body: "バックアップコードと機種変更手順を確認します。" }],
+    options: [{ name: "Google Authenticator", kind: "認証コードアプリ", body: "対応サービスの2段階認証コードをスマホで生成できます。", fit: "SMS以外の認証方法を使いたい", caution: "機種変更前に移行方法とバックアップコードを確認してください。", url: "https://support.google.com/accounts/answer/1066447?hl=ja" }],
+    notes: ["QRコードや設定キーを第三者へ見せないでください。", "不正ログインが疑われる場合は先にパスワードを変更します。"], related: ["digital-scam", "digital-phone"], reviewedAt: "2026-08-13",
+  },
+  {
+    slug: "identify-unknown-phone-number", problemId: "digital-scam", category: "デジタル・安全",
+    title: "知らない電話番号からの着信を確認する方法",
+    description: "知らない番号へ折り返す前に、発信者識別アプリと公式窓口を使って安全に確認します。",
+    intro: "警察、役所、金融機関を名乗られても、電話口で暗証番号や認証コードを伝えず、一度切って公式番号へ確認します。",
+    steps: [{ title: "すぐに折り返さない", body: "留守番電話やSMSの要求内容を確認します。" }, { title: "番号識別を判断材料にする", body: "表示名や迷惑電話報告を確認します。" }, { title: "組織の公式番号へ確認する", body: "着信画面に表示された番号ではなく公式サイトから連絡します。" }],
+    options: [{ name: "Whoscall", kind: "迷惑電話・SMS対策アプリ", body: "着信番号の識別や迷惑電話・SMS対策を支援します。", fit: "知らない番号へ出る前の判断材料がほしい", caution: "判定だけを過信せず、金銭や個人情報を求められたら公式窓口へ確認してください。", url: "https://whoscall.com/ja" }, { name: "詐欺バスターLITE", kind: "詐欺電話対策アプリ", body: "通話内容をもとに詐欺の可能性を確認する材料を提供します。", fit: "電話内容が怪しいか判断する材料がほしい", caution: "緊急性をあおられてもその場で送金や情報提供をしないでください。", url: "https://apps.apple.com/jp/app/id6743839168" }],
+    notes: ["認証コードや暗証番号を電話相手へ伝えないでください。", "被害が疑われる場合は警察や金融機関へ相談します。"], related: ["digital-account", "money-trouble"], reviewedAt: "2026-08-13",
+  },
+  {
+    slug: "compare-train-detour-apps", problemId: "mobility-delay", category: "移動・外出",
+    title: "電車遅延時に乗換アプリで迂回ルートを比べる方法",
+    description: "運休区間と再開見込みを確認し、鉄道・バス・徒歩を含む代替経路を複数の条件で比較します。",
+    intro: "アプリの検索結果だけでなく、振替輸送、入場規制、運休区間は交通事業者の公式案内を優先します。",
+    steps: [{ title: "運休区間を確認する", body: "全線か一部区間か、再開見込みを確認します。" }, { title: "一本後・経由駅を変えて検索する", body: "到着時刻だけでなく混雑や乗換回数も比べます。" }, { title: "到着見込みを共有する", body: "状況が変わるため再確認する時刻も決めます。" }],
+    options: [{ name: "Yahoo!乗換案内", kind: "乗換・運行情報アプリ", body: "登録路線の運行情報と乗換検索をまとめて確認できます。", fit: "普段使う路線の遅延から迂回したい", caution: "振替輸送は交通事業者の案内を優先してください。", url: "https://transit.yahoo.co.jp/" }, { name: "ジョルダン乗換案内", kind: "鉄道・バス乗換アプリ", body: "一本前後や鉄道・バスの別経路を検索できます。", fit: "再検索条件を変えて比較したい", caution: "有料機能と最新運行情報を確認してください。", url: "https://www.jorudan.co.jp/norikae/" }, { name: "乗換NAVITIME", kind: "乗換・時刻表アプリ", body: "経由駅などの条件を設定して鉄道・バスの経路を検索できます。", fit: "経由地やバスを含めて探したい", caution: "交通事業者の最新運行情報を優先してください。", url: "https://www.navitime.co.jp/transfer/" }],
+    notes: ["安全な場所へ移動してから再検索してください。", "終電や代替バスの最終時刻も確認します。"], related: ["mobility-taxi", "mobility-luggage"], reviewedAt: "2026-08-13",
+  },
+  {
+    slug: "choose-recipe-and-flyer-apps", problemId: "food-recipe", category: "食事・家事",
+    title: "食材からレシピと買い物を決めるアプリの使い分け",
+    description: "冷蔵庫の食材、調理時間、近所のチラシから、作る料理と追加購入を最小限にします。",
+    intro: "先に使い切りたい食材を三つまで選ぶと、レシピ候補や特売情報に振り回されにくくなります。",
+    steps: [{ title: "使い切る食材と時間を決める", body: "人数、調理時間、追加購入の上限を決めます。" }, { title: "レシピを二つまで比較する", body: "工程、調味料、加熱時間を確認します。" }, { title: "必要な物だけチラシで確認する", body: "移動時間と買いすぎも含めて店舗を選びます。" }],
+    options: [{ name: "クックパッド", kind: "レシピ検索アプリ", body: "食材名から多数の投稿レシピを検索できます。", fit: "同じ食材の多様な作り方を比較したい", caution: "投稿ごとに加熱・衛生面を確認してください。", url: "https://cookpad.com/jp" }, { name: "DELISH KITCHEN", kind: "レシピ動画アプリ", body: "料理工程を動画で確認し、食材や献立から探せます。", fit: "手順を動画で見ながら作りたい", caution: "アレルギーと保存条件を確認してください。", url: "https://delishkitchen.tv/" }, { name: "Shufoo!", kind: "デジタルチラシアプリ", body: "近隣店舗のチラシを位置や店舗から探せます。", fit: "必要な食材の価格を近所で比較したい", caution: "在庫と店頭価格は店舗の最新情報を確認してください。", url: "https://www.shufoo.net/contents/app/" }],
+    notes: ["特売を理由に不要な物を増やさないよう買い物リストを作ります。", "食中毒予防のため加熱と保存方法を確認してください。"], related: ["food-shopping", "food-chores"], reviewedAt: "2026-08-13",
+  },
+];
+
+problemPages.push(...moreProblemPages.filter((item) => new Set(["money-insurance", "mobility-delay"]).has(item.problemId)), ...appExpansionProblemPages);
+const publishedAppNames = new Set(["詐欺バスターLITE", "Apple『探す』", "Google デバイスを探す", "GOOSE", "ぺとログ", "保険簿", "Yahoo!乗換案内", "Yahoo!防災速報", "特務機関NERV防災", "tenki.jp", "トリセツ", "CLINICS", "お薬手帳プラス", "頭痛ーる", "Zaim", "Moneytree", "OsidOri", "ぴよログ", "家族アルバム みてね", "Google Authenticator", "Whoscall", "ジョルダン乗換案内", "乗換NAVITIME", "クックパッド", "DELISH KITCHEN", "Shufoo!"]);
 for (const page of problemPages) page.options = page.options.filter((option) => publishedAppNames.has(option.name));
 
 export const problemPageBySlug = (slug: string) => problemPages.find((item) => item.slug === slug);
