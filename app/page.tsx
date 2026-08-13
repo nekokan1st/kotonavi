@@ -17,6 +17,7 @@ type Service = {
   accent: string;
   sponsored?: boolean;
   affiliate?: boolean;
+  affiliateImpression?: string;
 };
 
 const mobileAppNames = new Set([
@@ -61,6 +62,8 @@ const destinationsFor = (service: Service): AppDestinations => {
 };
 
 const disasterKitAffiliateUrl = "https://rpx.a8.net/svt/ejp?a8mat=4BA39A+BFEJSI+2HOM+BW8O1&rakuten=y&a8ejpredirect=http%3A%2F%2Fhb.afl.rakuten.co.jp%2Fhgc%2F0ea62065.34400275.0ea62066.204f04c0%2Fa26081143426_4BA39A_BFEJSI_2HOM_BW8O1%3Fpc%3Dhttps%253A%252F%252Fitem.rakuten.co.jp%252Firisplaza-r%252F288353%252F%26m%3Dhttps%253A%252F%252Fitem.rakuten.co.jp%252Firisplaza-r%252F288353%252F";
+const misocaAffiliateUrl = "https://px.a8.net/svt/ejp?a8mat=4BA4T7+BRWNHU+2ZJ4+BW8O2&a8ejpredirect=https%3A%2F%2Fwww.misoca.jp%2F";
+const misocaAffiliateImpressionUrl = "https://www11.a8.net/0.gif?a8mat=4BA4T7+BRWNHU+2ZJ4+BW8O2";
 const disasterKitProblemIds = new Set([
   "daily-emergency", "family-basics", "family-medical-share", "family-absence", "family-emergency",
 ]);
@@ -477,7 +480,7 @@ const problems: Problem[] = [
       { id: "work-acceptance", title: "検収日と修正期限を伝える", note: "仕事が完了する条件を明確に。", timing: "納品時" },
       { id: "work-invoice", title: "請求書と入金予定日を保存する", note: "未入金の確認日も設定します。", timing: "納品後" },
     ], services: [
-      { name: "Misoca", category: "クラウド請求書", description: "見積書、納品書、請求書の作成・送付と、請求状況の管理をオンラインで行うサービス。", tags: ["請求書", "見積書", "入金管理"], fit: "納品後の請求漏れを防ぎたい", price: "無料プランあり", access: "Web・アプリ", href: "https://www.yayoi-kk.co.jp/seikyusho/", accent: "#38a3d1" },
+      { name: "Misoca", category: "クラウド請求書", description: "見積書、納品書、請求書の作成・送付と、請求状況の管理をオンラインで行うサービス。", tags: ["請求書", "見積書", "入金管理"], fit: "納品後の請求漏れを防ぎたい", watch: "利用条件は公式サイトで確認。広告提携は掲載順位に影響しません。", price: "無料プランあり", access: "Web・アプリ", href: misocaAffiliateUrl, accent: "#38a3d1", affiliate: true, affiliateImpression: misocaAffiliateImpressionUrl },
     ],
   },
   {
@@ -1121,8 +1124,8 @@ export default function Home() {
                   const destinations = destinationsFor(service);
                   return <div className="service-card" key={service.name}>
                   <div className="service-rank">0{index + 1}</div><div className="service-logo" style={{ background: service.accent }}>{service.name.slice(0, 1)}</div>
-                  <div className="service-main"><small>{service.category}</small><h5>{service.name}{service.sponsored && <em className="ad-label">PR</em>}{service.affiliate && <em className="ad-label affiliate">成果報酬</em>}</h5><p>{service.description}</p><div className="service-match"><small>このパターンなら</small><strong>{service.fit}</strong></div><div className="tag-row">{service.tags.map((tag) => <span key={tag}>{tag}</span>)}</div></div>
-                  <div className="service-meta"><dl><dt>選ぶ決め手</dt><dd>{service.why ?? service.tags.join("・")}</dd><dt>注意点</dt><dd>{service.watch ?? "料金・対象地域・利用条件は公式サイトで最新情報を確認"}</dd><dt>料金</dt><dd>{service.price}</dd><dt>始め方</dt><dd>{service.access}</dd></dl><div className="app-links">{destinations.official && <a className="official-link" href={destinations.official} target="_blank" rel={service.sponsored || service.affiliate ? "noreferrer sponsored" : "noreferrer"} onClick={() => trackOutbound(service, "official")}>公式サイト <span>↗</span></a>}{destinations.ios && <a className="store-link" href={destinations.ios} target="_blank" rel={service.sponsored || service.affiliate ? "noreferrer sponsored" : "noreferrer"} onClick={() => trackOutbound(service, "app-store")}>App Store <span>↗</span></a>}{destinations.android && <a className="store-link" href={destinations.android} target="_blank" rel={service.sponsored || service.affiliate ? "noreferrer sponsored" : "noreferrer"} onClick={() => trackOutbound(service, "google-play")}>Google Play <span>↗</span></a>}</div></div>
+                  <div className="service-main"><small>{service.category}</small><h5>{service.name}{service.sponsored && <em className="ad-label">PR</em>}{service.affiliate && <em className="ad-label affiliate">広告</em>}</h5><p>{service.description}</p><div className="service-match"><small>このパターンなら</small><strong>{service.fit}</strong></div><div className="tag-row">{service.tags.map((tag) => <span key={tag}>{tag}</span>)}</div></div>
+                  <div className="service-meta"><dl><dt>選ぶ決め手</dt><dd>{service.why ?? service.tags.join("・")}</dd><dt>注意点</dt><dd>{service.watch ?? "料金・対象地域・利用条件は公式サイトで最新情報を確認"}</dd><dt>料金</dt><dd>{service.price}</dd><dt>始め方</dt><dd>{service.access}</dd></dl><div className="app-links">{destinations.official && <a className="official-link" href={destinations.official} target="_blank" rel={service.sponsored || service.affiliate ? "noreferrer nofollow sponsored" : "noreferrer"} onClick={() => trackOutbound(service, "official")}>公式サイト <span>↗</span></a>}{destinations.ios && <a className="store-link" href={destinations.ios} target="_blank" rel={service.sponsored ? "noreferrer sponsored" : "noreferrer"} onClick={() => trackOutbound(service, "app-store")}>App Store <span>↗</span></a>}{destinations.android && <a className="store-link" href={destinations.android} target="_blank" rel={service.sponsored ? "noreferrer sponsored" : "noreferrer"} onClick={() => trackOutbound(service, "google-play")}>Google Play <span>↗</span></a>}</div>{service.affiliateImpression && <img className="affiliate-impression" width="1" height="1" src={service.affiliateImpression} alt="" aria-hidden="true" />}</div>
                 </div>;
                 })}</div>
                 {disasterKitProblemIds.has(selected.id) && <aside className="contextual-affiliate" aria-label="この困りごとに関連する広告">

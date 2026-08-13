@@ -115,6 +115,10 @@ test("uses verified destinations, broad search fields, and a bottom sponsor slot
   assert.match(page, /rel="noreferrer nofollow sponsored"/);
   assert.match(page, /rpx\.a8\.net\/svt\/ejp/);
   assert.match(page, /affiliate-impression/);
+  assert.match(page, /const misocaAffiliateUrl = "https:\/\/px\.a8\.net\/svt\/ejp\?a8mat=4BA4T7\+BRWNHU\+2ZJ4\+BW8O2/);
+  assert.match(page, /name: "Misoca"[\s\S]*?href: misocaAffiliateUrl[\s\S]*?affiliate: true[\s\S]*?affiliateImpression: misocaAffiliateImpressionUrl/);
+  assert.match(page, /service\.affiliate && <em className="ad-label affiliate">広告<\/em>/);
+  assert.match(page, /広告提携は掲載順位に影響しません/);
   assert.match(page, /className="contextual-affiliate"/);
   assert.match(css, /(?:^|})footer > div \{ display: flex; flex-wrap: wrap;/);
   assert.match(css, /(?:^|})footer > div a \{ padding: 0 14px; border-left:/);
