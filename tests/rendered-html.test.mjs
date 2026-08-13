@@ -176,7 +176,7 @@ test("sitemap includes all problem landing pages", async () => {
 test("server-renders expanded app guide pages", async () => {
   const cases = [
     ["/problems/disaster-alert-apps", /Yahoo!防災速報/],
-    ["/problems/choose-household-budget-app", /Moneytree/],
+    ["/problems/choose-household-budget-app", /毎月のお金を把握したい人の家計簿アプリ比較[\s\S]*マネーフォワード ME[\s\S]*Zaim[\s\S]*Moneytree[\s\S]*OsidOri/],
     ["/problems/set-up-two-factor-authentication", /Google Authenticator/],
     ["/problems/choose-recipe-and-flyer-apps", /DELISH KITCHEN/],
   ];

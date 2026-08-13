@@ -24,6 +24,7 @@ export default async function ProblemDetail({ params }: { params: Promise<{ slug
     "@context": "https://schema.org", "@type": "Article", headline: item.title, description: item.description,
     dateModified: item.reviewedAt, author: { "@type": "Organization", name: "コトナビ編集部" },
     publisher: { "@type": "Organization", name: "コトナビ編集部" }, mainEntityOfPage: `https://kotonaviapp.com/problems/${item.slug}`,
+    about: item.options.map((option) => ({ "@type": "SoftwareApplication", name: option.name, applicationCategory: option.kind, operatingSystem: "iOS, Android" })),
   };
   return <main className="guide-page problem-detail-page">
     <header className="topbar"><a className="brand" href="/"><span className="brand-mark"><i /><i /><i /></span><span>コトナビ</span></a><nav className="topnav"><a href="/problems">困りごと一覧</a><a href="/guides">解決ガイド</a><a href="/info">運営・掲載方針</a></nav></header>
@@ -33,6 +34,7 @@ export default async function ProblemDetail({ params }: { params: Promise<{ slug
         <section><h2>最初に知っておきたいこと</h2><p>{item.intro}</p></section>
         <section className="article-checklist"><h2>確認する順番</h2><ol>{item.steps.map((step) => <li key={step.title}><strong>{step.title}</strong><p>{step.body}</p></li>)}</ol></section>
         <section><h2>使えるスマホアプリ</h2><div className="problem-options">{item.options.map((option) => <article key={option.name}><small>{option.kind}</small><h3>{option.name}</h3><p>{option.body}</p><dl><dt>向いている状況</dt><dd>{option.fit}</dd><dt>注意点</dt><dd>{option.caution}</dd></dl><a href={option.url} target="_blank" rel="noreferrer">公式情報を確認する ↗</a></article>)}</div></section>
+        {item.seoContent?.map((content) => <section key={content.heading}><h2>{content.heading}</h2><p>{content.body}</p></section>)}
         <section className="problem-notes"><h2>利用前の注意</h2><ul>{item.notes.map((note) => <li key={note}>{note}</li>)}</ul></section>
         <aside className="article-cta"><span>コトナビで比較</span><h2>同じ困りごとに使える選択肢を見る</h2><p>対応環境や始め方を確認し、自分の状況に合うものを選んでください。</p><a href={`/?problem=${item.problemId}#guide`}>コトナビの案内を見る →</a></aside>
         {related.length > 0 && <section><h2>関連する困りごと</h2><div className="related-problems">{related.map((entry) => <a data-track="related" key={entry.slug} href={`/problems/${entry.slug}`}><small>{entry.category}</small><strong>{entry.title}</strong><span>→</span></a>)}</div></section>}

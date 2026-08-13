@@ -7,6 +7,7 @@ export type ProblemPage = {
   intro: string;
   steps: { title: string; body: string }[];
   options: { name: string; kind: string; body: string; fit: string; caution: string; url: string }[];
+  seoContent?: { heading: string; body: string }[];
   notes: string[];
   related: string[];
   reviewedAt: string;
@@ -298,12 +299,16 @@ const appExpansionProblemPages: ProblemPage[] = [
   },
   {
     slug: "choose-household-budget-app", problemId: "money-budget", category: "お金・契約",
-    title: "家計簿アプリを目的別に選ぶ方法",
-    description: "自動連携、レシート入力、資産一覧、夫婦共有のどれを重視するか整理して家計簿アプリを選びます。",
-    intro: "最初からすべての口座を登録せず、日常利用する口座やカードから始めると、分類や共有範囲を確認しやすくなります。",
+    title: "毎月のお金を把握したい人の家計簿アプリ比較｜マネーフォワード ME・Zaim・Moneytree・OsidOri",
+    description: "毎月何にお金を使っているか把握したい人向けに、マネーフォワード ME、Zaim、Moneytree、OsidOriの向いている使い方と確認点を整理します。",
+    intro: "毎月のお金を把握するには、最初からすべての口座を登録せず、日常利用する口座やカードから始めると、分類や共有範囲を確認しやすくなります。",
     steps: [{ title: "家計簿の目的を一つ決める", body: "支出削減、資産一覧、夫婦共有などから優先目的を選びます。" }, { title: "入力方法と連携先を確認する", body: "手入力、レシート、自動連携のうち続けられる方法を選びます。" }, { title: "一か月試して見直す", body: "分類の手間と見たい情報が合っているか確認します。" }],
     options: [{ name: "Zaim", kind: "家計簿・予算管理アプリ", body: "レシート読取、手入力、金融連携を使い分けて家計を記録できます。", fit: "入力方法を選びながら予算も管理したい", caution: "読取結果や自動分類を定期的に確認してください。", url: "https://zaim.net/" }, { name: "Moneytree", kind: "資産管理アプリ", body: "銀行、カード、電子マネー、ポイントなどを一か所で確認できます。", fit: "残高と明細をまとめて見たい", caution: "対応金融機関と無料・有料機能を確認してください。", url: "https://getmoneytree.com/jp/app/about" }, { name: "OsidOri", kind: "共有家計簿アプリ", body: "共有家計と個人のお金を分けて管理できます。", fit: "ふたりの支出だけを共有したい", caution: "共有範囲を確認してから口座を連携してください。", url: "https://www.osidori.co/" }],
-    notes: ["金融情報を扱うため、端末の画面ロックと復旧方法を設定します。", "広告提携の有無は掲載順位に影響しません。"], related: ["money-insurance", "daily-subscriptions"], reviewedAt: "2026-08-13",
+    seoContent: [
+      { heading: "毎月のお金を把握するために、最初に見る3つの項目", body: "最初は、口座やカードごとの残高、今月の支出、毎月ほぼ同じ金額が出ていく固定費の3つだけを確認します。分類を細かくしすぎると続きにくいため、食費・日用品・交通・固定費などの大分類から始める方法が向いています。" },
+      { heading: "マネーフォワード ME・Zaim・Moneytree・OsidOriの選び方", body: "複数の銀行・カード・証券をまとめて家計と資産の流れを見たい場合はマネーフォワード ME、レシート入力や予算も使い分けたい場合はZaim、残高や明細を一か所で確認したい場合はMoneytree、夫婦・カップルで共有するお金と個人のお金を分けたい場合はOsidOriが候補です。対応する金融機関や無料・有料の機能は、登録前に公式情報で確認してください。" },
+    ],
+    notes: ["金融情報を扱うため、端末の画面ロックと復旧方法を設定します。", "広告提携の有無は掲載順位に影響しません。"], related: ["money-insurance", "daily-subscriptions"], reviewedAt: "2026-08-14",
   },
   {
     slug: "baby-care-sharing-app", problemId: "parenting-grow", category: "子育て・学び",
