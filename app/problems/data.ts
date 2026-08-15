@@ -325,7 +325,7 @@ const appExpansionProblemPages: ProblemPage[] = [
     description: "重要なアカウントへ認証アプリを設定し、機種変更や端末紛失に備えて復旧方法も保存します。",
     intro: "メールや金融など、他サービスの復旧に使われる重要なアカウントから設定します。バックアップコードは同じ端末だけに保存しません。",
     steps: [{ title: "重要なアカウントを選ぶ", body: "メール、金融、SNSなどから始めます。" }, { title: "認証アプリを登録する", body: "公式設定画面のQRコードまたはキーを使います。" }, { title: "復旧方法を別の場所へ保存する", body: "バックアップコードと機種変更手順を確認します。" }],
-    options: [{ name: "Google Authenticator", kind: "認証コードアプリ", body: "対応サービスの2段階認証コードをスマホで生成できます。", fit: "SMS以外の認証方法を使いたい", caution: "機種変更前に移行方法とバックアップコードを確認してください。", url: "https://support.google.com/accounts/answer/1066447?co=GENIE.Platform%3DAndroid&hl=ja-JP" }],
+    options: [{ name: "Google Authenticator", kind: "認証コードアプリ", body: "対応サービスの2段階認証コードをスマホで生成できます。", fit: "SMS以外の認証方法を使いたい", caution: "機種変更前に移行方法とバックアップコードを確認してください。", url: "https://safety.google/safety/authentication/" }],
     notes: ["QRコードや設定キーを第三者へ見せないでください。", "不正ログインが疑われる場合は先にパスワードを変更します。"], related: ["digital-scam", "digital-phone"], reviewedAt: "2026-08-13",
   },
   {

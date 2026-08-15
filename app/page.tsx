@@ -771,7 +771,7 @@ const problems: Problem[] = [
       { id: "digital-review", title: "ログイン履歴と不要な連携を確認する", note: "見覚えのない端末を解除します。", timing: "毎月" },
     ], services: [
       { name: "IPA 情報セキュリティ10大脅威", category: "情報処理推進機構", description: "最新の被害事例と、パスワード管理・認証強化など個人が取るべき基本対策を確認。", tags: ["乗っ取り対策", "パスワード", "公的情報"], fit: "何から安全対策を始めるか知りたい", price: "無料", access: "Webで確認", href: "https://www.ipa.go.jp/security/10threats/index.html", accent: "#345993" },
-      { name: "Google Authenticator", category: "認証コード", description: "対応サービスの2段階認証コードをスマホで生成。", tags: ["2段階認証", "認証コード", "オフライン"], fit: "SMS以外の認証方法を設定したい", watch: "機種変更前に移行・同期方法とバックアップコードを確認", price: "無料", access: "アプリで利用", href: "https://support.google.com/accounts/answer/1066447?co=GENIE.Platform%3DAndroid&hl=ja-JP", accent: "#4285f4" },
+      { name: "Google Authenticator", category: "認証コード", description: "対応サービスの2段階認証コードをスマホで生成。", tags: ["2段階認証", "認証コード", "オフライン"], fit: "SMS以外の認証方法を設定したい", watch: "機種変更前に移行・同期方法とバックアップコードを確認", price: "無料", access: "アプリで利用", href: "https://safety.google/safety/authentication/", accent: "#4285f4" },
     ],
   },
   {
