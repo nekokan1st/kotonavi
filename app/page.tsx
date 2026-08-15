@@ -1109,7 +1109,7 @@ export default function Home() {
     <main>
       <header className="topbar">
         <a className="brand" href="#top" aria-label="コトナビ ホーム"><span className="brand-mark"><i /><i /><i /></span><span>コトナビ</span></a>
-        <nav className="topnav" aria-label="メインナビゲーション"><a href="#guide">困りごとから探す</a><a href="#categories">テーマ一覧</a><a href="/info">運営・掲載方針</a></nav>
+        <nav className="topnav" aria-label="メインナビゲーション"><a href="#guide">困りごとから探す</a><a href="/problems">困りごと一覧</a><a href="#categories">テーマ一覧</a><a href="/info">運営・掲載方針</a></nav><a className="problem-index-shortcut" href="/problems">困りごと一覧 <span aria-hidden="true">→</span></a>
       </header>
 
       <section className="hero" id="top">

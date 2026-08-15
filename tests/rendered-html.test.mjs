@@ -36,6 +36,7 @@ test("server-renders the Kotonavi home page", async () => {
   assert.doesNotMatch(html, /<h1>困りごとから、<br\s*\/>/);
   assert.match(html, /困りごとに合うスマホアプリ/);
   assert.match(html, /スマホアプリに限定/);
+  assert.match(html, /href="\/problems"[^>]*>困りごと一覧/);
   assert.doesNotMatch(html, /RAKURA|全国版救急受診ガイド Q助/);
   assert.match(html, /favicon-48\.png/);
   assert.match(html, /apple-touch-icon\.png/);
