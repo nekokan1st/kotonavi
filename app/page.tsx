@@ -1182,12 +1182,8 @@ export default function Home() {
                 <div className="task-list">{selected.tasks.map((task, index) => <div className="task" key={task.id}>
                   <span className="check">{index + 1}</span><span><strong>{task.title}</strong><small>{task.note}</small></span><em>{task.timing}</em>
                 </div>)}</div>
-              </article>
-            </div>
 
-          </div>
-        </div>
-        <section className="app-showcase" aria-label={`${selected.title}に使えるスマホアプリ`}><div className="solutions-heading"><div><span className="overline">NEXT APPS</span><h4>この困りごとに使えるスマホアプリ</h4></div><span>{selected.services.length}件を掲載</span></div>
+                <section className="app-showcase" aria-label={`${selected.title}に使えるスマホアプリ`}><div className="solutions-heading"><div><span className="overline">NEXT APPS</span><h4>この困りごとに使えるスマホアプリ</h4></div><span>{selected.services.length}件を掲載</span></div>
                 <div className="service-list">{selected.services.map((service, index) => {
                   const destinations = destinationsFor(service);
                   return <div className="service-card" key={service.name}>
@@ -1203,7 +1199,12 @@ export default function Home() {
                   <img className="affiliate-impression" width="1" height="1" src="https://www15.a8.net/0.gif?a8mat=4BA39A+BFEJSI+2HOM+BW8O1" alt="" aria-hidden="true" />
                 </aside>}
                 <div className="verified-note"><span>✓</span> 掲載内容は公式サイト・公式ストアをもとに編集しています <b>最終確認 2026.08.12</b></div>
-        </section>
+                </section>
+              </article>
+            </div>
+
+          </div>
+        </div>
       </section>
 
       <section className="game-lab" aria-labelledby="game-lab-title">
