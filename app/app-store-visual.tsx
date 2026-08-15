@@ -23,6 +23,8 @@ export function AppStoreVisual({ name, accent = "#1878c9", variant = "card" }: {
     return () => controller.abort();
   }, [appId]);
 
-  if (!visual) return <div className={`service-logo ${variant === "selected" ? "selected-app-logo" : ""}`} style={{ background: accent }} aria-label={`${name}のアプリアイコン`}>{name.slice(0, 1)}</div>;
-  return <figure className={`service-visual ${variant === "selected" ? "selected-app-visual" : ""}`}><img className="service-visual-screen" src={visual.screenshot} alt={`${name}の公式ストア画面イメージ`} /><img className="service-visual-icon" src={visual.icon} alt="" /><figcaption>公式ストアの画面イメージ</figcaption></figure>;
+  const iconModifier = variant === "selected" ? " selected-app-icon" : "";
+  const previewModifier = variant === "selected" ? " selected-app-visual" : "";
+  if (!visual) return <><div className={`store-app-icon${iconModifier}`} style={{ background: accent }} aria-label={`${name}のアプリアイコン`}>{name.slice(0, 1)}</div><div className={`service-visual visual-unavailable${previewModifier}`} aria-label={`${name}の公式ストア画面イメージは準備中`}><span>ストア画像<br />準備中</span></div></>;
+  return <><img className={`store-app-icon${iconModifier}`} src={visual.icon} alt={`${name}のアプリアイコン`} /><figure className={`service-visual${previewModifier}`}><img className="service-visual-screen" src={visual.screenshot} alt={`${name}の公式ストア画面イメージ`} /><figcaption>公式ストアの画面イメージ</figcaption></figure></>;
 }
