@@ -1011,16 +1011,26 @@ export const problemDetailSlugs: Record<string, string> = {
   "parenting-grow": "baby-care-sharing-app", "food-recipe": "choose-recipe-and-flyer-apps",
 };
 
+type GamePick = { id: string; name: string; label: string; description: string; fit: string; caution: string; official: string; ios: string; android: string; accent: string };
+const gamePicks: GamePick[] = [
+  { id: "solo", name: "どうぶつの森 ポケットキャンプ コンプリート", label: "ひとりで、ゆっくり続けたい", description: "キャンプ場づくりやどうぶつとの交流を、自分のペースで楽しむ買い切りアプリ。", fit: "対戦や毎日の課金を気にせず、ひとりで少しずつ遊びたい", caution: "有料アプリです。端末要件と保存データの扱いを公式情報で確認してください。", official: "https://ac-pocketcamp.com/ja-JP", ios: "https://apps.apple.com/jp/app/id6547834967", android: "https://play.google.com/store/apps/details?id=com.nintendo.zasa", accent: "#55a778" },
+  { id: "together", name: "Sky 星を紡ぐ子どもたち", label: "誰かと、ゆるく協力したい", description: "空の王国を旅しながら、ほかのプレイヤーと協力して進むソーシャルアドベンチャー。", fit: "勝敗より、景色や協力プレイを楽しみたい", caution: "オンライン要素とアプリ内課金があります。年齢区分・通信量もストアで確認してください。", official: "https://www.thatskygame.com/ja", ios: "https://apps.apple.com/jp/app/id1462117269", android: "https://play.google.com/store/apps/details?id=com.tgc.sky.android", accent: "#6d8ee8" },
+  { id: "walk", name: "Pokémon GO", label: "散歩のきっかけがほしい", description: "現実の場所を歩きながらポケモンを見つけ、集めて遊ぶ位置情報ゲーム。", fit: "外出や散歩に小さな目的をつくりたい", caution: "歩きスマホはせず、周囲の安全と位置情報・通信量を確認して利用してください。", official: "https://www.pokemongo.jp/download/", ios: "https://apps.apple.com/jp/app/pok%C3%A9mon-go/id1094591345", android: "https://play.google.com/store/apps/details?id=com.nianticlabs.pokemongo", accent: "#e95b55" },
+  { id: "group", name: "Among Us", label: "友だちと短時間で盛り上がりたい", description: "4〜15人で役割を推理しながら遊ぶ、オンラインまたはローカルWi-Fi対応のゲーム。", fit: "通話や集まりで、会話しながら遊べるゲームを探している", caution: "オンラインで知らない人と遊ぶ場合があります。年齢区分、広告・課金をストアで確認してください。", official: "https://www.innersloth.com/games/among-us/", ios: "https://apps.apple.com/jp/app/among-us/id1351168404", android: "https://play.google.com/store/apps/details?id=com.innersloth.spacemafia", accent: "#54438d" },
+];
+
 export default function Home() {
   const firstAppProblem = appProblems[0];
   const [themeId, setThemeId] = useState<ThemeId>(firstAppProblem.theme);
   const [phaseId, setPhaseId] = useState(firstAppProblem.phase);
   const [selectedId, setSelectedId] = useState(firstAppProblem.id);
+  const [gamePickId, setGamePickId] = useState(gamePicks[0].id);
   const [query, setQuery] = useState("");
   const searchInputRef = useRef<HTMLInputElement>(null);
 
   const theme = themes.find((item) => item.id === themeId) ?? themes[0];
   const selected = appProblems.find((problem) => problem.id === selectedId) ?? firstAppProblem;
+  const selectedGamePick = gamePicks.find((game) => game.id === gamePickId) ?? gamePicks[0];
   const activePhases = theme.phases.filter((item) => appProblems.some((problem) => problem.theme === themeId && problem.phase === item.id));
   const currentPhase = theme.phases.find((phase) => phase.id === phaseId);
   const visibleProblems = useMemo(
@@ -1190,6 +1200,12 @@ export default function Home() {
             </div>
           </div>
         </div>
+      </section>
+
+      <section className="game-lab" aria-labelledby="game-lab-title">
+        <div className="game-lab-heading"><div><span>PLAY LAB · 試験運用</span><h2 id="game-lab-title">ゲームアプリを、条件から選ぶ。</h2></div><p>生活アプリとは別の特集です。遊び方・課金・通信などを確認して、自分に合う一本を探せます。</p></div>
+        <div className="game-pick-tabs" role="tablist" aria-label="ゲームを選ぶ条件">{gamePicks.map((game) => <button className={gamePickId === game.id ? "active" : ""} key={game.id} type="button" role="tab" aria-selected={gamePickId === game.id} onClick={() => setGamePickId(game.id)}>{game.label}</button>)}</div>
+        <article className="game-pick-card"><div className="game-pick-icon" style={{ background: selectedGamePick.accent }}>{selectedGamePick.name.slice(0, 1)}</div><div className="game-pick-main"><span>この条件なら</span><h3>{selectedGamePick.name}</h3><p>{selectedGamePick.description}</p><strong>{selectedGamePick.fit}</strong><small>注意：{selectedGamePick.caution}</small></div><div className="game-pick-links"><a href={selectedGamePick.official} target="_blank" rel="noreferrer">公式サイト <span>↗</span></a><a href={selectedGamePick.ios} target="_blank" rel="noreferrer">App Store <span>↗</span></a><a href={selectedGamePick.android} target="_blank" rel="noreferrer">Google Play <span>↗</span></a></div></article>
       </section>
 
       <section className="principles" id="about"><span className="overline">OUR PRINCIPLES</span><h2>迷わず選べるための、3つの約束。</h2><div className="principle-grid">
