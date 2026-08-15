@@ -46,7 +46,7 @@ export const directStoreLinks: Record<string, AppDestinations> = {
   "ジョルダン乗換案内": { ios: "https://apps.apple.com/jp/app/id299490481", android: "https://play.google.com/store/apps/details?id=jp.co.jorudan.nrkj" },
   "乗換NAVITIME": { ios: "https://apps.apple.com/jp/app/id528532387" },
   "クックパッド": { ios: "https://apps.apple.com/jp/app/id340368403", android: "https://play.google.com/store/apps/details?id=com.cookpad.android.activities" },
-  "DELISH KITCHEN": { android: "https://play.google.com/store/apps/details?id=tv.every.delishkitchen" },
+  "DELISH KITCHEN": { ios: "https://apps.apple.com/jp/app/id1177907423", android: "https://play.google.com/store/apps/details?id=tv.every.delishkitchen" },
   "Shufoo!": { ios: "https://apps.apple.com/jp/app/id373909230", android: "https://play.google.com/store/apps/details?id=com.toppan.shufoo.android" },
   "さんあ〜る": { ios: "https://apps.apple.com/jp/app/id977071564", android: "https://play.google.com/store/apps/details?id=jp.co.delight_system.threeR.android" },
   "EPARKお薬手帳": { ios: "https://apps.apple.com/jp/app/id952969231", android: "https://play.google.com/store/apps/details?id=jp.epark.medicinenote" },
