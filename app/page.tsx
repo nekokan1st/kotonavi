@@ -19,6 +19,7 @@ type Service = {
   affiliate?: boolean;
   affiliateImpression?: string;
 };
+type StoreVisual = { icon: string; screenshot: string };
 
 const mobileAppNames = new Set([
   "Peatix", "Google フォト", "入退去メモ", "UCHITAS", "Cabinote",
@@ -91,6 +92,28 @@ const destinationsFor = (service: Service): AppDestinations => {
   const stores = directStoreLinks[service.name] ?? {};
   return { official: isStoreUrl(service.href) ? undefined : service.href, ...stores };
 };
+
+function AppStoreVisual({ service }: { service: Service }) {
+  const iosUrl = directStoreLinks[service.name]?.ios;
+  const appId = iosUrl?.match(/\/id(\d+)/)?.[1];
+  const [visual, setVisual] = useState<StoreVisual | null>(null);
+
+  useEffect(() => {
+    if (!appId) return;
+    const controller = new AbortController();
+    fetch(`https://itunes.apple.com/lookup?id=${appId}&country=jp`, { signal: controller.signal })
+      .then((response) => response.ok ? response.json() : null)
+      .then((data) => {
+        const app = data?.results?.[0];
+        if (app?.artworkUrl512 && app?.screenshotUrls?.[0]) setVisual({ icon: app.artworkUrl512, screenshot: app.screenshotUrls[0] });
+      })
+      .catch(() => undefined);
+    return () => controller.abort();
+  }, [appId]);
+
+  if (!visual) return <div className="service-logo" style={{ background: service.accent }} aria-label={`${service.name}のアプリアイコン`}>{service.name.slice(0, 1)}</div>;
+  return <figure className="service-visual"><img className="service-visual-screen" src={visual.screenshot} alt={`${service.name}の公式ストア画面イメージ`} /><img className="service-visual-icon" src={visual.icon} alt="" /><figcaption>公式ストアの画面イメージ</figcaption></figure>;
+}
 
 const disasterKitAffiliateUrl = "https://rpx.a8.net/svt/ejp?a8mat=4BA39A+BFEJSI+2HOM+BW8O1&rakuten=y&a8ejpredirect=http%3A%2F%2Fhb.afl.rakuten.co.jp%2Fhgc%2F0ea62065.34400275.0ea62066.204f04c0%2Fa26081143426_4BA39A_BFEJSI_2HOM_BW8O1%3Fpc%3Dhttps%253A%252F%252Fitem.rakuten.co.jp%252Firisplaza-r%252F288353%252F%26m%3Dhttps%253A%252F%252Fitem.rakuten.co.jp%252Firisplaza-r%252F288353%252F";
 const misocaAffiliateUrl = "https://px.a8.net/svt/ejp?a8mat=4BA4T7+BRWNHU+2ZJ4+BW8O2&a8ejpredirect=https%3A%2F%2Fwww.misoca.jp%2F";
@@ -1184,7 +1207,7 @@ export default function Home() {
                 <div className="service-list">{selected.services.map((service, index) => {
                   const destinations = destinationsFor(service);
                   return <div className="service-card" key={service.name}>
-                  <div className="service-rank">0{index + 1}</div><div className="service-logo" style={{ background: service.accent }}>{service.name.slice(0, 1)}</div>
+                  <div className="service-rank">0{index + 1}</div><AppStoreVisual service={service} />
                   <div className="service-main"><small>{service.category}</small><h5>{service.name}{service.sponsored && <em className="ad-label">PR</em>}{service.affiliate && <em className="ad-label affiliate">広告</em>}</h5><p>{service.description}</p><div className="service-match"><small>このパターンなら</small><strong>{service.fit}</strong></div><div className="tag-row">{service.tags.map((tag) => <span key={tag}>{tag}</span>)}</div></div>
                   <div className="service-meta"><dl><dt>選ぶ決め手</dt><dd>{service.why ?? service.tags.join("・")}</dd><dt>注意点</dt><dd>{service.watch ?? "料金・対象地域・利用条件は公式サイトで最新情報を確認"}</dd><dt>料金</dt><dd>{service.price}</dd><dt>始め方</dt><dd>{service.access}</dd></dl><div className="app-links">{destinations.official && <a className="official-link" href={destinations.official} target="_blank" rel={service.sponsored || service.affiliate ? "noreferrer nofollow sponsored" : "noreferrer"} onClick={() => trackOutbound(service, "official")}>公式サイト <span>↗</span></a>}{destinations.ios && <a className="store-link" href={destinations.ios} target="_blank" rel={service.sponsored ? "noreferrer sponsored" : "noreferrer"} onClick={() => trackOutbound(service, "app-store")}>App Store <span>↗</span></a>}{destinations.android && <a className="store-link" href={destinations.android} target="_blank" rel={service.sponsored ? "noreferrer sponsored" : "noreferrer"} onClick={() => trackOutbound(service, "google-play")}>Google Play <span>↗</span></a>}</div>{service.affiliateImpression && <img className="affiliate-impression" width="1" height="1" src={service.affiliateImpression} alt="" aria-hidden="true" />}</div>
                 </div>;
