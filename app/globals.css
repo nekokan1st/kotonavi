@@ -68,6 +68,7 @@
 
 /* App recommendations use the same wide stage as the game feature, independent of the navigator column. */
 .app-showcase { width: min(1120px, calc(100% + 264px)); margin: 44px 0 0 -264px; padding: 30px; border: 1px solid #cfdae4; border-radius: 16px; background: #fff; box-sizing: border-box; }.app-showcase .solutions-heading { margin: 0 0 19px; }.app-showcase .service-card { border-color: #d7e1e9; }.app-showcase .verified-note { margin-bottom: 0; }
+.explorer { overflow: visible; position: relative; z-index: 1; }
 @media (max-width: 1040px) { .app-showcase { width: calc(100% + 224px); margin-left: -224px; } }
 @media (max-width: 780px) { .app-showcase { width: auto; margin: 30px 0 0; padding: 22px 19px; border-radius: 12px; } }
 
