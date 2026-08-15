@@ -35,7 +35,7 @@ const mobileAppNames = new Set([
 
 export type AppDestinations = { official?: string; ios?: string; android?: string };
 export const directStoreLinks: Record<string, AppDestinations> = {
-  "詐欺バスターLITE": { ios: "https://apps.apple.com/jp/app/id6743839168" },
+  "詐欺バスターLITE": { ios: "https://apps.apple.com/jp/app/id6756911225" },
   "Apple『探す』": { ios: "https://apps.apple.com/jp/app/%E6%8E%A2%E3%81%99/id1514844621?platform=ipad" },
   "Google デバイスを探す": { android: "https://play.google.com/store/apps/details?id=com.google.android.apps.adm" },
   "Peatix": { ios: "https://apps.apple.com/jp/app/id561632513", android: "https://play.google.com/store/apps/details?id=com.peatix.android.Azuki" },
@@ -68,7 +68,7 @@ export const directStoreLinks: Record<string, AppDestinations> = {
   "tenki.jp": { ios: "https://apps.apple.com/jp/app/id433865746", android: "https://play.google.com/store/apps/details?id=jwa.or.jp.tenkijp3" },
   "トリセツ": { ios: "https://apps.apple.com/jp/app/id1085923883", android: "https://play.google.com/store/apps/details?id=com.trygle.instructionmanualapp" },
   "お薬手帳プラス": { ios: "https://apps.apple.com/jp/app/id947740067", android: "https://play.google.com/store/apps/details?id=jp.co.nicho.jpokusuri" },
-  "頭痛ーる": { ios: "https://apps.apple.com/jp/app/id913664940", android: "https://play.google.com/store/apps/details?id=jp.co.pocke.android.zutsu" },
+  "頭痛ーる": { ios: "https://apps.apple.com/jp/app/id602991338", android: "https://play.google.com/store/apps/details?id=jp.co.pocke.android.zutsu" },
   "CLINICS": { ios: "https://apps.apple.com/jp/app/id1106261604", android: "https://play.google.com/store/apps/details?id=life.medley.clinics" },
   "Zaim": { ios: "https://apps.apple.com/jp/app/id445850671", android: "https://play.google.com/store/apps/details?id=net.zaim.android" },
   "Moneytree": { ios: "https://apps.apple.com/jp/app/id586847189", android: "https://play.google.com/store/apps/details?id=jp.moneytree.moneytree" },
@@ -345,7 +345,7 @@ const problems: Problem[] = [
       { name: "Yahoo!防災速報", category: "防災情報通知", description: "現在地と登録地点の地震、豪雨、避難情報、Jアラートなどを通知。", tags: ["災害通知", "登録地点", "防災手帳"], fit: "自宅や家族の地域の災害情報を受け取りたい", watch: "通知には位置情報・通知設定が必要。避難判断は自治体の最新情報を優先", price: "無料", access: "アプリで利用", href: "https://emg.yahoo.co.jp/", accent: "#e15b4b" },
       { name: "特務機関NERV防災", category: "防災気象情報", description: "地震・津波・噴火・大雨などを、現在地や登録地点に合わせて配信。", tags: ["地震速報", "雨雲", "音声読み上げ"], fit: "災害情報を地図と通知で詳しく確認したい", watch: "重大な通知には位置情報など端末側の設定が必要", price: "無料・任意の有料支援あり", access: "アプリで利用", href: "https://nerv.app/", accent: "#222b34" },
       { name: "Yahoo!天気", category: "天気・防災", description: "雨雲レーダー、警報、台風、地域ごとの天気を確認。", tags: ["雨雲レーダー", "警報", "台風"], fit: "日常の天気と急な雨を同じアプリで確認したい", watch: "避難情報は自治体・気象庁の最新発表も確認", price: "無料", access: "アプリで利用", href: "https://weather.yahoo.co.jp/weather/promo/app/", accent: "#4c8bd9" },
-      { name: "tenki.jp", category: "日本気象協会公式", description: "天気、雨雲、台風、地震、防災情報を地域ごとに確認。", tags: ["天気予報", "防災情報", "日本気象協会"], fit: "気象情報と防災情報をまとめて見たい", watch: "警報時は自治体の避難情報も確認", price: "無料版あり", access: "アプリで利用", href: "https://tenki.jp/pr/app/", accent: "#287cb9" },
+      { name: "tenki.jp", category: "日本気象協会公式", description: "天気、雨雲、台風、地震、防災情報を地域ごとに確認。", tags: ["天気予報", "防災情報", "日本気象協会"], fit: "気象情報と防災情報をまとめて見たい", watch: "警報時は自治体の避難情報も確認", price: "無料版あり", access: "アプリで利用", href: "https://tenki.jp/pr/app-lp.html", accent: "#287cb9" },
     ],
   },
   {
@@ -771,7 +771,7 @@ const problems: Problem[] = [
       { id: "digital-review", title: "ログイン履歴と不要な連携を確認する", note: "見覚えのない端末を解除します。", timing: "毎月" },
     ], services: [
       { name: "IPA 情報セキュリティ10大脅威", category: "情報処理推進機構", description: "最新の被害事例と、パスワード管理・認証強化など個人が取るべき基本対策を確認。", tags: ["乗っ取り対策", "パスワード", "公的情報"], fit: "何から安全対策を始めるか知りたい", price: "無料", access: "Webで確認", href: "https://www.ipa.go.jp/security/10threats/index.html", accent: "#345993" },
-      { name: "Google Authenticator", category: "認証コード", description: "対応サービスの2段階認証コードをスマホで生成。", tags: ["2段階認証", "認証コード", "オフライン"], fit: "SMS以外の認証方法を設定したい", watch: "機種変更前に移行・同期方法とバックアップコードを確認", price: "無料", access: "アプリで利用", href: "https://support.google.com/accounts/answer/1066447?hl=ja", accent: "#4285f4" },
+      { name: "Google Authenticator", category: "認証コード", description: "対応サービスの2段階認証コードをスマホで生成。", tags: ["2段階認証", "認証コード", "オフライン"], fit: "SMS以外の認証方法を設定したい", watch: "機種変更前に移行・同期方法とバックアップコードを確認", price: "無料", access: "アプリで利用", href: "https://support.google.com/accounts/answer/1066447?co=GENIE.Platform%3DAndroid&hl=ja-JP", accent: "#4285f4" },
     ],
   },
   {
@@ -877,7 +877,7 @@ const problems: Problem[] = [
       { id: "shop-route", title: "一店舗か二店舗に決める", note: "価格差より総所要時間も考えます。", timing: "出発前" },
     ], services: [
       { name: "くふう トクバイ", category: "チラシ・買い物情報", description: "近くのスーパーやドラッグストアの商品・チラシを店舗横断で確認できる。", tags: ["近隣店舗", "デジタルチラシ", "商品比較"], fit: "紙のチラシを取っておらず、近所の特売を横断したい", why: "位置情報を基準に複数店舗の商品情報を見比べやすい", watch: "在庫や店頭価格は変わるため、確実性が必要なら店舗へ確認", price: "無料", access: "Web・アプリ", href: "https://tokubai.co.jp/app", accent: "#f06b35" },
-      { name: "Shufoo!", category: "デジタルチラシ", description: "近隣店舗のチラシを位置や店舗から探して比較できるアプリ。", tags: ["チラシ", "近隣店舗", "買い物"], fit: "複数店の紙チラシをスマホでまとめて見たい", watch: "掲載期間、在庫、店頭価格は店舗の最新情報を確認", price: "無料", access: "アプリで利用", href: "https://www.shufoo.net/contents/app/", accent: "#f05c4f" },
+      { name: "Shufoo!", category: "デジタルチラシ", description: "近隣店舗のチラシを位置や店舗から探して比較できるアプリ。", tags: ["チラシ", "近隣店舗", "買い物"], fit: "複数店の紙チラシをスマホでまとめて見たい", watch: "掲載期間、在庫、店頭価格は店舗の最新情報を確認", price: "無料", access: "アプリで利用", href: "https://www.shufoo.net/", accent: "#f05c4f" },
     ],
   },
   {

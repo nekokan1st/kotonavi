@@ -25,7 +25,7 @@ export const problemPages: ProblemPage[] = [
       { title: "相談・報告して着信対策をする", body: "不安があれば警察相談専用電話 #9110 や消費者ホットライン188へ。端末や通信会社の迷惑電話対策も有効にします。" },
     ],
     options: [
-      { name: "詐欺バスターLITE", kind: "詐欺電話対策アプリ", body: "通話内容をもとに詐欺の可能性を確認するための選択肢です。", fit: "電話中や通話後に、怪しい内容か判断する材料がほしい", caution: "判定だけを過信せず、金銭や個人情報を求められた場合は公式窓口へ確認してください。", url: "https://apps.apple.com/jp/app/id6743839168" },
+      { name: "詐欺バスターLITE", kind: "詐欺電話対策アプリ", body: "通話内容をもとに詐欺の可能性を確認するための選択肢です。", fit: "電話中や通話後に、怪しい内容か判断する材料がほしい", caution: "判定だけを過信せず、金銭や個人情報を求められた場合は公式窓口へ確認してください。", url: "https://apps.apple.com/jp/app/id6756911225" },
       { name: "警察相談専用電話 #9110", kind: "警察庁・相談窓口", body: "緊急ではない生活上の安全や犯罪被害の不安について、地域の警察相談窓口につながります。", fit: "詐欺の可能性や今後の対応を警察へ相談したい", caution: "事件・事故が発生中など緊急の場合は110を利用します。", url: "https://www.gov-online.go.jp/useful/article/201309/3.html" },
     ],
     notes: ["警察や金融機関が電話で暗証番号を尋ねることはありません。", "画面共有アプリの導入やATM操作を求められたら中断してください。"],
@@ -59,7 +59,7 @@ export const problemPages: ProblemPage[] = [
     ],
     options: [
       { name: "Apple『探す』", kind: "iPhone・iPad", body: "Apple製デバイスの位置確認、紛失としてマーク、遠隔消去などを行えます。", fit: "Apple Accountに紐づく端末を探したい", caution: "事前設定や端末の状態によって利用できる機能が異なります。", url: "https://support.apple.com/ja-jp/101593" },
-      { name: "Google デバイスを探す", kind: "Android", body: "Android端末の位置確認、音を鳴らす、ロック、初期化などを行えます。", fit: "Googleアカウントに紐づくAndroid端末を探したい", caution: "端末の電源・通信・事前設定により位置が表示されない場合があります。", url: "https://support.google.com/android/answer/6160491?hl=ja" },
+      { name: "Google デバイスを探す", kind: "Android", body: "Android端末の位置確認、音を鳴らす、ロック、初期化などを行えます。", fit: "Googleアカウントに紐づくAndroid端末を探したい", caution: "端末の電源・通信・事前設定により位置が表示されない場合があります。", url: "https://www.google.com/android/find/about?hl=ja&u=0" },
     ],
     notes: ["パスワード変更前に、位置確認や紛失モードの利用条件を確認します。", "拾得者と直接会う場合も、安全を優先してください。"],
     related: ["digital-account", "digital-backup"], reviewedAt: "2026-08-12",
@@ -266,7 +266,7 @@ const appExpansionProblemPages: ProblemPage[] = [
     options: [
       { name: "Yahoo!防災速報", kind: "防災情報通知アプリ", body: "現在地と登録地点の地震、豪雨、避難情報などを通知します。", fit: "複数地点の防災情報をまとめて受け取りたい", caution: "避難判断は自治体・気象機関の最新発表を優先してください。", url: "https://emg.yahoo.co.jp/" },
       { name: "特務機関NERV防災", kind: "防災気象情報アプリ", body: "地震、津波、大雨などを地図・通知・音声で確認できます。", fit: "災害情報を地図で詳しく確認したい", caution: "位置情報や重大な通知の端末設定を確認してください。", url: "https://nerv.app/" },
-      { name: "tenki.jp", kind: "日本気象協会公式アプリ", body: "天気、雨雲、台風、地震、防災情報を地域ごとに確認できます。", fit: "日常の天気と防災情報を一緒に見たい", caution: "警報時は自治体の避難情報も確認してください。", url: "https://tenki.jp/pr/app/" },
+      { name: "tenki.jp", kind: "日本気象協会公式アプリ", body: "天気、雨雲、台風、地震、防災情報を地域ごとに確認できます。", fit: "日常の天気と防災情報を一緒に見たい", caution: "警報時は自治体の避難情報も確認してください。", url: "https://tenki.jp/pr/app-lp.html" },
     ],
     notes: ["通知が届くか、平常時に設定を見直してください。", "通信障害に備えて避難先や連絡先はオフラインでも確認できるようにします。"], related: ["family-basics", "family-absence"], reviewedAt: "2026-08-13",
   },
@@ -325,7 +325,7 @@ const appExpansionProblemPages: ProblemPage[] = [
     description: "重要なアカウントへ認証アプリを設定し、機種変更や端末紛失に備えて復旧方法も保存します。",
     intro: "メールや金融など、他サービスの復旧に使われる重要なアカウントから設定します。バックアップコードは同じ端末だけに保存しません。",
     steps: [{ title: "重要なアカウントを選ぶ", body: "メール、金融、SNSなどから始めます。" }, { title: "認証アプリを登録する", body: "公式設定画面のQRコードまたはキーを使います。" }, { title: "復旧方法を別の場所へ保存する", body: "バックアップコードと機種変更手順を確認します。" }],
-    options: [{ name: "Google Authenticator", kind: "認証コードアプリ", body: "対応サービスの2段階認証コードをスマホで生成できます。", fit: "SMS以外の認証方法を使いたい", caution: "機種変更前に移行方法とバックアップコードを確認してください。", url: "https://support.google.com/accounts/answer/1066447?hl=ja" }],
+    options: [{ name: "Google Authenticator", kind: "認証コードアプリ", body: "対応サービスの2段階認証コードをスマホで生成できます。", fit: "SMS以外の認証方法を使いたい", caution: "機種変更前に移行方法とバックアップコードを確認してください。", url: "https://support.google.com/accounts/answer/1066447?co=GENIE.Platform%3DAndroid&hl=ja-JP" }],
     notes: ["QRコードや設定キーを第三者へ見せないでください。", "不正ログインが疑われる場合は先にパスワードを変更します。"], related: ["digital-scam", "digital-phone"], reviewedAt: "2026-08-13",
   },
   {
@@ -334,7 +334,7 @@ const appExpansionProblemPages: ProblemPage[] = [
     description: "知らない番号へ折り返す前に、発信者識別アプリと公式窓口を使って安全に確認します。",
     intro: "警察、役所、金融機関を名乗られても、電話口で暗証番号や認証コードを伝えず、一度切って公式番号へ確認します。",
     steps: [{ title: "すぐに折り返さない", body: "留守番電話やSMSの要求内容を確認します。" }, { title: "番号識別を判断材料にする", body: "表示名や迷惑電話報告を確認します。" }, { title: "組織の公式番号へ確認する", body: "着信画面に表示された番号ではなく公式サイトから連絡します。" }],
-    options: [{ name: "Whoscall", kind: "迷惑電話・SMS対策アプリ", body: "着信番号の識別や迷惑電話・SMS対策を支援します。", fit: "知らない番号へ出る前の判断材料がほしい", caution: "判定だけを過信せず、金銭や個人情報を求められたら公式窓口へ確認してください。", url: "https://whoscall.com/ja" }, { name: "詐欺バスターLITE", kind: "詐欺電話対策アプリ", body: "通話内容をもとに詐欺の可能性を確認する材料を提供します。", fit: "電話内容が怪しいか判断する材料がほしい", caution: "緊急性をあおられてもその場で送金や情報提供をしないでください。", url: "https://apps.apple.com/jp/app/id6743839168" }],
+    options: [{ name: "Whoscall", kind: "迷惑電話・SMS対策アプリ", body: "着信番号の識別や迷惑電話・SMS対策を支援します。", fit: "知らない番号へ出る前の判断材料がほしい", caution: "判定だけを過信せず、金銭や個人情報を求められたら公式窓口へ確認してください。", url: "https://whoscall.com/ja" }, { name: "詐欺バスターLITE", kind: "詐欺電話対策アプリ", body: "通話内容をもとに詐欺の可能性を確認する材料を提供します。", fit: "電話内容が怪しいか判断する材料がほしい", caution: "緊急性をあおられてもその場で送金や情報提供をしないでください。", url: "https://apps.apple.com/jp/app/id6756911225" }],
     notes: ["認証コードや暗証番号を電話相手へ伝えないでください。", "被害が疑われる場合は警察や金融機関へ相談します。"], related: ["digital-account", "money-trouble"], reviewedAt: "2026-08-13",
   },
   {
@@ -352,7 +352,7 @@ const appExpansionProblemPages: ProblemPage[] = [
     description: "冷蔵庫の食材、調理時間、近所のチラシから、作る料理と追加購入を最小限にします。",
     intro: "先に使い切りたい食材を三つまで選ぶと、レシピ候補や特売情報に振り回されにくくなります。",
     steps: [{ title: "使い切る食材と時間を決める", body: "人数、調理時間、追加購入の上限を決めます。" }, { title: "レシピを二つまで比較する", body: "工程、調味料、加熱時間を確認します。" }, { title: "必要な物だけチラシで確認する", body: "移動時間と買いすぎも含めて店舗を選びます。" }],
-    options: [{ name: "クックパッド", kind: "レシピ検索アプリ", body: "食材名から多数の投稿レシピを検索できます。", fit: "同じ食材の多様な作り方を比較したい", caution: "投稿ごとに加熱・衛生面を確認してください。", url: "https://cookpad.com/jp" }, { name: "DELISH KITCHEN", kind: "レシピ動画アプリ", body: "料理工程を動画で確認し、食材や献立から探せます。", fit: "手順を動画で見ながら作りたい", caution: "アレルギーと保存条件を確認してください。", url: "https://delishkitchen.tv/" }, { name: "Shufoo!", kind: "デジタルチラシアプリ", body: "近隣店舗のチラシを位置や店舗から探せます。", fit: "必要な食材の価格を近所で比較したい", caution: "在庫と店頭価格は店舗の最新情報を確認してください。", url: "https://www.shufoo.net/contents/app/" }],
+    options: [{ name: "クックパッド", kind: "レシピ検索アプリ", body: "食材名から多数の投稿レシピを検索できます。", fit: "同じ食材の多様な作り方を比較したい", caution: "投稿ごとに加熱・衛生面を確認してください。", url: "https://cookpad.com/jp" }, { name: "DELISH KITCHEN", kind: "レシピ動画アプリ", body: "料理工程を動画で確認し、食材や献立から探せます。", fit: "手順を動画で見ながら作りたい", caution: "アレルギーと保存条件を確認してください。", url: "https://delishkitchen.tv/" }, { name: "Shufoo!", kind: "デジタルチラシアプリ", body: "近隣店舗のチラシを位置や店舗から探せます。", fit: "必要な食材の価格を近所で比較したい", caution: "在庫と店頭価格は店舗の最新情報を確認してください。", url: "https://www.shufoo.net/" }],
     notes: ["特売を理由に不要な物を増やさないよう買い物リストを作ります。", "食中毒予防のため加熱と保存方法を確認してください。"], related: ["food-shopping", "food-chores"], reviewedAt: "2026-08-13",
   },
 ];
