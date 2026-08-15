@@ -202,6 +202,15 @@ test("server-renders expanded app guide pages", async () => {
   assert.match(await lostPhoneResponse.text(), /apps\.apple\.com\/jp\/app\/.*id1514844621/);
 });
 
+test("provides a detail route for an app problem without an editorial article", async () => {
+  const response = await render("/problems/view?problem=mobility-taxi");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  assert.match(html, /タクシーを呼びたい/);
+  assert.match(html, /確認する順番/);
+  assert.match(html, /App Store|Google Play|公式サイト/);
+});
+
 test("keeps problem guide search metadata stable when app choices change", async () => {
   const response = await render("/problems/manage-medication-app");
   const html = await response.text();

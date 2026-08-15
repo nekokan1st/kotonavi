@@ -98,7 +98,7 @@ const misocaAffiliateImpressionUrl = "https://www11.a8.net/0.gif?a8mat=4BA4T7+BR
 const disasterKitProblemIds = new Set([
   "daily-emergency", "family-basics", "family-medical-share", "family-absence", "family-emergency",
 ]);
-type Problem = {
+export type Problem = {
   id: string;
   theme: ThemeId;
   phase: string;
@@ -994,7 +994,7 @@ const problems: Problem[] = [
   },
 ];
 
-const appProblems = problems
+export const appProblems = problems
   .map((problem) => ({ ...problem, services: problem.services.filter((service) => mobileAppNames.has(service.name)) }))
   .filter((problem) => problem.services.length > 0);
 const problemDetailSlugs: Record<string, string> = {
@@ -1167,7 +1167,7 @@ export default function Home() {
               <article className="detail-panel">
                 <div className="breadcrumb">{theme.label} <i>›</i> {currentPhase?.label}</div>
                 <span className="detail-kicker">{selected.eyebrow}</span><h3>{selected.title}</h3><p className="detail-description">{selected.description}</p>
-                {problemDetailSlugs[selected.id] && <a className="problem-detail-cta" href={`/problems/${problemDetailSlugs[selected.id]}`}><span>まずは状況を整理する</span><strong>この困りごとの詳しい確認手順を見る</strong><small>確認する順番と利用前の注意を、約3分で読めます。</small><i aria-hidden="true">→</i></a>}
+                <a className="problem-detail-cta" href={problemDetailSlugs[selected.id] ? `/problems/${problemDetailSlugs[selected.id]}` : `/problems/view?problem=${encodeURIComponent(selected.id)}`}><span>まずは状況を整理する</span><strong>この困りごとの詳しい確認手順を見る</strong><small>確認する順番と利用前の注意を、約3分で読めます。</small><i aria-hidden="true">→</i></a>
                 <div className="steps-intro"><span className="overline">BEFORE YOU CHOOSE</span><h4>サービスを見る前に、整理したい{selected.tasks.length}つのこと</h4><p>自分の状況や希望を先に整理し、下のサービスや窓口が困りごとのどの部分を助けるのか確認してみてください。ここで操作や登録をする必要はありません。</p></div>
                 <div className="task-list">{selected.tasks.map((task, index) => <div className="task" key={task.id}>
                   <span className="check">{index + 1}</span><span><strong>{task.title}</strong><small>{task.note}</small></span><em>{task.timing}</em>
