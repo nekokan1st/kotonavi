@@ -166,6 +166,7 @@ test("server-renders indexable problem landing pages", async () => {
   assert.match(html, /あなたの場合は、どのアプリから見る？/);
   assert.match(html, /気になる項目を選ぶと、すぐ下に特徴・注意点・公式情報への入口が表示されます。/);
   assert.match(html, /application\/ld\+json/);
+  assert.doesNotMatch(html.match(/<header class="topbar">[\s\S]*?<\/header>/)?.[0] ?? "", /href="\/guides"/);
 });
 
 test("sitemap includes all problem landing pages", async () => {

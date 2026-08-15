@@ -30,7 +30,7 @@ export default async function ProblemDetail({ params }: { params: Promise<{ slug
     about: item.options.map((option) => ({ "@type": "SoftwareApplication", name: option.name, applicationCategory: option.kind, operatingSystem: "スマートフォン" })),
   };
   return <main className="guide-page problem-detail-page">
-    <header className="topbar"><a className="brand" href="/"><span className="brand-mark"><i /><i /><i /></span><span>コトナビ</span></a><nav className="topnav"><a href="/problems">困りごと一覧</a><a href="/guides">解決ガイド</a><a href="/info">運営・掲載方針</a></nav></header>
+    <header className="topbar"><a className="brand" href="/"><span className="brand-mark"><i /><i /><i /></span><span>コトナビ</span></a><nav className="topnav"><a href="/problems">困りごと一覧</a><a href="/info">運営・掲載方針</a></nav></header>
     <article>
       <header className="article-header"><nav className="breadcrumb"><a href="/">トップ</a> <i>›</i> <a href="/problems">困りごと一覧</a> <i>›</i> {item.category}</nav><small>{item.category} ・ 最終確認 {item.reviewedAt.replaceAll("-", ".")}</small><h1>{item.title}</h1><p>{item.description}</p></header>
       <div className="article-body">
