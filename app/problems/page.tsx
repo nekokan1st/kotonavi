@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import ProblemsIndexClient from "./problems-index-client";
 
 export const metadata: Metadata = {
-  title: "困りごと一覧｜コトナビ",
-  description: "暮らしの困りごとを一覧から探し、確認手順と役立つスマホアプリを確認できます。",
+  title: "困りごとの確認手順一覧｜コトナビ",
+  description: "困りごとごとに、確認する順番とアプリを使う前の注意をまとめています。",
   alternates: { canonical: "/problems" },
 };
 

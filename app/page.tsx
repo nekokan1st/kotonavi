@@ -1109,7 +1109,7 @@ export default function Home() {
     <main>
       <header className="topbar">
         <a className="brand" href="#top" aria-label="コトナビ ホーム"><span className="brand-mark"><i /><i /><i /></span><span>コトナビ</span></a>
-        <nav className="topnav" aria-label="メインナビゲーション"><a href="#guide">困りごとから探す</a><a href="/problems">困りごと一覧</a><a href="#categories">テーマ一覧</a><a href="/info">運営・掲載方針</a></nav><a className="problem-index-shortcut" href="/problems">困りごと一覧 <span aria-hidden="true">→</span></a>
+        <nav className="topnav" aria-label="メインナビゲーション"><a href="#guide">アプリを探す</a><a href="#categories">テーマ一覧</a><a href="/info">運営・掲載方針</a></nav>
       </header>
 
       <section className="hero" id="top">
@@ -1203,7 +1203,7 @@ export default function Home() {
         <a href={disasterKitAffiliateUrl} target="_blank" rel="noreferrer nofollow sponsored">セット内容を確認する ↗</a>
         <img className="affiliate-impression" width="1" height="1" src="https://www15.a8.net/0.gif?a8mat=4BA39A+BFEJSI+2HOM+BW8O1" alt="" aria-hidden="true" />
       </aside>
-      <footer><a className="brand footer-brand" href="#top"><span className="brand-mark"><i /><i /><i /></span><span>コトナビ</span></a><p>困りごとから、次の一歩へ。</p><div><a href="#guide">困りごとから探す</a><a href="/problems">困りごと一覧</a><a href="/guides">解決ガイド</a><a href="/info#editorial">編集方針</a><a href="/info#advertising">広告掲載方針</a><a href="/info#privacy">プライバシー</a><a href="/info#contact">お問い合わせ</a></div><small>© 2026 Kotonavi.</small></footer>
+      <footer><a className="brand footer-brand" href="#top"><span className="brand-mark"><i /><i /><i /></span><span>コトナビ</span></a><p>困りごとから、次の一歩へ。</p><div><a href="#guide">アプリを探す</a><a href="/problems">確認手順一覧</a><a href="/guides">解決ガイド</a><a href="/info#editorial">編集方針</a><a href="/info#advertising">広告掲載方針</a><a href="/info#privacy">プライバシー</a><a href="/info#contact">お問い合わせ</a></div><small>© 2026 Kotonavi.</small></footer>
     </main>
   );
 }

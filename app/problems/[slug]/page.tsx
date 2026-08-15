@@ -30,9 +30,9 @@ export default async function ProblemDetail({ params }: { params: Promise<{ slug
     about: item.options.map((option) => ({ "@type": "SoftwareApplication", name: option.name, applicationCategory: option.kind, operatingSystem: "スマートフォン" })),
   };
   return <main className="guide-page problem-detail-page">
-    <header className="topbar"><a className="brand" href="/"><span className="brand-mark"><i /><i /><i /></span><span>コトナビ</span></a><nav className="topnav"><a href="/problems">困りごと一覧</a><a href="/info">運営・掲載方針</a></nav></header>
+    <header className="topbar"><a className="brand" href="/"><span className="brand-mark"><i /><i /><i /></span><span>コトナビ</span></a><nav className="topnav"><a href="/problems">確認手順一覧</a><a href="/info">運営・掲載方針</a></nav></header>
     <article>
-      <header className="article-header"><nav className="breadcrumb"><a href="/">トップ</a> <i>›</i> <a href="/problems">困りごと一覧</a> <i>›</i> {item.category}</nav><small>{item.category} ・ 最終確認 {item.reviewedAt.replaceAll("-", ".")}</small><h1>{item.title}</h1><p>{item.description}</p></header>
+      <header className="article-header"><nav className="breadcrumb"><a href="/">トップ</a> <i>›</i> <a href="/problems">確認手順一覧</a> <i>›</i> {item.category}</nav><small>{item.category} ・ 最終確認 {item.reviewedAt.replaceAll("-", ".")}</small><h1>{item.title}</h1><p>{item.description}</p></header>
       <div className="article-body">
         <section><h2>最初に知っておきたいこと</h2><p>{item.intro}</p></section>
         <section className="article-checklist"><h2>確認する順番</h2><ol>{item.steps.map((step) => <li key={step.title}><strong>{step.title}</strong><p>{step.body}</p></li>)}</ol></section>
@@ -44,7 +44,7 @@ export default async function ProblemDetail({ params }: { params: Promise<{ slug
         <p className="article-note">広告・提携の有無は通常掲載の順位に影響しません。利用条件や受付状況は変わるため、リンク先で最新情報をご確認ください。</p>
       </div>
     </article>
-    <footer><a className="brand footer-brand" href="/"><span className="brand-mark"><i /><i /><i /></span><span>コトナビ</span></a><p>困りごとから、次の一歩へ。</p><div><a href="/">トップ</a><a href="/problems">困りごと一覧</a><a href="/guides">解決ガイド</a><a href="/info">運営・掲載方針</a></div><small>© 2026 Kotonavi.</small></footer>
+    <footer><a className="brand footer-brand" href="/"><span className="brand-mark"><i /><i /><i /></span><span>コトナビ</span></a><p>困りごとから、次の一歩へ。</p><div><a href="/">アプリを探す</a><a href="/problems">確認手順一覧</a><a href="/guides">解決ガイド</a><a href="/info">運営・掲載方針</a></div><small>© 2026 Kotonavi.</small></footer>
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }} />
   </main>;
 }

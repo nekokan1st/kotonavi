@@ -16,9 +16,9 @@ export default function ProblemViewPage() {
   }
 
   return <main className="guide-page problem-detail-page">
-    <header className="topbar"><a className="brand" href="/"><span className="brand-mark"><i /><i /><i /></span><span>コトナビ</span></a><nav className="topnav"><a href="/problems">困りごと一覧</a><a href="/info">運営・掲載方針</a></nav></header>
+    <header className="topbar"><a className="brand" href="/"><span className="brand-mark"><i /><i /><i /></span><span>コトナビ</span></a><nav className="topnav"><a href="/problems">確認手順一覧</a><a href="/info">運営・掲載方針</a></nav></header>
     <article>
-      <header className="article-header"><nav className="breadcrumb"><a href="/">トップ</a> <i>›</i> <a href="/problems">困りごと一覧</a> <i>›</i> <span>{problem.title}</span></nav><small>{problem.eyebrow}</small><h1>{problem.title}</h1><p>{problem.description}</p></header>
+      <header className="article-header"><nav className="breadcrumb"><a href="/">トップ</a> <i>›</i> <a href="/problems">確認手順一覧</a> <i>›</i> <span>{problem.title}</span></nav><small>{problem.eyebrow}</small><h1>{problem.title}</h1><p>{problem.description}</p></header>
       <div className="article-body">
         <section className="article-checklist"><h2>確認する順番</h2><ol>{problem.tasks.map((task) => <li key={task.id}><strong>{task.title}</strong><p>{task.note}</p><small>{task.timing}</small></li>)}</ol></section>
         <section className="app-chooser"><span>YOUR APP OPTIONS</span><h2>あなたの場合は、どのアプリから見る？</h2><p>目的に近いものを選ぶと、すぐ下に特徴・注意点・公式情報への入口が表示されます。</p><div className="app-choice-list">{problem.services.map((service, index) => <button className={selectedServiceName === service.name ? "app-choice active" : "app-choice"} key={service.name} type="button" onClick={() => setSelectedServiceName(service.name)}><span className="app-choice-number">{index + 1}</span><span><strong>{service.name}</strong><small>{service.fit}</small></span><i>→</i></button>)}</div>{selectedServiceName && problem.services.filter((service) => service.name === selectedServiceName).map((service) => {
@@ -30,6 +30,6 @@ export default function ProblemViewPage() {
         <p className="article-note">掲載順は広告・提携の有無で決まりません。アプリの特徴と困りごとへの相性をもとに案内しています。</p>
       </div>
     </article>
-    <footer><a className="brand footer-brand" href="/"><span className="brand-mark"><i /><i /><i /></span><span>コトナビ</span></a><p>困りごとから、次の一歩へ。</p><div><a href="/">トップ</a><a href="/problems">困りごと一覧</a><a href="/info">運営・掲載方針</a></div><small>© 2026 Kotonavi.</small></footer>
+    <footer><a className="brand footer-brand" href="/"><span className="brand-mark"><i /><i /><i /></span><span>コトナビ</span></a><p>困りごとから、次の一歩へ。</p><div><a href="/">アプリを探す</a><a href="/problems">確認手順一覧</a><a href="/info">運営・掲載方針</a></div><small>© 2026 Kotonavi.</small></footer>
   </main>;
 }

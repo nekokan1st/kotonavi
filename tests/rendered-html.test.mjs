@@ -36,7 +36,7 @@ test("server-renders the Kotonavi home page", async () => {
   assert.doesNotMatch(html, /<h1>困りごとから、<br\s*\/>/);
   assert.match(html, /困りごとに合うスマホアプリ/);
   assert.match(html, /スマホアプリに限定/);
-  assert.match(html, /href="\/problems"[^>]*>困りごと一覧/);
+  assert.match(html, /href="\/problems"[^>]*>確認手順一覧/);
   assert.doesNotMatch(html, /RAKURA|全国版救急受診ガイド Q助/);
   assert.match(html, /favicon-48\.png/);
   assert.match(html, /apple-touch-icon\.png/);
@@ -156,7 +156,7 @@ test("uses verified destinations, broad search fields, and a bottom sponsor slot
 test("server-renders indexable problem landing pages", async () => {
   const indexResponse = await render("/problems");
   assert.equal(indexResponse.status, 200);
-  assert.match(await indexResponse.text(), /困りごとを、一覧から探す/);
+  assert.match(await indexResponse.text(), /困りごとの確認手順を読む/);
 
   const problemResponse = await render("/problems/scam-call-check");
   assert.equal(problemResponse.status, 200);
