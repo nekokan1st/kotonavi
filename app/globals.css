@@ -60,6 +60,12 @@
 @media (max-width: 780px) { .service-card { grid-template-columns: 22px 42px 92px 1fr; }.store-app-icon { width: 40px; height: 40px; border-radius: 11px; }.visual-unavailable { height: 126px; }.selected-app { grid-template-columns: 42px 136px minmax(0, 1fr); gap: 15px; }.store-app-icon.selected-app-icon { width: 40px; height: 40px; }.selected-app-visual { width: 136px; }.selected-app-visual .service-visual-screen, .selected-app-visual.visual-unavailable { width: 136px; height: 178px; } }
 @media (max-width: 480px) { .service-card { grid-template-columns: 21px 36px 82px 1fr; }.store-app-icon { width: 36px; height: 36px; border-radius: 10px; }.service-card .service-visual, .service-card .service-visual-screen { width: 82px; }.service-card .service-visual-screen, .visual-unavailable { height: 112px; }.selected-app { grid-template-columns: 1fr; }.store-app-icon.selected-app-icon { width: 44px; height: 44px; }.selected-app-visual { width: 136px; } }
 
+/* The navigator can make a card narrower than the browser viewport. Adapt to the card itself. */
+.service-list { container-type: inline-size; }.service-card { grid-template-columns: 25px 220px minmax(0, 1fr); }.service-card .service-meta { grid-column: 2 / -1; border-left: 0; border-top: 1px solid var(--line); padding: 14px 0 0; }.service-card .service-meta dl { max-width: 620px; }.service-card .app-links { max-width: 360px; }
+@container (min-width: 900px) { .service-card { grid-template-columns: 25px 220px minmax(0, 1fr) minmax(270px, 340px); }.service-card .service-meta { grid-column: auto; border-top: 0; border-left: 1px solid var(--line); padding: 0 0 0 15px; }.service-card .app-links { max-width: none; } }
+@media (max-width: 780px) { .service-card { grid-template-columns: 22px minmax(0, 1fr); }.service-card .service-visuals { grid-column: 2; }.service-card .service-main, .service-card .service-meta { grid-column: 2; }.service-card .service-meta { padding-top: 12px; } }
+@media (max-width: 480px) { .service-card { grid-template-columns: 21px minmax(0, 1fr); } }
+
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
