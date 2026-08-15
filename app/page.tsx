@@ -98,9 +98,12 @@ const destinationsFor = (service: Service): AppDestinations => {
 const disasterKitAffiliateUrl = "https://rpx.a8.net/svt/ejp?a8mat=4BA39A+BFEJSI+2HOM+BW8O1&rakuten=y&a8ejpredirect=http%3A%2F%2Fhb.afl.rakuten.co.jp%2Fhgc%2F0ea62065.34400275.0ea62066.204f04c0%2Fa26081143426_4BA39A_BFEJSI_2HOM_BW8O1%3Fpc%3Dhttps%253A%252F%252Fitem.rakuten.co.jp%252Firisplaza-r%252F288353%252F%26m%3Dhttps%253A%252F%252Fitem.rakuten.co.jp%252Firisplaza-r%252F288353%252F";
 const misocaAffiliateUrl = "https://px.a8.net/svt/ejp?a8mat=4BA4T7+BRWNHU+2ZJ4+BW8O2&a8ejpredirect=https%3A%2F%2Fwww.misoca.jp%2F";
 const misocaAffiliateImpressionUrl = "https://www11.a8.net/0.gif?a8mat=4BA4T7+BRWNHU+2ZJ4+BW8O2";
+const navitimeTravelAffiliateUrl = "https://px.a8.net/svt/ejp?a8mat=4BA756+490F8Y+4R8G+BWVTE";
+const navitimeTravelAffiliateImpressionUrl = "https://www15.a8.net/0.gif?a8mat=4BA756+490F8Y+4R8G+BWVTE";
 const disasterKitProblemIds = new Set([
   "daily-emergency", "family-basics", "family-medical-share", "family-absence", "family-emergency",
 ]);
+const navitimeTravelProblemIds = new Set(["leisure-join"]);
 export type Problem = {
   id: string;
   theme: ThemeId;
@@ -1197,6 +1200,12 @@ export default function Home() {
                   <div><b>ふたり分の備えを、ひとつのリュックに。</b><p>水・保存食から、ラジオライト、エアベッド、携帯トイレまで。家族で一つずつ集める手間を減らせる、2人用の防災セットです。</p><small>商品の内容・価格・在庫は販売ページでご確認ください。広告はアプリの掲載順位に影響しません。</small></div>
                   <a href={disasterKitAffiliateUrl} target="_blank" rel="noreferrer nofollow sponsored">セット内容を確認する ↗</a>
                   <img className="affiliate-impression" width="1" height="1" src="https://www15.a8.net/0.gif?a8mat=4BA39A+BFEJSI+2HOM+BW8O1" alt="" aria-hidden="true" />
+                </aside>}
+                {navitimeTravelProblemIds.has(selected.id) && <aside className="contextual-affiliate" aria-label="この困りごとに関連する広告">
+                  <span>広告</span>
+                  <div><b>新幹線・特急のチケットを、自宅で受け取りたい方へ。</b><p>NAVITIME Travelでは、全国のJR線の新幹線・特急チケットの手配をオンラインで申し込めます。</p><small>対象列車、申込期限、配送条件は公式サイトでご確認ください。広告はアプリの掲載順位に影響しません。</small></div>
+                  <a href={navitimeTravelAffiliateUrl} target="_blank" rel="noreferrer nofollow sponsored">チケット手配の条件を見る ↗</a>
+                  <img className="affiliate-impression" width="1" height="1" src={navitimeTravelAffiliateImpressionUrl} alt="" aria-hidden="true" />
                 </aside>}
                 <div className="verified-note"><span>✓</span> 掲載内容は公式サイト・公式ストアをもとに編集しています <b>最終確認 2026.08.12</b></div>
                 </section>
