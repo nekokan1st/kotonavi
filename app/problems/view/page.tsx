@@ -2,7 +2,9 @@
 
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
-import { appProblems, directStoreLinks } from "../../page";
+import { appProblems } from "../../page";
+import { AppStoreVisual } from "../../app-store-visual";
+import { directStoreLinks } from "../../destinations";
 
 const isStoreUrl = (url: string) => url.includes("apps.apple.com/") || url.includes("play.google.com/store/apps/");
 
@@ -24,7 +26,7 @@ export default function ProblemViewPage() {
         <section className="app-chooser"><span>YOUR APP OPTIONS</span><h2>あなたの場合は、どのアプリから見る？</h2><p>目的に近いものを選ぶと、すぐ下に特徴・注意点・公式情報への入口が表示されます。</p><div className="app-choice-list">{problem.services.map((service, index) => <button className={selectedServiceName === service.name ? "app-choice active" : "app-choice"} key={service.name} type="button" onClick={() => setSelectedServiceName(service.name)}><span className="app-choice-number">{index + 1}</span><span><strong>{service.name}</strong><small>{service.fit}</small></span><i>→</i></button>)}</div>{selectedServiceName && problem.services.filter((service) => service.name === selectedServiceName).map((service) => {
           const stores = directStoreLinks[service.name] ?? {};
           const official = isStoreUrl(service.href) ? undefined : service.href;
-          return <article className="selected-app" key={service.name}><div><small>{service.category}</small><h3>{service.name}</h3><p>{service.description}</p></div><dl><dt>この場合に</dt><dd>{service.fit}</dd><dt>注意点</dt><dd>{service.watch ?? "料金・対象地域・利用条件は公式情報で確認してください。"}</dd></dl><div className="selected-app-links">{official && <a className="official-link" href={official} target="_blank" rel={service.sponsored || service.affiliate ? "noreferrer nofollow sponsored" : "noreferrer"}>公式サイト <span>↗</span></a>}{stores.ios && <a href={stores.ios} target="_blank" rel="noreferrer">App Store <span>↗</span></a>}{stores.android && <a href={stores.android} target="_blank" rel="noreferrer">Google Play <span>↗</span></a>}{!official && !stores.ios && !stores.android && <a className="official-link" href={service.href} target="_blank" rel="noreferrer">公式情報を見る <span>↗</span></a>}</div></article>;
+          return <article className="selected-app" key={service.name}><AppStoreVisual name={service.name} accent={service.accent} variant="selected" /><div className="selected-app-copy"><small>{service.category}</small><h3>{service.name}</h3><p>{service.description}</p><dl><dt>この場合に</dt><dd>{service.fit}</dd><dt>注意点</dt><dd>{service.watch ?? "料金・対象地域・利用条件は公式情報で確認してください。"}</dd></dl><div className="selected-app-links">{official && <a className="official-link" href={official} target="_blank" rel={service.sponsored || service.affiliate ? "noreferrer nofollow sponsored" : "noreferrer"}>公式サイト <span>↗</span></a>}{stores.ios && <a href={stores.ios} target="_blank" rel="noreferrer">App Store <span>↗</span></a>}{stores.android && <a href={stores.android} target="_blank" rel="noreferrer">Google Play <span>↗</span></a>}{!official && !stores.ios && !stores.android && <a className="official-link" href={service.href} target="_blank" rel="noreferrer">公式情報を見る <span>↗</span></a>}</div></div></article>;
         })}</section>
         <section className="problem-notes"><h2>利用前の注意</h2><ul><li>アプリの機能・料金・対応OS・利用条件は変更されることがあります。リンク先の公式情報で最新内容を確認してください。</li><li>緊急性がある場合や専門的な判断が必要な場合は、アプリでの確認より公的窓口・専門機関への相談を優先してください。</li></ul></section>
         <p className="article-note">掲載順は広告・提携の有無で決まりません。アプリの特徴と困りごとへの相性をもとに案内しています。</p>
