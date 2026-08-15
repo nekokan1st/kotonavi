@@ -156,7 +156,7 @@ test("uses verified destinations, broad search fields, and a bottom sponsor slot
 test("server-renders indexable problem landing pages", async () => {
   const indexResponse = await render("/problems");
   assert.equal(indexResponse.status, 200);
-  assert.match(await indexResponse.text(), /困りごとから、使えるアプリを探す/);
+  assert.match(await indexResponse.text(), /困りごとを、一覧から探す/);
 
   const problemResponse = await render("/problems/scam-call-check");
   assert.equal(problemResponse.status, 200);

@@ -997,7 +997,7 @@ const problems: Problem[] = [
 export const appProblems = problems
   .map((problem) => ({ ...problem, services: problem.services.filter((service) => mobileAppNames.has(service.name)) }))
   .filter((problem) => problem.services.length > 0);
-const problemDetailSlugs: Record<string, string> = {
+export const problemDetailSlugs: Record<string, string> = {
   "digital-scam": "identify-unknown-phone-number", "health-urgent": "ambulance-or-hospital", "health-clinic": "online-medical-appointment",
   "digital-phone": "find-lost-phone", "daily-emergency": "check-disaster-risk", "home-utilities": "moving-procedures",
   "family-medical-share": "share-family-medication", "daily-subscriptions": "cancel-subscriptions",
@@ -1116,9 +1116,6 @@ export default function Home() {
         <div className="hero-kicker"><span>GUIDE</span> 困りごと別ナビ</div>
         <h1>困りごとから、次の一歩へ。</h1>
         <p>状況を整理し、困りごとに合うスマホアプリを案内します。</p>
-        <div className="hero-themes" aria-label="公開中のテーマ">
-          {themes.filter((item) => appProblems.some((problem) => problem.theme === item.id)).map((item) => <button key={item.id} type="button" onClick={() => { selectTheme(item); document.getElementById("guide")?.scrollIntoView({ behavior: "smooth" }); }}><b>{item.mark}</b>{item.label}</button>)}
-        </div>
         <div className="search-wrap">
           <span className="search-icon" aria-hidden="true" />
           <input ref={searchInputRef} value={query} onChange={(event) => setQuery(event.target.value)} placeholder="困っていることを入力　例：家族の薬、タクシー、写真整理" aria-label="困りごとを検索" />
@@ -1137,9 +1134,9 @@ export default function Home() {
         <div className="navigator-grid">
           <div className="category-nav"><aside className="category-rail" id="categories">
             <div className="rail-label">テーマ</div>
-            {themes.map((item) => {
+            {themes.filter((item) => appProblems.some((problem) => problem.theme === item.id)).map((item) => {
               const count = appProblems.filter((problem) => problem.theme === item.id).length;
-              return <button className={themeId === item.id ? "category active" : "category"} key={item.id} disabled={count === 0} type="button" onClick={() => selectTheme(item)}>
+              return <button className={themeId === item.id ? "category active" : "category"} key={item.id} type="button" onClick={() => selectTheme(item)}>
                 <span className="category-mark">{item.mark}</span><span><strong>{item.label}</strong><small>{count}の困りごと</small></span><i>{themeId === item.id ? "→" : ""}</i>
               </button>;
             })}
