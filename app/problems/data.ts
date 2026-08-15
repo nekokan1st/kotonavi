@@ -26,7 +26,7 @@ export const problemPages: ProblemPage[] = [
     ],
     options: [
       { name: "詐欺バスターLITE", kind: "詐欺電話対策アプリ", body: "通話内容をもとに詐欺の可能性を確認するための選択肢です。", fit: "電話中や通話後に、怪しい内容か判断する材料がほしい", caution: "判定だけを過信せず、金銭や個人情報を求められた場合は公式窓口へ確認してください。", url: "https://apps.apple.com/jp/app/id6756911225" },
-      { name: "警察相談専用電話 #9110", kind: "警察庁・相談窓口", body: "緊急ではない生活上の安全や犯罪被害の不安について、地域の警察相談窓口につながります。", fit: "詐欺の可能性や今後の対応を警察へ相談したい", caution: "事件・事故が発生中など緊急の場合は110を利用します。", url: "https://www.gov-online.go.jp/useful/article/201309/3.html" },
+      { name: "警察相談専用電話 #9110", kind: "警察庁・相談窓口", body: "緊急ではない生活上の安全や犯罪被害の不安について、地域の警察相談窓口につながります。", fit: "詐欺の可能性や今後の対応を警察へ相談したい", caution: "事件・事故が発生中など緊急の場合は110を利用します。", url: "https://www.gov-online.go.jp/article/201309/entry-7508.html" },
     ],
     notes: ["警察や金融機関が電話で暗証番号を尋ねることはありません。", "画面共有アプリの導入やATM操作を求められたら中断してください。"],
     related: ["digital-account", "money-trouble"], reviewedAt: "2026-08-12",
