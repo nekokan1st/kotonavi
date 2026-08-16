@@ -390,7 +390,7 @@ const problems: Problem[] = [
       { id: "leisure-route", title: "入場時刻から逆算して経路を決める", note: "混雑や乗換時間に余裕を持ちます。", timing: "前日" },
       { id: "leisure-rules", title: "持込み・撮影・荷物のルールを見る", note: "会場の公式案内を優先します。", timing: "出発前" },
     ], services: [
-      { name: "Peatix 参加者ヘルプ", category: "イベント参加ガイド", description: "チケットの確認、イベント参加、主催者への連絡など、Peatix掲載イベントの当日までの操作を確認。", tags: ["電子チケット", "参加方法", "公式ヘルプ"], fit: "Peatixのイベントへ参加する", price: "閲覧無料", access: "Webで確認", href: "https://help-attendee.peatix.com/ja-JP/support/home", accent: "#00a0df" },
+      { name: "Peatix", category: "イベント参加・チケット", description: "申し込み済みイベントのチケット確認や、主催者からの案内の確認に使える公式アプリ。", tags: ["電子チケット", "参加方法", "イベント案内"], fit: "Peatixのイベントへ参加する", price: "無料", access: "アプリで利用", href: "https://peatix.com/", accent: "#00a0df" },
     ],
   },
   {
