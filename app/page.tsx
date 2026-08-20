@@ -100,6 +100,8 @@ const misocaAffiliateUrl = "https://px.a8.net/svt/ejp?a8mat=4BA4T7+BRWNHU+2ZJ4+B
 const misocaAffiliateImpressionUrl = "https://www11.a8.net/0.gif?a8mat=4BA4T7+BRWNHU+2ZJ4+BW8O2";
 const navitimeTravelAffiliateUrl = "https://px.a8.net/svt/ejp?a8mat=4BA756+490F8Y+4R8G+BWVTE";
 const navitimeTravelAffiliateImpressionUrl = "https://www15.a8.net/0.gif?a8mat=4BA756+490F8Y+4R8G+BWVTE";
+const akippaAffiliateUrl = "https://px.a8.net/svt/ejp?a8mat=4BA5L7+A1E4Z6+3NAY+5YJRM";
+const akippaAffiliateImpressionUrl = "https://www17.a8.net/0.gif?a8mat=4BA5L7+A1E4Z6+3NAY+5YJRM";
 const disasterKitProblemIds = new Set([
   "daily-emergency", "family-basics", "family-medical-share", "family-absence", "family-emergency",
 ]);
@@ -847,7 +849,7 @@ const problems: Problem[] = [
       { id: "park-time", title: "利用時間と入出庫条件を比較する", note: "連続利用や再入庫の可否も確認します。", timing: "予約前" },
       { id: "park-photo", title: "入口写真と区画番号を保存する", note: "当日迷わないよう同乗者とも共有。", timing: "予約後" },
     ], services: [
-      { name: "akippa", category: "予約制駐車場", description: "空いている月極区画や個人宅などを含む全国の駐車場を事前予約・オンライン決済。", tags: ["事前予約", "車両サイズ", "オンライン決済"], fit: "ライブ・スポーツ・観光など、満車を避けたい日", why: "予約完了時点で利用区画を確保できる", watch: "対応車種、利用時間、キャンセル条件を駐車場ごとに確認", price: "駐車場ごと", access: "Web・アプリで予約", href: "https://www.akippa.com/", accent: "#29a9df" },
+      { name: "akippa", category: "予約制駐車場", description: "空いている月極区画や個人宅などを含む全国の駐車場を事前予約・オンライン決済。", tags: ["事前予約", "車両サイズ", "オンライン決済"], fit: "ライブ・スポーツ・観光など、満車を避けたい日", why: "予約完了時点で利用区画を確保できる", watch: "対応車種、利用時間、キャンセル条件を駐車場ごとに確認。広告提携は掲載順位に影響しません。", price: "駐車場ごと", access: "Web・アプリで予約", href: akippaAffiliateUrl, accent: "#29a9df", affiliate: true, affiliateImpression: akippaAffiliateImpressionUrl },
     ],
   },
   {
