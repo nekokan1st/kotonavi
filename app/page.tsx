@@ -1007,7 +1007,7 @@ export const appProblems = problems
   .filter((problem) => problem.services.length > 0);
 export const problemDetailSlugs: Record<string, string> = {
   "digital-scam": "identify-unknown-phone-number", "health-urgent": "ambulance-or-hospital", "health-clinic": "online-medical-appointment",
-  "digital-phone": "find-lost-phone", "daily-emergency": "check-disaster-risk", "home-utilities": "moving-procedures",
+  "digital-phone": "find-lost-phone",
   "family-medical-share": "share-family-medication", "daily-subscriptions": "cancel-subscriptions",
   "daily-dispose": "dispose-large-appliances", "pets-record": "pet-health-log",
   "digital-account": "set-up-two-factor-authentication", "parenting-sick": "child-fever-night",
@@ -1017,6 +1017,22 @@ export const problemDetailSlugs: Record<string, string> = {
   "daily-emergency": "disaster-alert-apps", "home-manuals": "organize-appliance-manuals",
   "health-record": "manage-medication-app", "money-budget": "choose-household-budget-app",
   "parenting-grow": "baby-care-sharing-app", "food-recipe": "choose-recipe-and-flyer-apps",
+  "daily-lost": "find-everyday-lost-items", "leisure-find": "find-weekend-plans",
+  "leisure-plan": "coordinate-schedules", "leisure-join": "manage-event-participation",
+  "leisure-photos": "share-event-photos", "choose-mover": "compare-moving-quotes",
+  "record-condition": "record-room-condition", "start-utilities": "start-utilities-after-moving",
+  "moveout-evidence": "keep-moveout-evidence", "work-scope": "manage-project-scope",
+  "work-change": "track-project-changes", "work-delivery": "invoice-after-delivery",
+  "work-profit": "review-freelance-profit", "family-basics": "manage-family-information",
+  "family-access-plan": "plan-family-access", "family-absence": "prepare-family-handover",
+  "family-emergency": "prepare-family-emergency", "family-digital": "organize-family-digital-access",
+  "health-care": "find-care-support", "money-tax": "prepare-tax-records",
+  "parenting-care": "find-childcare-support", "parenting-schedule": "share-family-schedule",
+  "digital-backup": "back-up-photos-and-data", "mobility-taxi": "call-a-taxi-app",
+  "mobility-parking": "reserve-parking", "mobility-luggage": "store-travel-luggage",
+  "food-shopping": "find-grocery-deals", "food-rescue": "pick-up-surplus-food",
+  "food-chores": "share-household-chores", "pets-hospital": "find-pet-hospital",
+  "pets-sitter": "choose-pet-sitter", "support-alone": "find-support-when-alone",
 };
 
 

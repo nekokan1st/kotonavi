@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { AppChooser } from "./app-chooser";
-import { problemPageById, problemPageBySlug, problemPages } from "../data";
+import { problemPageBySlug, problemPages, relatedProblemPage } from "../data";
 
 export function generateStaticParams() { return problemPages.map(({ slug }) => ({ slug })); }
 
@@ -24,7 +24,7 @@ export default async function ProblemDetail({ params }: { params: Promise<{ slug
   const { slug } = await params;
   const item = problemPageBySlug(slug);
   if (!item) notFound();
-  const related = item.related.map(problemPageById).filter((value) => value !== undefined);
+  const related = item.related.map(relatedProblemPage).filter((value) => value !== undefined);
   const structuredData = {
     "@context": "https://schema.org", "@type": "Article", headline: item.title, description: item.description,
     dateModified: item.reviewedAt, author: { "@type": "Organization", name: "コトナビ編集部" },
