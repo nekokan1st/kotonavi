@@ -1035,28 +1035,33 @@ export const problemDetailSlugs: Record<string, string> = {
   "pets-sitter": "choose-pet-sitter", "support-alone": "find-support-when-alone",
 };
 
+// 一覧・SCENE NAVIGATOR用。サービス欄はスマホアプリだけに保ちつつ、
+// 相談先・公的情報の記事も詳細ページへ到達できるようにします。
+export const navigableProblems = problems
+  .filter((problem) => problemDetailSlugs[problem.id])
+  .map((problem) => ({ ...problem, services: problem.services.filter((service) => mobileAppNames.has(service.name)) }));
 
 export default function Home() {
-  const firstAppProblem = appProblems[0];
-  const [themeId, setThemeId] = useState<ThemeId>(firstAppProblem.theme);
-  const [phaseId, setPhaseId] = useState(firstAppProblem.phase);
-  const [selectedId, setSelectedId] = useState(firstAppProblem.id);
+  const firstNavigableProblem = navigableProblems[0];
+  const [themeId, setThemeId] = useState<ThemeId>(firstNavigableProblem.theme);
+  const [phaseId, setPhaseId] = useState(firstNavigableProblem.phase);
+  const [selectedId, setSelectedId] = useState(firstNavigableProblem.id);
   const [query, setQuery] = useState("");
   const searchInputRef = useRef<HTMLInputElement>(null);
 
   const theme = themes.find((item) => item.id === themeId) ?? themes[0];
-  const selected = appProblems.find((problem) => problem.id === selectedId) ?? firstAppProblem;
-  const activePhases = theme.phases.filter((item) => appProblems.some((problem) => problem.theme === themeId && problem.phase === item.id));
+  const selected = navigableProblems.find((problem) => problem.id === selectedId) ?? firstNavigableProblem;
+  const activePhases = theme.phases.filter((item) => navigableProblems.some((problem) => problem.theme === themeId && problem.phase === item.id));
   const currentPhase = theme.phases.find((phase) => phase.id === phaseId);
   const visibleProblems = useMemo(
-    () => appProblems.filter((problem) => problem.theme === themeId && problem.phase === phaseId),
+    () => navigableProblems.filter((problem) => problem.theme === themeId && problem.phase === phaseId),
     [themeId, phaseId],
   );
   const searchResults = useMemo(() => {
     const normalized = query.trim().toLowerCase();
     if (!normalized) return [];
     const tokens = normalized.split(/[\s　、。・\/のをがにはへでと]+/).filter(Boolean);
-    return appProblems.filter((problem) => {
+    return navigableProblems.filter((problem) => {
       const problemTheme = themes.find((item) => item.id === problem.theme);
       const problemPhase = problemTheme?.phases.find((item) => item.id === problem.phase);
       const searchable = [
@@ -1091,7 +1096,7 @@ export default function Home() {
 
   useEffect(() => {
     const requestedId = new URLSearchParams(window.location.search).get("problem");
-    const requestedProblem = appProblems.find((problem) => problem.id === requestedId);
+    const requestedProblem = navigableProblems.find((problem) => problem.id === requestedId);
     if (requestedProblem) {
       setThemeId(requestedProblem.theme);
       setPhaseId(requestedProblem.phase);
@@ -1116,7 +1121,7 @@ export default function Home() {
   }, []);
 
   const selectTheme = (nextTheme: Theme) => {
-    const firstProblem = appProblems.find((problem) => problem.theme === nextTheme.id);
+    const firstProblem = navigableProblems.find((problem) => problem.theme === nextTheme.id);
     if (!firstProblem) return;
     setThemeId(nextTheme.id);
     setPhaseId(firstProblem.phase);
@@ -1159,8 +1164,8 @@ export default function Home() {
         <div className="navigator-grid">
           <div className="category-nav"><aside className="category-rail" id="categories">
             <div className="rail-label">テーマ</div>
-            {themes.filter((item) => appProblems.some((problem) => problem.theme === item.id)).map((item) => {
-              const count = appProblems.filter((problem) => problem.theme === item.id).length;
+            {themes.filter((item) => navigableProblems.some((problem) => problem.theme === item.id)).map((item) => {
+              const count = navigableProblems.filter((problem) => problem.theme === item.id).length;
               return <button className={themeId === item.id ? "category active" : "category"} key={item.id} type="button" onClick={() => selectTheme(item)}>
                 <span className="category-mark">{item.mark}</span><span><strong>{item.label}</strong><small>{count}の困りごと</small></span><i>{themeId === item.id ? "→" : ""}</i>
               </button>;
@@ -1173,7 +1178,7 @@ export default function Home() {
             {activePhases.length > 1 ? <div className="phase-tabs" style={{ gridTemplateColumns: `repeat(${activePhases.length}, 1fr)` }} role="tablist" aria-label={`${theme.label}の段階`}>
               {activePhases.map((item, index) => <button key={item.id} className={phaseId === item.id ? "phase-tab active" : "phase-tab"} onClick={() => {
                 setPhaseId(item.id);
-                const first = appProblems.find((problem) => problem.theme === themeId && problem.phase === item.id);
+                const first = navigableProblems.find((problem) => problem.theme === themeId && problem.phase === item.id);
                 if (first) chooseProblem(first);
               }} type="button" role="tab" aria-selected={phaseId === item.id}><b>0{index + 1}</b><span>{item.label}<small>{item.short}</small></span></button>)}
             </div> : <div className="single-phase-context"><span>現在の場面</span><b>{activePhases[0]?.label}</b><small>{activePhases[0]?.short}</small></div>}
@@ -1195,7 +1200,7 @@ export default function Home() {
                   <span className="check">{index + 1}</span><span><strong>{task.title}</strong><small>{task.note}</small></span><em>{task.timing}</em>
                 </div>)}</div>
 
-                <section className="app-showcase" aria-label={`${selected.title}に使えるスマホアプリ`}><div className="solutions-heading"><div><span className="overline">NEXT APPS</span><h4>この困りごとに使えるスマホアプリ</h4></div><span>{selected.services.length}件を掲載</span></div>
+                {selected.services.length > 0 ? <section className="app-showcase" aria-label={`${selected.title}に使えるスマホアプリ`}><div className="solutions-heading"><div><span className="overline">NEXT APPS</span><h4>この困りごとに使えるスマホアプリ</h4></div><span>{selected.services.length}件を掲載</span></div>
                 <div className="service-list">{selected.services.map((service, index) => {
                   const destinations = destinationsFor(service);
                   return <div className="service-card" key={service.name}>
@@ -1217,7 +1222,7 @@ export default function Home() {
                   <img className="affiliate-impression" width="1" height="1" src={navitimeTravelAffiliateImpressionUrl} alt="" aria-hidden="true" />
                 </aside>}
                 <div className="verified-note"><span>✓</span> 掲載内容は公式サイト・公式ストアをもとに編集しています <b>最終確認 2026.08.12</b></div>
-                </section>
+                </section> : <section className="app-showcase information-next-step"><div className="solutions-heading"><div><span className="overline">NEXT STEP</span><h4>公式情報・相談先を確認する</h4></div></div><p>この困りごとは、アプリの導入より先に公式情報や相談窓口の確認が役立つ場合があります。詳しい確認手順から、状況に合う次の一歩を確認してください。</p></section>}
               </article>
             </div>
 

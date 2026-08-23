@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { appProblems, problemDetailSlugs } from "../page";
+import { navigableProblems, problemDetailSlugs } from "../page";
 
 const themeLabels: Record<string, string> = {
   daily: "日常生活", home: "引越し・住まい", work: "仕事・フリーランス", family: "家族・もしも",
@@ -16,10 +16,10 @@ const destinationFor = (problemId: string) => problemDetailSlugs[problemId]
 export default function ProblemsIndexClient() {
   const [query, setQuery] = useState("");
   const [theme, setTheme] = useState("すべて");
-  const themes = ["すべて", ...Array.from(new Set(appProblems.map((item) => themeLabels[item.theme] ?? item.theme)))];
+  const themes = ["すべて", ...Array.from(new Set(navigableProblems.map((item) => themeLabels[item.theme] ?? item.theme)))];
   const results = useMemo(() => {
     const normalized = query.trim().toLowerCase();
-    return appProblems.filter((item) => {
+    return navigableProblems.filter((item) => {
       const category = themeLabels[item.theme] ?? item.theme;
       const searchable = [item.title, item.description, item.eyebrow, category, ...item.services.flatMap((service) => [service.name, service.category, service.tags.join(" ")])].join(" ").toLowerCase();
       return (theme === "すべて" || category === theme) && (!normalized || searchable.includes(normalized));
