@@ -163,8 +163,8 @@ test("server-renders indexable problem landing pages", async () => {
   const html = await problemResponse.text();
   assert.match(html, /詐欺電話か確認したいとき/);
   assert.match(html, /詐欺バスターLITE/);
-  assert.match(html, /あなたの場合は、どのアプリから見る？/);
-  assert.match(html, /気になる項目を選ぶと、すぐ下に特徴・注意点・公式情報への入口が表示されます。/);
+  assert.match(html, /公式情報・相談先を確認する/);
+  assert.match(html, /公的機関・事業者の公式情報を優先します。/);
   assert.match(html, /application\/ld\+json/);
   assert.doesNotMatch(html.match(/<header class="topbar">[\s\S]*?<\/header>/)?.[0] ?? "", /href="\/guides"/);
 });

@@ -10,7 +10,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const item = problemPageBySlug(slug);
   if (!item) return {};
   const title = item.title;
-  const description = `${item.description} 確認する順番と、状況に応じたアプリの選び方を公式情報をもとに整理します。`;
+  const description = item.contentType === "information"
+    ? `${item.description} 公式情報と相談先を優先した確認手順を整理します。`
+    : `${item.description} 確認する順番と、状況に応じたアプリの選び方を公式情報をもとに整理します。`;
   return {
     title: `${title}｜コトナビ`, description,
     alternates: { canonical: `/problems/${item.slug}` },
@@ -27,7 +29,9 @@ export default async function ProblemDetail({ params }: { params: Promise<{ slug
     "@context": "https://schema.org", "@type": "Article", headline: item.title, description: item.description,
     dateModified: item.reviewedAt, author: { "@type": "Organization", name: "コトナビ編集部" },
     publisher: { "@type": "Organization", name: "コトナビ編集部" }, mainEntityOfPage: `https://kotonaviapp.com/problems/${item.slug}`,
-    about: item.options.map((option) => ({ "@type": "SoftwareApplication", name: option.name, applicationCategory: option.kind, operatingSystem: "スマートフォン" })),
+    about: item.contentType === "information"
+      ? item.options.map((option) => ({ "@type": "Thing", name: option.name, description: option.kind }))
+      : item.options.map((option) => ({ "@type": "SoftwareApplication", name: option.name, applicationCategory: option.kind, operatingSystem: "スマートフォン" })),
   };
   return <main className="guide-page problem-detail-page">
     <header className="topbar"><a className="brand" href="/"><span className="brand-mark"><i /><i /><i /></span><span>コトナビ</span></a><nav className="topnav"><a href="/problems">確認手順一覧</a><a href="/info">運営・掲載方針</a></nav></header>
@@ -36,11 +40,11 @@ export default async function ProblemDetail({ params }: { params: Promise<{ slug
       <div className="article-body">
         <section><h2>最初に知っておきたいこと</h2><p>{item.intro}</p></section>
         <section className="article-checklist"><h2>確認する順番</h2><ol>{item.steps.map((step) => <li key={step.title}><strong>{step.title}</strong><p>{step.body}</p></li>)}</ol></section>
-        <AppChooser options={item.options} />
+        <AppChooser options={item.options} information={item.contentType === "information"} />
         {item.seoContent?.map((content) => <section key={content.heading}><h2>{content.heading}</h2><p>{content.body}</p></section>)}
         <section className="problem-notes"><h2>利用前の注意</h2><ul>{item.notes.map((note) => <li key={note}>{note}</li>)}</ul></section>
         {related.length > 0 && <section><h2>関連する困りごと</h2><div className="related-problems">{related.map((entry) => <a data-track="related" key={entry.slug} href={`/problems/${entry.slug}`}><small>{entry.category}</small><strong>{entry.title}</strong><span>→</span></a>)}</div></section>}
-        <section className="source-method"><h2>このページの作成・確認方法</h2><dl><dt>執筆・確認</dt><dd><a href="/info#team">コトナビ編集部</a></dd><dt>情報源</dt><dd>アプリの公式サイト・公式ストア</dd><dt>確認項目</dt><dd>提供主体、対象者、対応OS、利用方法、料金、注意事項</dd><dt>最終確認日</dt><dd>{item.reviewedAt.replaceAll("-", ".")}</dd></dl><p>アプリは専門家による個別判断や緊急対応を代替するものではありません。誤りや変更は<a href="mailto:kotonavi.info@proton.me">編集部へお知らせください</a>。</p></section>
+        <section className="source-method"><h2>このページの作成・確認方法</h2><dl><dt>執筆・確認</dt><dd><a href="/info#team">コトナビ編集部</a></dd><dt>情報源</dt><dd>{item.contentType === "information" ? "公的機関・相談窓口・事業者の公式案内" : "アプリの公式サイト・公式ストア"}</dd><dt>確認項目</dt><dd>{item.contentType === "information" ? "相談先、緊急時の連絡先、対象者、利用方法、注意事項" : "提供主体、対象者、対応OS、利用方法、料金、注意事項"}</dd><dt>最終確認日</dt><dd>{item.reviewedAt.replaceAll("-", ".")}</dd></dl><p>{item.contentType === "information" ? "緊急時は各窓口の案内を優先してください。誤りや変更は" : "アプリは専門家による個別判断や緊急対応を代替するものではありません。誤りや変更は"}<a href="mailto:kotonavi.info@proton.me">編集部へお知らせください</a>。</p></section>
         <p className="article-note">広告・提携の有無は通常掲載の順位に影響しません。利用条件や受付状況は変わるため、リンク先で最新情報をご確認ください。</p>
       </div>
     </article>

@@ -42,6 +42,8 @@ export const directStoreLinks: Record<string, AppDestinations> = {
   "ぴよログ": { ios: "https://apps.apple.com/jp/app/id1252857347", android: "https://play.google.com/store/apps/details?id=jp.co.sakabou.piyolog" },
   "家族アルバム みてね": { ios: "https://apps.apple.com/jp/app/id935672069", android: "https://play.google.com/store/apps/details?id=us.mitene" },
   "Google Authenticator": { ios: "https://apps.apple.com/jp/app/id388497605", android: "https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2" },
+  "Microsoft Authenticator": { ios: "https://apps.apple.com/jp/app/id983156458", android: "https://play.google.com/store/apps/details?id=com.azure.authenticator" },
+  "Twilio Authy": { ios: "https://apps.apple.com/jp/app/id494168017", android: "https://play.google.com/store/apps/details?id=com.authy.authy" },
   "Whoscall": { ios: "https://apps.apple.com/jp/app/id929968679", android: "https://play.google.com/store/apps/details?id=gogolook.callgogolook2" },
   "ジョルダン乗換案内": { ios: "https://apps.apple.com/jp/app/id299490481", android: "https://play.google.com/store/apps/details?id=jp.co.jorudan.nrkj" },
   "乗換NAVITIME": { ios: "https://apps.apple.com/jp/app/id528532387" },

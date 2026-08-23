@@ -11,11 +11,13 @@ export type ProblemPage = {
   notes: string[];
   related: string[];
   reviewedAt: string;
+  contentType?: "app" | "information";
 };
 
 export const problemPages: ProblemPage[] = [
   {
     slug: "scam-call-check", problemId: "digital-scam", category: "デジタル・安全",
+    contentType: "information",
     title: "詐欺電話か確認したいときにすること｜怪しい着信への対処手順",
     description: "知らない番号や不審な電話を受けたときに、折り返す前に確認すること、相談先、詐欺対策サービスの選び方を整理します。",
     intro: "電話口で急かされたり、警察・役所・金融機関を名乗られたりしても、その場で個人情報や暗証番号を伝える必要はありません。まず通話を切り、相手が示した番号ではなく、組織の公式窓口を自分で調べて確認します。",
@@ -33,6 +35,7 @@ export const problemPages: ProblemPage[] = [
   },
   {
     slug: "find-open-clinic", problemId: "health-clinic", category: "健康・介護",
+    contentType: "information",
     title: "今診てもらえる病院や薬局を探す方法｜診療時間と診療科で検索",
     description: "現在地、診療科、診療時間、対応可能な治療などから医療機関・薬局を探し、受診前に確認する項目を案内します。",
     intro: "検索結果の診療時間は変更されている場合があります。候補を見つけたら、出発前に電話で受付時間、初診の可否、必要な持ち物を確認してください。",
@@ -49,6 +52,7 @@ export const problemPages: ProblemPage[] = [
   },
   {
     slug: "find-lost-phone", problemId: "digital-phone", category: "デジタル・安全",
+    contentType: "information",
     title: "スマホをなくしたときにすぐすること｜位置確認・ロック・回線停止",
     description: "iPhoneやAndroid端末を紛失したときに、別の端末から位置を確認し、情報と決済を守る手順を案内します。",
     intro: "端末を探しに危険な場所へ一人で向かわず、位置情報が不審な場所を示す場合は警察へ相談してください。遠隔でのデータ消去は、位置確認や復旧ができなくなる場合があるため最後の手段です。",
@@ -66,6 +70,7 @@ export const problemPages: ProblemPage[] = [
   },
   {
     slug: "check-disaster-risk", problemId: "daily-emergency", category: "日常生活",
+    contentType: "information",
     title: "自宅の災害リスクと避難場所を確認する方法｜防災準備の始め方",
     description: "洪水・土砂災害・高潮・津波などのリスクを住所から確認し、避難先、備蓄、家族の連絡方法を整理します。",
     intro: "防災用品を買う前に、自宅や勤務先で想定される災害と避難先を確認すると、必要な備えを絞りやすくなります。自治体の最新情報と現地の避難経路も合わせて確認します。",
@@ -82,6 +87,7 @@ export const problemPages: ProblemPage[] = [
   },
   {
     slug: "moving-procedures", problemId: "home-utilities", category: "引越し・住まい",
+    contentType: "information",
     title: "引越しの電気・ガス・水道手続きを忘れない方法",
     description: "引越し前後の電気、ガス、水道などの停止・開始手続きを整理し、開栓や利用開始の漏れを防ぎます。",
     intro: "ガスの開栓は立会いが必要な場合があり、繁忙期は希望日時が埋まりやすくなります。契約先、お客さま番号、旧住所と新住所、利用日を先に揃えると進めやすくなります。",
@@ -114,6 +120,7 @@ export const problemPages: ProblemPage[] = [
   },
   {
     slug: "cancel-subscriptions", problemId: "daily-subscriptions", category: "日常生活",
+    contentType: "information",
     title: "使っていないサブスクを見つけて整理する方法",
     description: "カードや口座の明細から定額サービスを洗い出し、利用状況、解約条件、データの扱いを確認する手順です。",
     intro: "アプリを削除しただけでは解約にならないサービスがあります。Apple、Google Play、事業者サイトなど、契約した場所を確認して正式な解約手続きを行います。",
@@ -130,6 +137,7 @@ export const problemPages: ProblemPage[] = [
   },
   {
     slug: "dispose-large-appliances", problemId: "daily-dispose", category: "日常生活",
+    contentType: "information",
     title: "ごみの分別と収集日をスマホで確認する方法",
     description: "住んでいる自治体のルールに合わせて、ごみの分別方法と収集日を確認し、出し忘れを減らす手順です。",
     intro: "ごみの出し方や収集日は自治体・地域によって異なります。アプリを使う前に、住んでいる自治体が対応しているかを確認してください。テレビ、エアコン、冷蔵庫・冷凍庫、洗濯機・衣類乾燥機は通常の粗大ごみと異なる手続きが必要です。",
@@ -157,15 +165,18 @@ export const problemPages: ProblemPage[] = [
     ],
     options: [
       { name: "ぺとログ", kind: "ペット健康管理アプリ", body: "犬猫の体重、食事、投薬などを記録し、家族で共有できる健康ログアプリです。", fit: "家族の誰が世話しても同じ履歴を確認したい", caution: "アプリの提案は診断ではありません。症状がある場合は獣医師へ相談してください。", url: "https://play.google.com/store/apps/details?id=jp.nooon.petlog" },
+      { name: "PAWLOG", kind: "犬猫の健康・お世話記録アプリ", body: "ごはん、投薬、トイレ、通院などの日々のお世話を記録し、家族で確認できます。", fit: "毎日のお世話と予防の予定を一緒に残したい", caution: "診断や治療の代わりにはなりません。異変があれば動物病院へ相談してください。", url: "https://pawlog.jp/" },
+      { name: "ペットラインウェルネスナビ", kind: "犬猫の健康管理アプリ", body: "質問や日々の記録を通じて、愛犬・愛猫の健康管理を支援するアプリです。", fit: "食事や生活習慣を見直すきっかけがほしい", caution: "利用対象・提供機能は公式案内で確認し、症状がある場合は受診を優先してください。", url: "https://www.petline.co.jp/wellness-app/" },
     ],
     notes: ["薬の量や回数は獣医師の指示を優先してください。", "誤食や呼吸困難など緊急性がある場合は記録より受診を優先します。"],
     related: ["pets-hospital", "pets-sitter"], reviewedAt: "2026-08-12",
   },
-].filter((item) => new Set(["digital-scam", "digital-phone", "family-medical-share", "pets-record", "daily-dispose"]).has(item.problemId));
+];
 
 const moreProblemPages: ProblemPage[] = [
   {
     slug: "suspicious-sms-email", problemId: "digital-scam", category: "デジタル・安全",
+    contentType: "information",
     title: "怪しいSMS・メールが届いたときの確認方法｜リンクを開く前にすること",
     description: "配送、不正利用、未払いなどを装うSMSやメールを受け取ったときに、安全に真偽を確認して報告する手順です。",
     intro: "本文のリンク、添付ファイル、記載された電話番号は使わず、公式アプリや自分のブックマークから契約状況を確認します。",
@@ -184,6 +195,7 @@ const moreProblemPages: ProblemPage[] = [
   },
   {
     slug: "child-fever-night", problemId: "parenting-sick", category: "子育て・学び",
+    contentType: "information",
     title: "夜間・休日に子どもが発熱したときの相談先｜#8000を使う前の確認",
     description: "子どもの急な発熱や症状で受診を迷ったときに、状態を整理して電話相談へつなぐ手順です。",
     intro: "意識や呼吸に異常があるなど明らかな緊急時は119へ。迷う場合は、年齢、体温、症状、始まった時刻を整理して相談します。",
@@ -197,11 +209,12 @@ const moreProblemPages: ProblemPage[] = [
     description: "生命保険、損害保険、カード付帯保険などをまとめ、補償、更新、問い合わせ先を家族と確認します。",
     intro: "保険会社名だけでなく、何が起きたときに使える契約か、証券番号の保管場所、請求期限を整理します。",
     steps: [{ title: "紙・PDF・Web証券を集める", body: "生命、医療、火災、自動車、カード付帯を確認します。" }, { title: "補償される場面で分類する", body: "入院、けが、物損、旅行などに分けます。" }, { title: "家族と問い合わせ方法を共有する", body: "更新日と見直し日も登録します。" }],
-    options: [{ name: "保険簿", kind: "保険管理アプリ", body: "複数社の保険証券、補償、更新時期などをまとめて管理できます。", fit: "家族分を含む契約を一か所で確認したい", caution: "実際の補償可否は保険会社へ確認してください。", url: "https://hokenbo.com/" }],
+    options: [{ name: "保険簿", kind: "保険管理アプリ", body: "保険証券を取り込み、複数社の補償内容・更新時期・問い合わせ先をまとめて確認できます。", fit: "保険の内容と請求先を、家族分も含めて確認したい", caution: "実際の補償可否・請求期限は保険会社へ確認してください。", url: "https://hokenbo.com/" }, { name: "GOOSE", kind: "家族情報共有アプリ", body: "保険、病歴、かかりつけ医など、もしものときに家族で確認したい情報を共有できます。", fit: "保険証券だけでなく、家族が見る情報の場所も決めたい", caution: "保険契約の詳細や請求可否は保険会社の公式情報で確認してください。", url: "https://goose-net.com/" }, { name: "Google ドライブ", kind: "書類保管アプリ", body: "保険証券のPDFや写真を、フォルダと共有権限で整理して保管できます。", fit: "すでに持っているPDFを、保管場所から整えたい", caution: "共有設定とアカウントの二段階認証を確認し、機微情報の公開範囲を絞ってください。", url: "https://www.google.com/drive/" }],
     notes: ["保険証券の画像には個人情報が含まれます。共有範囲を確認してください。", "請求期限は契約ごとに確認してください。"], related: ["family-basics", "money-trouble"], reviewedAt: "2026-08-12",
   },
   {
     slug: "consumer-contract-trouble", problemId: "money-trouble", category: "お金・契約",
+    contentType: "information",
     title: "契約・請求トラブルを相談したいとき｜証拠の残し方と188",
     description: "解約できない、説明と違う、身に覚えのない請求などの消費者トラブルで、相談前に整理する内容を案内します。",
     intro: "契約画面、注文履歴、請求明細、事業者とのやり取りを消さずに保存し、希望する解決内容を一文で整理します。",
@@ -215,11 +228,12 @@ const moreProblemPages: ProblemPage[] = [
     description: "運行区間と再開見込みを確認し、別路線、バス、徒歩を含めて到着時刻を比較する手順です。",
     intro: "全線運休か一部区間かを鉄道会社の公式情報で確認し、振替輸送の対象と利用条件を優先します。",
     steps: [{ title: "公式の運行区間を確認する", body: "再開見込みと振替輸送の案内を確認します。" }, { title: "遅延を反映して再検索する", body: "乗換回数だけでなく到着の確実性を比べます。" }, { title: "到着見込みを共有する", body: "状況が変わるため再確認する時刻も決めます。" }],
-    options: [{ name: "Yahoo!乗換案内", kind: "乗換・運行情報", body: "乗換検索と登録路線の運行情報をまとめて確認できます。", fit: "遅延を見ながら別経路を探したい", caution: "振替輸送と入場規制は鉄道会社の公式案内を優先してください。", url: "https://transit.yahoo.co.jp/" }],
+    options: [{ name: "Yahoo!乗換案内", kind: "乗換・運行情報", body: "乗換検索と登録路線の運行情報をまとめて確認できます。", fit: "遅延を見ながら別経路を探したい", caution: "振替輸送と入場規制は鉄道会社の公式案内を優先してください。", url: "https://transit.yahoo.co.jp/" }, { name: "ジョルダン乗換案内", kind: "鉄道・バス乗換アプリ", body: "鉄道・バスの経路を検索し、一本前後の便も比較できます。", fit: "出発時刻を前後させて、混雑を避ける経路も見たい", caution: "遅延・運休の最終確認は交通事業者の公式案内で行ってください。", url: "https://www.jorudan.co.jp/norikae/" }, { name: "乗換NAVITIME", kind: "乗換・時刻表アプリ", body: "経由地やバスを含めた条件で、到着時刻と乗換経路を検索できます。", fit: "経由駅やバスを指定して、別の行き方を比べたい", caution: "利用できる機能と最新の運行情報を確認してください。", url: "https://www.navitime.co.jp/transfer/" }],
     notes: ["無理な乗換や混雑したホームでの移動を避けてください。", "運休証明等が必要な場合は鉄道会社の案内を確認してください。"], related: ["mobility-taxi", "mobility-luggage"], reviewedAt: "2026-08-12",
   },
   {
     slug: "find-missing-pet", problemId: "pets-missing", category: "ペット",
+    contentType: "information",
     title: "犬や猫が逃げたときにすぐすること｜連絡先と探し方",
     description: "脱走場所、特徴、写真を整理し、警察、保健所、動物愛護窓口へ連絡しながら捜索する手順です。",
     intro: "最初の数時間から連絡範囲を広げます。マイクロチップはGPSではありませんが、保護された際の所有者確認につながります。",
@@ -229,6 +243,7 @@ const moreProblemPages: ProblemPage[] = [
   },
   {
     slug: "where-to-get-legal-help", problemId: "support-legal", category: "相談・支援",
+    contentType: "information",
     title: "どこへ法律相談すればよいか分からないとき｜法テラスへの相談準備",
     description: "問題名が分からない段階でも、出来事、相手、期限、資料を整理して適切な制度と相談先を確認します。",
     intro: "法律相談の前に、評価や推測ではなく出来事を日付順に短くまとめると、窓口が状況を把握しやすくなります。",
@@ -238,6 +253,7 @@ const moreProblemPages: ProblemPage[] = [
   },
   {
     slug: "mental-health-public-help", problemId: "support-mind", category: "相談・支援",
+    contentType: "information",
     title: "気持ちがつらいときに公的な相談先へつながる方法",
     description: "ひとりで抱え込まず、今の安全を確認して、地域のこころの相談窓口へつながるための案内です。",
     intro: "今すぐ自分や他人を傷つける危険がある場合は119または110へ。うまく説明できなくても、困っていることを一言から伝えて構いません。",
@@ -247,6 +263,7 @@ const moreProblemPages: ProblemPage[] = [
   },
   {
     slug: "dv-stalking-safe-consultation", problemId: "support-home", category: "相談・支援",
+    contentType: "information",
     title: "パートナーからの暴力・監視を安全に相談する方法",
     description: "DVや端末監視が疑われるときに、現在の安全を優先し、電話・チャット・メールで専門窓口へ相談する手順です。",
     intro: "証拠集めより安全確保を優先します。端末を見られている可能性がある場合は、安全な別端末や場所から相談してください。",
@@ -259,6 +276,7 @@ const moreProblemPages: ProblemPage[] = [
 const appExpansionProblemPages: ProblemPage[] = [
   {
     slug: "disaster-alert-apps", problemId: "daily-emergency", category: "日常生活",
+    contentType: "information",
     title: "地震・豪雨・避難情報をアプリで受け取る方法",
     description: "現在地と家族の地域に合う防災通知アプリを選び、通知・位置情報・登録地点を設定する手順です。",
     intro: "防災アプリを入れただけでは、必要な通知が届かない場合があります。通知権限、位置情報、登録地点を確認し、自治体の避難情報と合わせて使います。",
@@ -281,6 +299,7 @@ const appExpansionProblemPages: ProblemPage[] = [
   },
   {
     slug: "online-medical-appointment", problemId: "health-clinic", category: "健康・介護",
+    contentType: "information",
     title: "オンライン診療を予約したいときの確認事項",
     description: "オンライン診療に向く症状かを確認し、対応医療機関、費用、薬の受け取り方法を整理します。",
     intro: "呼吸困難、意識障害、突然の激痛など緊急性がある症状では、オンライン診療を待たず119や救急相談を利用してください。",
@@ -325,7 +344,7 @@ const appExpansionProblemPages: ProblemPage[] = [
     description: "重要なアカウントへ認証アプリを設定し、機種変更や端末紛失に備えて復旧方法も保存します。",
     intro: "メールや金融など、他サービスの復旧に使われる重要なアカウントから設定します。バックアップコードは同じ端末だけに保存しません。",
     steps: [{ title: "重要なアカウントを選ぶ", body: "メール、金融、SNSなどから始めます。" }, { title: "認証アプリを登録する", body: "公式設定画面のQRコードまたはキーを使います。" }, { title: "復旧方法を別の場所へ保存する", body: "バックアップコードと機種変更手順を確認します。" }],
-    options: [{ name: "Google Authenticator", kind: "認証コードアプリ", body: "対応サービスの2段階認証コードをスマホで生成できます。", fit: "SMS以外の認証方法を使いたい", caution: "機種変更前に移行方法とバックアップコードを確認してください。", url: "https://safety.google/safety/authentication/" }],
+    options: [{ name: "Google Authenticator", kind: "認証コードアプリ", body: "対応サービスの2段階認証コードをスマホで生成できます。", fit: "Googleアカウントと連携し、認証コードを管理したい", caution: "機種変更前に移行方法とバックアップコードを確認してください。", url: "https://www.google.com/mobile/authenticator/" }, { name: "Microsoft Authenticator", kind: "認証コード・サインイン承認アプリ", body: "対応サービスのワンタイムコードやサインイン承認をスマホで扱えます。", fit: "Microsoftアカウントも使い、承認通知でログインを確認したい", caution: "各サービスの対応方式と、復旧用の連絡先を先に確認してください。", url: "https://www.microsoft.com/ja-jp/security/mobile-authenticator-app" }, { name: "Twilio Authy", kind: "認証コードアプリ", body: "対応サービスの二段階認証コードを端末間で利用できる認証アプリです。", fit: "複数端末で認証コードを扱う方法を検討したい", caution: "利用条件や端末追加時の保護設定を公式案内で確認してください。", url: "https://www.authy.com/" }],
     notes: ["QRコードや設定キーを第三者へ見せないでください。", "不正ログインが疑われる場合は先にパスワードを変更します。"], related: ["digital-scam", "digital-phone"], reviewedAt: "2026-08-13",
   },
   {
@@ -357,9 +376,45 @@ const appExpansionProblemPages: ProblemPage[] = [
   },
 ];
 
-problemPages.push(...moreProblemPages.filter((item) => new Set(["money-insurance", "mobility-delay"]).has(item.problemId)), ...appExpansionProblemPages);
-const publishedAppNames = new Set(["詐欺バスターLITE", "Apple『探す』", "Google デバイスを探す", "GOOSE", "ぺとログ", "保険簿", "Yahoo!乗換案内", "Yahoo!防災速報", "特務機関NERV防災", "tenki.jp", "トリセツ", "CLINICS", "お薬手帳プラス", "EPARKお薬手帳", "頭痛ーる", "マネーフォワード ME", "Zaim", "Moneytree", "OsidOri", "ぴよログ", "家族アルバム みてね", "Google Authenticator", "Whoscall", "ジョルダン乗換案内", "乗換NAVITIME", "クックパッド", "DELISH KITCHEN", "Shufoo!", "さんあ〜る"]);
-for (const page of problemPages) page.options = page.options.filter((option) => publishedAppNames.has(option.name));
+const createAppProblemPage = (page: Omit<ProblemPage, "steps" | "seoContent" | "notes" | "reviewedAt">): ProblemPage => ({
+  ...page,
+  steps: [
+    { title: "目的と条件を一つ決める", body: "何を減らしたいか、誰と使うか、いつまでに決めるかを先に整理します。" },
+    { title: "候補の公式情報と対応OSを確認する", body: "登録前に、料金、共有範囲、対応端末、利用条件を公式情報で確認します。" },
+    { title: "一つから試して、必要なら見直す", body: "最初からすべてを移さず、続けられるかを確認してから利用範囲を広げます。" },
+  ],
+  seoContent: [
+    { heading: "アプリを選ぶ前に確認したいこと", body: "同じ目的でも、ひとりで使うか共有するか、手入力か自動連携か、無料で始められるかで向くアプリは変わります。登録前に公式サイト・公式ストアで対応OSと利用条件を確認してください。" },
+    { heading: "利用を始めた後の見直し", body: "通知、共有範囲、保存されるデータを定期的に確認します。生活や予定が変わったときは、不要な権限や共有相手も見直します。" },
+  ],
+  notes: ["料金・対応地域・対応OS・利用条件はリンク先の公式情報で確認してください。", "広告・提携の有無は通常掲載の順位に影響しません。"],
+  reviewedAt: "2026-08-23",
+});
+
+const additionalAppProblemPages: ProblemPage[] = [
+  createAppProblemPage({ slug: "coordinate-schedules", problemId: "leisure-plan", category: "休日・イベント", title: "友人との日程調整アプリの選び方｜候補日をまとめて決める", description: "候補日、参加者、決まった予定を一か所で共有するためのアプリ選びを整理します。", intro: "候補日を増やしすぎず、返答期限を決めて共有すると予定を決めやすくなります。", options: [{ name: "TimeTree", kind: "共有カレンダーアプリ", body: "予定・コメント・通知を共有カレンダーで管理できます。", fit: "決まった予定と担当を同じ場所で共有したい", caution: "共有するカレンダーと相手を確認してください。", url: "https://timetreeapp.com/intl/ja/" }], related: ["parenting-schedule", "leisure-join"] }),
+  createAppProblemPage({ slug: "share-event-photos", problemId: "leisure-photos", category: "休日・イベント", title: "旅行やイベントの写真を共有・整理するアプリの選び方", description: "参加者の写真を集め、見返しやすいアルバムとして残すための選び方です。", intro: "共有相手と保存期間を先に決め、位置情報や写り込みを確認してから共有します。", options: [{ name: "Google フォト", kind: "写真管理アプリ", body: "写真や動画をアルバムにまとめ、共有相手を指定して閲覧できます。", fit: "複数人の写真を一つのアルバムに集めたい", caution: "共有範囲とバックアップ設定を確認してください。", url: "https://photos.google.com/" }], related: ["family-basics", "digital-backup"] }),
+  createAppProblemPage({ slug: "record-room-condition", problemId: "record-condition", category: "引越し・住まい", title: "入居時の傷・設備不良を記録するアプリの選び方", description: "入居前からある傷や汚れを、写真と部屋名で残して保管する方法です。", intro: "写真は部屋全体と接写をセットで撮り、日付と場所が分かる名前で残します。", options: [{ name: "入退去メモ", kind: "入退去記録アプリ", body: "部屋ごとの写真・メモを残し、入居時と退去時の記録整理を支援します。", fit: "退去時にも比較できる形で写真を残したい", caution: "管理会社への提出方法・期限は契約書を確認してください。", url: "https://apps.apple.com/jp/app/%E5%85%A5%E9%80%80%E5%8E%BB%E3%83%A1%E3%83%A2/id6767765025" }], related: ["moveout-evidence", "home-manuals"] }),
+  createAppProblemPage({ slug: "manage-family-information", problemId: "family-basics", category: "家族・もしも", title: "家族の緊急連絡先・重要情報を共有するアプリの選び方", description: "緊急連絡先、医療情報、書類の場所を、必要な家族が確認できる状態に整えます。", intro: "情報の種類ごとに見せる相手を決め、共有範囲を定期的に見直します。", options: [{ name: "GOOSE", kind: "家族情報共有アプリ", body: "病歴、保険、かかりつけ医など、もしものときに必要な情報を家族で共有できます。", fit: "緊急時に必要な生活・医療情報をまとめたい", caution: "共有する相手と情報の範囲を確認してください。", url: "https://goose-net.com/" }, { name: "つなぐノート", kind: "家族情報整理アプリ", body: "家族に残す情報や連絡先を整理するためのアプリです。", fit: "少しずつ情報を整理して、家族へ伝えたい", caution: "端末紛失時の保護設定と共有条件を確認してください。", url: "https://apps.apple.com/jp/app/id6451205576" }], related: ["family-medical-share", "family-access-plan"] }),
+  createAppProblemPage({ slug: "share-family-schedule", problemId: "parenting-schedule", category: "子育て・学び", title: "家族の予定・送迎を共有するアプリの選び方", description: "学校行事、習い事、送迎などの予定と担当を、家族で共有する方法です。", intro: "誰がいつ対応するかを予定に書き、変更時の通知先を決めます。", options: [{ name: "TimeTree", kind: "共有カレンダーアプリ", body: "家族の予定、コメント、通知を一つのカレンダーに集められます。", fit: "予定だけでなく担当者も共有したい", caution: "子どもの予定を共有する相手を確認してください。", url: "https://timetreeapp.com/intl/ja/" }], related: ["parenting-grow", "leisure-plan"] }),
+  createAppProblemPage({ slug: "back-up-photos-and-data", problemId: "digital-backup", category: "デジタル・安全", title: "写真や大事なデータをバックアップするアプリの選び方", description: "端末の故障・紛失に備え、写真や連絡先を復元できる状態にする方法です。", intro: "失いたくないデータを決めてから、自動バックアップと復元方法を確認します。", options: [{ name: "Google One バックアップ", kind: "クラウドバックアップアプリ", body: "Googleアカウントを使い、端末のデータや写真のバックアップを管理できます。", fit: "Android端末のデータを定期的にバックアップしたい", caution: "保存容量・対象データ・復元方法を公式案内で確認してください。", url: "https://one.google.com/about/" }, { name: "Google フォト", kind: "写真バックアップアプリ", body: "写真・動画のバックアップとアルバム整理を行えます。", fit: "写真を端末以外にも残したい", caution: "バックアップ品質、容量、共有設定を確認してください。", url: "https://photos.google.com/" }], related: ["digital-phone", "leisure-photos"] }),
+  createAppProblemPage({ slug: "call-a-taxi-app", problemId: "mobility-taxi", category: "移動・外出", title: "タクシー配車アプリの選び方｜現在地から呼ぶ・予約する", description: "現在地、到着希望時刻、支払い方法を確認してタクシーを呼ぶ方法です。", intro: "安全に乗れる場所を指定し、手配料・キャンセル条件を確認してから依頼します。", options: [{ name: "GO", kind: "タクシー配車アプリ", body: "現在地への配車や支払い方法の設定をアプリで行えます。", fit: "電話せずに現在地からタクシーを呼びたい", caution: "対応地域、手配料金、予約可否を確認してください。", url: "https://go.mo-t.com/" }], related: ["mobility-delay", "mobility-parking"] }),
+  createAppProblemPage({ slug: "reserve-parking", problemId: "mobility-parking", category: "移動・外出", title: "駐車場予約アプリの選び方｜目的地近くを事前に確保する", description: "車種、利用時間、入出庫条件を確認して駐車場を事前予約する方法です。", intro: "入口写真と区画の条件を確認し、当日の経路とキャンセル規定を保存します。", options: [{ name: "akippa", kind: "予約制駐車場アプリ", body: "目的地付近の駐車場を検索し、事前予約・オンライン決済できます。", fit: "満車を避けて、目的地近くを事前に確保したい", caution: "車両サイズ、入出庫条件、キャンセル規定を駐車場ごとに確認してください。", url: "https://www.akippa.com/" }], related: ["mobility-taxi", "leisure-join"] }),
+  createAppProblemPage({ slug: "store-travel-luggage", problemId: "mobility-luggage", category: "移動・外出", title: "荷物預かりアプリの選び方｜旅行中に店舗で預ける", description: "荷物の大きさと移動経路に合う預け先を検索・予約する方法です。", intro: "受取可能時間、保管条件、店舗の位置を確認してから予約します。", options: [{ name: "ecbo cloak", kind: "荷物預かり予約アプリ", body: "カフェ・店舗などの空きスペースに荷物を預ける予約サービスです。", fit: "コインロッカー以外も含めて預け先を探したい", caution: "荷物サイズ、保管条件、受取時間を店舗ごとに確認してください。", url: "https://cloak.ecbo.io/ja/" }], related: ["leisure-join", "mobility-delay"] }),
+  createAppProblemPage({ slug: "find-grocery-deals", problemId: "food-shopping", category: "食事・家事", title: "近所のスーパーのチラシ・特売を比べるアプリの選び方", description: "必要な物だけを買うために、近所の店舗とチラシを比較する方法です。", intro: "先に買い物リストを作り、移動時間を含めて一店舗か二店舗に絞ります。", options: [{ name: "くふう トクバイ", kind: "チラシ・買い物情報アプリ", body: "近隣スーパーのチラシや買い物情報を確認できます。", fit: "行ける範囲の店舗だけを比べたい", caution: "在庫・価格・営業時間は店舗の最新情報を確認してください。", url: "https://tokubai.co.jp/" }, { name: "Shufoo!", kind: "デジタルチラシアプリ", body: "位置や店舗から近隣のデジタルチラシを探せます。", fit: "店舗別に特売情報を見比べたい", caution: "店頭価格や在庫は変動するため、来店前に確認してください。", url: "https://www.shufoo.net/" }], related: ["food-recipe", "food-chores"] }),
+  createAppProblemPage({ slug: "pick-up-surplus-food", problemId: "food-rescue", category: "食事・家事", title: "食品ロス削減アプリの選び方｜近所の余剰食品を受け取る", description: "受取時間と内容を確認し、近所の余剰食品を無理なく受け取る方法です。", intro: "受取に行ける時間だけを選び、アレルギー情報と保存方法を確認します。", options: [{ name: "TABETE", kind: "食品ロス削減アプリ", body: "近隣店舗の余剰になりそうな食品を予約し、指定時間に受け取れます。", fit: "近所で受取可能な食品を探したい", caution: "内容・受取時間・アレルギー表示を注文前に確認してください。", url: "https://tabete.me/" }], related: ["food-shopping", "food-recipe"] }),
+  createAppProblemPage({ slug: "share-household-chores", problemId: "food-chores", category: "食事・家事", title: "家事分担を見える化するアプリの選び方｜偏りを話し合う", description: "日常の家事を見える化し、分担を感情的にならず話し合うための方法です。", intro: "一度に全部を変えず、負担の大きい家事を一つ選んで担当と期限を決めます。", options: [{ name: "Yieto 2", kind: "家事分担アプリ", body: "家事の見える化と分担の話し合いを支援するアプリです。", fit: "家事の偏りを一覧で確認して話し合いたい", caution: "相手を責める用途ではなく、合意した分担を見直すために使ってください。", url: "https://apps.apple.com/jp/app/id6745941580" }, { name: "Google Keep", kind: "共有メモアプリ", body: "買い物や家事のチェックリストを共有できます。", fit: "まずは少ない家事から共同の一覧にしたい", caution: "通知設定と共有するメモを確認してください。", url: "https://keep.google.com/" }], related: ["food-shopping", "family-basics"] }),
+  createAppProblemPage({ slug: "choose-pet-sitter", problemId: "pets-sitter", category: "ペット", title: "ペットシッターを探すアプリの選び方｜旅行中の世話を依頼する", description: "世話内容、健康上の注意、面談、緊急時対応を確認してペットシッターを選ぶ方法です。", intro: "価格だけで決めず、レビュー、事前面談、キャンセル時の対応を確認します。", options: [{ name: "PetBacker", kind: "ペットシッター検索アプリ", body: "地域や条件からペットシッター等を探し、依頼前にやり取りできます。", fit: "旅行中の世話を頼める候補を比較したい", caution: "資格・保険・緊急時の連絡方法・利用条件を個別に確認してください。", url: "https://www.petbacker.com/" }], related: ["pets-record", "pets-hospital"] }),
+  createAppProblemPage({ slug: "compare-moving-quotes", problemId: "choose-mover", category: "引越し・住まい", title: "引越し見積もりを比較する方法｜条件をそろえて選ぶ", description: "荷物量と希望日をそろえ、複数の引越し見積もりを比較するための手順です。", intro: "料金だけでなく、訪問見積もりの有無、補償、追加料金、キャンセル条件を確認します。", options: [{ name: "引越し侍", kind: "引越し見積もり比較サービス", body: "複数の引越し会社へ見積もりを依頼する入口として使えます。", fit: "同じ条件で複数社の見積もりを集めたい", caution: "連絡方法・対応地域・見積もり条件を確認してください。", url: "https://hikkoshizamurai.jp/" }], related: ["home-utilities", "moveout-evidence"] }),
+  createAppProblemPage({ slug: "manage-project-scope", problemId: "work-scope", category: "仕事・フリーランス", title: "依頼範囲を整理するアプリの選び方｜見積もり・仕様を残す", description: "成果物、修正回数、追加料金を記録して、仕事のすれ違いを減らす方法です。", intro: "口頭の依頼も、期限と担当を確認できる形で残してから着手します。", options: [{ name: "Google Keep", kind: "共有メモアプリ", body: "依頼内容と確認事項を共有メモに整理できます。", fit: "まずは依頼内容を短く残して共有したい", caution: "契約条件は正式な書面・メールでも合意を残してください。", url: "https://keep.google.com/" }], related: ["work-change", "work-delivery"] }),
+  createAppProblemPage({ slug: "track-project-changes", problemId: "work-change", category: "仕事・フリーランス", title: "仕様変更を記録するアプリの選び方｜追加作業を見える化する", description: "当初の依頼と変更内容を比較し、料金・納期への影響を残す方法です。", intro: "変更が出た時点で、作業内容・追加費用・新しい期限を確認します。", options: [{ name: "Google Keep", kind: "共有メモアプリ", body: "変更内容を時系列で残し、関係者と共有できます。", fit: "少人数で変更履歴をすぐ残したい", caution: "最終的な合意はメールなど記録性のある方法で確認してください。", url: "https://keep.google.com/" }], related: ["work-scope", "work-delivery"] }),
+  createAppProblemPage({ slug: "invoice-after-delivery", problemId: "work-delivery", category: "仕事・フリーランス", title: "納品・請求を管理するアプリの選び方｜請求漏れを防ぐ", description: "納品物、請求書、入金予定日を整理して請求漏れを防ぐ方法です。", intro: "納品前に契約内容と照合し、検収日と請求期限を確認します。", options: [{ name: "Misoca", kind: "請求書作成・管理サービス", body: "見積書・納品書・請求書の作成と請求状況の管理を行えます。", fit: "納品後の請求書作成と入金確認をまとめたい", caution: "料金・電子帳簿保存法への対応・利用条件を公式案内で確認してください。", url: "https://www.misoca.jp/" }], related: ["work-scope", "work-profit"] }),
+  createAppProblemPage({ slug: "review-freelance-profit", problemId: "work-profit", category: "仕事・フリーランス", title: "フリーランスの作業時間を記録して利益を振り返るアプリの選び方", description: "実作業時間と報酬を比べ、次の見積もりに活かすための記録方法です。", intro: "作業時間を細かく完璧に取るより、案件ごとの大まかな時間から始めます。", options: [{ name: "Toggl Track", kind: "時間記録アプリ", body: "案件や作業ごとの時間を記録し、後から集計できます。", fit: "実際に使った時間を案件ごとに振り返りたい", caution: "無料・有料機能とデータの共有範囲を確認してください。", url: "https://toggl.com/track/" }], related: ["work-delivery", "money-budget"] }),
+  createAppProblemPage({ slug: "plan-family-access", problemId: "family-access-plan", category: "家族・もしも", title: "家族に必要な情報だけを共有するアプリの選び方", description: "重要情報を、必要な人・必要なタイミングで共有するための整理方法です。", intro: "パスワードをそのまま送らず、情報ごとに受け取る人と確認方法を決めます。", options: [{ name: "GOOSE", kind: "家族情報共有アプリ", body: "家族で確認したい生活・医療・保険情報を整理できます。", fit: "共有する情報を家族の状況に合わせて整理したい", caution: "共有範囲と利用条件を確認し、機密性の高い情報の扱いに注意してください。", url: "https://goose-net.com/" }], related: ["family-basics", "family-medical-share"] }),
+  createAppProblemPage({ slug: "prepare-family-handover", problemId: "family-absence", category: "家族・もしも", title: "急な入院時に家のことを引き継ぐアプリの選び方", description: "連絡先、日々の世話、支払い、家の鍵などを家族へ引き継ぐための準備です。", intro: "最初の72時間に必要な情報だけを選び、家族に伝わる形で残します。", options: [{ name: "GOOSE", kind: "家族情報共有アプリ", body: "日常ともしもの情報を家族で確認できるように整理できます。", fit: "入院など急な不在でも、家族が必要な情報を確認できるようにしたい", caution: "共有相手と更新方法を定期的に確認してください。", url: "https://goose-net.com/" }], related: ["family-basics", "family-emergency"] }),
+];
+
+problemPages.push(...moreProblemPages, ...appExpansionProblemPages, ...additionalAppProblemPages);
 
 export const problemPageBySlug = (slug: string) => problemPages.find((item) => item.slug === slug);
 export const problemPageById = (problemId: string) => problemPages.find((item) => item.problemId === problemId);
