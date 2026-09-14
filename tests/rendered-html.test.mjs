@@ -140,6 +140,8 @@ test("uses verified destinations, broad search fields, and a bottom sponsor slot
   assert.match(css, /(?:^|})footer > div a \{ padding: 0 14px; border-left:/);
   assert.match(page, /disasterKitProblemIds\.has\(selected\.id\)/);
   assert.match(page, /この困りごとに関連する広告/);
+  assert.match(page, /const mealsAffiliateUrl = "https:\/\/px\.a8\.net\/svt\/ejp\?a8mat=4BA756\+48EZN6\+53KW\+60WN6"/);
+  assert.match(page, /DELISH KITCHENプロデュースの冷凍宅配弁当「Meals」/);
   assert.match(page, /サービスを見る前に、整理したい\{selected\.tasks\.length\}つのこと/);
   assert.match(page, /サービスや窓口が困りごとのどの部分を助けるのか確認/);
   assert.match(page, /ここで操作や登録をする必要はありません/);

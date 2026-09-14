@@ -102,10 +102,13 @@ const navitimeTravelAffiliateUrl = "https://px.a8.net/svt/ejp?a8mat=4BA756+490F8
 const navitimeTravelAffiliateImpressionUrl = "https://www15.a8.net/0.gif?a8mat=4BA756+490F8Y+4R8G+BWVTE";
 const akippaAffiliateUrl = "https://px.a8.net/svt/ejp?a8mat=4BA5L7+A1E4Z6+3NAY+5YJRM";
 const akippaAffiliateImpressionUrl = "https://www17.a8.net/0.gif?a8mat=4BA5L7+A1E4Z6+3NAY+5YJRM";
+const mealsAffiliateUrl = "https://px.a8.net/svt/ejp?a8mat=4BA756+48EZN6+53KW+60WN6";
+const mealsAffiliateImpressionUrl = "https://www19.a8.net/0.gif?a8mat=4BA756+48EZN6+53KW+60WN6";
 const disasterKitProblemIds = new Set([
   "daily-emergency", "family-basics", "family-medical-share", "family-absence", "family-emergency",
 ]);
 const navitimeTravelProblemIds = new Set(["leisure-join"]);
+const mealsProblemIds = new Set(["food-recipe", "food-chores"]);
 export type Problem = {
   id: string;
   theme: ThemeId;
@@ -1220,6 +1223,12 @@ export default function Home() {
                   <div><b>新幹線・特急のチケットを、自宅で受け取りたい方へ。</b><p>NAVITIME Travelでは、全国のJR線の新幹線・特急チケットの手配をオンラインで申し込めます。</p><small>対象列車、申込期限、配送条件は公式サイトでご確認ください。広告はアプリの掲載順位に影響しません。</small></div>
                   <a href={navitimeTravelAffiliateUrl} target="_blank" rel="noreferrer nofollow sponsored">チケット手配の条件を見る ↗</a>
                   <img className="affiliate-impression" width="1" height="1" src={navitimeTravelAffiliateImpressionUrl} alt="" aria-hidden="true" />
+                </aside>}
+                {mealsProblemIds.has(selected.id) && <aside className="contextual-affiliate" aria-label="この困りごとに関連する広告">
+                  <span>広告</span>
+                  <div><b>献立を考えたり調理したりする負担を減らしたい方へ。</b><p>DELISH KITCHENプロデュースの冷凍宅配弁当「Meals」は、管理栄養士監修の食事を自宅へ届けるサービスです。</p><small>配送地域、料金、メニュー、定期購入・解約条件は公式サイトでご確認ください。広告はアプリの掲載順位に影響しません。</small></div>
+                  <a href={mealsAffiliateUrl} target="_blank" rel="noreferrer nofollow sponsored">サービス内容を確認する ↗</a>
+                  <img className="affiliate-impression" width="1" height="1" src={mealsAffiliateImpressionUrl} alt="" aria-hidden="true" />
                 </aside>}
                 <div className="verified-note"><span>✓</span> 掲載内容は公式サイト・公式ストアをもとに編集しています <b>最終確認 2026.08.12</b></div>
                 </section> : <section className="app-showcase information-next-step"><div className="solutions-heading"><div><span className="overline">NEXT STEP</span><h4>公式情報・相談先を確認する</h4></div></div><p>この困りごとは、アプリの導入より先に公式情報や相談窓口の確認が役立つ場合があります。詳しい確認手順から、状況に合う次の一歩を確認してください。</p></section>}

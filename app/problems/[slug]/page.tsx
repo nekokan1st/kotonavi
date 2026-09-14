@@ -3,6 +3,10 @@ import { notFound } from "next/navigation";
 import { AppChooser } from "./app-chooser";
 import { problemPageBySlug, problemPages, relatedProblemPage } from "../data";
 
+const mealsAffiliateUrl = "https://px.a8.net/svt/ejp?a8mat=4BA756+48EZN6+53KW+60WN6";
+const mealsAffiliateImpressionUrl = "https://www19.a8.net/0.gif?a8mat=4BA756+48EZN6+53KW+60WN6";
+const mealsProblemIds = new Set(["food-recipe", "food-chores"]);
+
 export function generateStaticParams() { return problemPages.map(({ slug }) => ({ slug })); }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
@@ -41,6 +45,12 @@ export default async function ProblemDetail({ params }: { params: Promise<{ slug
         <section><h2>最初に知っておきたいこと</h2><p>{item.intro}</p></section>
         <section className="article-checklist"><h2>確認する順番</h2><ol>{item.steps.map((step) => <li key={step.title}><strong>{step.title}</strong><p>{step.body}</p></li>)}</ol></section>
         <AppChooser options={item.options} information={item.contentType === "information"} />
+        {mealsProblemIds.has(item.problemId) && <aside className="contextual-affiliate" aria-label="この困りごとに関連する広告">
+          <span>広告</span>
+          <div><b>献立を考えたり調理したりする負担を減らしたい方へ。</b><p>DELISH KITCHENプロデュースの冷凍宅配弁当「Meals」は、管理栄養士監修の食事を自宅へ届けるサービスです。</p><small>配送地域、料金、メニュー、定期購入・解約条件は公式サイトでご確認ください。広告はアプリの掲載順位に影響しません。</small></div>
+          <a href={mealsAffiliateUrl} target="_blank" rel="noreferrer nofollow sponsored">サービス内容を確認する ↗</a>
+          <img className="affiliate-impression" width="1" height="1" src={mealsAffiliateImpressionUrl} alt="" aria-hidden="true" />
+        </aside>}
         {item.seoContent?.map((content) => <section key={content.heading}><h2>{content.heading}</h2><p>{content.body}</p></section>)}
         <section className="problem-notes"><h2>利用前の注意</h2><ul>{item.notes.map((note) => <li key={note}>{note}</li>)}</ul></section>
         {related.length > 0 && <section><h2>関連する困りごと</h2><div className="related-problems">{related.map((entry) => <a data-track="related" key={entry.slug} href={`/problems/${entry.slug}`}><small>{entry.category}</small><strong>{entry.title}</strong><span>→</span></a>)}</div></section>}
