@@ -29,7 +29,7 @@ const mobileAppNames = new Set([
   "Yahoo!乗換案内", "GO", "akippa", "ecbo cloak", "クラシル", "くふう トクバイ",
   "TABETE", "Yieto 2", "ぺとログ", "PetBacker",
   "Yahoo!防災速報", "特務機関NERV防災", "Yahoo!天気", "tenki.jp", "トリセツ",
-  "お薬手帳プラス", "頭痛ーる", "CLINICS", "Zaim", "Moneytree", "OsidOri",
+  "お薬手帳プラス", "頭痛ーる", "melmo（メルモ）", "Zaim", "Moneytree", "OsidOri",
   "ぴよログ", "家族アルバム みてね", "Google Authenticator", "Whoscall",
   "ジョルダン乗換案内", "乗換NAVITIME", "クックパッド", "DELISH KITCHEN", "Shufoo!",
   "さんあ〜る", "EPARKお薬手帳", "Google Keep",
@@ -72,7 +72,7 @@ export const directStoreLinks = storeDestinations;
   "トリセツ": { ios: "https://apps.apple.com/jp/app/id1085923883", android: "https://play.google.com/store/apps/details?id=com.trygle.instructionmanualapp" },
   "お薬手帳プラス": { ios: "https://apps.apple.com/jp/app/id947740067", android: "https://play.google.com/store/apps/details?id=jp.co.nicho.jpokusuri" },
   "頭痛ーる": { ios: "https://apps.apple.com/jp/app/id602991338", android: "https://play.google.com/store/apps/details?id=jp.co.pocke.android.zutsu" },
-  "CLINICS": { ios: "https://apps.apple.com/jp/app/id1106261604", android: "https://play.google.com/store/apps/details?id=life.medley.clinics" },
+  "melmo（メルモ）": { ios: "https://apps.apple.com/jp/app/id1106261604", android: "https://play.google.com/store/apps/details?id=life.medley.clinics" },
   "Zaim": { ios: "https://apps.apple.com/jp/app/id445850671", android: "https://play.google.com/store/apps/details?id=net.zaim.android" },
   "Moneytree": { ios: "https://apps.apple.com/jp/app/id586847189", android: "https://play.google.com/store/apps/details?id=jp.moneytree.moneytree" },
   "OsidOri": { ios: "https://apps.apple.com/jp/app/id1473751623" },
@@ -652,7 +652,7 @@ const problems: Problem[] = [
       { id: "health-call", title: "受診可能か電話で確認する", note: "急患や初診の受付条件を聞きます。", timing: "出発前" },
     ], services: [
       { name: "医療情報ネット ナビイ", category: "厚生労働省", description: "診療日、診療科目、対応可能な疾患や治療内容などから全国の医療機関・薬局を検索。", tags: ["全国検索", "病院", "薬局"], fit: "条件に合う医療機関を探したい", price: "無料", access: "Webで検索", href: "https://www.iryou.teikyouseido.mhlw.go.jp/", accent: "#1683a8" },
-      { name: "CLINICS", category: "オンライン診療・服薬指導", description: "対応医療機関の予約、オンライン診療、薬の受け取りまでを支援。", tags: ["オンライン診療", "予約", "服薬指導"], fit: "対応する医療機関を予約してオンラインで相談したい", watch: "緊急症状には不向き。診療内容・費用・利用可否は医療機関ごとに確認", price: "診療・医療機関ごと", access: "アプリで利用", href: "https://clinics-app.com/", accent: "#46a5a1" },
+      { name: "melmo（メルモ）", category: "オンライン診療・服薬指導", description: "対応医療機関の予約、オンライン診療、薬の受け取りまでを支援。", tags: ["オンライン診療", "予約", "服薬指導"], fit: "対応する医療機関を予約してオンラインで相談したい", watch: "緊急症状には不向き。診療内容・費用・利用可否は医療機関ごとに確認", price: "診療・医療機関ごと", access: "アプリで利用", href: "https://melmo-app.com/", accent: "#46a5a1" },
     ],
   },
   {

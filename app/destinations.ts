@@ -1,6 +1,8 @@
 export type AppDestinations = { official?: string; ios?: string; android?: string };
 
 export const directStoreLinks: Record<string, AppDestinations> = {
+  "MAMORIO": { ios: "https://apps.apple.com/jp/app/mamorio/id952095468" },
+  "Tile": { ios: "https://apps.apple.com/jp/app/tile-find-lost-keys-phone/id664939913" },
   "詐欺バスターLITE": { ios: "https://apps.apple.com/jp/app/id6756911225" },
   "Apple『探す』": { ios: "https://apps.apple.com/jp/app/%E6%8E%A2%E3%81%99/id1514844621?platform=ipad" },
   "Google デバイスを探す": { android: "https://play.google.com/store/apps/details?id=com.google.android.apps.adm" },
@@ -35,7 +37,7 @@ export const directStoreLinks: Record<string, AppDestinations> = {
   "トリセツ": { ios: "https://apps.apple.com/jp/app/id1085923883", android: "https://play.google.com/store/apps/details?id=com.trygle.instructionmanualapp" },
   "お薬手帳プラス": { ios: "https://apps.apple.com/jp/app/id947740067", android: "https://play.google.com/store/apps/details?id=jp.co.nicho.jpokusuri" },
   "頭痛ーる": { ios: "https://apps.apple.com/jp/app/id602991338", android: "https://play.google.com/store/apps/details?id=jp.co.pocke.android.zutsu" },
-  "CLINICS": { ios: "https://apps.apple.com/jp/app/id1106261604", android: "https://play.google.com/store/apps/details?id=life.medley.clinics" },
+  "melmo（メルモ）": { ios: "https://apps.apple.com/jp/app/id1106261604", android: "https://play.google.com/store/apps/details?id=life.medley.clinics" },
   "Zaim": { ios: "https://apps.apple.com/jp/app/id445850671", android: "https://play.google.com/store/apps/details?id=net.zaim.android" },
   "Moneytree": { ios: "https://apps.apple.com/jp/app/id586847189", android: "https://play.google.com/store/apps/details?id=jp.moneytree.moneytree" },
   "OsidOri": { ios: "https://apps.apple.com/jp/app/id1473751623" },

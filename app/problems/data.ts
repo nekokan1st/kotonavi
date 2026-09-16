@@ -304,8 +304,8 @@ const appExpansionProblemPages: ProblemPage[] = [
     description: "オンライン診療に向く症状かを確認し、対応医療機関、費用、薬の受け取り方法を整理します。",
     intro: "呼吸困難、意識障害、突然の激痛など緊急性がある症状では、オンライン診療を待たず119や救急相談を利用してください。",
     steps: [{ title: "緊急性がないか確認する", body: "強い症状や急変では対面受診・救急対応を優先します。" }, { title: "対応医療機関と費用を確認する", body: "初診の可否、予約枠、診察料以外の費用を確認します。" }, { title: "通信環境と薬の受け取りを準備する", body: "本人確認書類、保険情報、服薬情報を手元に置きます。" }],
-    options: [{ name: "CLINICS", kind: "オンライン診療アプリ", body: "対応医療機関の予約、オンライン診療、服薬指導や薬の受け取りを支援します。", fit: "対応医療機関を予約してオンラインで相談したい", caution: "診療内容、費用、初診可否は医療機関ごとに異なります。", url: "https://clinics-app.com/" }],
-    notes: ["オンライン診療はすべての症状に適するものではありません。", "薬の配送・受取方法と到着時期を確認してください。"], related: ["health-urgent", "health-record"], reviewedAt: "2026-08-13",
+    options: [{ name: "melmo（メルモ）", kind: "オンライン診療アプリ", body: "対応医療機関の予約、オンライン診療、服薬指導や薬の受け取りを支援します。", fit: "対応医療機関を予約してオンラインで相談したい", caution: "診療内容、費用、初診可否は医療機関ごとに異なります。", url: "https://melmo-app.com/" }],
+    notes: ["オンライン診療はすべての症状に適するものではありません。", "薬の配送・受取方法と到着時期を確認してください。"], related: ["health-urgent", "health-record"], reviewedAt: "2026-09-17",
   },
   {
     slug: "manage-medication-app", problemId: "health-record", category: "健康・介護",
