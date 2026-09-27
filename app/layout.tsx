@@ -6,6 +6,8 @@ import Analytics from "./analytics";
 import GoogleAnalyticsPageView from "./google-analytics";
 
 const GA_MEASUREMENT_ID = "G-3QE4Z77S21";
+const SITE_DESCRIPTION =
+  "家計、健康、防災、子育て、引っ越し、仕事など、生活の困りごとを解決までの順番に整理。確認すべき手順、公的な相談先、状況に合うスマホアプリを分かりやすく案内します。";
 
 export async function generateMetadata(): Promise<Metadata> {
   const headerList = await headers();
@@ -19,7 +21,7 @@ export async function generateMetadata(): Promise<Metadata> {
       default: "コトナビ｜困りごとから、次の一歩へ",
       template: "%s",
     },
-    description: "生活の困りごとを解決までの順番に整理し、状況に合うスマホアプリを案内します。",
+    description: SITE_DESCRIPTION,
     icons: {
       icon: [
         { url: "/favicon-48.png", type: "image/png", sizes: "48x48" },
@@ -33,14 +35,14 @@ export async function generateMetadata(): Promise<Metadata> {
     robots: { index: true, follow: true },
     openGraph: {
       title: "コトナビ｜困りごとから、次の一歩へ。",
-      description: "解決までのステップと、状況に合うスマホアプリがわかる。",
+      description: SITE_DESCRIPTION,
       type: "website",
       images: [{ url: `${origin}/og-kotonavi-next-step-v2.png`, width: 1731, height: 909, alt: "コトナビ 困りごとから、次の一歩へ。" }],
     },
     twitter: {
       card: "summary_large_image",
       title: "コトナビ｜困りごとから、次の一歩へ。",
-      description: "解決までのステップと、状況に合うスマホアプリがわかる。",
+      description: SITE_DESCRIPTION,
       images: [`${origin}/og-kotonavi-next-step-v2.png`],
     },
   };
@@ -52,7 +54,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     "@type": "WebSite",
     name: "コトナビ",
     url: "https://kotonaviapp.com",
-    description: "生活の困りごとを解決までの順番に整理し、状況に合うスマホアプリを案内するサイト。",
+    description: SITE_DESCRIPTION,
     inLanguage: "ja",
   };
   return (
