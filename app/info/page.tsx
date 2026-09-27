@@ -60,6 +60,7 @@ export default function InfoPage() {
         <section id="privacy">
           <span className="policy-number">04</span><div><h2>プライバシーについて</h2>
           <p>サイト改善のため、ホスティングサービスがアクセス数やページ閲覧などの利用状況を記録する場合があります。外部リンクを開いた後は、リンク先事業者のプライバシーポリシーが適用されます。</p>
+          <p>当サイトでは、Googleによるアクセス解析ツール「Googleアナリティクス」を使用しています。Googleアナリティクスはデータの収集のためにCookieを使用しています。このデータは匿名で収集されており、個人を特定するものではありません。この機能はCookieを無効にすることで収集を拒否できますので、お使いのブラウザの設定をご確認ください。詳しくは<a href="https://marketingplatform.google.com/about/analytics/terms/jp/" target="_blank" rel="noreferrer">Googleアナリティクスの利用規約</a>・<a href="https://policies.google.com/technologies/partner-sites?hl=ja" target="_blank" rel="noreferrer">Googleのポリシーと規約</a>をご確認ください。</p>
           <ul><li>閲覧ページ、サイト内検索語、検索結果件数、外部リンク種別、参照元をサイト改善のため記録する場合があります。</li><li>これらの計測情報を、氏名やメールアドレスと結び付けて収集しません。</li><li>問い合わせ機能を追加する際は、取得項目、利用目的、保存期間を明示します。</li><li>機密情報や健康情報などを、このサイトへ入力しないでください。</li></ul></div>
         </section>
 

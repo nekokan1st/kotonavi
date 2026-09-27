@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { headers } from "next/headers";
 import "./globals.css";
 import Analytics from "./analytics";
+import GoogleAnalytics from "./google-analytics";
 
 export async function generateMetadata(): Promise<Metadata> {
   const headerList = await headers();
@@ -55,6 +56,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="ja">
       <body>
         <Analytics />
+        <GoogleAnalytics />
         {children}
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }} />
       </body>
