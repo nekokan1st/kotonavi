@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import { headers } from "next/headers";
+import Script from "next/script";
 import "./globals.css";
 import Analytics from "./analytics";
-import GoogleAnalytics from "./google-analytics";
+import GoogleAnalyticsPageView from "./google-analytics";
+
+const GA_MEASUREMENT_ID = "G-3QE4Z77S21";
 
 export async function generateMetadata(): Promise<Metadata> {
   const headerList = await headers();
@@ -56,7 +59,18 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="ja">
       <body>
         <Analytics />
-        <GoogleAnalytics />
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+window.gtag = gtag;
+gtag('js', new Date());
+gtag('config', '${GA_MEASUREMENT_ID}');`}
+        </Script>
+        <GoogleAnalyticsPageView />
         {children}
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }} />
       </body>

@@ -1,10 +1,7 @@
 "use client";
 
-import Script from "next/script";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
-
-const GA_MEASUREMENT_ID = "G-3QE4Z77S21";
 
 declare global {
   interface Window {
@@ -13,7 +10,7 @@ declare global {
   }
 }
 
-export default function GoogleAnalytics() {
+export default function GoogleAnalyticsPageView() {
   const pathname = usePathname();
   const isInitialPageView = useRef(true);
 
@@ -30,19 +27,5 @@ export default function GoogleAnalytics() {
     });
   }, [pathname]);
 
-  return (
-    <>
-      <Script
-        src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
-        strategy="afterInteractive"
-      />
-      <Script id="google-analytics" strategy="afterInteractive">
-        {`window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-window.gtag = gtag;
-gtag('js', new Date());
-gtag('config', '${GA_MEASUREMENT_ID}');`}
-      </Script>
-    </>
-  );
+  return null;
 }
