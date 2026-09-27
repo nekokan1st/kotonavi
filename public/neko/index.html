@@ -44,17 +44,21 @@ h1 span{color:var(--gold)}
 .qhead .bar{flex:1;height:10px;border-radius:5px;background:rgba(255,255,255,.3);overflow:hidden}
 .qhead .bar i{display:block;height:100%;width:0;background:var(--gold);border-radius:5px;transition:width .3s}
 .qhead b{font-family:var(--display);font-weight:400;font-size:16px;font-variant-numeric:tabular-nums;min-width:3.5em;text-align:right}
-.qsec{display:flex;flex-direction:column;min-height:calc(100dvh - 60px)}
-.qcard{padding:18px 18px 20px}
-.qsec .qtext{min-height:auto;margin-bottom:16px}
-.qsec .opt{padding:14px}
-.nbox{position:relative;flex:1;min-height:210px;margin-top:14px;border-radius:26px;background:linear-gradient(180deg,rgba(255,255,255,.28),rgba(255,255,255,.12));border:2px solid rgba(255,255,255,.55);overflow:hidden;touch-action:none}
+.qsec{display:flex;flex-direction:column;height:calc(100dvh - 24px);min-height:520px}
+body.quiz main{padding-block:12px}
+body.quiz .qhead{padding-right:48px;margin-bottom:10px;min-height:40px}
+.qcard{padding:14px 14px 14px}
+.qsec .qtext{min-height:auto;margin-bottom:12px;font-size:clamp(18px,5vw,22px);line-height:1.4}
+.qsec .qnum{margin-bottom:2px}
+.qsec .opts{gap:8px}
+.qsec .opt{padding:11px 12px;font-size:15px}
+.qsec .opt .k{width:26px;height:26px;font-size:12px}
+.nbox{position:relative;flex:1;min-height:190px;margin-top:10px;border-radius:26px;background:linear-gradient(180deg,rgba(255,255,255,.28),rgba(255,255,255,.12));border:2px solid rgba(255,255,255,.55);overflow:hidden;touch-action:none}
 .nbox::after{content:"";position:absolute;left:0;right:0;bottom:0;height:18px;background:rgba(255,255,255,.35)}
 #box{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none;z-index:1}
 .nlabel{position:absolute;left:12px;top:10px;z-index:2;display:flex;flex-direction:column;gap:2px;pointer-events:none;color:#fff}
 .nlabel b{font-family:var(--display);font-weight:400;font-size:15px}
 .nlabel span{font-size:11px;font-weight:800;opacity:.9}
-.back{margin-top:10px!important}
 .qcat{width:110px;height:110px;display:block;margin:-70px auto 4px}
 .qnum{font-size:12px;font-weight:800;letter-spacing:.14em;color:var(--accent);text-align:center;margin:0 0 6px}
 .qtext{font-family:var(--display);font-weight:400;font-size:clamp(20px,5.6vw,24px);line-height:1.45;text-align:center;margin:0 0 20px;text-wrap:balance;min-height:2.9em}
@@ -64,7 +68,7 @@ h1 span{color:var(--gold)}
 .opt .k{flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--soft);font-family:var(--display);font-weight:400;font-size:14px;color:var(--mute)}
 .opt.picked{border-color:var(--accent);background:#FFF3EE}
 .opt.picked .k{background:var(--accent);color:#fff}
-.back{margin:16px auto 0;display:block;border:0;background:none;color:#fff;font-weight:800;font-size:13px;opacity:.85}
+.back{flex:none;width:34px;height:34px;border-radius:50%;border:0;background:rgba(255,255,255,.22);color:#fff;display:grid;place-items:center;padding:0}
 .qwrap{animation:in .35s ease-out}
 @keyframes in{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:none}}
 /* loading */
@@ -167,7 +171,7 @@ h1 span{color:var(--gold)}
   </section>
 
   <section id="sQ" class="qsec" hidden>
-    <div class="qhead"><div class="bar"><i id="qbar"></i></div><b id="qcount">1/12</b></div>
+    <div class="qhead"><button class="back" id="bBack" aria-label="ひとつ前の質問にもどる"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button><div class="bar"><i id="qbar"></i></div><b id="qcount">1/12</b></div>
     <div class="qwrap" id="qwrap">
       <div class="card qcard">
         <p class="qnum" id="qnum">Q1</p>
@@ -182,7 +186,6 @@ h1 span{color:var(--gold)}
       <canvas id="box" aria-label="答えるたびにねこが増える箱。ねこはさわったり転がしたりできる"></canvas>
       <div class="nlabel"><b id="nboxN">ねこばこ 0/12</b><span id="nboxTip">答えるたびに、ねこがふえるよ</span></div>
     </div>
-    <button class="back" id="bBack">ひとつ前にもどる</button>
   </section>
 
   <section class="loading" id="sLoad" hidden><canvas id="lcat" width="320" height="320" aria-hidden="true"></canvas><p id="ltext">しんだん中にゃ…</p></section>
@@ -204,8 +207,9 @@ h1 span{color:var(--gold)}
         <div class="box wide"><h3>相性ばつぐんのねこ</h3><div class="mate"><canvas id="mcat" width="112" height="112" aria-hidden="true"></canvas><p id="rmate"></p></div></div>
       </div>
       <div class="share">
+        <button class="btn" id="bNative" hidden>画像つきでシェアする</button>
         <a class="xbtn" id="xShare" href="#" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.8 3h3.1l-6.8 7.8L22 21h-6.3l-4.9-6.4L5.2 21H2.1l7.3-8.3L2 3h6.4l4.4 5.9L17.8 3zm-1.1 16.2h1.7L7.4 4.7H5.6l11.1 14.5z"/></svg>結果をポストする</a>
-        <button class="btn" id="bInvite">友だちにも診断してもらう</button>
+        <button class="btn sub" id="bInvite">友だちにも診断してもらう</button>
         <span class="copied" id="copied" hidden></span>
         <button class="btn sub" id="bRetry">もう一度診断する</button>
       </div>
@@ -335,16 +339,17 @@ const pokeT=[];
 lineCvs.forEach(([cv],i)=>cv.addEventListener('pointerdown',()=>{initAudio();pokeT[i]=performance.now();meow(1.05+Math.random()*.35);try{navigator.vibrate&&navigator.vibrate(10);}catch(_){}}));
 function renderFriend(){const f=$('friend');if(!friendKey){f.hidden=true;return;}f.hidden=false;$('fname').innerHTML=T[friendKey].name+'タイプ<i>'+T[friendKey].copy+'</i>';paintCat($('fcat'),T[friendKey].coat,{face:'happy'});}
 renderFriend();
+if(navigator.share&&matchMedia('(pointer:coarse)').matches){$('bNative').hidden=false;$('bNative').onclick=nativeShare;}
 if(friendKey)track('friend_link_open',{cat_type:T[friendKey].id});
 $('xShare').addEventListener('click',()=>track('share',{method:'x',cat_type:resultKey?T[resultKey].id:''}));
 $('shareImg').addEventListener('contextmenu',()=>track('share',{method:'image_save',cat_type:resultKey?T[resultKey].id:''}));
-function show(id){for(const s of['sIntro','sQ','sLoad','sR'])$(s).hidden=s!==id;window.scrollTo({top:0});}
+function show(id){document.body.classList.toggle('quiz',id==='sQ');for(const s of['sIntro','sQ','sLoad','sR'])$(s).hidden=s!==id;window.scrollTo({top:0});}
 
 /* ---------- cat box: one cat per answer, touch / drag / fling / roll ---------- */
 const box=$('box'),bctx=box.getContext('2d');let BW=1,BH=1,BD=1,cats=[],lastBox=performance.now(),grab=null;
 function boxResize(){const r=box.getBoundingClientRect();BD=Math.min(2,devicePixelRatio||1);BW=Math.max(1,r.width);BH=Math.max(1,r.height);box.width=Math.round(BW*BD);box.height=Math.round(BH*BD);}
 new ResizeObserver(boxResize).observe(box);
-function catR(){return Math.max(22,Math.min(38,BW/9));}
+function catR(){return Math.max(18,Math.min(34,BW/10.5,BH/7));}
 function partialKey(){const s={S:0,A:0,E:0};answers.forEach((v,i)=>{if(v)s[Q[i].ax]+=v;});return (s.S>=0?'+':'-')+(s.A>=0?'+':'-')+(s.E>=0?'+':'-');}
 function addCat(key,lv,x,y){const R=catR()*Math.pow(1.42,lv||0);cats.push({key,lv:lv||0,age:0,x:x!==undefined?x:R+Math.random()*(BW-2*R),y:y!==undefined?y:-R*1.5,vx:(Math.random()-.5)*120,vy:0,a:(Math.random()-.5)*.4,w:(Math.random()-.5)*2,va:0,onFloor:false,r:R,face:'idle',faceT:0,sq:0,blink:2+Math.random()*3});}
 function popCat(){cats.pop();}
@@ -437,7 +442,7 @@ box.addEventListener('pointerup',bup);box.addEventListener('pointercancel',bup);
 /* ---------- quiz ---------- */
 function renderQ(){const q=Q[qi];$('qcount').textContent=(qi+1)+'/'+Q.length;$('qbar').style.width=(qi/Q.length*100)+'%';$('qnum').textContent='Q'+(qi+1);$('qtext').innerHTML=jp(q.q);$('tA').innerHTML=jp(q.a);$('tB').innerHTML=jp(q.b);
   for(const id of['oA','oB'])$(id).classList.remove('picked');const prev=answers[qi];if(prev!==undefined)$(prev>0?'oA':'oB').classList.add('picked');
-  syncCats();$('bBack').hidden=qi===0;const w=$('qwrap');w.style.animation='none';void w.offsetWidth;w.style.animation='';}
+  syncCats();$('bBack').style.visibility=qi===0?'hidden':'visible';const w=$('qwrap');w.style.animation='none';void w.offsetWidth;w.style.animation='';}
 function answer(v){initAudio();popSE(v);const fresh=answers[qi]===undefined;answers[qi]=v;if(fresh){const small=cats.filter(c=>c.lv===0),k=small.length&&Math.random()<.4?small[Math.floor(Math.random()*small.length)].key:ORDER[Math.floor(Math.random()*ORDER.length)];addCat(k);}$(v>0?'oA':'oB').classList.add('picked');anim.look=[v>0?-1:1,0];anim.face='happy';
   if(fresh&&qi===5)track('quiz_progress',{question:6});
   setTimeout(()=>{if(qi<Q.length-1){qi++;renderQ();}else finish();},260);}
@@ -446,6 +451,12 @@ $('bBack').onclick=()=>{if(qi>0){qi--;renderQ();}};
 $('bStart').onclick=()=>{track('quiz_start',{from_friend:friendKey?T[friendKey].id:'none'});initAudio();clearRev();bgmStart('quiz');answers=[];qi=0;cats=[];merges=0;maxMerge=0;show('sQ');requestAnimationFrame(boxResize);renderQ();};
 $('bRetry').onclick=()=>{track('retry');clearRev();bgmStop(.5);answers=[];qi=0;cats=[];show('sIntro');};
 function score(){const s={S:0,A:0,E:0};Q.forEach((q,i)=>{s[q.ax]+=answers[i]||0;});return s;}
+let shareText='',shareUrl='';
+async function nativeShare(){const key=resultKey;track('share',{method:'native',cat_type:key?T[key].id:''});
+  try{const blob=await (await fetch($('shareImg').src)).blob(),file=new File([blob],'neko-shindan.png',{type:'image/png'});
+    const data={files:[file],text:shareText+(shareUrl?'\n'+shareUrl:'')};
+    if(navigator.canShare&&navigator.canShare(data)){await navigator.share(data);return;}
+    await navigator.share({text:shareText,url:shareUrl||undefined});}catch(e){}}
 let inviteText='',revT=[];
 function confetti(){if(reduce)return;const cv=$('confetti'),D=Math.min(2,devicePixelRatio||1),W=innerWidth,H=innerHeight;cv.width=W*D;cv.height=H*D;const c=cv.getContext('2d');c.setTransform(D,0,0,D,0,0);
   const col=['#FFD36E','#FF7A59','#FFFFFF','#7FC6E8','#F5A04A','#E0607E','#6CC18B'],P=[];
@@ -474,8 +485,8 @@ function showResult(key,s){if(s)track('quiz_complete',{cat_type:T[key].id,merges
   $('axes').innerHTML=ax.map(([l,r,k])=>{const v=s?s[k]:(key['SAE'.indexOf(k)]==='+'?2:-2),pct=50-v/4*42;return '<div class="axis"><span>'+l+'</span><div class="t"><i style="left:'+pct+'%"></i></div><span>'+r+'</span></div>';}).join('');
   const link=shareLink(t.id);const king=s&&maxMerge>=2?' キングにゃんも作れた!':'';
   const text='わたしをねこにたとえると「'+t.name+'タイプ」('+t.copy+')でした!'+king+'\nあなたは何ねこ? 相性も見てみて\n#ねこ診断';
-  $('xShare').href='https://x.com/intent/post?text='+encodeURIComponent(text)+(link?'&url='+encodeURIComponent(link):'');
-  inviteText=text+(link?'\n'+link:'');$('copied').hidden=true;
+  $('xShare').href='https://twitter.com/intent/tweet?text='+encodeURIComponent(text)+(link?'&url='+encodeURIComponent(link):'');
+  inviteText=text+(link?'\n'+link:'');shareText=text;shareUrl=link;$('copied').hidden=true;
   $('shareImg').src=shareImage(key,s?{merges,king:maxMerge>=2}:null);paintCat($('pcat'),T['+-+'].coat,{face:'happy'});
   $('ogrid').innerHTML='';ORDER.forEach(k=>{const b=document.createElement('button');if(k===key)b.className='me';const cv=document.createElement('canvas');cv.width=120;cv.height=120;paintCat(cv,T[k].coat,{});b.appendChild(cv);b.appendChild(document.createTextNode(T[k].name));b.onclick=()=>{track('view_other_type',{cat_type:T[k].id});showResult(k,null);};$('ogrid').appendChild(b);});}
 function wrapJP(c,x,w){const ls=[''];for(const k of chunks(x)){const cur=ls[ls.length-1];if(cur&&c.measureText(cur+k).width>w)ls.push(k);else ls[ls.length-1]=cur+k;}return ls;}
