@@ -44,6 +44,27 @@ const worker = {
       });
     }
 
+    if (url.pathname === "/neko") {
+      url.pathname = "/neko/";
+      return Response.redirect(url.toString(), 308);
+    }
+
+    if (url.pathname.startsWith("/neko/")) {
+      const assetUrl = new URL(url);
+      if (assetUrl.pathname === "/neko/") assetUrl.pathname = "/neko/index.html";
+
+      const response = await env.ASSETS.fetch(new Request(assetUrl, request));
+      if (!isStaging) return response;
+
+      const headers = new Headers(response.headers);
+      headers.set("x-robots-tag", "noindex, nofollow, noarchive");
+      return new Response(response.body, {
+        status: response.status,
+        statusText: response.statusText,
+        headers,
+      });
+    }
+
     if (url.pathname === "/api/events" && request.method === "POST") {
       try {
         const raw = await request.json() as Record<string, unknown>;
