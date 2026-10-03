@@ -102,6 +102,7 @@ body.quiz .qhead{padding-right:48px;margin-bottom:10px;min-height:40px}
 .promo canvas{width:64px;height:64px;flex:none}
 .promo b{font-family:var(--display);font-weight:400;font-size:17px;display:block}
 .promo span{font-size:12px;opacity:.9}
+.promo{text-decoration:none;box-shadow:0 8px 20px rgba(60,111,209,.3)}.promo small{display:block;font-size:11px;font-weight:800;opacity:.95;margin-bottom:2px}.promo .pbtn{display:inline-block;margin-top:8px;background:#fff;color:#3C6FD1;font-style:normal;font-weight:800;font-size:13px;border-radius:999px;padding:7px 14px}.promo canvas{width:76px;height:76px}
 .others{margin-top:16px}
 .others h2{color:#fff;font-size:14px;letter-spacing:.14em;text-align:center;margin:0 0 10px}
 .ogrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
@@ -216,7 +217,7 @@ body.quiz .qhead{padding-right:48px;margin-bottom:10px;min-height:40px}
       <p class="imgnote jw">画像を<wbr>長押しで<wbr>保存して、<wbr>SNSで<wbr>シェアしてね</p>
       <img id="shareImg" alt="診断結果のシェア用画像">
     </div>
-    <div class="promo"><canvas id="pcat" width="128" height="128" aria-hidden="true"></canvas><div><b>つるつるにゃんこ</b><span class="jw">このねこたちが<wbr>主役の<wbr>すべって<wbr>ぬる<wbr>パズル。<wbr>近日公開</span></div></div>
+    <a class="promo" id="promo" href="https://apps.apple.com/jp/app/id6817419396" target="_blank" rel="noopener"><canvas id="pcat" width="128" height="128" aria-hidden="true"></canvas><div><small id="pkick">このねこたちが主役のゲーム</small><b>つるつるにゃんこ</b><span class="jw" id="ptext">スワイプでねこがすべって<wbr>マスをぬる<wbr>パズル。<wbr>100ステージ以上</span><em class="pbtn">App Storeで無料ダウンロード</em></div></a>
     <div class="others"><h2>ほかのタイプも見る</h2><div class="ogrid" id="ogrid"></div></div>
     <p class="note">※ エンタメとしてお楽しみください</p>
   </section>
@@ -341,6 +342,7 @@ function renderFriend(){const f=$('friend');if(!friendKey){f.hidden=true;return;
 renderFriend();
 if(navigator.share&&matchMedia('(pointer:coarse)').matches){$('bNative').hidden=false;$('bNative').onclick=nativeShare;}
 if(friendKey)track('friend_link_open',{cat_type:T[friendKey].id});
+$('promo').addEventListener('click',()=>track('app_click',{app:'tsurutsuru',cat_type:resultKey?T[resultKey].id:''}));
 $('xShare').addEventListener('click',()=>track('share',{method:'x',cat_type:resultKey?T[resultKey].id:''}));
 $('shareImg').addEventListener('contextmenu',()=>track('share',{method:'image_save',cat_type:resultKey?T[resultKey].id:''}));
 function show(id){document.body.classList.toggle('quiz',id==='sQ');for(const s of['sIntro','sQ','sLoad','sR'])$(s).hidden=s!==id;window.scrollTo({top:0});}
@@ -487,7 +489,7 @@ function showResult(key,s){if(s)track('quiz_complete',{cat_type:T[key].id,merges
   const text='わたしをねこにたとえると「'+t.name+'タイプ」('+t.copy+')でした!'+king+'\nあなたは何ねこ? 相性も見てみて\n#ねこ診断';
   $('xShare').href='https://twitter.com/intent/tweet?text='+encodeURIComponent(text)+(link?'&url='+encodeURIComponent(link):'');
   inviteText=text+(link?'\n'+link:'');shareText=text;shareUrl=link;$('copied').hidden=true;
-  $('shareImg').src=shareImage(key,s?{merges,king:maxMerge>=2}:null);paintCat($('pcat'),T['+-+'].coat,{face:'happy'});
+  $('shareImg').src=shareImage(key,s?{merges,king:maxMerge>=2}:null);paintCat($('pcat'),t.coat,{face:'happy'});$('pkick').textContent='あなたの「'+t.name+'」も登場するゲーム';
   $('ogrid').innerHTML='';ORDER.forEach(k=>{const b=document.createElement('button');if(k===key)b.className='me';const cv=document.createElement('canvas');cv.width=120;cv.height=120;paintCat(cv,T[k].coat,{});b.appendChild(cv);b.appendChild(document.createTextNode(T[k].name));b.onclick=()=>{track('view_other_type',{cat_type:T[k].id});showResult(k,null);};$('ogrid').appendChild(b);});}
 function wrapJP(c,x,w){const ls=[''];for(const k of chunks(x)){const cur=ls[ls.length-1];if(cur&&c.measureText(cur+k).width>w)ls.push(k);else ls[ls.length-1]=cur+k;}return ls;}
 function shareImage(key,ac){const t=T[key],S=1080,cv=document.createElement('canvas');cv.width=S;cv.height=S;const c=cv.getContext('2d');
