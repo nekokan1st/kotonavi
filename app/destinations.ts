@@ -55,4 +55,11 @@ export const directStoreLinks: Record<string, AppDestinations> = {
   "さんあ〜る": { ios: "https://apps.apple.com/jp/app/id977071564", android: "https://play.google.com/store/apps/details?id=jp.co.delight_system.threeR.android" },
   "EPARKお薬手帳": { ios: "https://apps.apple.com/jp/app/id952969231", android: "https://play.google.com/store/apps/details?id=jp.epark.medicinenote" },
   "Google Keep": { ios: "https://apps.apple.com/jp/app/id1029207872", android: "https://play.google.com/store/apps/details?id=com.google.android.keep" },
+  "ヤマト運輸公式アプリ": { ios: "https://apps.apple.com/jp/app/id484435888", android: "https://play.google.com/store/apps/details?id=jp.co.kuronekoyamato.KuronekoyamatoOfficialApp" },
+  "郵便局公式アプリ": { ios: "https://apps.apple.com/jp/app/id6450435935", android: "https://play.google.com/store/apps/details?id=jp.jppost.pfapp" },
+  "佐川急便公式アプリ": { ios: "https://apps.apple.com/jp/app/id556798723", android: "https://play.google.com/store/apps/details?id=jp.co.sagawa.SagawaOfficialApp" },
+  "Adobe Scan": { ios: "https://apps.apple.com/jp/app/id1199564834", android: "https://play.google.com/store/apps/details?id=com.adobe.scan.android" },
+  "Google ドライブ": { ios: "https://apps.apple.com/jp/app/id507874739", android: "https://play.google.com/store/apps/details?id=com.google.android.apps.docs" },
+  "Sleep Cycle": { ios: "https://apps.apple.com/jp/app/id320606217", android: "https://play.google.com/store/apps/details?id=com.northcube.sleepcycle" },
+  "熟睡アラーム": { ios: "https://apps.apple.com/jp/app/id827600695", android: "https://play.google.com/store/apps/details?id=jp.co.c2inc.deepsleep.pokemedi" },
 };

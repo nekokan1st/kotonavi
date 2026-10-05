@@ -40,6 +40,30 @@ test("renamed apps use the current store identity throughout the site", async ()
   assert.doesNotMatch(home, /name: "CLINICS"/);
 });
 
+test("new app comparisons remain linked from the navigator with distinct store visuals", async () => {
+  const home = await readFile(new URL("../app/page.tsx", import.meta.url), "utf8");
+  const expected = new Map([
+    ["daily-parcel", ["ヤマト運輸公式アプリ", "郵便局公式アプリ", "佐川急便公式アプリ"]],
+    ["digital-scan", ["Adobe Scan", "Google ドライブ"]],
+    ["health-sleep", ["Sleep Cycle", "熟睡アラーム"]],
+  ]);
+
+  for (const [problemId, names] of expected) {
+    assert.match(home, new RegExp(`"${problemId}": "[^"]+"`), `${problemId}: missing detail link`);
+    const page = problemPages.find((item) => item.problemId === problemId);
+    assert.ok(page, `${problemId}: missing editorial page`);
+    assert.deepEqual(page.options.map((option) => option.name), names);
+    const storeIds = names.map((name) => {
+      assert.match(home, new RegExp(`"${name}"`), `${name}: missing home app allowlist`);
+      const stores = directStoreLinks[name];
+      assert.ok(stores?.ios?.includes("apps.apple.com/jp/app/id"), `${name}: missing App Store visual source`);
+      assert.ok(stores?.android?.includes("play.google.com/store/apps/details?id="), `${name}: missing Google Play link`);
+      return stores.ios.match(/id(\d+)/)?.[1];
+    });
+    assert.equal(new Set(storeIds).size, names.length, `${problemId}: duplicate App Store visual`);
+  }
+});
+
 test("every editorial problem page renders the correct chooser variant and all choices", async () => {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
   workerUrl.searchParams.set("chooser-audit", `${process.pid}-${Date.now()}`);
