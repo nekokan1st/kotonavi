@@ -33,6 +33,8 @@ const mobileAppNames = new Set([
   "ぴよログ", "家族アルバム みてね", "Google Authenticator", "Whoscall",
   "ジョルダン乗換案内", "乗換NAVITIME", "クックパッド", "DELISH KITCHEN", "Shufoo!",
   "さんあ〜る", "EPARKお薬手帳", "Google Keep",
+  "ヤマト運輸公式アプリ", "郵便局公式アプリ", "佐川急便公式アプリ",
+  "Adobe Scan", "Google ドライブ", "Sleep Cycle", "熟睡アラーム",
 ]);
 
 export const directStoreLinks = storeDestinations;
@@ -316,14 +318,14 @@ const problems: Problem[] = [
     ],
   },
   {
-    id: "daily-dispose", theme: "daily", phase: "organize", eyebrow: "捨てる前に分類",
-    title: "大きな家具や家電の処分方法を知りたい",
-    description: "自治体回収、家電リサイクル、譲渡や買取のどれが使えるかを品目ごとに切り分けます。",
+    id: "daily-dispose", theme: "daily", phase: "organize", eyebrow: "自治体のルールから確認",
+    title: "ごみの分別・収集日と粗大ごみの出し方を知りたい",
+    description: "普段のごみの出し方を地域ごとに確認し、家具や家電は別の処分ルールへ切り分けます。",
     duration: "所要 15分",
     tasks: [
-      { id: "daily-item", title: "品目・大きさ・状態を記録する", note: "型番や製造年も分かれば控えます。", timing: "最初に" },
-      { id: "daily-rule", title: "自治体とリサイクル対象のルールを確認する", note: "通常の粗大ごみで出せない品目があります。", timing: "申込前" },
-      { id: "daily-book", title: "費用と搬出方法を比べて予約する", note: "自力搬出が難しい場合は運び出し条件も確認。", timing: "希望日の前" },
+      { id: "daily-item", title: "住んでいる自治体と出したい品目を確認する", note: "同じ品目でも地域によって分別が異なります。", timing: "最初に" },
+      { id: "daily-rule", title: "収集日と分別ルールを確認する", note: "さんあ〜るの対応地域なら通知も設定できます。", timing: "ごみ出し前" },
+      { id: "daily-book", title: "粗大ごみ・家電は別の手続きを確認する", note: "家電4品目は通常の粗大ごみでは出せません。", timing: "申込前" },
     ], services: [
       { name: "環境省 家電リサイクル案内", category: "公的案内", description: "家電4品目、小型家電、粗大ごみを正しく処分するための区分と、無許可回収業者への注意点を確認。", tags: ["家電4品目", "自治体ルール", "不用品処分"], fit: "処分方法の区分から確認したい", price: "閲覧無料", access: "Webで確認", href: "https://www.env.go.jp/recycle/kaden/tvrecycle.html", accent: "#368665" },
       { name: "さんあ〜る", category: "ごみ分別・収集日通知アプリ", description: "対応自治体のごみ収集日、分別方法、品目検索、自治体からのお知らせを確認できるアプリ。", tags: ["ごみ収集日", "分別検索", "対応自治体"], fit: "住んでいる自治体のごみ出し日と分別をスマホで確認したい", why: "地域設定に合わせて収集日と分別ルールを確認できる", watch: "利用できる自治体か、初回設定時に必ず確認", price: "無料", access: "アプリで利用", href: "https://threer.delight-system.co.jp/", accent: "#4c9a72" },
@@ -1003,6 +1005,49 @@ const problems: Problem[] = [
       { name: "DV相談プラス", category: "内閣府 DV相談", description: "電話、チャット、メール、外国語相談に対応し、必要に応じて地域の支援へつなぐ相談サービス。", tags: ["24時間電話", "チャット", "多言語"], fit: "電話で話しづらい、または安全な時間に文字で相談したい", why: "電話だけでなくチャット・メール・外国語の入口を選べる", watch: "端末を監視されている可能性がある場合は閲覧履歴や安全な端末に注意", price: "相談無料", access: "電話・チャット・メール", href: "https://soudanplus.jp/", accent: "#8d5a94" },
     ],
   },
+  {
+    id: "daily-parcel", theme: "daily", phase: "now", eyebrow: "配送会社ごとに確認",
+    title: "荷物の配達状況と再配達をスマホで確認したい",
+    description: "荷物の追跡番号と配送会社を確認し、公式アプリから配達状況・受取方法を確認します。",
+    duration: "所要 5分",
+    tasks: [
+      { id: "parcel-company", title: "送り状の配送会社と追跡番号を確認する", note: "購入履歴や発送メールに記載された番号を使います。", timing: "最初に" },
+      { id: "parcel-track", title: "配送会社の公式アプリで追跡する", note: "他社の番号は検索できない場合があります。", timing: "発送後" },
+      { id: "parcel-receive", title: "必要なら受取日時・場所を変更する", note: "変更可能な条件と締切は荷物ごとに確認します。", timing: "配達前" },
+    ], services: [
+      { name: "ヤマト運輸公式アプリ", category: "宅配便の追跡・受取", description: "ヤマト運輸の荷物を追跡し、対象の荷物は受取日時・場所の変更や再配達依頼を行えます。", tags: ["荷物追跡", "受取変更", "再配達"], fit: "ヤマト運輸の荷物を受け取る", watch: "利用できる変更機能は荷物と会員登録状況によって異なります。", price: "無料", access: "アプリで利用", href: "https://www.kuronekoyamato.co.jp/ytc/campaign/app2015/lp_001.html", accent: "#e9b10b" },
+      { name: "郵便局公式アプリ", category: "郵便・ゆうパックの追跡", description: "日本郵便の荷物の追跡や再配達依頼などをスマホで確認できます。", tags: ["荷物追跡", "再配達", "郵便局"], fit: "ゆうパックなど日本郵便の荷物を確認する", watch: "サービスごとの対象条件や、ゆうIDが必要な機能を確認してください。", price: "無料", access: "アプリで利用", href: "https://www.post.japanpost.jp/service/useful/app/post-office.html", accent: "#bd1728" },
+      { name: "佐川急便公式アプリ", category: "宅配便の追跡・受取", description: "佐川急便の荷物の追跡や再配達依頼を行えます。", tags: ["荷物追跡", "再配達", "配達通知"], fit: "佐川急便の荷物を受け取る", watch: "通知など一部の機能にはスマートクラブの登録が必要です。", price: "無料", access: "アプリで利用", href: "https://www.sagawa-exp.co.jp/", accent: "#126caa" },
+    ],
+  },
+  {
+    id: "digital-scan", theme: "digital", phase: "backup", eyebrow: "紙を読みやすいPDFに",
+    title: "紙の書類をスマホでスキャンして保存したい",
+    description: "書類を撮影してPDFにし、必要なときに探せる場所へ保存します。原本が必要かも先に確認します。",
+    duration: "所要 10分",
+    tasks: [
+      { id: "scan-document", title: "原本の保管要否と書類のページ数を確認する", note: "提出先が原本を求める書類は捨てません。", timing: "撮影前" },
+      { id: "scan-pages", title: "明るい場所で全ページを撮影してPDF化する", note: "四隅・文字の欠けや傾きを見直します。", timing: "撮影時" },
+      { id: "scan-save", title: "名前と日付を付け、共有設定を確認する", note: "個人情報を含む書類は公開リンクに注意します。", timing: "保存後" },
+    ], services: [
+      { name: "Adobe Scan", category: "書類スキャン・PDF", description: "書類をスマホで取り込み、PDF化や文字認識に利用できます。", tags: ["PDF", "文字認識", "書類"], fit: "紙の書類を読みやすくPDFで整理したい", watch: "クラウド保存や有料機能の条件、共有先を確認してください。", price: "無料機能あり", access: "アプリで利用", href: "https://www.adobe.com/jp/acrobat/mobile.html", accent: "#d23030" },
+      { name: "Google ドライブ", category: "書類スキャン・クラウド保存", description: "スマホから書類をスキャンし、PDFとしてドライブに保存できます。", tags: ["PDF", "クラウド", "共有"], fit: "スキャンした書類をほかのファイルと一緒に管理したい", watch: "保存容量と共有権限を確認し、機密書類の扱いに注意してください。", price: "無料容量あり", access: "Googleアカウントで利用", href: "https://support.google.com/drive/answer/3145835?co=GENIE.Platform%3DDesktop&hl=ja", accent: "#3a8b57" },
+    ],
+  },
+  {
+    id: "health-sleep", theme: "health", phase: "manage", eyebrow: "記録は診断の代わりではない",
+    title: "睡眠時間や眠りの傾向を記録したい",
+    description: "就寝・起床時刻を無理なく記録し、生活リズムの見直しに役立てます。症状が続く場合は医療機関に相談します。",
+    duration: "初回 10分",
+    tasks: [
+      { id: "sleep-baseline", title: "就寝・起床時刻と日中の眠気を記録する", note: "数日分の傾向を見て判断します。", timing: "毎日" },
+      { id: "sleep-device", title: "記録方法と端末の置き方を確認する", note: "アプリごとの測定条件を確認します。", timing: "利用前" },
+      { id: "sleep-review", title: "生活習慣と体調を一緒に振り返る", note: "強い眠気やいびきなどが続く場合は受診も検討します。", timing: "1週間後" },
+    ], services: [
+      { name: "Sleep Cycle", category: "睡眠記録・アラーム", description: "スマホを使って睡眠の傾向を記録し、設定した時間帯のアラームを利用できます。", tags: ["睡眠記録", "アラーム", "傾向"], fit: "睡眠パターンを見ながら起床もサポートしてほしい", watch: "記録は医療上の診断ではありません。定期購入の料金・条件を確認してください。", price: "無料機能あり・有料プランあり", access: "アプリで利用", href: "https://sleepcycle.com/download-app", accent: "#6976b8" },
+      { name: "熟睡アラーム", category: "睡眠記録・アラーム", description: "睡眠の記録とアラーム機能を組み合わせて使えるアプリです。", tags: ["睡眠記録", "アラーム", "生活リズム"], fit: "日本語のアプリで睡眠と目覚ましをまとめたい", watch: "計測結果は目安です。広告や有料機能の条件を確認してください。", price: "無料機能あり", access: "アプリで利用", href: "https://jukusui.com/service", accent: "#508ca2" },
+    ],
+  },
 ];
 
 export const appProblems = problems
@@ -1036,6 +1081,8 @@ export const problemDetailSlugs: Record<string, string> = {
   "food-shopping": "find-grocery-deals", "food-rescue": "pick-up-surplus-food",
   "food-chores": "share-household-chores", "pets-hospital": "find-pet-hospital",
   "pets-sitter": "choose-pet-sitter", "support-alone": "find-support-when-alone",
+  "daily-parcel": "track-parcels-with-apps", "digital-scan": "scan-documents-with-apps",
+  "health-sleep": "track-sleep-with-apps",
 };
 
 // 一覧・SCENE NAVIGATOR用。サービス欄はスマホアプリだけに保ちつつ、

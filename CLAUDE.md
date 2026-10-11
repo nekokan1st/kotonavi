@@ -51,14 +51,12 @@ npm test
 
 ## デプロイ
 
-Cloudflare Workersのプロジェクト名は `kotonaviapp`。production build後、認証済みのWranglerで次を実行します。
+Cloudflare Workersのプロジェクト名は `kotonaviapp`。`main`へpushすると `.github/workflows/ci-deploy.yml` が `npm test`、`npm run build`、`npx wrangler deploy --name kotonaviapp`、本番スモーク確認を順に実行します。PRではtestだけ実行します。
 
-```sh
-npm run build
-npx wrangler deploy --name kotonaviapp
-```
-
-Cloudflare認証はローカルのWrangler設定またはCloudflare側で行います。認証情報はリポジトリへ保存しません。デプロイ後は本番URL、変更対象URL、`robots.txt`、`sitemap.xml`を確認します。ステージングは `staging.kotonaviapp.com` で、`x-robots-tag: noindex, nofollow, noarchive` が必要です。
+- 認証はGitHub Secretsの `CLOUDFLARE_API_TOKEN` と `CLOUDFLARE_ACCOUNT_ID` だけで行い、リポジトリには保存しません。
+- Claudeの作業環境はnpmレジストリへ接続できないため、build・testの結果はActionsで確認します。
+- Secrets未設定時の手動デプロイは、利用者のMacで `npx wrangler login && npm run build && npx wrangler deploy --name kotonaviapp` を実行します。
+- デプロイ後は本番URL、変更対象URL、`robots.txt`、`sitemap.xml`を確認します。ステージングは `staging.kotonaviapp.com` で、`x-robots-tag: noindex, nofollow, noarchive` が必要です。
 
 ## 独立静的ページ
 
@@ -70,7 +68,7 @@ Cloudflare認証はローカルのWrangler設定またはCloudflare側で行い�
 - 推測で商品情報、制度、URL、提携状況を書かない。不明は「不明」と記録する。
 - 公式サイト・公式ストア・公的機関を一次情報として確認する。
 - 広告リンクには広告表示と `rel="nofollow sponsored"` を付ける。
-- lint、TypeScript、production build、testを通してから、対象ファイルだけcommit・pushする。
+- production build・testを通してから、対象ファイルだけcommit・pushする（lintとTypeScriptは既存エラーがあるため、新たなエラーを増やさないことを確認する）。
 - push後はGitHubのmain、デプロイ後は本番の実表示とHTTP状態を確認する。
 
 ## 引き継ぎ文書

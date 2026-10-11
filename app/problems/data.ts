@@ -138,8 +138,8 @@ export const problemPages: ProblemPage[] = [
   {
     slug: "dispose-large-appliances", problemId: "daily-dispose", category: "日常生活",
     contentType: "information",
-    title: "ごみの分別と収集日をスマホで確認する方法",
-    description: "住んでいる自治体のルールに合わせて、ごみの分別方法と収集日を確認し、出し忘れを減らす手順です。",
+    title: "ごみの分別・収集日と粗大ごみの出し方を確認する方法",
+    description: "自治体の分別方法と収集日をアプリで確認し、粗大ごみや家電リサイクル対象品は別手続きへ切り分ける手順です。",
     intro: "ごみの出し方や収集日は自治体・地域によって異なります。アプリを使う前に、住んでいる自治体が対応しているかを確認してください。テレビ、エアコン、冷蔵庫・冷凍庫、洗濯機・衣類乾燥機は通常の粗大ごみと異なる手続きが必要です。",
     steps: [
       { title: "自治体がアプリに対応しているか確認する", body: "住んでいる市区町村と地域を選択できるか確認します。" },
@@ -150,8 +150,12 @@ export const problemPages: ProblemPage[] = [
       { name: "環境省 家電リサイクル案内", kind: "公的案内", body: "家電4品目、小型家電、粗大ごみの区分と、無許可回収業者への注意点を確認できます。", fit: "処分方法の区分から確認したい", caution: "実際の収集方法や料金は自治体・販売店の案内を確認してください。", url: "https://www.env.go.jp/recycle/kaden/tvrecycle.html" },
       { name: "さんあ〜る", kind: "ごみ分別・収集日通知アプリ", body: "対応自治体のごみ収集日、分別方法、品目検索、自治体からのお知らせを確認できます。", fit: "自治体のごみ出し日と分別をスマホで確認したい", caution: "対応自治体と地域設定を確認してください。家電4品目などは別の手続きが必要です。", url: "https://threer.delight-system.co.jp/" },
     ],
+    seoContent: [
+      { heading: "毎日のごみ出しと大型品を分けて考える", body: "可燃・不燃・資源ごみの収集日や分別は自治体ごとに違います。さんあ〜るが住んでいる自治体に対応していれば、地域を設定して収集カレンダーや品目検索を利用できます。" },
+      { heading: "粗大ごみ・家電4品目は別の公式案内へ", body: "家具などの粗大ごみは自治体の申込方法と料金を確認します。テレビ・エアコン・冷蔵庫・洗濯機など家電リサイクル法の対象品は通常の粗大ごみとして出せないため、自治体や販売店の案内を優先してください。" },
+    ],
     notes: ["通知は地域設定が正しいことを確認してから有効にします。", "個人情報が残る機器は初期化とデータ消去を行います。"],
-    related: ["home-moving", "daily-subscriptions"], reviewedAt: "2026-08-12",
+    related: ["home-moving", "daily-subscriptions"], reviewedAt: "2026-09-19",
   },
   {
     slug: "pet-health-log", problemId: "pets-record", category: "ペット",
@@ -429,7 +433,74 @@ const additionalInformationProblemPages: ProblemPage[] = [
   { slug: "find-support-when-alone", problemId: "support-alone", category: "相談・支援", contentType: "information", title: "一人で抱え込まず相談先を探す手順｜生活の困りごと別に整理する", description: "お金、住まい、健康、法律などの困りごとを整理し、公的な相談窓口へつなぐ方法です。", intro: "今すぐ危険がある、住む場所がない、命に関わる場合は、地域の緊急窓口や119・110を優先します。", steps: [{ title: "困っていることと期限を一つ書き出す", body: "支払い、住まい、健康、家族、安全などに分けます。" }, { title: "公的な相談窓口を確認する", body: "自治体や国の公式サイトから、地域の窓口を探します。" }, { title: "連絡前に伝えたいことをメモする", body: "いつから、何が起きたか、希望する支援を短く整理します。" }], options: [{ name: "よりそいホットライン", kind: "相談窓口", body: "暮らしの困りごとを相談し、必要に応じて支援先につなぐ窓口です。", fit: "どこへ相談すればよいか分からない", caution: "受付時間・相談方法は公式案内で確認してください。緊急時は110・119を優先します。", url: "https://www.since2011.net/yorisoi/" }], seoContent: [{ heading: "相談先を選ぶ目安", body: "契約や請求は188、法律は法テラス、心の不調は自治体や専門窓口など、困りごとに合わせた公的窓口を確認してください。" }], notes: ["個人情報や安全に関する相談は、周囲に見られない安全な端末・場所を選んでください。"], related: ["support-legal", "support-mind"], reviewedAt: "2026-08-23" },
 ];
 
-problemPages.push(...moreProblemPages, ...appExpansionProblemPages, ...additionalAppProblemPages, ...additionalInformationProblemPages);
+const newAppProblemPages: ProblemPage[] = [
+  {
+    slug: "track-parcels-with-apps", problemId: "daily-parcel", category: "日常生活", contentType: "app",
+    title: "荷物追跡・再配達アプリの選び方｜配送会社ごとに使い分ける",
+    description: "配送会社に合う公式アプリで荷物の追跡、受取変更、再配達を確認する方法と注意点を比較します。",
+    intro: "最初に発送メールや送り状で配送会社と追跡番号を確認します。アプリは配送会社ごとに分かれているため、使っている会社の公式アプリを選ぶのが近道です。受取日時・場所の変更は、荷物の種類や会員登録状況によって利用できない場合があります。",
+    steps: [
+      { title: "配送会社と追跡番号を確認する", body: "購入履歴や発送メールにある番号と会社名を確認します。SMSなどの不審な再配達リンクは開かず、公式アプリから入力します。" },
+      { title: "公式アプリで配達状況を確認する", body: "配達中・持戻りなどの表示と、受取変更の可否を荷物ごとに確認します。" },
+      { title: "必要なら再配達や受取方法を変更する", body: "選べる日時・場所と締切を確認し、変更完了画面を保存します。" },
+    ],
+    options: [
+      { name: "ヤマト運輸公式アプリ", kind: "ヤマト運輸の荷物向け", body: "ヤマト運輸の荷物の追跡、対象荷物の受取日時・場所変更、再配達依頼に使えます。", fit: "クロネコヤマトで届く荷物が多い", caution: "一部機能はクロネコメンバーズ登録や荷物の条件によって異なります。", url: "https://www.kuronekoyamato.co.jp/ytc/campaign/app2015/lp_001.html" },
+      { name: "郵便局公式アプリ", kind: "日本郵便の荷物向け", body: "ゆうパックなどの追跡や再配達依頼をスマホから確認できます。", fit: "日本郵便の荷物や郵便サービスをよく使う", caution: "対象サービスと、ゆうIDが必要な機能を確認してください。", url: "https://www.post.japanpost.jp/service/useful/app/post-office.html" },
+      { name: "佐川急便公式アプリ", kind: "佐川急便の荷物向け", body: "佐川急便の荷物の追跡や再配達依頼に使えます。", fit: "佐川急便から届く荷物の状況を確認したい", caution: "通知など一部機能はスマートクラブの登録が必要です。", url: "https://www.sagawa-exp.co.jp/" },
+    ],
+    seoContent: [
+      { heading: "どのアプリを使えばいい？", body: "配送会社がヤマト運輸ならヤマト運輸公式アプリ、日本郵便なら郵便局公式アプリ、佐川急便なら佐川急便公式アプリを選びます。複数社の荷物を受け取る場合は、会社ごとに公式情報を確認してください。" },
+      { heading: "再配達を装うメッセージに注意", body: "配送会社を名乗るSMSのリンクからログインせず、公式アプリまたは自分で開いた公式サイトで追跡番号を確認してください。" },
+    ],
+    notes: ["配達予定や変更可能時間は荷物ごとに異なります。", "アプリ内の表示より新しい案内が必要な場合は配送会社の公式窓口へ確認してください。"],
+    related: ["daily-lost", "mobility-luggage"], reviewedAt: "2026-10-05",
+  },
+  {
+    slug: "scan-documents-with-apps", problemId: "digital-scan", category: "デジタル・安全", contentType: "app",
+    title: "書類スキャンアプリの選び方｜紙をPDFで保存・共有する",
+    description: "書類スキャンアプリを、PDF化・文字認識・保存先・共有の違いから比較します。",
+    intro: "紙の書類を探しやすくするには、まず原本の保管が必要か確認し、全ページが読める状態でスキャンします。スキャン後は日付と書類名を付け、共有範囲を絞ります。",
+    steps: [
+      { title: "原本が必要か確認する", body: "契約書、証明書、提出書類などはスキャン後も原本の保管が必要な場合があります。" },
+      { title: "明るい場所で全ページを撮影する", body: "四隅、裏面、細かな文字、押印欄に欠けがないかPDFを開いて確認します。" },
+      { title: "保存名と共有権限を整える", body: "日付と書類名を付け、公開リンクや共有相手を確認します。" },
+    ],
+    options: [
+      { name: "Adobe Scan", kind: "スキャン・PDF作成アプリ", body: "書類を撮影してPDF化し、文字認識などを使って探しやすくできます。", fit: "紙の書類を読みやすいPDFにまとめたい", caution: "クラウド保存先と有料機能の条件を確認してください。", url: "https://www.adobe.com/jp/acrobat/mobile.html" },
+      { name: "Google ドライブ", kind: "スキャン・クラウド保管アプリ", body: "モバイルアプリで書類をスキャンしてPDFをドライブへ保存できます。", fit: "スキャンした書類を他のファイルと一緒に保管・共有したい", caution: "保存容量と共有権限を確認し、個人情報を含む書類の公開を避けてください。", url: "https://support.google.com/drive/answer/3145835?co=GENIE.Platform%3DDesktop&hl=ja" },
+    ],
+    seoContent: [
+      { heading: "PDFを作りたいか、保管までまとめたいか", body: "紙から読みやすいPDFを作る作業を重視するならAdobe Scan、Google ドライブに既存のファイルと一緒に保管・共有するならGoogle ドライブが候補です。" },
+      { heading: "書類のデジタル化で見落としやすい点", body: "写真が鮮明でも、裏面や複数ページの欠落があると使えません。保存後にPDFを開いて全ページを確認し、原本が必要なものは廃棄しないでください。" },
+    ],
+    notes: ["行政・契約手続きではスキャンデータが原本の代わりにならない場合があります。", "機密書類を共有する際は相手と権限を再確認してください。"],
+    related: ["digital-backup", "moveout-evidence"], reviewedAt: "2026-09-19",
+  },
+  {
+    slug: "track-sleep-with-apps", problemId: "health-sleep", category: "健康・介護", contentType: "app",
+    title: "睡眠記録アプリの選び方｜眠りの傾向とアラームを見直す",
+    description: "睡眠記録アプリを、記録方法、目覚まし、料金の注意点から比較します。",
+    intro: "睡眠アプリの推定値は健康状態の診断ではありません。就寝・起床時刻や日中の眠気を一緒に記録し、数日から数週間の傾向を見るために使います。強い眠気や呼吸の異常が続く場合は医療機関に相談してください。",
+    steps: [
+      { title: "記録したいことを決める", body: "睡眠時間、起床時刻、日中の眠気など、続けられる項目を選びます。" },
+      { title: "端末の設置・権限・アラームを試す", body: "アプリの案内に従って設置し、通知と音が鳴るか事前に確認します。" },
+      { title: "一晩の数値だけで判断しない", body: "生活リズムと体調を合わせて振り返り、困りごとが続けば専門家へ相談します。" },
+    ],
+    options: [
+      { name: "Sleep Cycle", kind: "睡眠記録・アラームアプリ", body: "スマホを使った睡眠の傾向の記録と、設定した時間帯のアラームに対応します。", fit: "睡眠の変化を見ながら起床方法も試したい", caution: "記録は医療診断ではありません。無料・有料機能と定期購入条件を確認してください。", url: "https://sleepcycle.com/download-app" },
+      { name: "熟睡アラーム", kind: "睡眠記録・目覚ましアプリ", body: "睡眠の記録とアラーム機能を組み合わせて使えます。", fit: "日本語の画面で睡眠記録と目覚ましを始めたい", caution: "推定値は目安です。広告や有料機能の条件を確認してください。", url: "https://jukusui.com/service" },
+    ],
+    seoContent: [
+      { heading: "続けやすい記録方法で選ぶ", body: "起床時のアラームと睡眠傾向を一緒に見たい場合はSleep Cycle、日本語で日々の記録と目覚ましをまとめたい場合は熟睡アラームが候補です。いずれも利用前に計測方法と料金条件を確認してください。" },
+      { heading: "眠れない・日中眠い状態が続く場合", body: "アプリの数値だけで病気の有無を判断せず、睡眠時間と症状をメモして医療機関に相談してください。" },
+    ],
+    notes: ["睡眠記録は診断・治療の代わりになりません。", "睡眠中の端末の置き方や充電はメーカーの安全案内に従ってください。"],
+    related: ["health-record", "support-mind"], reviewedAt: "2026-10-05",
+  },
+];
+
+problemPages.push(...moreProblemPages, ...appExpansionProblemPages, ...additionalAppProblemPages, ...additionalInformationProblemPages, ...newAppProblemPages);
 
 // 月次レビューではこの値を確認し、90日を超える記事を優先して公式情報・外部リンクを再確認します。
 export const oldestProblemPageReview = problemPages.reduce((oldest, page) => page.reviewedAt < oldest.reviewedAt ? page : oldest);
