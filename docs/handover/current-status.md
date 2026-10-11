@@ -1,11 +1,11 @@
 # 現在の作業状況
 
-最終更新: 2026-10-05（Claude）
+最終更新: 2026-10-11（Claude）
 
 ## 運用体制
 
-- 2026-10-05から開発・運用はClaudeが担当。Codexの自動化`x`は利用者が停止済み。
-- ClaudeのGitHub連携は利用者が設定済み。ただしpushには、`nekokan1st/kotonavi`へのClaude GitHub Appのインストールが必要（2026-10-05時点で未インストールのためpush不可）。
+- 2026-10-05から開発・運用はClaudeが担当。Codexの自動化`x`は2026-10-11に削除済み。
+- ClaudeのGitHub連携・GitHub Appは設定済み（2026-10-11）。
 - Claudeの作業環境からは npm レジストリと Google Play に接続できない。build・testはGitHub Actions（`.github/workflows/ci-deploy.yml`）で実行する。
 
 ## デプロイ
@@ -33,7 +33,7 @@
 
 ## 次の手順
 
-1. 利用者: Claude GitHub Appをリポジトリにインストール、Cloudflare APIトークンとアカウントIDをGitHub Secretsに登録。
+1. 済（2026-10-11）: Claude GitHub Appのインストール、GitHub Secretsへの`CLOUDFLARE_API_TOKEN`・`CLOUDFLARE_ACCOUNT_ID`登録。Codex自動化`x`は削除済み。
 2. Claude: 変更をpushし、Actionsの結果と本番表示（新3記事、`/neko/`のバナー）を確認。
 3. Claude: AdSense申請に向けたサイト整備。
 4. Claude: 定期実行（リンク監視、月曜点検、金曜テーマ調査、週次のX投稿下書き）を設定。
@@ -41,7 +41,7 @@
 ## 参考情報（Codexからの引き継ぎ時点）
 
 - GitHub: 公開リポジトリ、デフォルトブランチ`main`、ブランチ保護なし。
-- Cloudflare: Worker名`kotonaviapp`。route・custom domainは管理画面側で設定（リポジトリに記録なし）。stagingは`staging.kotonaviapp.com`で、Workerコードが`x-robots-tag: noindex, nofollow, noarchive`を付与。バインディングは`ASSETS`、`IMAGES`。`DB`（D1）は型宣言のみで、`.openai/hosting.json`の`d1`は`null`。
+- Cloudflare（2026-10-11に利用者の管理画面で確認）: 本番はWorker `kotonaviapp`（`kotonaviapp.com`ほか1ルート）、ステージングは別Worker `kotonaviapp-staging`（`staging.kotonaviapp.com`ほか1ルート）。ほかに`site-creator-vinext-starter`（workers.devのみ、生成設定の既定名で作られたと思われる）がある。ドメイン登録・DNSもCloudflare。Workerコードはホスト名がstagingのとき`x-robots-tag: noindex, nofollow, noarchive`を付与。GitHub Actionsは本番`kotonaviapp`だけにデプロイする。バインディングは`ASSETS`、`IMAGES`。`DB`（D1）は型宣言のみで、`.openai/hosting.json`の`d1`は`null`。
 - GA4: `G-3QE4Z77S21`（本体は`app/layout.tsx`、ねこ診断は`public/neko/index.html`）。
 - Search Console: プロパティ形式・所有者は不明。
 - X（`@kotonaviapp`）: 以前はCodexがログイン済みブラウザで投稿。今後は運用ドキュメントのとおりClaudeが下書きを作り、利用者が予約投稿する。
