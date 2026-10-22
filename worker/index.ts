@@ -25,8 +25,36 @@ interface ExecutionContext {
 // dangerouslyAllowSVG: true in next.config.js and uncomment below:
 // const imageConfig: ImageConfig = { dangerouslyAllowSVG: true };
 
+// すべての応答に付ける防御用ヘッダー。CSPは計測・広告タグへの影響が大きいため、
+// 埋め込み防止(frame-ancestors)だけに限定する。
+const SECURITY_HEADERS: Record<string, string> = {
+  "strict-transport-security": "max-age=31536000; includeSubDomains",
+  "x-content-type-options": "nosniff",
+  "x-frame-options": "SAMEORIGIN",
+  "content-security-policy": "frame-ancestors 'self'",
+  "referrer-policy": "strict-origin-when-cross-origin",
+  "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=()",
+};
+
+function withSecurityHeaders(response: Response): Response {
+  const headers = new Headers(response.headers);
+  for (const [key, value] of Object.entries(SECURITY_HEADERS)) {
+    if (!headers.has(key)) headers.set(key, value);
+  }
+  return new Response(response.body, {
+    status: response.status,
+    statusText: response.statusText,
+    headers,
+  });
+}
+
 const worker = {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+    return withSecurityHeaders(await route(request, env, ctx));
+  },
+};
+
+async function route(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     const url = new URL(request.url);
     const isStaging = url.hostname === "staging.kotonaviapp.com";
 
@@ -96,7 +124,6 @@ const worker = {
       statusText: response.statusText,
       headers,
     });
-  },
-};
+}
 
 export default worker;

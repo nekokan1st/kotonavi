@@ -51,12 +51,18 @@ npm test
 
 ## デプロイ
 
-Cloudflare Workersのプロジェクト名は `kotonaviapp`。`main`へpushすると `.github/workflows/ci-deploy.yml` が `npm test`、`npm run build`、`npx wrangler deploy --name kotonaviapp`、本番スモーク確認を順に実行します。PRではtestだけ実行します。
+Cloudflare Workersのプロジェクト名は `kotonaviapp`。`main`へpushすると `.github/workflows/ci-deploy.yml` が `npm test`、`npm run build`、`npx wrangler deploy --name kotonaviapp`、本番スモーク確認を順に実行します。PRでは、testが通ると同じリポジトリのブランチに限りステージング用Worker `kotonaviapp-staging`（`https://staging.kotonaviapp.com`）へデプロイします。本番に出す前にステージングで表示を確認します。
 
 - 認証はGitHub Secretsの `CLOUDFLARE_API_TOKEN` と `CLOUDFLARE_ACCOUNT_ID` だけで行い、リポジトリには保存しません。
 - Claudeの作業環境はnpmレジストリへ接続できないため、build・testの結果はActionsで確認します。
 - Secrets未設定時の手動デプロイは、利用者のMacで `npx wrangler login && npm run build && npx wrangler deploy --name kotonaviapp` を実行します。
 - デプロイ後は本番URL、変更対象URL、`robots.txt`、`sitemap.xml`を確認します。ステージングは `staging.kotonaviapp.com` で、`x-robots-tag: noindex, nofollow, noarchive` が必要です。
+
+## セキュリティ
+
+- `worker/index.ts` の `withSecurityHeaders` が全応答にHSTS、`nosniff`、`X-Frame-Options`、`frame-ancestors`、Referrer-Policy、Permissions-Policyを付与する。CSPは計測・広告タグへの影響が大きいため埋め込み防止に限定している。
+- DDoSはCloudflareが自動で緩和する。Workers無料プランは1日10万リクエストが上限で、超えるとサイトが止まる。WAFのレート制限とBot Fight ModeはWorkerより前で遮断するため、上限対策になる。
+- `tests/security-headers.test.mjs` でヘッダーとリダイレクトの維持を検査する。
 
 ## 独立静的ページ
 
