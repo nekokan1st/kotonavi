@@ -13,7 +13,7 @@ async function sourceFiles(dir) {
   return out;
 }
 
-const SKIP = [/^https?:\/\/(localhost|127\.0\.0\.1)/, /kotonaviapp\.com/, /a8\.net\/0\.gif/, /schema\.org/, /w3\.org/];
+const SKIP = [/^https?:\/\/(localhost|127\.0\.0\.1)/, /\.local(\/|$)/, /\$\{/, /kotonaviapp\.com/, /a8\.net\/0\.gif/, /schema\.org/, /w3\.org/];
 const urls = new Map();
 for (const file of await sourceFiles("app")) {
   const text = await readFile(file, "utf8");
