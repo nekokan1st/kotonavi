@@ -14,6 +14,8 @@ const isCodexSeatbeltSandbox = process.env.CODEX_SANDBOX === "seatbelt";
 const localBindingConfig = {
   main: "./worker/index.ts",
   compatibility_flags: ["nodejs_compat"],
+  // Workers Logs（ダッシュボードの Observability）で 5xx の原因を調べられるようにする。
+  observability: { enabled: true },
   assets: {
     binding: "ASSETS",
     html_handling: "none" as const,
