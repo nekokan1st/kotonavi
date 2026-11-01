@@ -50,7 +50,30 @@ function withSecurityHeaders(response: Response): Response {
 
 const worker = {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
-    return withSecurityHeaders(await route(request, env, ctx));
+    let response: Response;
+    try {
+      response = await route(request, env, ctx);
+    } catch (error) {
+      // 原因調査用。URLのクエリは個人情報を含みうるため、パスだけを記録する。
+      const url = new URL(request.url);
+      console.error(JSON.stringify({
+        source: "kotonavi_error",
+        method: request.method,
+        host: url.hostname,
+        path: url.pathname.slice(0, 300),
+        message: error instanceof Error ? error.message.slice(0, 500) : String(error).slice(0, 500),
+        stack: error instanceof Error ? error.stack?.slice(0, 1500) : undefined,
+      }));
+      response = new Response("Internal Server Error", {
+        status: 500,
+        headers: { "content-type": "text/plain; charset=utf-8", "cache-control": "no-store" },
+      });
+    }
+    if (response.status >= 500) {
+      const url = new URL(request.url);
+      console.error(JSON.stringify({ source: "kotonavi_5xx", status: response.status, method: request.method, host: url.hostname, path: url.pathname.slice(0, 300) }));
+    }
+    return withSecurityHeaders(response);
   },
 };
 
