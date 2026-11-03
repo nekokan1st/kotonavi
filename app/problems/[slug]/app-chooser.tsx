@@ -6,7 +6,6 @@ import { directStoreLinks } from "../../destinations";
 
 type AppOption = { name: string; kind: string; body: string; fit: string; caution: string; url: string };
 const platformStoreLinks: Record<string, { ios?: string; android?: string }> = {
-  "詐欺バスターLITE": { ios: "https://apps.apple.com/jp/app/id6743839168" },
   "Apple『探す』": { ios: "https://apps.apple.com/jp/app/%E6%8E%A2%E3%81%99/id1514844621?platform=ipad" },
   "Google デバイスを探す": { android: "https://play.google.com/store/apps/details?id=com.google.android.apps.adm" },
 };
