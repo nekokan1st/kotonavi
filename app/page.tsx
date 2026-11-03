@@ -499,7 +499,6 @@ const problems: Problem[] = [
     ],
     services: [
       { name: "Spectempo", category: "スコープ管理", description: "AIを使って業務範囲を定義し、変更を管理してクライアントとの認識を揃えるサービス。", tags: ["英語", "AI", "変更管理"], fit: "着手前の条件を整理したい", price: "公式サイトで確認", access: "Webから利用", href: "https://www.spectempo.ai/", accent: "#6d62df" },
-      { name: "Dairakar", category: "フリーランス向け", description: "初期スコープ、追加依頼、クライアント承認を履歴として残す。", tags: ["英語", "承認履歴", "追加請求"], fit: "範囲外作業を防ぎたい", price: "無料開始", access: "Webから利用", href: "https://dairakar.com/", accent: "#df704f" },
     ],
   },
   {
@@ -515,7 +514,6 @@ const problems: Problem[] = [
     ],
     services: [
       { name: "ScopeDue", category: "スコープクリープ対策", description: "チャットから生まれる範囲外作業を記録し、追加料金と承認を管理。", tags: ["英語", "証拠履歴", "承認"], fit: "チャット依頼が多い", price: "公式サイトで確認", access: "Webから利用", href: "https://scopedue.com/", accent: "#126c51" },
-      { name: "Dairakar", category: "フリーランス向け", description: "変更前後の基準線を版管理し、クライアント承認をタイムスタンプ付きで保存。", tags: ["英語", "版管理", "追加請求"], fit: "変更の経緯を残したい", price: "無料開始", access: "Webから利用", href: "https://dairakar.com/", accent: "#df704f" },
     ],
   },
   {
