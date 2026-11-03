@@ -61,6 +61,8 @@ export default function InfoPage() {
           <span className="policy-number">04</span><div><h2>プライバシーについて</h2>
           <p>サイト改善のため、ホスティングサービスがアクセス数やページ閲覧などの利用状況を記録する場合があります。外部リンクを開いた後は、リンク先事業者のプライバシーポリシーが適用されます。</p>
           <p>当サイトでは、Googleによるアクセス解析ツール「Googleアナリティクス」を使用しています。Googleアナリティクスはデータの収集のためにCookieを使用しています。このデータは匿名で収集されており、個人を特定するものではありません。この機能はCookieを無効にすることで収集を拒否できますので、お使いのブラウザの設定をご確認ください。詳しくは<a href="https://marketingplatform.google.com/about/analytics/terms/jp/" target="_blank" rel="noreferrer">Googleアナリティクスの利用規約</a>・<a href="https://policies.google.com/technologies/partner-sites?hl=ja" target="_blank" rel="noreferrer">Googleのポリシーと規約</a>をご確認ください。</p>
+          <p>当サイトでは、第三者配信の広告サービス「Google AdSense」を利用する場合があります。Googleなどの第三者配信事業者は、Cookieを使用して、利用者が当サイトや他のサイトに過去にアクセスした際の情報に基づいて広告を配信することがあります。パーソナライズ広告は<a href="https://adssettings.google.com/" target="_blank" rel="noreferrer">Googleの広告設定</a>で無効にできます。また、<a href="https://optout.aboutads.info/" target="_blank" rel="noreferrer">www.aboutads.info</a>から第三者配信事業者のCookieを無効にすることもできます。詳しくは<a href="https://policies.google.com/technologies/ads?hl=ja" target="_blank" rel="noreferrer">Googleの広告に関するポリシー</a>をご確認ください。</p>
+          <p>成果報酬型広告（アフィリエイト）のリンクでは、成果の確認のため、リンク先や広告配信事業者がCookieを使用する場合があります。</p>
           <ul><li>閲覧ページ、サイト内検索語、検索結果件数、外部リンク種別、参照元をサイト改善のため記録する場合があります。</li><li>これらの計測情報を、氏名やメールアドレスと結び付けて収集しません。</li><li>問い合わせ機能を追加する際は、取得項目、利用目的、保存期間を明示します。</li><li>機密情報や健康情報などを、このサイトへ入力しないでください。</li></ul></div>
         </section>
 
