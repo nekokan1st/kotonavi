@@ -12,7 +12,12 @@ export type ProblemPage = {
   related: string[];
   reviewedAt: string;
   contentType?: "app" | "information";
+  /** 共通テンプレートのままで個別の中身が薄い記事。作り込むまで検索結果とsitemapから外す。 */
+  draft?: boolean;
 };
+
+/** 検索エンジンに登録する記事かどうか。 */
+export const isIndexableProblem = (page: ProblemPage) => !page.draft;
 
 export const problemPages: ProblemPage[] = [
   {
@@ -380,8 +385,9 @@ const appExpansionProblemPages: ProblemPage[] = [
   },
 ];
 
-const createAppProblemPage = (page: Omit<ProblemPage, "steps" | "seoContent" | "notes" | "reviewedAt">): ProblemPage => ({
+const createAppProblemPage = (page: Omit<ProblemPage, "steps" | "seoContent" | "notes" | "reviewedAt" | "draft">): ProblemPage => ({
   ...page,
+  draft: true,
   steps: [
     { title: "目的と条件を一つ決める", body: "何を減らしたいか、誰と使うか、いつまでに決めるかを先に整理します。" },
     { title: "候補の公式情報と対応OSを確認する", body: "登録前に、料金、共有範囲、対応端末、利用条件を公式情報で確認します。" },
