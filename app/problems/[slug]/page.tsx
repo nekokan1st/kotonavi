@@ -20,6 +20,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: `${title}｜コトナビ`, description,
     alternates: { canonical: `/problems/${item.slug}` },
+    ...(item.draft ? { robots: { index: false, follow: true } } : {}),
     openGraph: { title, description, type: "article", url: `/problems/${item.slug}` },
   };
 }

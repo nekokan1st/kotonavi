@@ -171,12 +171,12 @@ test("server-renders indexable problem landing pages", async () => {
   assert.doesNotMatch(html.match(/<header class="topbar">[\s\S]*?<\/header>/)?.[0] ?? "", /href="\/guides"/);
 });
 
-test("sitemap includes all problem landing pages", async () => {
+test("sitemap includes all indexable problem landing pages", async () => {
   const [sitemap, data] = await Promise.all([
     readFile(new URL("../app/sitemap.ts", import.meta.url), "utf8"),
     readFile(new URL("../app/problems/data.ts", import.meta.url), "utf8"),
   ]);
-  assert.match(sitemap, /problemPages\.map/);
+  assert.match(sitemap, /problemPages\.filter\(isIndexableProblem\)\.map/);
   assert.match(data, /slug: "scam-call-check"/);
   assert.doesNotMatch(data, /全国版救急受診ガイド Q助|slug: "ambulance-or-hospital"/);
   assert.match(data, /slug: "disaster-alert-apps"/);
