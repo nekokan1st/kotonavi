@@ -35,3 +35,14 @@ test("sitemap lists written pages and omits template-only pages", async () => {
   assert.match(xml, /\/problems\/dispose-large-appliances</);
   assert.doesNotMatch(xml, /\/problems\/coordinate-schedules</);
 });
+
+test("written article renders comparison, checklist, FAQ and sources", async () => {
+  const response = await render("/problems/compare-moving-quotes");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  assert.doesNotMatch(html, noindexMeta);
+  assert.match(html, /<table>/);
+  assert.match(html, /契約前のチェックリスト/);
+  assert.match(html, /"@type":"FAQPage"/);
+  assert.match(html, /mlit\.go\.jp\/jidosha\/jidosha_tk4_000033/);
+});

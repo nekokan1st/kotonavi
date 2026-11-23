@@ -257,3 +257,21 @@ footer { background: #10283d; color: white; padding: 48px clamp(24px, 7vw, 110px
 @media (max-width: 780px) { .app-showcase .service-card { padding: 16px; gap: 12px; }.app-showcase .service-main h5 { font-size: 18px; }.app-showcase .service-main p { font-size: 10px; }.app-showcase .service-match strong { font-size: 10px; }.app-showcase .service-meta dl { font-size: 9px; }.app-showcase .app-links a { height: 35px; font-size: 10px; } }
 @media (min-width: 781px) { .app-showcase .service-card { grid-template-columns: 25px 220px minmax(0, 1fr); }.app-showcase .service-meta { grid-column: 2 / -1; border-left: 0; border-top: 1px solid var(--line); padding: 14px 0 0; }.app-showcase .app-links { max-width: 360px; } }
 @container (min-width: 900px) { .app-showcase .service-card { grid-template-columns: 25px 220px minmax(260px, 1fr) minmax(270px, 360px); }.app-showcase .service-meta { grid-column: auto; border-top: 0; border-left: 1px solid var(--line); padding: 0 0 0 15px; }.app-showcase .app-links { max-width: none; } }
+
+.article-comparison .comparison-scroll { overflow-x: auto; margin-top: 16px; border: 1px solid rgba(12,121,216,.16); border-radius: 14px; -webkit-overflow-scrolling: touch; }
+.article-comparison table { width: 100%; min-width: 640px; border-collapse: collapse; font-size: 14px; line-height: 1.7; }
+.article-comparison caption { padding: 12px 16px; text-align: left; font-weight: 700; color: #4b5c6c; background: #f7fbfe; }
+.article-comparison th, .article-comparison td { padding: 12px 14px; border-top: 1px solid rgba(12,121,216,.12); text-align: left; vertical-align: top; }
+.article-comparison thead th { background: #eaf4fc; font-size: 13px; color: #36495b; white-space: nowrap; }
+.article-comparison tbody th { min-width: 150px; color: #1d2f40; }
+.article-comparison .comparison-note { margin-top: 10px; font-size: 13px; color: #667787; }
+.article-precheck { padding: 28px 32px; border: 1px solid rgba(46,140,90,.25); border-radius: 18px; background: #f4fbf6; }
+.article-precheck ul { margin: 14px 0 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+.article-precheck li { position: relative; padding-left: 30px; line-height: 1.7; }
+.article-precheck li::before { content: ""; position: absolute; left: 0; top: .3em; width: 16px; height: 16px; border: 2px solid #3d9a68; border-radius: 4px; }
+.article-faq details { border-bottom: 1px solid rgba(12,121,216,.14); padding: 14px 0; }
+.article-faq summary { cursor: pointer; font-weight: 700; line-height: 1.6; }
+.article-faq details p { margin: 10px 0 0; }
+.source-method .source-list { margin: 0; padding-left: 18px; }
+.source-method .source-list li { margin-bottom: 4px; }
+@media (max-width: 720px) { .article-precheck { padding: 22px; } }
