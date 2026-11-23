@@ -9,6 +9,7 @@ export const directStoreLinks: Record<string, AppDestinations> = {
   "Peatix": { ios: "https://apps.apple.com/jp/app/id561632513", android: "https://play.google.com/store/apps/details?id=com.peatix.android.Azuki" },
   "Google フォト": { ios: "https://apps.apple.com/jp/app/id962194608", android: "https://play.google.com/store/apps/details?id=com.google.android.apps.photos" },
   "入退去メモ": { ios: "https://apps.apple.com/jp/app/%E5%85%A5%E9%80%80%E5%8E%BB%E3%83%A1%E3%83%A2/id6767765025" },
+  "引越しAI秘書 by ミツモア": { ios: "https://apps.apple.com/jp/app/id6755713539" },
   "UCHITAS": { ios: "https://apps.apple.com/jp/app/id1453357489" },
   "Cabinote": { ios: "https://apps.apple.com/jp/app/%E6%8C%81%E3%81%A1%E7%89%A9-%E5%AE%B6%E8%B2%A1%E7%AE%A1%E7%90%86%E6%95%B4%E7%90%93%E4%BF%9D%E8%A8%BC%E6%9B%B8-cabinote/id6755080718" },
   "Misoca": { ios: "https://apps.apple.com/jp/app/id1026534800", android: "https://play.google.com/store/apps/details?id=jp.misoca.misoca" },
