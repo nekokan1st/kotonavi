@@ -358,3 +358,5 @@ footer { background: #10283d; color: white; padding: 48px clamp(24px, 7vw, 110px
 .guide-c .official-link:hover { background: #333; color: #fff; }
 .guide-c .app-choice-number { color: var(--gc-accent) !important; }
 .guide-c .app-choice small { color: var(--gc-accent); }
+.guide-c .app-choice.active .app-choice-number { background: var(--gc-accent) !important; color: #fff !important; }
+.guide-c .app-choice.active i { color: var(--gc-accent); }
