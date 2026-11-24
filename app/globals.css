@@ -370,3 +370,4 @@ h1, h2 { font-weight: 700; }
 main *:not(:focus-visible):not(.selected-app-links a) { box-shadow: none !important; }
 footer { background: var(--ink) !important; }
 .hero::before, .hero::after { display: none !important; }
+.principles, .policy-hero, .article-cta { background: var(--ink) !important; }
