@@ -168,7 +168,9 @@ test("server-renders indexable problem landing pages", async () => {
   assert.match(html, /公式情報・相談先を確認する/);
   assert.match(html, /公的機関・事業者の公式情報を優先します。/);
   assert.match(html, /application\/ld\+json/);
-  assert.doesNotMatch(html.match(/<header class="topbar">[\s\S]*?<\/header>/)?.[0] ?? "", /href="\/guides"/);
+  const articleHeader = html.match(/<header class="gc-top">[\s\S]*?<\/header>/)?.[0];
+  assert.ok(articleHeader, "article header is rendered");
+  assert.doesNotMatch(articleHeader, /href="\/guides"/);
 });
 
 test("sitemap includes all indexable problem landing pages", async () => {

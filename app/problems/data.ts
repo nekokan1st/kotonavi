@@ -14,6 +14,10 @@ export type ProblemPage = {
   contentType?: "app" | "information";
   /** 比較表。候補や方式の違いを同じ観点で並べる。 */
   comparison?: { heading: string; caption: string; columns: string[]; rows: string[][]; note?: string };
+  /** 記事冒頭の要約（1〜2文）。 */
+  summary?: string;
+  /** 数字で示す図。afterHeading の seoContent 見出しの直後に表示する。 */
+  keyFigures?: { afterHeading: string; caption: string; items: { label: string; value: string; emphasis?: boolean }[] };
   /** 契約・利用前に確かめる項目。 */
   checklist?: { heading: string; items: string[] };
   faq?: { question: string; answer: string }[];
@@ -31,6 +35,7 @@ export const problemPages: ProblemPage[] = [
     slug: "compare-moving-quotes", problemId: "choose-mover", category: "引越し・住まい",
     title: "引越し見積もりの比較方法｜電話を減らして条件をそろえる",
     description: "料金だけでなく、連絡方法・追加料金・キャンセル条件までそろえて引越し業者を比べる手順です。ネット予約型と一括見積もりの違いと、契約前のチェックリストをまとめました。",
+    summary: "電話を減らすならネット予約型か、電話番号の入力が任意の一括見積もり。比べるのは総額だけでなく「追加料金の条件」と「キャンセル規定」です。",
     intro: "引越し料金は、時期・距離・荷物量・作業内容で大きく変わります。同じ条件で複数社を比べるのが基本ですが、一括見積もりでは依頼直後に複数社から電話が来ることがあります。電話のやりとりを減らしたい場合は、料金を画面で比べて予約する方式や、電話番号の入力が任意のサービスを選ぶと負担を減らせます。",
     steps: [
       { title: "比較する条件を先に書き出す", body: "今の住所と新住所、希望日（第1〜第3希望）、時間帯（午前・午後・時間指定なし）、人数、大型の家具・家電、エアコンの取り外しや不用品回収など頼みたい作業をメモします。条件がそろっていないと、見積額を比べられません。" },
@@ -54,6 +59,16 @@ export const problemPages: ProblemPage[] = [
         ["訪問見積もり", "担当者が実際の荷物を見て見積もる", "訪問日の調整の連絡がある", "荷物が多い、大型家具や運び出しにくい物がある", "時間がかかる。その場で決めず、ほかの見積もりと比べてから決めてよい"],
       ],
       note: "国民生活センターは、オンラインでの見積もりでは荷物量などの情報を正確に伝えるのが難しい場合があると注意を呼びかけています。",
+    },
+    keyFigures: {
+      afterHeading: "キャンセル・延期の手数料は直前ほど高くなる",
+      caption: "図：解約・延期の手数料の上限（運賃及び料金に対する割合。国土交通省の標準引越運送約款による）",
+      items: [
+        { label: "3日前まで", value: "0%" },
+        { label: "前々日", value: "〜20%" },
+        { label: "前日", value: "〜30%" },
+        { label: "当日", value: "〜50%", emphasis: true },
+      ],
     },
     seoContent: [
       { heading: "料金が変わる主な要素", body: "引越し料金は、時期、移動距離、荷物量、作業内容、時間指定の有無で変わります。3〜4月は引越しが集中する繁忙期で、料金が高くなりやすく、希望日の予約も取りにくくなります。希望日に幅を持たせたり、時間帯の指定をなくしたりすると、業者の空き状況に合わせやすくなります。" },
