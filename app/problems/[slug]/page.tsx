@@ -53,7 +53,6 @@ export default async function ProblemDetail({ params }: { params: Promise<{ slug
   ];
   const no = (id: string) => String(sections.findIndex((section) => section.id === id) + 1).padStart(2, "0");
   return <main className="guide-page problem-detail-page guide-c">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700&display=swap" />
     <header className="gc-top"><a className="gc-brand" href="/">コトナビ<small>困りごとから、次の一歩へ。</small></a><nav><a href="/problems">確認手順一覧</a><a href="/info">運営・掲載方針</a></nav></header>
     <article>
       <header className="gc-hero">
