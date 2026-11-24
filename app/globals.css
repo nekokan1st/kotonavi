@@ -348,3 +348,13 @@ footer { background: #10283d; color: white; padding: 48px clamp(24px, 7vw, 110px
   .guide-c .gc-layout { gap: 28px; }
   .guide-c .gc-summary, .guide-c .article-precheck { padding: 20px; }
 }
+.guide-c .selected-app .visual-unavailable, .guide-c .selected-app div.store-app-icon { display: none; }
+.guide-c .selected-app:has(.visual-unavailable) { grid-template-columns: minmax(0, 1fr); }
+.guide-c .selected-app h3 { letter-spacing: 0; font-family: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif; }
+.guide-c .selected-app-copy > small { color: var(--gc-accent); font-weight: 700; }
+.guide-c .selected-app-links a { border-color: var(--gc-ink); color: var(--gc-ink); }
+.guide-c .selected-app-links a:hover { background: var(--gc-paper); border-color: var(--gc-ink); }
+.guide-c .official-link { background: var(--gc-ink); border-color: var(--gc-ink); color: #fff; }
+.guide-c .official-link:hover { background: #333; color: #fff; }
+.guide-c .app-choice-number { color: var(--gc-accent) !important; }
+.guide-c .app-choice small { color: var(--gc-accent); }
